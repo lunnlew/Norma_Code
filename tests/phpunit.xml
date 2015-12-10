@@ -1,0 +1,15 @@
+<phpunit colors="true" bootstrap="./bootstrap.php">
+	<testSuites>
+    <testSuite name="default">
+      <directory>tests/</directory>
+    </testSuite>
+  </testSuites>
+  <filter>
+        <whitelist>
+            <directory>../src/</directory>
+            <exclude>
+                <directory>../vendor/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
