@@ -33,10 +33,10 @@ class Helper_Uploader
     /**
      * 构造函数
      * @param string $fileField 表单名称
-     * @param array $config  配置项
-     * @param bool $base64  是否解析base64编码，可省略。若开启，则$fileField代表的是base64编码的字符串表单名
+     * @param array  $config    配置项
+     * @param bool   $base64    是否解析base64编码，可省略。若开启，则$fileField代表的是base64编码的字符串表单名
      */
-    public function __construct( $fileField , $config , $base64 = false )
+    public function __construct($fileField , $config , $base64 = false)
     {
         $this->fileField = $fileField;
         $this->config = $config;
@@ -49,27 +49,31 @@ class Helper_Uploader
      * @param $base64
      * @return mixed
      */
-    private function upFile( $base64 )
+    private function upFile($base64)
     {
         //处理base64上传
-        if ($base64 ) {
+        if ($base64) {
             $content = $_POST[ $this->fileField ];
             $this->base64ToImage( $content );
+
             return;
         }
-        
+
         //处理普通上传
         $file = $this->file = $_FILES[ $this->fileField ];
-        if ( !$file ) {
+        if (!$file) {
             $this->stateInfo = $this->getStateInfo( 'POST' );
+
             return;
         }
-        if ( $this->file[ 'error' ] ) {
+        if ($this->file[ 'error' ]) {
             $this->stateInfo = $this->getStateInfo( $file[ 'error' ] );
+
             return;
         }
         if ( !is_uploaded_file( $file[ 'tmp_name' ] ) ) {
             $this->stateInfo = $this->getStateInfo( "UNKNOWN" );
+
             return;
         }
 
@@ -79,17 +83,19 @@ class Helper_Uploader
 
         if ( !$this->checkSize() ) {
             $this->stateInfo = $this->getStateInfo( "SIZE" );
+
             return;
         }
         if ( !$this->checkType() ) {
             $this->stateInfo = $this->getStateInfo( "TYPE" );
+
             return;
         }
         $this->fullName = $this->getFolder() . '/' . $this->getName();
-        if ( $this->stateInfo == $this->stateMap[ 0 ] ) {
+        if ($this->stateInfo == $this->stateMap[ 0 ]) {
             if ( !Storage::upload($file[ "tmp_name" ] , $this->fullName ) ) {
                 $this->stateInfo = $this->getStateInfo( "MOVE" );
-            }else{
+            } else {
                 $this->url = Storage::getUrl($this->fullName);
             }
         }
@@ -100,15 +106,16 @@ class Helper_Uploader
      * @param $base64Data
      * @return mixed
      */
-    private function base64ToImage( $base64Data )
+    private function base64ToImage($base64Data)
     {
         $img = base64_decode( $base64Data );
         $this->fileName = time() . rand( 1 , 10000 ) . ".png";
         $this->fullName = $this->getFolder() . '/' . $this->fileName;
         if ( !Storage::write($this->fullName , $img ) ) {
            $this->stateInfo = $this->getStateInfo( "IO" );
+
             return;
-        }else{
+        } else {
             $this->url = Storage::getUrl($this->fullName);
         }
         $this->oriName = "";
@@ -137,7 +144,7 @@ class Helper_Uploader
      * @param $errCode
      * @return string
      */
-    private function getStateInfo( $errCode )
+    private function getStateInfo($errCode)
     {
         return !$this->stateMap[ $errCode ] ? $this->stateMap[ "UNKNOWN" ] : $this->stateMap[ $errCode ];
     }
@@ -164,7 +171,7 @@ class Helper_Uploader
      * 文件大小检测
      * @return bool
      */
-    private function  checkSize()
+    private function checkSize()
     {
         return $this->fileSize <= ( $this->config[ "maxSize" ] * 1024 );
     }
@@ -195,6 +202,7 @@ class Helper_Uploader
                 return false;
             }
         }
+
         return $pathStr;
     }
 }

@@ -8,7 +8,7 @@ $pay = $payment->setAdapter("Alipay_Refund",array(
         'cacert'=>getcwd().'\\cacert.pem',////ca证书路径地址，用于curl中ssl校验
         'transport'=>'http',//访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
         ))
-->setParameter(function($instance){
+->setParameter(function ($instance) {
         return array(
         "partner" => trim($instance->config['partner']),
         "notify_url"    => "http://www.xxx.com/refund_fastpay_by_platform_pwd-PHP-UTF-8/notify_url.php",//服务器异步通知页面路径

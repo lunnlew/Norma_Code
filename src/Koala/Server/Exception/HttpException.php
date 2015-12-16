@@ -16,7 +16,7 @@ class HttpException extends RuntimeException implements HttpExceptionInterface
     /**
      * Create an HTTP exception from nothing but an HTTP code
      *
-     * @param int $code
+     * @param  int           $code
      * @static
      * @access public
      * @return HttpException

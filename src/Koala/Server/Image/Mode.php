@@ -6,7 +6,8 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Koala\Server\Image;
-class Mode{
+class Mode
+{
     /**
      * 只限定宽度
      * 宽度一定,高度自适应,等比缩放

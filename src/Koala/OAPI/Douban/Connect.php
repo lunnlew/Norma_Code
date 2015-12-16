@@ -7,7 +7,6 @@
  */
 namespace Koala\OAPI\Douban;
 
-use Koala\OAPI\Base;
 include (__DIR__ . '/Lib/func.php');
 
 /**

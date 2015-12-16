@@ -8,15 +8,16 @@
 namespace Koala\Server\Engine;
 /**
  * 模板引擎基类
- * 
+ *
  * @package  Koala
  * @subpackage  Server\Engine
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Base implements Face{
-	public function assign($key,$value){}
-	public function set($key,$value){}
-	public function get($key){}
-	public function render($tpl){}
-	public function display($tpl=''){}
+class Base implements Face
+{
+    public function assign($key,$value) {}
+    public function set($key,$value) {}
+    public function get($key) {}
+    public function render($tpl) {}
+    public function display($tpl='') {}
 }

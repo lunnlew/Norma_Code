@@ -8,7 +8,7 @@
 namespace Koala\Server\Session\Stream;
 use Koala\Server\Session\Base;
 /*
- * 
+ *
  *--
  *-- 表的结构 `koala_session`
  *--
@@ -27,7 +27,8 @@ use Koala\Server\Session\Base;
  * @author   LunnLew <lunnlew@gmail.com>
  * @final
  */
-final class PDOStream extends Base{
+final class PDOStream extends Base
+{
     private static $_path         = null;
     private static $_name         = null;
     private static $_db          = null;
@@ -38,19 +39,20 @@ final class PDOStream extends Base{
      * 构造函数
      * @param array $options 参数项
      */
-    public function __construct($options=array()){
-    	//PDO连接
+    public function __construct($options=array())
+    {
+        //PDO连接
         $str = C('DB_TYPE').":host=".C('DB_HOST_M').";port=".C('DB_PORT').";dbname=".C('DB_NAME');
         self::$_db = new \PDO($str, C('DB_USER'), C('DB_PWD'));
-    	self::$_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        self::$_db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         self::$_table = C('DB_PREFIX').'session';
         //表是否存在
         $sql = "SHOW TABLES LIKE '".self::$_table."'";
         $stmt = self::$_db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if(empty($result)){
-        	throw new \Exception('table '.self::$_table.' not exists!', 1);
+        if (empty($result)) {
+            throw new \Exception('table '.self::$_table.' not exists!', 1);
         }
         //方法注册
         self::$_maxLifeTime = ini_get('session.gc_maxlifetime');
@@ -71,7 +73,8 @@ final class PDOStream extends Base{
      * session_read
      * @param mixed $id session id
      */
-    public static function read($id){
+    public static function read($id)
+    {
         $sql = 'SELECT * FROM '.self::$_table.' where PHPSESSID = ?';
         $stmt = self::$_db->prepare($sql);
         $stmt->execute(array($id));
@@ -79,27 +82,29 @@ final class PDOStream extends Base{
             return null;
         } elseif (self::$_ip != $result['client_ip']) {
             return null;
-        } elseif ($result['update_time']+self::$_maxLifeTime < time()){
+        } elseif ($result['update_time']+self::$_maxLifeTime < time()) {
             self::destroy($id);
+
             return null;
         } else {
-            return $result['data'];    
+            return $result['data'];
         }
     }
     /**
      * session_write
-     * @param mixed $id session id
+     * @param mixed $id   session id
      * @param mixed $data session data
      */
-    public static function write($id,$data){
+    public static function write($id,$data)
+    {
         $sql = 'SELECT * FROM '.self::$_table.' where PHPSESSID = ?';
         $stmt = self::$_db->prepare($sql);
         $stmt->execute(array($id));
-        
+
         if ($result = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             if ($result['data'] != $data) {
                 $sql = 'UPDATE '.self::$_table.' SET update_time =? , data = ? WHERE PHPSESSID = ?';
-                
+
                 $stmt = self::$_db->prepare($sql);
                 $time = time();
                 $stmt->execute(array($time, $data, $id));
@@ -112,30 +117,32 @@ final class PDOStream extends Base{
                 $stmt->execute(array($id, $time, self::$_ip, $data));
             }
         }
-        
+
         return true;
     }
     /**
      * session_destroy
      * @param mixed $id session id
      */
-    public static function destroy($id){
+    public static function destroy($id)
+    {
         $sql = 'DELETE FROM '.self::$_table.' WHERE PHPSESSID = ?';
         $stmt = self::$_db->prepare($sql);
         $stmt->execute(array($id));
-        
-        return true;        
+
+        return true;
     }
     /**
      * session_gc
      * @param int $maxLifeTime session最大生存时间
      */
-    public static function gc($maxLifeTime='3600'){
+    public static function gc($maxLifeTime='3600')
+    {
         $sql = 'DELETE FROM '.self::$_table.' WHERE update_time < ?';
         $stmt = self::$_db->prepare($sql);
         $time = time();
         $stmt->execute(array($time - $maxLifeTime));
-        
+
         return true;
     }
 }

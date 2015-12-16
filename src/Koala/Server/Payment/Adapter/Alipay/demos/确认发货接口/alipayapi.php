@@ -24,52 +24,52 @@ $pay = $payment->setAdapter("Alipay_GoodsConfirm",array(
         'cacert'=>getcwd().'\\cacert.pem',////ca证书路径地址，用于curl中ssl校验
         'transport'=>'http',//访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
         ))
-->setParameter(function($instance){
-	/**************************请求参数**************************/
-	        //支付宝交易号
-	        $trade_no = $_POST['WIDtrade_no'];
-	        //必填
+->setParameter(function ($instance) {
+    /**************************请求参数**************************/
+            //支付宝交易号
+            $trade_no = $_POST['WIDtrade_no'];
+            //必填
 
-	        //物流公司名称
-	        $logistics_name = $_POST['WIDlogistics_name'];
-	        //必填
+            //物流公司名称
+            $logistics_name = $_POST['WIDlogistics_name'];
+            //必填
 
-	        //物流发货单号
+            //物流发货单号
 
-	        $invoice_no = $_POST['WIDinvoice_no'];
-	        //物流运输类型
-	        $transport_type = $_POST['WIDtransport_type'];
-	        //三个值可选：POST（平邮）、EXPRESS（快递）、EMS（EMS）
+            $invoice_no = $_POST['WIDinvoice_no'];
+            //物流运输类型
+            $transport_type = $_POST['WIDtransport_type'];
+            //三个值可选：POST（平邮）、EXPRESS（快递）、EMS（EMS）
 
-	/************************************************************/
+    /************************************************************/
 
-	//构造要请求的参数数组，无需改动
-	$parameter = array(
-			"service" => "send_goods_confirm_by_platform",
-			"partner" => trim($instance->config['partner']),
-			"trade_no"	=> $trade_no,
-			"logistics_name"	=> $logistics_name,
-			"invoice_no"	=> $invoice_no,
-			"transport_type"	=> $transport_type,
-			"_input_charset"	=> trim(strtolower($instance->config['input_charset']))
-	);
+    //构造要请求的参数数组，无需改动
+    $parameter = array(
+            "service" => "send_goods_confirm_by_platform",
+            "partner" => trim($instance->config['partner']),
+            "trade_no"	=> $trade_no,
+            "logistics_name"	=> $logistics_name,
+            "invoice_no"	=> $invoice_no,
+            "transport_type"	=> $transport_type,
+            "_input_charset"	=> trim(strtolower($instance->config['input_charset']))
+    );
 });
-	//建立请求
-	$alipaySubmit = new AlipaySubmit($pay->config);
-	$html_text = $alipaySubmit->buildRequestHttp($pay->param);
-	//解析XML
-	//注意：该功能PHP5环境及以上支持，需开通curl、SSL等PHP配置环境。建议本地调试时使用PHP开发软件
-	$doc = new DOMDocument();
-	$doc->loadXML($html_text);
+    //建立请求
+    $alipaySubmit = new AlipaySubmit($pay->config);
+    $html_text = $alipaySubmit->buildRequestHttp($pay->param);
+    //解析XML
+    //注意：该功能PHP5环境及以上支持，需开通curl、SSL等PHP配置环境。建议本地调试时使用PHP开发软件
+    $doc = new DOMDocument();
+    $doc->loadXML($html_text);
 
-	//请在这里加上商户的业务逻辑程序代码
+    //请在这里加上商户的业务逻辑程序代码
 
-	//——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
+    //——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
 
-	//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
-	//解析XML
-	if( ! empty($doc->getElementsByTagName( "alipay" )->item(0)->nodeValue) ) {
-		$alipay = $doc->getElementsByTagName( "alipay" )->item(0)->nodeValue;
-		echo $alipay;
-	}
-	//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
+    //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
+    //解析XML
+    if ( ! empty($doc->getElementsByTagName( "alipay" )->item(0)->nodeValue) ) {
+        $alipay = $doc->getElementsByTagName( "alipay" )->item(0)->nodeValue;
+        echo $alipay;
+    }
+    //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——

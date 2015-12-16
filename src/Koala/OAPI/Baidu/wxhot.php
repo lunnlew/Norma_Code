@@ -13,6 +13,7 @@ use Koala\OAPI\BaseV2 as RequestBase;
  * @abstract
  * @author    LunnLew <lunnlew@gmail.com>
  */
-abstract class wxhot extends RequestBase {
-	abstract protected function _getApikey($item);
+abstract class wxhot extends RequestBase
+{
+    abstract protected function _getApikey($item);
 }

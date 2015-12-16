@@ -1,8 +1,33 @@
 language: php
+
 php:
   - 5.3
   - 5.4
+
+before_install:true
+
+install:true
+
 before_script:
-  - composer install
-  - cd tests
-script: phpunit -v
+  - chmod ugo+x ./scripts/run-tests.sh
+  - wget http://get.sensiolabs.org/php-cs-fixer.phar -O php-cs-fixer
+  - sudo chmod a+x php-cs-fixer
+  - sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
+
+script:
+## PHP_CodeSniffer
+## PHP Copy/Paste Detector
+## PHP Mess Detector
+## PHPLOC
+## PHPUNIT
+  - ./scripts/run-tests.sh
+
+after_success:true
+ # - bash <(curl -s https://codecov.io/bash)
+before_deploy:true
+
+deploy:true
+
+after_deploy:true
+
+after_script:true

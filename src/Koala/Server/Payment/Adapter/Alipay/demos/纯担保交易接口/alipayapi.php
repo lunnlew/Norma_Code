@@ -8,7 +8,7 @@ $pay = $payment->setAdapter("Alipay_Escow",array(
         'cacert'=>getcwd().'\\cacert.pem',////ca证书路径地址，用于curl中ssl校验
         'transport'=>'http',//访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
         ))
-->setParameter(function($instance){
+->setParameter(function ($instance) {
 
         //支付类型
         $payment_type = "1";
@@ -75,8 +75,6 @@ $pay = $payment->setAdapter("Alipay_Escow",array(
         //收货人手机号码
         $receive_mobile = $_POST['WIDreceive_mobile'];
         //如：13312341234
-
-
         return array(
         "service" => "create_partner_trade_by_buyer",
         "partner" => trim($instance->config['partner']),

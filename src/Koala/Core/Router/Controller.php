@@ -1,110 +1,120 @@
 <?php
 namespace Koala\Core\Router;
-use Koala\Core\Router\Router;
 use ReflectionObject;
 
-class Controller {
+class Controller
+{
+    protected function parseMethodAnnotation($method)
+    {
+        $annotations = array();
+        $doc         = $method->getDocComment();
+        if ($doc) {
+            if (preg_match('/^[\s*]*\@Method\("(get|put|post|delete|head|patch|options)"\)/im', $doc, $regs)) {
+                $annotations['Method'] = $regs[1];
+            }
+            if (preg_match('/^[\s*]*\@Route\("([^\s]*)"\)/im', $doc, $regs)) {
+                $annotations['Route'] = $regs[1];
+            }
+        }
 
-	protected function parseMethodAnnotation($method) {
+        return $annotations;
+    }
 
-		$annotations = array();
-		$doc         = $method->getDocComment();
-		if ($doc) {
-			if (preg_match('/^[\s*]*\@Method\("(get|put|post|delete|head|patch|options)"\)/im', $doc, $regs)) {
-				$annotations['Method'] = $regs[1];
-			}
-			if (preg_match('/^[\s*]*\@Route\("([^\s]*)"\)/im', $doc, $regs)) {
-				$annotations['Route'] = $regs[1];
-			}
-		}
-		return $annotations;
-	}
+    protected function parseMethods($refObject, &$args, $parent = 0)
+    {
+        if ($pClassRef = $refObject->getParentClass()) {
+            $this->parseMethods($pClassRef, $args, 1);
+        }
 
-	protected function parseMethods($refObject, &$args, $parent = 0) {
-		if ($pClassRef = $refObject->getParentClass()) {
-			$this->parseMethods($pClassRef, $args, 1);
-		}
+        $methods = $refObject->getMethods();
+        foreach ($methods as $method) {
+            if (!preg_match('/Action$/', $method->getName())) {
+                return;
+            }
 
-		$methods = $refObject->getMethods();
-		foreach ($methods as $method) {
-			if (!preg_match('/Action$/', $method->getName())) {
-				return;
-			}
+            $meta = array('class' => $refObject->getName());
+            $anns = $this->parseMethodAnnotation($method);
+            if (empty($anns)) {
+                // get parent method annotations
+                if (isset($args[$method->getName()])) {
+                    $anns = $args[$method->getName()][0];
+                }
+            }
+            // override
+            $args[$method->getName()] = array($anns, $meta);
+        }
+    }
 
-			$meta = array('class' => $refObject->getName());
-			$anns = $this->parseMethodAnnotation($method);
-			if (empty($anns)) {
-				// get parent method annotations
-				if (isset($args[$method->getName()])) {
-					$anns = $args[$method->getName()][0];
-				}
-			}
-			// override
-			$args[$method->getName()] = array($anns, $meta);
-		}
-	}
+    public function getActionMethods()
+    {
+        $refObject = new ReflectionObject($this);
+        $args      = array();
+        $this->parseMethods($refObject, $args, 0);
 
-	public function getActionMethods() {
-		$refObject = new ReflectionObject($this);
-		$args      = array();
-		$this->parseMethods($refObject, $args, 0);
-		return $args;
-	}
+        return $args;
+    }
 
-	protected function translatePath($methodName) {
-		$methodName = preg_replace('/Action$/', '', $methodName);
-		return '/' . preg_replace_callback('/[A-Z]/', function ($matches) {
-			return '/' . strtolower($matches[0]);
-		}, $methodName);
-	}
+    protected function translatePath($methodName)
+    {
+        $methodName = preg_replace('/Action$/', '', $methodName);
 
-	/**
-	 * Return [["/path", "testAction", [ "method" => ... ] ],...]
-	 *
-	 */
-	public function getActionRoutes() {
-		$pairs   = array();
-		$actions = $this->getActionMethods();
+        return '/' . preg_replace_callback('/[A-Z]/', function ($matches) {
+            return '/' . strtolower($matches[0]);
+        }, $methodName);
+    }
 
-		foreach ($actions as $actionName => $actionInfo) {
-			list($annotations, $meta) = $actionInfo;
+    /**
+     * Return [["/path", "testAction", [ "method" => ... ] ],...]
+     *
+     */
+    public function getActionRoutes()
+    {
+        $pairs   = array();
+        $actions = $this->getActionMethods();
 
-			if (isset($annotations['Route'])) {
-				$path = $annotations['Route'];
-			} else {
-				if ($actionName === 'indexAction') {
-					$path = '';
-				} else {
-					$path = $this->translatePath($actionName);// '/' . preg_replace_callback('/[A-Z]/', function($matches) {
-				}
-			}
+        foreach ($actions as $actionName => $actionInfo) {
+            list($annotations, $meta) = $actionInfo;
 
-			$pair = array($path, $actionName);
+            if (isset($annotations['Route'])) {
+                $path = $annotations['Route'];
+            } else {
+                if ($actionName === 'indexAction') {
+                    $path = '';
+                } else {
+                    $path = $this->translatePath($actionName);// '/' . preg_replace_callback('/[A-Z]/', function ($matches) {
+                }
+            }
 
-			if (isset($annotations['Method'])) {
-				$pair[] = array('method' => Router::getRequestMethodConstant($annotations['Method']));
-			} else {
-				$pair[] = array();
-			}
-			$pairs[] = $pair;
-		}
-		return $pairs;
-	}
+            $pair = array($path, $actionName);
 
-	public function expand() {
-		$router = new Router();
-		$paths  = $this->getActionRoutes();
+            if (isset($annotations['Method'])) {
+                $pair[] = array('method' => Router::getRequestMethodConstant($annotations['Method']));
+            } else {
+                $pair[] = array();
+            }
+            $pairs[] = $pair;
+        }
 
-		foreach ($paths as $path) {
-			$router->add($path[0], array(get_class($this), $path[1]), $path[2]);
-		}
+        return $pairs;
+    }
 
-		$router->sort();
-		return $router;
-	}
+    public function expand()
+    {
+        $router = new Router();
+        $paths  = $this->getActionRoutes();
 
-	public function toJson($data) {
-		return json_encode($data);
-	}
+        foreach ($paths as $path) {
+            $router->add($path[0], array(get_class($this), $path[1]), $path[2]);
+        }
+
+        $router->sort();
+
+        return $router;
+    }
+
+    public function toJson($data)
+    {
+        return json_encode($data);
+    }
 
 }

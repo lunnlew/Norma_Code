@@ -35,8 +35,8 @@ class HeaderDataCollection extends DataCollection
      * {@inheritdoc}
      *
      * @see DataCollection::get()
-     * @param string $key           The name of the header to return
-     * @param mixed  $default_val   The default value of the header if it contains no value
+     * @param  string $key         The name of the header to return
+     * @param  mixed  $default_val The default value of the header if it contains no value
      * @access public
      * @return mixed
      */
@@ -53,8 +53,8 @@ class HeaderDataCollection extends DataCollection
      * {@inheritdoc}
      *
      * @see DataCollection::set()
-     * @param string $key   The name of the header to set
-     * @param mixed  $value The value of the header to set
+     * @param  string               $key   The name of the header to set
+     * @param  mixed                $value The value of the header to set
      * @access public
      * @return HeaderDataCollection
      */
@@ -71,7 +71,7 @@ class HeaderDataCollection extends DataCollection
      * {@inheritdoc}
      *
      * @see DataCollection::exists()
-     * @param string $key   The name of the header
+     * @param  string  $key The name of the header
      * @access public
      * @return boolean
      */
@@ -88,7 +88,7 @@ class HeaderDataCollection extends DataCollection
      * {@inheritdoc}
      *
      * @see DataCollection::remove()
-     * @param string $key   The name of the header
+     * @param  string $key The name of the header
      * @access public
      * @return void
      */
@@ -106,8 +106,8 @@ class HeaderDataCollection extends DataCollection
      * separates the words of headers
      *
      * @link http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
-     * @param string $name              The name ("field") of the header
-     * @param boolean $make_lowercase   Whether or not to lowercase the name
+     * @param  string  $name           The name ("field") of the header
+     * @param  boolean $make_lowercase Whether or not to lowercase the name
      * @static
      * @access public
      * @return string

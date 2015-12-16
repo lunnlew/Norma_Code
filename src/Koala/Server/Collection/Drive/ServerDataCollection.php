@@ -38,7 +38,6 @@ class ServerDataCollection extends DataCollection
         'CONTENT_MD5',
     );
 
-
     /**
      * Methods
      */
@@ -46,8 +45,8 @@ class ServerDataCollection extends DataCollection
     /**
      * Quickly check if a string has a passed prefix
      *
-     * @param string $string    The string to check
-     * @param string $prefix    The prefix to test
+     * @param  string  $string The string to check
+     * @param  string  $prefix The prefix to test
      * @static
      * @access public
      * @return boolean

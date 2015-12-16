@@ -4,7 +4,7 @@ namespace Koala\Server\Exception;
  * DispatchHaltedException
  *
  * Exception used to halt a route callback from executing in a dispatch loop
- * 
+ *
  * @uses       RuntimeException
  */
 class DispatchHaltedException extends RuntimeException implements KoalaExceptionInterface
@@ -35,7 +35,6 @@ class DispatchHaltedException extends RuntimeException implements KoalaException
      */
     const SKIP_REMAINING = 0;
 
-
     /**
      * Properties
      */
@@ -47,7 +46,6 @@ class DispatchHaltedException extends RuntimeException implements KoalaException
      * @access protected
      */
     protected $number_of_skips = 1;
-
 
     /**
      * Methods
@@ -62,11 +60,11 @@ class DispatchHaltedException extends RuntimeException implements KoalaException
     {
         return $this->number_of_skips;
     }
-    
+
     /**
      * Sets the number of matches to skip on a "next" skip
      *
-     * @param int $number_of_skips
+     * @param  int                     $number_of_skips
      * @access public
      * @return DispatchHaltedException
      */

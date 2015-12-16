@@ -6,4 +6,4 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Koala\Server\Image;
-interface Face{}
+interface Face

@@ -1,38 +1,39 @@
 <?php
 namespace Koala\Server\Counter;
-interface Face{
+interface Face
+{
     //初始化
-    function __construct();
+    public function __construct();
     /**
      * 建立一个计数器
-     * @param  string $name 计数器名称
-     * @param  int $value   计数器值
-     * @param  int $expires 计数器过期时间
-     * @return bool       true/false
+     * @param  string $name    计数器名称
+     * @param  int    $value   计数器值
+     * @param  int    $expires 计数器过期时间
+     * @return bool   true/false
      */
     public function create($name,$value=0,$expires=-1);
     /**
      * 移除一个计数器
      * @param  string $name 计数器名称
-     * @return bool       true/false
+     * @return bool   true/false
      */
     public function remove($name);
     /**
      * 设置计数器的值
-     * @param string $name 计数器名称
-     * @param int $value 计数器值
-     * @return bool       计数器值/false
+     * @param  string $name  计数器名称
+     * @param  int    $value 计数器值
+     * @return bool   计数器值/false
      */
     public function set($name,$value);
     /**
      * 获得计数器的值
      * @param  string $name 计数器名称
-     * @return int       值/false
+     * @return int    值/false
      */
     public function get($name);
     /**
      * 获得多个计数器的值
-     * 
+     *
      * $list格式
      * array(
      * name1,name2,....
@@ -41,35 +42,35 @@ interface Face{
      * array('计数器名'=>计数器值
      * ...
      * )
-     * 
-     * @param array $list 计数器列表
-     * @return array       计数器键值对/false
+     *
+     * @param  array $list 计数器列表
+     * @return array 计数器键值对/false
      */
     public function mget($list);
     /**
      * 设置多个计数器的值
-     * 
+     *
      * $keys格式
      * array('计数器名'=>计数器值
      * ...
      * )
-     * 
-     * @param array $keys 计数器键值对
-     * @return bool       成功计数器数量/false
+     *
+     * @param  array $keys 计数器键值对
+     * @return bool  成功计数器数量/false
      */
     public function mset($keys);
     /**
      * 对计数器减
-     * @param  string $name 计数器名称
-     * @param  int $value 需要减值
-     * @return bool       计数器值/false
+     * @param  string $name  计数器名称
+     * @param  int    $value 需要减值
+     * @return bool   计数器值/false
      */
     public function decrease($name,$value);
     /**
      * 对计数器加
-     * @param  string $name 计数器名称
-     * @param  int $value 需要加值
-     * @return bool       计数器值/false
+     * @param  string $name  计数器名称
+     * @param  int    $value 需要加值
+     * @return bool   计数器值/false
      */
     public function increase($name,$value);
     /**
@@ -84,8 +85,8 @@ interface Face{
     public function getAllList();
     /**
      * 判断计数器是否存在
-     * @param  string $name 计数器名称
-     * @return boolean       true/false
+     * @param  string  $name 计数器名称
+     * @return boolean true/false
      */
     public function isExist($name);
     /**
@@ -94,4 +95,3 @@ interface Face{
      */
     public function getNums();
 }
-?>

@@ -6,5 +6,6 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Koala\Server\Image;
-class Base implements Face{
+class Base implements Face
+{
 }

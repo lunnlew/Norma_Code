@@ -18,10 +18,10 @@
         @dst_height: 缩小高
         @backgroundcolor: 补充色  如：#FFFFFF  支持 6位  不支持3位
 */
-function imagezoom( $srcimage, $dstimage,  $dst_width, $dst_height, $backgroundcolor ) {
-
+function imagezoom($srcimage, $dstimage,  $dst_width, $dst_height, $backgroundcolor)
+{
         // 中文件名乱码
-        if ( PHP_OS == 'WINNT' ) {
+        if (PHP_OS == 'WINNT') {
                 $srcimage = iconv('UTF-8', 'GBK', $srcimage);
                 $dstimage = iconv('UTF-8', 'GBK', $dstimage);
         }
@@ -43,7 +43,7 @@ function imagezoom( $srcimage, $dstimage,  $dst_width, $dst_height, $backgroundc
     $src_height = $arr[1];
     $srcimg = null;
     $method = getcreatemethod( $srcimage );
-    if ( $method ) {
+    if ($method) {
         eval( '$srcimg = ' . $method . ';' );
     }
 
@@ -85,7 +85,8 @@ function imagezoom( $srcimage, $dstimage,  $dst_width, $dst_height, $backgroundc
 
 }
 
-function getcreatemethod( $file ) {
+function getcreatemethod($file)
+{
         $arr = array(
                 '474946' => "imagecreatefromgif('$file')"
                 , 'FFD8FF' => "imagecreatefromjpeg('$file')"
@@ -106,10 +107,11 @@ function getcreatemethod( $file ) {
         }
 }
 //字符串转16进制
-function str2hex( $str ) {
+function str2hex($str)
+{
         $ret = "";
 
-        for( $i = 0; $i < strlen( $str ) ; $i++ ) {
+        for ( $i = 0; $i < strlen( $str ) ; $i++ ) {
                 $ret .= ord($str[$i]) >= 16 ? strval( dechex( ord($str[$i]) ) )
                         : '0'. strval( dechex( ord($str[$i]) ) );
         }
@@ -138,8 +140,7 @@ function imagecreatefrombmp($filename)
    if ($BMP['decal'] == 4) $BMP['decal'] = 0;
 
    $PALETTE = array();
-   if ($BMP['colors'] < 16777216)
-   {
+   if ($BMP['colors'] < 16777216) {
     $PALETTE = unpack('V'.$BMP['colors'], fread($f1,$BMP['colors']*4));
    }
 
@@ -149,31 +150,22 @@ function imagecreatefrombmp($filename)
    $res = imagecreatetruecolor($BMP['width'],$BMP['height']);
    $P = 0;
    $Y = $BMP['height']-1;
-   while ($Y >= 0)
-   {
+   while ($Y >= 0) {
         $X=0;
-        while ($X < $BMP['width'])
-        {
+        while ($X < $BMP['width']) {
          if ($BMP['bits_per_pixel'] == 24)
             $COLOR = unpack("V",substr($IMG,$P,3).$VIDE);
-         elseif ($BMP['bits_per_pixel'] == 16)
-         {  
+         elseif ($BMP['bits_per_pixel'] == 16) {
             $COLOR = unpack("n",substr($IMG,$P,2));
             $COLOR[1] = $PALETTE[$COLOR[1]+1];
-         }
-         elseif ($BMP['bits_per_pixel'] == 8)
-         {  
+         } elseif ($BMP['bits_per_pixel'] == 8) {
             $COLOR = unpack("n",$VIDE.substr($IMG,$P,1));
             $COLOR[1] = $PALETTE[$COLOR[1]+1];
-         }
-         elseif ($BMP['bits_per_pixel'] == 4)
-         {
+         } elseif ($BMP['bits_per_pixel'] == 4) {
             $COLOR = unpack("n",$VIDE.substr($IMG,floor($P),1));
             if (($P*2)%2 == 0) $COLOR[1] = ($COLOR[1] >> 4) ; else $COLOR[1] = ($COLOR[1] & 0x0F);
             $COLOR[1] = $PALETTE[$COLOR[1]+1];
-         }
-         elseif ($BMP['bits_per_pixel'] == 1)
-         {
+         } elseif ($BMP['bits_per_pixel'] == 1) {
             $COLOR = unpack("n",$VIDE.substr($IMG,floor($P),1));
             if     (($P*8)%8 == 0) $COLOR[1] =  $COLOR[1]        >>7;
             elseif (($P*8)%8 == 1) $COLOR[1] = ($COLOR[1] & 0x40)>>6;
@@ -184,8 +176,8 @@ function imagecreatefrombmp($filename)
             elseif (($P*8)%8 == 6) $COLOR[1] = ($COLOR[1] & 0x2)>>1;
             elseif (($P*8)%8 == 7) $COLOR[1] = ($COLOR[1] & 0x1);
             $COLOR[1] = $PALETTE[$COLOR[1]+1];
-         }
-         else
+         } else
+
             return FALSE;
          imagesetpixel($res,$X,$Y,$COLOR[1]);
          $X++;
@@ -199,7 +191,7 @@ function imagecreatefrombmp($filename)
 return $res;
 }
 // BMP 保存函数，php本身无
-function imagebmp ($im, $fn = false)
+function imagebmp($im, $fn = false)
 {
     if (!$im) return false;
 
@@ -221,10 +213,8 @@ function imagebmp ($im, $fn = false)
     fwrite ($f, pack ('VVVvvVVVVVV', 40, $biWidth, $biHeight, 1, 24, 0, $biSizeImage, 0, 0, 0, 0));
 
     $numpad = $biStride - $biBPLine;
-    for ($y = $biHeight - 1; $y >= 0; --$y)
-    {
-        for ($x = 0; $x < $biWidth; ++$x)
-        {
+    for ($y = $biHeight - 1; $y >= 0; --$y) {
+        for ($x = 0; $x < $biWidth; ++$x) {
             $col = imagecolorat ($im, $x, $y);
             fwrite ($f, pack ('V', $col), 3);
         }
@@ -232,74 +222,60 @@ function imagebmp ($im, $fn = false)
             fwrite ($f, pack ('C', 0));
     }
     fclose ($f);
+
     return true;
 }
 
 /**
   * 字符串分割为单字数组
   */
- function getSplit($sourcestr,$len=0){
+ function getSplit($sourcestr,$len=0)
+ {
     $returnstr = array();
     $i = 0;
     $n = 0.0;
     $str_length = strlen($sourcestr); //字符串的字节数
-    while ($i<$str_length)
-    {
+    while ($i<$str_length) {
     $temp_str = substr($sourcestr, $i, 1);
     $ascnum = ord($temp_str); //得到字符串中第$i位字符的ASCII码
-    if ( $ascnum >= 252) //如果ASCII位高与252
-    {
+    if ($ascnum >= 252) { //如果ASCII位高与252
     $returnstr[] = substr($sourcestr, $i, 6); //根据UTF-8编码规范，将6个连续的字符计为单个字符
     $i = $i + 6; //实际Byte计为6
     $n++; //字串长度计1
-    }
-    elseif ( $ascnum >= 248 ) //如果ASCII位高与248
-    {
+    } elseif ($ascnum >= 248) { //如果ASCII位高与248
     $returnstr[] = substr($sourcestr, $i, 5); //根据UTF-8编码规范，将5个连续的字符计为单个字符
     $i = $i + 5; //实际Byte计为5
     $n++; //字串长度计1
-    }
-    elseif ( $ascnum >= 240 ) //如果ASCII位高与240
-    {
+    } elseif ($ascnum >= 240) { //如果ASCII位高与240
     $returnstr[] = substr($sourcestr, $i, 4); //根据UTF-8编码规范，将4个连续的字符计为单个字符
     $i = $i + 4; //实际Byte计为4
     $n++; //字串长度计1
-    }
-    elseif ( $ascnum >= 224 ) //如果ASCII位高与224
-    {
+    } elseif ($ascnum >= 224) { //如果ASCII位高与224
     $returnstr[] = substr($sourcestr, $i, 3); //根据UTF-8编码规范，将3个连续的字符计为单个字符
     $i = $i + 3 ; //实际Byte计为3
     $n++; //字串长度计1
-    }
-    elseif ( $ascnum >= 192 ) //如果ASCII位高与192
-    {
+    } elseif ($ascnum >= 192) { //如果ASCII位高与192
     $returnstr[] = substr($sourcestr, $i, 2); //根据UTF-8编码规范，将2个连续的字符计为单个字符
     $i = $i + 2; //实际Byte计为2
     $n++; //字串长度计1
-    }
-    elseif ( $ascnum>=65 and $ascnum<=90 and $ascnum!=73) //如果是大写字母 I除外
-    {
+    } elseif ($ascnum>=65 and $ascnum<=90 and $ascnum!=73) { //如果是大写字母 I除外
     $returnstr[] = substr($sourcestr, $i, 1);
     $i = $i + 1; //实际的Byte数仍计1个
     $n++; //但考虑整体美观，大写字母计成一个高位字符
-    }
-    elseif ( !(array_search($ascnum, array(37, 38, 64, 109 ,119)) === FALSE) ) //%,&,@,m,w 字符按１个字符宽
-    {
+    } elseif ( !(array_search($ascnum, array(37, 38, 64, 109 ,119)) === FALSE) ) { //%,&,@,m,w 字符按１个字符宽
     $returnstr[] = substr($sourcestr, $i, 1);
     $i = $i + 1; //实际的Byte数仍计1个
     $n++; //但考虑整体美观，这些字条计成一个高位字符
-    }
-    else //其他情况下，包括小写字母和半角标点符号
-    {
+    } else { //其他情况下，包括小写字母和半角标点符号
     $returnstr[] = substr($sourcestr, $i, 1);
     $i = $i + 1; //实际的Byte数计1个
     $n = $n + 0.5; //其余的小写字母和半角标点等与半个高位字符宽...
     }
-    if($len<=$n){break;}
+    if ($len<=$n) {break;}
     }
+
     return $returnstr;
  }
-
 
  //校验函数库
 /**
@@ -307,7 +283,8 @@ function imagebmp ($im, $fn = false)
  * 主要对不太长的请求字符串进行处理。
  * @param string $str 要处理的字符串
  */
-function SqlInjiectFilter(&$str,$key=''){
+function SqlInjiectFilter(&$str,$key='')
+{
     //关键字表
     $keys = array('select','update','insert','and','or','xor','order','union','group','user');
     $rkeys = array('se\lect','up\date','ins\ert','an\d','o\r','x\or','or\der','uni\on','gro\up','us\er');
@@ -342,8 +319,8 @@ function SqlInjiectFilter(&$str,$key=''){
  * 主要对不太长的请求字符串进行处理。
  * @param string $str 要处理的字符串
  */
-function RevertSqlInjiectFilter(&$str,$key=''){
-    
+function RevertSqlInjiectFilter(&$str,$key='')
+{
     //关键字表
     $rkeys = array('select','update','insert','and','or','xor','order','union','group','user');
     $keys = array('se\lect','up\date','ins\ert','an\d','o\r','x\or','or\der','uni\on','gro\up','us\er');
@@ -369,38 +346,43 @@ function RevertSqlInjiectFilter(&$str,$key=''){
     $rchar = array('/','*','-',';','%','@','(');
     $char = array('/\\','*\\','-\\',';\\','%\\','@\\','(\\');
     $str = str_replace($char, $rchar, $str);
-    
+
     //return $str;
 }
 /**
  * 过滤
  */
-function Filter($str,$callfunc='SqlInjiectFilter'){
-    if(is_string($str)){
+function Filter($str,$callfunc='SqlInjiectFilter')
+{
+    if (is_string($str)) {
         $strarr = array($str);
-    }else{
+    } else {
         $strarr = $str;
     }
     array_walk_recursive($strarr, $callfunc);
+
     return $strarr;
 }
 //检查是否是汉字//gbk版
-function isCWInGBK($str){
+function isCWInGBK($str)
+{
     $iscw = 0;
-    if(preg_match("(([\xB0-\xF7][\xA1-\xFE])|([\x81-\xA0][\x40-\xFE])|([\xAA-\xFE][\x40-\xA0])|(\w))+", $str)){
+    if (preg_match("(([\xB0-\xF7][\xA1-\xFE])|([\x81-\xA0][\x40-\xFE])|([\xAA-\xFE][\x40-\xA0])|(\w))+", $str)) {
         $iscw =1;
     }
+
     return $iscw;
 }
 //检查是否是汉字//utf8版
-function isCWInUTF8($str){
+function isCWInUTF8($str)
+{
     $iscw = 0;
     //4E00-9FFF：常用汉字
-    if(preg_match("/^[\x{4E00}-\x{9FFF}]+$/u",$str)){
+    if (preg_match("/^[\x{4E00}-\x{9FFF}]+$/u",$str)) {
         $iscw=1;
     }
     //3400-4DBF：罕用汉字A
-    if(preg_match("/^[\x{3400}-\x{4DBF}]+$/u",$str)){
+    if (preg_match("/^[\x{3400}-\x{4DBF}]+$/u",$str)) {
         $iscw=1;
     }
     //其他区域20000-2A6DF,2A700-2B73F,F900-FAFF,2F800-2FA1F无数据或者包含少量偏僻数据
@@ -409,6 +391,7 @@ function isCWInUTF8($str){
 
 //分页插件使用的替换函数
 //array_walk_recursive($arr,"var_filter",array($v,$k));
-function var_filter(&$value,$key,$arr){
+function var_filter(&$value,$key,$arr)
+{
     $value = str_replace("[".strtoupper($arr[1])."]",$arr[0],$value);
 }

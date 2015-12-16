@@ -16,10 +16,10 @@
  * get_weather_info  api
  */
 $cfg['get_weather_info'] = array(
-	'url'=>'http://m.weather.com.cn/data',
-	'urltpl'=>'/{cityid}.html',
-	'method'=>'get',
-	'commonParam'=> array(),
-	'requestParam'=>array('cityid'),
-	);
+    'url'=>'http://m.weather.com.cn/data',
+    'urltpl'=>'/{cityid}.html',
+    'method'=>'get',
+    'commonParam'=> array(),
+    'requestParam'=>array('cityid'),
+    );
 return $cfg;

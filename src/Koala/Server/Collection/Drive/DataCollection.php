@@ -4,8 +4,8 @@ namespace Koala\Server\Collection\Drive;
  * DataCollection
  *
  */
-class DataCollection{
-
+class DataCollection
+{
     /**
      * Class properties
      */
@@ -17,7 +17,6 @@ class DataCollection{
      * @access protected
      */
     protected $attributes = array();
-
 
     /**
      * Methods
@@ -40,9 +39,9 @@ class DataCollection{
      * If an optional mask array is passed, this only
      * returns the keys that match the mask
      *
-     * @param array $mask               The parameter mask array
-     * @param boolean $fill_with_nulls  Whether or not to fill the returned array with
-     *  values to match the given mask, even if they don't exist in the collection
+     * @param  array   $mask            The parameter mask array
+     * @param  boolean $fill_with_nulls Whether or not to fill the returned array with
+     *                                  values to match the given mask, even if they don't exist in the collection
      * @access public
      * @return array
      */
@@ -68,6 +67,7 @@ class DataCollection{
              * Remove all of the values from the keys
              * that aren't in the passed mask
              */
+
             return array_intersect(
                 array_keys($this->attributes),
                 $mask
@@ -83,9 +83,9 @@ class DataCollection{
      * If an optional mask array is passed, this only
      * returns the keys that match the mask
      *
-     * @param array $mask               The parameter mask array
-     * @param boolean $fill_with_nulls  Whether or not to fill the returned array with
-     *  values to match the given mask, even if they don't exist in the collection
+     * @param  array   $mask            The parameter mask array
+     * @param  boolean $fill_with_nulls Whether or not to fill the returned array with
+     *                                  values to match the given mask, even if they don't exist in the collection
      * @access public
      * @return array
      */
@@ -111,6 +111,7 @@ class DataCollection{
              * Remove all of the keys from the attributes
              * that aren't in the passed mask
              */
+
             return array_intersect_key(
                 $this->attributes,
                 array_flip($mask)
@@ -125,8 +126,8 @@ class DataCollection{
      *
      * Return a default value if the key doesn't exist
      *
-     * @param string $key           The name of the parameter to return
-     * @param mixed  $default_val   The default value of the parameter if it contains no value
+     * @param  string $key         The name of the parameter to return
+     * @param  mixed  $default_val The default value of the parameter if it contains no value
      * @access public
      * @return mixed
      */
@@ -142,8 +143,8 @@ class DataCollection{
     /**
      * Set an attribute of the collection
      *
-     * @param string $key   The name of the parameter to set
-     * @param mixed  $value The value of the parameter to set
+     * @param  string         $key   The name of the parameter to set
+     * @param  mixed          $value The value of the parameter to set
      * @access public
      * @return DataCollection
      */
@@ -157,7 +158,7 @@ class DataCollection{
     /**
      * Replace the collection's attributes
      *
-     * @param array $attributes The attributes to replace the collection's with
+     * @param  array          $attributes The attributes to replace the collection's with
      * @access public
      * @return DataCollection
      */
@@ -175,8 +176,8 @@ class DataCollection{
      * into the collection in a "hard" manner, using the "array_replace"
      * method instead of the usual "array_merge" method
      *
-     * @param array $attributes The attributes to merge into the collection
-     * @param boolean $hard     Whether or not to make the merge "hard"
+     * @param  array          $attributes The attributes to merge into the collection
+     * @param  boolean        $hard       Whether or not to make the merge "hard"
      * @access public
      * @return DataCollection
      */
@@ -204,7 +205,7 @@ class DataCollection{
     /**
      * See if an attribute exists in the collection
      *
-     * @param string $key   The name of the parameter
+     * @param  string  $key The name of the parameter
      * @access public
      * @return boolean
      */
@@ -217,7 +218,7 @@ class DataCollection{
     /**
      * Remove an attribute from the collection
      *
-     * @param string $key   The name of the parameter
+     * @param  string $key The name of the parameter
      * @access public
      * @return void
      */
@@ -265,7 +266,6 @@ class DataCollection{
         return $clone;
     }
 
-
     /*
      * Magic method implementations
      */
@@ -277,7 +277,7 @@ class DataCollection{
      * this instance while treating it as an instance property
      *
      * @see get()
-     * @param string $key   The name of the parameter to return
+     * @param  string $key The name of the parameter to return
      * @access public
      * @return mixed
      */
@@ -293,8 +293,8 @@ class DataCollection{
      * this instance while treating it as an instance property
      *
      * @see set()
-     * @param string $key   The name of the parameter to set
-     * @param mixed  $value The value of the parameter to set
+     * @param  string $key   The name of the parameter to set
+     * @param  mixed  $value The value of the parameter to set
      * @access public
      * @return void
      */
@@ -310,7 +310,7 @@ class DataCollection{
      * from this instance while treating it as an instance property
      *
      * @see exists()
-     * @param string $key   The name of the parameter
+     * @param  string  $key The name of the parameter
      * @access public
      * @return boolean
      */
@@ -326,7 +326,7 @@ class DataCollection{
      * this instance while treating it as an instance property
      *
      * @see remove()
-     * @param string $key   The name of the parameter
+     * @param  string $key The name of the parameter
      * @access public
      * @return void
      */
@@ -334,7 +334,6 @@ class DataCollection{
     {
         $this->remove($key);
     }
-
 
     /*
      * Interface required method implementations
@@ -361,7 +360,7 @@ class DataCollection{
      *
      * @see \ArrayAccess::offsetGet()
      * @see get()
-     * @param string $key   The name of the parameter to return
+     * @param  string $key The name of the parameter to return
      * @access public
      * @return mixed
      */
@@ -377,8 +376,8 @@ class DataCollection{
      *
      * @see \ArrayAccess::offsetSet()
      * @see set()
-     * @param string $key   The name of the parameter to set
-     * @param mixed  $value The value of the parameter to set
+     * @param  string $key   The name of the parameter to set
+     * @param  mixed  $value The value of the parameter to set
      * @access public
      * @return void
      */
@@ -394,7 +393,7 @@ class DataCollection{
      *
      * @see \ArrayAccess::offsetExists()
      * @see exists()
-     * @param string $key   The name of the parameter
+     * @param  string  $key The name of the parameter
      * @access public
      * @return boolean
      */
@@ -410,7 +409,7 @@ class DataCollection{
      *
      * @see \ArrayAccess::offsetUnset()
      * @see remove()
-     * @param string $key   The name of the parameter
+     * @param  string $key The name of the parameter
      * @access public
      * @return void
      */

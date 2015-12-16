@@ -15,11 +15,12 @@ use Koala\OAPI\BaseV1 as RequestBase;
  * @abstract
  * @author    LunnLew <lunnlew@gmail.com>
  */
-abstract class Segment extends RequestBase {
-	/**
-	 * 获取token
-	 * @param  string $str [description]
-	 * @return mixed
-	 */
-	abstract protected function _getAccessToken($str = '');
+abstract class Segment extends RequestBase
+{
+    /**
+     * 获取token
+     * @param  string $str [description]
+     * @return mixed
+     */
+    abstract protected function _getAccessToken($str = '');
 }

@@ -15,11 +15,12 @@ use Koala\OAPI\BaseV1 as RequestBase;
  * @abstract
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Connect extends RequestBase {
-	/**
-	 * 获取key
-	 * @param  string $str [description]
-	 * @return mixed
-	 */
-	//abstract protected function _getAppKey($str = '');
+class Connect extends RequestBase
+{
+    /**
+     * 获取key
+     * @param  string $str [description]
+     * @return mixed
+     */
+    //abstract protected function _getAppKey($str = '');
 }

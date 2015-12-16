@@ -12,33 +12,33 @@
  */
 $SoftVersion = '2013-12-26';
 $header      = array(
-	'Accept|@application/json', //application/xml
-	'Content-Type|getContentType',
-	//'Content-Length',
-	'Authorization|getAuthorization',
+    'Accept|@application/json', //application/xml
+    'Content-Type|getContentType',
+    //'Content-Length',
+    'Authorization|getAuthorization',
 );
 $cfg['api_base'] = array(
-	'url'       => 'https://sandboxapp.cloopen.com:8883/' . $SoftVersion,
-	'urltpl'    => '/Accounts/{accountSid}/{func}/{funcdes}?sig={sig}',
-	'suburltpl' => '/SubAccounts/{subAccountSid}/{func}/{funcdes}?sig={sig}',
+    'url'       => 'https://sandboxapp.cloopen.com:8883/' . $SoftVersion,
+    'urltpl'    => '/Accounts/{accountSid}/{func}/{funcdes}?sig={sig}',
+    'suburltpl' => '/SubAccounts/{subAccountSid}/{func}/{funcdes}?sig={sig}',
 );
 /**
  * 主帐号信息查询
  */
 $cfg['get_account_info'] = array(
-	'method'       => 'get',
-	'header'       => $header,
-	'requestParam' => array('accountSid|getAccountSid', 'func|@AccountInfo', 'funcdes', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'get',
+    'header'       => $header,
+    'requestParam' => array('accountSid|getAccountSid', 'func|@AccountInfo', 'funcdes', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 /**
  * 创建子帐号
  * @param friendlyName 子帐号名称
  */
 $cfg['create_sub_account'] = array(
-	'method'       => 'post',
-	'header'       => $header,
-	'contentParam' => array('appId|getAppKey', 'friendlyName'),
-	'requestParam' => array('accountSid|getAccountSid', 'func|@SubAccounts', 'funcdes', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'post',
+    'header'       => $header,
+    'contentParam' => array('appId|getAppKey', 'friendlyName'),
+    'requestParam' => array('accountSid|getAccountSid', 'func|@SubAccounts', 'funcdes', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 /**
  * 获取子帐号
@@ -46,20 +46,20 @@ $cfg['create_sub_account'] = array(
  * @param offset 一次查询的最大条数，最小是1条，最大是100条
  */
 $cfg['get_sub_account'] = array(
-	'method'       => 'post',
-	'header'       => $header,
-	'contentParam' => array('appId|getAppKey', 'startNo|@0', 'offset|@100'),
-	'requestParam' => array('accountSid|getAccountSid', 'func|@GetSubAccounts', 'funcdes', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'post',
+    'header'       => $header,
+    'contentParam' => array('appId|getAppKey', 'startNo|@0', 'offset|@100'),
+    'requestParam' => array('accountSid|getAccountSid', 'func|@GetSubAccounts', 'funcdes', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 /**
  * 子帐号信息查询
  * @param friendlyName 子帐号名称
  */
 $cfg['get_sub_account_info'] = array(
-	'method'       => 'post',
-	'header'       => $header,
-	'contentParam' => array('appId|getAppKey', 'friendlyName'),
-	'requestParam' => array('accountSid|getAccountSid', 'func|@QuerySubAccountByName', 'funcdes', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'post',
+    'header'       => $header,
+    'contentParam' => array('appId|getAppKey', 'friendlyName'),
+    'requestParam' => array('accountSid|getAccountSid', 'func|@QuerySubAccountByName', 'funcdes', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 /**
  * 发送短信
@@ -67,10 +67,10 @@ $cfg['get_sub_account_info'] = array(
  * @param body 短信正文
  */
 $cfg['send_sms'] = array(
-	'method'       => 'post',
-	'header'       => $header,
-	'contentParam' => array('to', 'body', 'appId|getAppKey'),
-	'requestParam' => array('accountSid|getAccountSid', 'func|@SMS', 'funcdes|@Messages', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'post',
+    'header'       => $header,
+    'contentParam' => array('to', 'body', 'appId|getAppKey'),
+    'requestParam' => array('accountSid|getAccountSid', 'func|@SMS', 'funcdes|@Messages', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 /**
  * 发送模板短信
@@ -80,10 +80,10 @@ $cfg['send_sms'] = array(
  */
 //http://docs.yuntongxun.com/index.php/模板短信
 $cfg['template_sms'] = array(
-	'method'       => 'post',
-	'header'       => $header,
-	'contentParam' => array('to', 'appId|getAppKey', 'templateId', 'datas'),
-	'requestParam' => array('accountSid|getAccountSid', 'func|@SMS', 'funcdes|@TemplateSMS', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'post',
+    'header'       => $header,
+    'contentParam' => array('to', 'appId|getAppKey', 'templateId', 'datas'),
+    'requestParam' => array('accountSid|getAccountSid', 'func|@SMS', 'funcdes|@TemplateSMS', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 /**
  * 双向回呼
@@ -94,11 +94,11 @@ $cfg['template_sms'] = array(
  * @param promptTone 第三方自定义回拨提示音
  */
 $cfg['callback'] = array(
-	'method'       => 'post',
-	'header'       => $header,
-	'sub'          => true,
-	'contentParam' => array('from', 'to', 'customerSerNum', 'fromSerNum', 'promptTone'),
-	'requestParam' => array('accountSid|getAccountSid', 'func|@Calls', 'funcdes|@Callback', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'post',
+    'header'       => $header,
+    'sub'          => true,
+    'contentParam' => array('from', 'to', 'customerSerNum', 'fromSerNum', 'promptTone'),
+    'requestParam' => array('accountSid|getAccountSid', 'func|@Calls', 'funcdes|@Callback', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 /**
  * 营销外呼
@@ -110,10 +110,10 @@ $cfg['callback'] = array(
  * @param respUrl 营销外呼状态通知回调地址，云通讯平台将向该Url地址发送呼叫结果通知。
  */
 $cfg['landing_call'] = array(
-	'method'       => 'post',
-	'header'       => $header,
-	'contentParam' => array('playTimes', 'mediaTxt', 'mediaName', 'to', 'appId|getAppKey', 'displayNum', 'respUrl'),
-	'requestParam' => array('accountSid|getAccountSid', 'func|@Calls', 'funcdes|@LandingCalls', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'post',
+    'header'       => $header,
+    'contentParam' => array('playTimes', 'mediaTxt', 'mediaName', 'to', 'appId|getAppKey', 'displayNum', 'respUrl'),
+    'requestParam' => array('accountSid|getAccountSid', 'func|@Calls', 'funcdes|@LandingCalls', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 /**
  * 语音验证码
@@ -124,10 +124,10 @@ $cfg['landing_call'] = array(
  * @param respUrl 语音验证码状态通知回调地址，云通讯平台将向该Url地址发送呼叫结果通知
  */
 $cfg['voice_verify'] = array(
-	'method'       => 'post',
-	'header'       => $header,
-	'contentParam' => array('verifyCode', 'playTimes', 'to', 'appId|getAppKey', 'displayNum', 'respUrl'),
-	'requestParam' => array('accountSid|getAccountSid', 'func|@Calls', 'funcdes|@VoiceVerify', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'post',
+    'header'       => $header,
+    'contentParam' => array('verifyCode', 'playTimes', 'to', 'appId|getAppKey', 'displayNum', 'respUrl'),
+    'requestParam' => array('accountSid|getAccountSid', 'func|@Calls', 'funcdes|@VoiceVerify', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 /**
  * IVR外呼
@@ -141,11 +141,11 @@ $cfg['voice_verify'] = array(
  * @param record   是否录音，可填项为true和false，默认值为false不录音，为Dial节点的属性
  */
 $cfg['ivrdial'] = array(
-	'method'       => 'post',
-	'header'       => $header,
-	'format'       => 'xml',
-	'contentParam' => array('AppId|getAppKey', 'Dial'),
-	'requestParam' => array('accountSid|getAccountSid', 'func|@ivr', 'funcdes|@dial', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'post',
+    'header'       => $header,
+    'format'       => 'xml',
+    'contentParam' => array('AppId|getAppKey', 'Dial'),
+    'requestParam' => array('accountSid|getAccountSid', 'func|@ivr', 'funcdes|@dial', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 /**
  * 话单下载
@@ -153,9 +153,9 @@ $cfg['ivrdial'] = array(
  * @param keywords   客户的查询条件，由客户自行定义并提供给云通讯平台。默认不填忽略此参数
  */
 $cfg['bill_records'] = array(
-	'method'       => 'post',
-	'header'       => $header,
-	'contentParam' => array('appId|getAppKey', 'date', 'keywords'),
-	'requestParam' => array('accountSid|getAccountSid', 'func|@BillRecords', 'funcdes', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
+    'method'       => 'post',
+    'header'       => $header,
+    'contentParam' => array('appId|getAppKey', 'date', 'keywords'),
+    'requestParam' => array('accountSid|getAccountSid', 'func|@BillRecords', 'funcdes', 'sig|getSign', 'content|getContent', 'Content-Length|getLengthStr'),
 );
 return $cfg;

@@ -1,4 +1,5 @@
 <?php
 namespace Koala\Server\Log;
-class Base implements Face{
+class Base implements Face
+{
 }

@@ -1,3 +1,3 @@
 <?php
 namespace Koala\Server\Exception;
-interface KoalaExceptionInterface{}
+interface KoalaExceptionInterface

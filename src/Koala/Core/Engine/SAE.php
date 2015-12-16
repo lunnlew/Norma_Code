@@ -1,7 +1,7 @@
 <?php
 /**
  * LAE云引擎参数统一化
- * 
+ *
  */
 
 //运行数据路径
@@ -18,7 +18,6 @@ defined('TMP_PATH') or define('TMP_PATH', rtrim(SAE_TMP_PATH) . '/');
 
 //存储数据路径
 defined('STOR_PATH') or define('STOR_PATH', null);
-
 
 //其他引用
 //--AE私有常量

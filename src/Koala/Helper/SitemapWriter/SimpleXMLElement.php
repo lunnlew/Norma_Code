@@ -8,11 +8,14 @@
 
 namespace Koala\Helper\SitemapWriter;
 
-class SimpleXMLElement extends \SimpleXMLElement {
-	public function addChild($name, $value = null, $namespace = null) {
-		if ($value !== null and is_string($value) === true) {
-			$value = str_replace(array('&'), array('&amp;'), $value);
-		}
-		return parent::addChild($name, $value, $namespace);
-	}
+class SimpleXMLElement extends \SimpleXMLElement
+{
+    public function addChild($name, $value = null, $namespace = null)
+    {
+        if ($value !== null and is_string($value) === true) {
+            $value = str_replace(array('&'), array('&amp;'), $value);
+        }
+
+        return parent::addChild($name, $value, $namespace);
+    }
 }

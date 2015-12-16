@@ -14,7 +14,7 @@ namespace Koala\Server\Exception;
  * DuplicateServiceException
  *
  * Exception used for when a service is attempted to be registered that already exists
- * 
+ *
  * @uses       Exception
  * @package    Klein\Exceptions
  */

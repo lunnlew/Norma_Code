@@ -14,11 +14,13 @@ use Koala\OAPI\BaseV1 as RequestBase;
  *
  * http://www.liantu.com/pingtai/
  */
-class Connect extends RequestBase {
-	/**
-	 * 构造函数
-	 */
-	final public function __construct() {
-		$this->cfg = include (__DIR__ . '/Api/liantu.php');
-	}
+class Connect extends RequestBase
+{
+    /**
+     * 构造函数
+     */
+    final public function __construct()
+    {
+        $this->cfg = include (__DIR__ . '/Api/liantu.php');
+    }
 }
