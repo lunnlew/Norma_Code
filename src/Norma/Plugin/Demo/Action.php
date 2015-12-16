@@ -6,9 +6,6 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Norma\Plugin\Demo;
-
-use Plugin;
-
 /**
  * 插件实现类 Demo
  *  Plugin::trigger('hello');
@@ -24,9 +21,9 @@ class Action
     public function __construct()
     {
         //你想自动挂接的钩子列表
-        \Core\Plugin\Manager::register('hello', array(&$this, 'sayHello'));
-        \Core\Plugin\Manager::register('bye', 'Plugin\Demo\Action::sayBye');
-        \Core\Plugin\Manager::register('hi', 'Plugin\Demo\Action::sayHi', array('demo'));
+        \Norma\PluginManager::register('hello', array(&$this, 'sayHello'));
+        \Norma\PluginManager::register('bye', 'Norma\Plugin\Demo\Action::sayBye');
+        \Norma\PluginManager::register('hi', 'Norma\Plugin\Demo\Action::sayHi', array('demo'));
     }
     public function sayHello()
     {

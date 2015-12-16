@@ -19,9 +19,9 @@ class Action extends \Core\Plugin\Base
      */
     public function __construct()
     {
-        \Core\Plugin\Manager::only('appInitialize', array(&$this, 'deafultAppInitialize'));
-        \Core\Plugin\Manager::only('coreLazyInitialize', array(&$this, 'defaultCoreLazyInitialize'));
-        \Core\Plugin\Manager::only('appLazyInitialize', array(&$this, 'defaultAppLazyInitialize'));
+        \Norma\PluginManager::only('appInitialize', array(&$this, 'deafultAppInitialize'));
+        \Norma\PluginManager::only('coreLazyInitialize', array(&$this, 'defaultCoreLazyInitialize'));
+        \Norma\PluginManager::only('appLazyInitialize', array(&$this, 'defaultAppLazyInitialize'));
     }
     /**
      * @param  array  $options [description]
@@ -100,10 +100,10 @@ class Action extends \Core\Plugin\Base
          * 视图加载方案
          */
         //视图风格名
-        define('THEME_NAME', C('THEME_NAME', "page"));
+        defined('THEME_NAME') or define('THEME_NAME', C('THEME_NAME', "page"));
         //静态资源URL
-        define('CSS_URL', str_replace('\\', '/', ASSETS_URL . "css" . DS));
-        define('JS_URL', str_replace('\\', '/', ASSETS_URL . "js" . DS));
-        define('IMG_URL', str_replace('\\', '/', ASSETS_URL . "img" . DS));
+        defined('CSS_URL') or define('CSS_URL', str_replace('\\', '/', ASSETS_URL . "css" . DS));
+        defined('JS_URL') or define('JS_URL', str_replace('\\', '/', ASSETS_URL . "js" . DS));
+        defined('IMG_URL') or define('IMG_URL', str_replace('\\', '/', ASSETS_URL . "img" . DS));
     }
 }

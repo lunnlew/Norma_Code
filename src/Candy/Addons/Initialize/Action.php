@@ -15,7 +15,7 @@ class Action extends \Norma\Addons\Initialize\Action {
 	 * @param string $plugin 插件管理器
 	 */
 	function __construct() {
-		\Core\Plugin\Manager::only('appInitialize', array(&$this, 'appInitialize'));
+		\Norma\PluginManager::only('appInitialize', array(&$this, 'appInitialize'));
 	}
 	public function appInitialize($options = array()) {
 		/**
@@ -42,8 +42,6 @@ class Action extends \Norma\Addons\Initialize\Action {
 		 */
 		\Config::loadFile(APP_PATH.'/Config/LAEGlobal.user.php');
 		is_file(APP_PATH . 'Vendor/autoload.php') AND require APP_PATH . 'Vendor/autoload.php';
-
-		//
-		\Request::parse();
+		\Norma\Request::parse();
 	}
 }

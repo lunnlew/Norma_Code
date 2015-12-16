@@ -8,9 +8,9 @@
 // +----------------------------------------------------------------------
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
-namespace Core\Plugin;
+namespace Norma;
 
-class Manager
+class PluginManager
 {
     //已注册的插件监听表
     private static $_queues = array();

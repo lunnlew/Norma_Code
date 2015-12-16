@@ -28,7 +28,7 @@ interface Face
     //获得kv信息
     public function getInfo();
     //获取选项值
-    public function getIptions();
+    public function getOptions();
     //批量获得key-values
     public function mget($ary);
     //前缀范围查找key-values
@@ -38,5 +38,5 @@ interface Face
     //更新key对应的value
     public function set($key, $value);
     //设置选项值
-    public function setIptions($options);
+    public function setOptions($options);
 }

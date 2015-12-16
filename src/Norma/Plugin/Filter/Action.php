@@ -20,7 +20,7 @@ class Action extends \Core\Plugin\Base
     public function __construct()
     {
         parent::__construct(array());
-        \Core\Plugin\Manager::only('inputFilter', array(&$this, 'inputFilter'), array('type' => 'all'));
+        \Norma\PluginManager::only('inputFilter', array(&$this, 'inputFilter'), array('type' => 'all'));
     }
     /**
      * [inputFilter description]

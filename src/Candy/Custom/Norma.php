@@ -14,4 +14,4 @@ hookTrigger('appLazyInitialize', '', '', true);
 /**
  * 应用执行实现
  */
-class Norma extends NormaCore {}
+class Norma extends Norma\NormaCore {}

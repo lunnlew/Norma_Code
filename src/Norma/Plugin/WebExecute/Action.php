@@ -19,7 +19,7 @@ class Action extends \Core\Plugin\Base
      */
     public function __construct()
     {
-        \Core\Plugin\Manager::only('WebExecute', array(&$this, 'run'));
+        \Norma\PluginManager::only('WebExecute', array(&$this, 'run'));
     }
     public function run($options = array())
     {

@@ -71,7 +71,7 @@ class BaseV2
                     if (is_string($value)) {
                         $access_params[$postype][] = $name.'|@'.$value;
                     } else {
-                        $access_params[$postype][] = $name.'|@'.array_pop($value);//对35行的处理,具有多个相同key时
+                        $access_params[$postype][] = $name.'|@'.array_pop($value);//对41行的处理,具有多个相同key时
                     }
                 }
             }

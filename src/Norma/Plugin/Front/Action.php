@@ -16,7 +16,7 @@ class Action
     public function __construct()
     {
         //你想自动挂接的钩子列表
-        \Core\Plugin\Manager::only('setRequestType', array(&$this, 'setRequestType'));
+        \Norma\PluginManager::only('setRequestType', array(&$this, 'setRequestType'));
     }
     public function setRequestType()
     {

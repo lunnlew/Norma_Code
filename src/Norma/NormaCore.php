@@ -89,17 +89,17 @@ NormaCore::initialize(function () {
             $run->register();
     } else {
         ini_set("display_errors", "Off");
-        $log = Norma\Server\Log::factory('monolog');
-        Norma\Server\ErrorHandler::register('monolog', array($log), function () use ($log) {
-            $log->pushHandler(new Monolog\Handler\ChromePHPHandler(Norma\Server\Log::INFO));
-            $log->pushHandler(new AEStreamHandler('Log/' . date('Y-m-d') . "/ERROR.log", Norma\Server\Log::ERROR));
-            $log->pushHandler(new AEStreamHandler('Log/' . date('Y-m-d') . "/WARN.log", Norma\Server\Log::WARNING));
+        $log = Server\Log::factory('monolog');
+        Server\ErrorHandler::register('monolog', array($log), function () use ($log) {
+            $log->pushHandler(new \Monolog\Handler\ChromePHPHandler(Server\Log::INFO));
+            $log->pushHandler(new AEStreamHandler('Log/' . date('Y-m-d') . "/ERROR.log", Server\Log::ERROR));
+            $log->pushHandler(new AEStreamHandler('Log/' . date('Y-m-d') . "/WARN.log", Server\Log::WARNING));
         });
     }
         
     //插件支持
-    \Core\Plugin\Manager::loadPlugin(FRAME_PATH . 'Plugin');
+    \Norma\PluginManager::loadPlugin(FRAME_PATH . 'Plugin');
 
-    \Core\Plugin\Manager::loadPlugin(APP_PATH . 'Plugin', '');
+    \Norma\PluginManager::loadPlugin(APP_PATH . 'Plugin', '');
 });
 ////核心初始化结束

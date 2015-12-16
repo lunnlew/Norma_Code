@@ -563,5 +563,5 @@ function urlsafe_base64_encode($str)
 }
 function hookTrigger($hook, $param = null, $callable = null, $return = false)
 {
-    return \Core\Plugin\Manager::trigger($hook, $param, $callable, $return);
+    return \Norma\PluginManager::trigger($hook, $param, $callable, $return);
 }
