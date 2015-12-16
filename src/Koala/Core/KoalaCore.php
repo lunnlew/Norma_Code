@@ -72,7 +72,7 @@ KoalaCore::initialize(function () {
 	//对多个相同应用情况下的缓存服务提供前缀防止缓存段共用问题;
 	define('APP_UUID', strtolower(substr(md5(APP_PATH), 0, 6)));
 	//composer第三方库加载支持
-	is_file(FRAME_PATH . 'External/autoload.php') AND require FRAME_PATH . 'External/autoload.php';
+	is_file(FRAME_PATH . 'Vendor/autoload.php') AND require FRAME_PATH . 'Vendor/autoload.php';
 	//调试及错误设置
 	if (C('DEBUGLEVEL', defined('DEBUGLEVEL') ? DEBUGLEVEL : 1)) {
 			global $_php_error_global_handler;

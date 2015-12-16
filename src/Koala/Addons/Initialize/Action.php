@@ -86,7 +86,7 @@ class Action extends \Core\Plugin\Base {
 		});
 
 		//composer第三方库加载支持
-		is_file(APP_PATH . 'External/autoload.php') AND require APP_PATH . 'External/autoload.php';
+		is_file(APP_PATH . 'Vendor/autoload.php') AND require APP_PATH . 'Vendor/autoload.php';
 	}
 
 	public function defaultAppLazyInitialize() {
