@@ -22,10 +22,10 @@ use Norma\Server\Image\Base;
  * $img = Norma\Server\Image::factory('GDImage');
  * $img->setCanvas(160,160)->ttftext('测试',40,40,18,'./fs.ttf',0,255,0)->save();
  *
- * listDir('./Norma/Addons/Fonts',$files);
+ * listDir('./Norma/Plugin/Fonts',$files);
  * $img = Norma\Server\Image::factory('GDImage');
- * foreach ($files['./Norma/Addons/Fonts'] as $key => $value) {
- *  $img->setCanvas(160,160)->ttftext('测试'.$value,40,40,18,'./Norma/Addons/Fonts/'.$value,0,255,0)->save();
+ * foreach ($files['./Norma/Plugin/Fonts'] as $key => $value) {
+ *  $img->setCanvas(160,160)->ttftext('测试'.$value,40,40,18,'./Norma/Plugin/Fonts/'.$value,0,255,0)->save();
  * }
  * @final
  */

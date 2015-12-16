@@ -6,6 +6,7 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Helper\URITemplate\Drive;
+
 /**
  * RFC6570 规范实现
  *

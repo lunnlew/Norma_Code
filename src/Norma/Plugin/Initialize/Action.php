@@ -5,7 +5,8 @@
  * @package  Norma
  * @author   LunnLew <lunnlew@gmail.com>
  */
-namespace Norma\Addons\Initialize;
+namespace Norma\Plugin\Initialize;
+
 /**
  * Initialize
  */
@@ -31,7 +32,7 @@ class Action extends \Core\Plugin\Base
         /**
          * 应用类库加载方案
          */
-        \ClassLoader::initialize(function ($instance) {
+         \Norma\ClassLoader::initialize(function ($instance) {
             $instance->register();
             $instance->registerNamespaces(array(
                 'Controller' => dirname(CONTRLLER_PATH),
@@ -39,22 +40,22 @@ class Action extends \Core\Plugin\Base
                 'Logic' => dirname(MODEL_PATH),
                 'Library' => APP_PATH,
                 'Custom' => APP_PATH,
-                'Addons' => APP_PATH,
+                'Plugin' => APP_PATH,
                 'Tag' => FRAME_PATH . 'Extension',
             ));
             $instance->registerDirs(array(
                 APP_PATH . 'Custom',
             ));
             $instance->loadFunc('Custom', 'Func');
-        });
+         });
         /**
          * 应用配置文件
          */
-        \Config::loadFile(APP_PATH . 'Config/LAEGlobal.user.php');
-        is_file(APP_PATH . 'Vendor/autoload.php') AND require APP_PATH . 'Vendor/autoload.php';
+             \Norma\Config::loadFile(APP_PATH . 'Config/LAEGlobal.user.php');
+            is_file(APP_PATH . 'Vendor/autoload.php') and require APP_PATH . 'Vendor/autoload.php';
 
         //
-        \Request::parse();
+            \Norma\Request::parse();
     }
     public function defaultCoreLazyInitialize()
     {
@@ -76,7 +77,7 @@ class Action extends \Core\Plugin\Base
         defined('APP_NAME') or define('APP_NAME', basename(APP_PATH));
         defined('APP_VERSION') or define('APP_VERSION', '1');
         //默认应用插件路径
-        defined('APP_ADDONS_PATH') or define('APP_ADDONS_PATH', APP_PATH . 'Addons/');
+        defined('APP_ADDONS_PATH') or define('APP_ADDONS_PATH', APP_PATH . 'Plugin/');
         //请求开始时间
         defined('START_TIME') or define('START_TIME', isset($_SERVER['REQUEST_TIME_FLOAT'])?$_SERVER['REQUEST_TIME_FLOAT']:'');
         //文件后缀
@@ -84,13 +85,13 @@ class Action extends \Core\Plugin\Base
         //Third  Parts
         defined('THIRD_PATH') or define('THIRD_PATH', APP_PATH . 'Library/Third/');
         //设置应用插件默认加载方案
-        \ClassLoader::initialize(function ($instance) {
+         \Norma\ClassLoader::initialize(function ($instance) {
             $instance->register();
             $instance->registerNamespace('Plugin', array(APP_ADDONS_PATH));
-        });
+         });
 
         //composer第三方库加载支持
-        is_file(APP_PATH . 'Vendor/autoload.php') AND require APP_PATH . 'Vendor/autoload.php';
+            is_file(APP_PATH . 'Vendor/autoload.php') and require APP_PATH . 'Vendor/autoload.php';
     }
 
     public function defaultAppLazyInitialize()

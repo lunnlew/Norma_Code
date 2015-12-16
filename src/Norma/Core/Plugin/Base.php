@@ -1,11 +1,15 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
 namespace Core\Plugin;
+
 /**
  * 插件基类
  */
@@ -29,33 +33,43 @@ abstract class Base
      * @final
      * @param string $path 视图路径
      */
-    public function setTemplatePath($path = '') {}
+    public function setTemplatePath($path = '')
+    {
+    }
     /**
      * 设置插件主题名
      * @final
      * @param string $theme 主题名
      */
-    public function setTheme($theme = 'default') {}
+    public function setTheme($theme = 'default')
+    {
+    }
     /**
      * 模板变量赋值
      * @final
      * @param string $name  变量名
      * @param fixed  $value 变量值
      */
-    public function assign($name, $value) {}
+    public function assign($name, $value)
+    {
+    }
     /**
      * 视图输出
      * @final
      * @param string $template 模板文件名
      */
-    public function display($template = '') {}
+    public function display($template = '')
+    {
+    }
     /**
      * 模板渲染
      * @final
      * @param  string $template 模板文件名
      * @return string 模板渲染结果
      */
-    public function render($template = '') {}
+    public function render($template = '')
+    {
+    }
     /**
      * 必须实现安装入口
      *  @abstract

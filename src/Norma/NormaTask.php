@@ -83,22 +83,22 @@ NormaCore::initialize(function () {
     ClassLoader::initialize(function ($instance) {
         $instance->register();
         $instance->registerNamespaces(array(
-            'Advice' => FRAME_PATH . 'Addons',
+            'Advice' => FRAME_PATH . 'Plugin',
             'Func' => FRAME_PATH . 'Core',
             'Helper' => FRAME_PATH,
             'Base' => FRAME_PATH . 'Core',
             'Core' => FRAME_PATH,
             'Server' => FRAME_PATH,
-            'Plugin' => array(FRAME_PATH . 'Addons'),
-            'Minion' => FRAME_PATH . 'Addons',
-            'Resource' => FRAME_PATH . 'Addons',
+            'Plugin' => array(FRAME_PATH . 'Plugin'),
+            'Minion' => FRAME_PATH . 'Plugin',
+            'Resource' => FRAME_PATH . 'Plugin',
             'Norma' => dirname(FRAME_PATH),
         ));
         $instance->registerDirs(array(
             FRAME_PATH . 'Core',
             FRAME_PATH . 'Tests',
             FRAME_PATH . 'Server',
-            FRAME_PATH . 'Addons/Compatible',
+            FRAME_PATH . 'Plugin/Compatible',
         ));
         //框架内置函数库
         $instance->loadFunc('Func', 'Common,Special');
@@ -140,7 +140,7 @@ NormaCore::initialize(function () {
     (RUN_ENGINE != "LAE") and include(ENTRANCE_PATH . '.Initialise/Class' . RUN_ENGINE . ".php");
 
     //插件支持
-    Plugin::loadPlugin(FRAME_PATH . 'Addons/');
+    Plugin::loadPlugin(FRAME_PATH . 'Plugin/');
 });
 
 /**
@@ -173,14 +173,14 @@ NormaCore::lazyInitialize(function () {
     //存储访问路径
     defined('STOR_URL') or define('STOR_URL', APP_RELATIVE_URL . 'Runtime/Storage/');
     //widget路径
-    defined('WIDGET_PATH') or define('WIDGET_PATH', APP_PATH . 'Addons/Source/Widget/');
+    defined('WIDGET_PATH') or define('WIDGET_PATH', APP_PATH . 'Plugin/Source/Widget/');
     //widget访问路径
-    defined('WIDGET_URL') or define('WIDGET_URL', APP_RELATIVE_URL . 'Addons/Source/Widget/');
+    defined('WIDGET_URL') or define('WIDGET_URL', APP_RELATIVE_URL . 'Plugin/Source/Widget/');
 
     //默认应用路径
     defined('APP_PATH') or define('APP_PATH', ENTRANCE_PATH . 'App/');
     //默认应用插件路径
-    defined('APP_ADDONS_PATH') or define('APP_ADDONS_PATH', APP_PATH . 'Addons/');
+    defined('APP_ADDONS_PATH') or define('APP_ADDONS_PATH', APP_PATH . 'Plugin/');
     defined('APP_PLUGIN_PATH') or define("APP_PLUGIN_PATH", APP_ADDONS_PATH . 'Plugin/');
 
     //设置应用默认加载方案

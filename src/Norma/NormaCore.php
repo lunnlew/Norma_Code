@@ -50,10 +50,10 @@ NormaCore::initialize(function () {
     ClassLoader::initialize(function ($instance) {
         $instance->register();
         $instance->registerNamespaces(array(
-            'Advice' => FRAME_PATH . 'Addons',
+            'Advice' => FRAME_PATH . 'Plugin',
             'Func' => FRAME_PATH . 'Core',
             'Helper' => FRAME_PATH,
-            'Addons' => FRAME_PATH,
+            'Plugin' => FRAME_PATH,
             'Base' => FRAME_PATH . 'Core',
             'Requests' => FRAME_PATH . 'Core',
             'Core' => FRAME_PATH,
@@ -61,7 +61,7 @@ NormaCore::initialize(function () {
             'Server' => FRAME_PATH,
             'Norma' => dirname(FRAME_PATH),
             'Controller' => APP_PATH,
-            'Addons' => APP_PATH
+            'Plugin' => APP_PATH
         ));
         $instance->registerDirs(array(
             FRAME_PATH,
@@ -98,8 +98,8 @@ NormaCore::initialize(function () {
     }
         
     //插件支持
-    \Core\Plugin\Manager::loadPlugin(FRAME_PATH . 'Addons');
+    \Core\Plugin\Manager::loadPlugin(FRAME_PATH . 'Plugin');
 
-    \Core\Plugin\Manager::loadPlugin(APP_PATH . 'Addons', '');
+    \Core\Plugin\Manager::loadPlugin(APP_PATH . 'Plugin', '');
 });
 ////核心初始化结束

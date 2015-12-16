@@ -1,10 +1,13 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
 namespace Core\Plugin;
 
 class Manager
@@ -112,7 +115,7 @@ class Manager
     /**
      * 加载插件
      */
-    public static function loadPlugin($path, $pre = 'Norma', $dir = 'Addons')
+    public static function loadPlugin($path, $pre = 'Norma', $dir = 'Plugin')
     {
         $path = rtrim($path, '/') . '/';
         if (!file_exists($path)) {

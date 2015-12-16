@@ -6,6 +6,7 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Norma\CLI\Minion;
+
 /**
  * 命令行基类
  *
@@ -29,8 +30,9 @@ abstract class Task
     public static function convert_task_to_class_name($task)
     {
         $task = trim($task);
-        if (empty($task))
+        if (empty($task)) {
             return '';
+        }
         //具体Task类名
         return 'Minion\Task\\'.implode('\\', array_map('ucfirst', explode(Task::$task_separator, $task)));
     }
@@ -38,7 +40,7 @@ abstract class Task
     /**
      * 从类名或者实例中获取任务名
      *
-     * @param  string|Task 	类名或者实例
+     * @param  string|Task  类名或者实例
      * @return string Task名
      */
     public static function convert_class_to_task($class)
@@ -47,7 +49,7 @@ abstract class Task
             $class = get_class($class);
         }
 
-        return strtolower(str_replace('\\', Task::$task_separator, substr($class,strlen('Minion\Task\\'))));
+        return strtolower(str_replace('\\', Task::$task_separator, substr($class, strlen('Minion\Task\\'))));
     }
 
     /**
@@ -59,9 +61,9 @@ abstract class Task
      */
     public static function factory($options)
     {
-        if (($task = $options['task']) !== NULL) {
+        if (($task = $options['task']) !== null) {
             unset($options['task']);
-        } elseif (($task = $options[0]) !== NULL) {
+        } elseif (($task = $options[0]) !== null) {
             //第一个参数可能任务名
             unset($options[0]);
         } else {
@@ -71,7 +73,7 @@ abstract class Task
         $class = Task::convert_task_to_class_name($task);
 
         //判断是否存在Task
-        if ( ! class_exists($class)) {
+        if (! class_exists($class)) {
             throw new Minion_Exception_InvalidTask(
                 "Task ':task' is not a valid minion task",
                 array(':task' => $class)
@@ -140,9 +142,9 @@ abstract class Task
      */
     public function __toString()
     {
-        static $task_name = NULL;
+        static $task_name = null;
 
-        if ($task_name === NULL) {
+        if ($task_name === null) {
             $task_name = Task::convert_class_to_task($this);
         }
 
@@ -196,7 +198,7 @@ abstract class Task
         //$validation = Validation::factory($options);
         //$validation = $this->build_validation($validation);
 
-        if ( $this->_method != '_help' AND 0/* AND ! $validation->check()*/) {
+        if ($this->_method != '_help' and 0/* AND ! $validation->check()*/) {
             echo \FrontData::factory('minion/error/validation')
                 ->set('task', Task::convert_class_to_task($this))
                 ->set('errors', $validation->errors($this->get_errors_file()));
@@ -218,13 +220,13 @@ abstract class Task
      */
     protected function _help(array $params)
     {
-        $tasks = $this->_compile_task_list(listFiles('Addons/Minion/Task'));
+        $tasks = $this->_compile_task_list(listFiles('Plugin/Minion/Task'));
 
         $inspector = new \ReflectionClass($this);
 
         list($description, $tags) = $this->_parse_doccomment($inspector->getDocComment());
 
-        \FrontData::assign('tpl','minion/help/task');
+        \FrontData::assign('tpl', 'minion/help/task');
         \FrontData::assign('description', $description);
         \FrontData::assign('tags', (array) $tags);
         \FrontData::assign('task', Task::convert_class_to_task($this));
@@ -285,7 +287,7 @@ abstract class Task
         foreach ($files as $file => $path) {
             $file = substr($file, strrpos($file, DIRECTORY_SEPARATOR) + 1);
 
-            if (is_array($path) AND count($path)) {
+            if (is_array($path) and count($path)) {
                 $task = $this->_compile_task_list($path, $prefix.$file.Task::$task_separator);
 
                 if ($task) {
@@ -333,9 +335,8 @@ abstract class Task
 
     public function valid_option(Validation $validation, $option)
     {
-        if ( ! in_array($option, $this->_accepted_options)) {
+        if (! in_array($option, $this->_accepted_options)) {
             $validation->error($option, 'minion_option');
         }
     }
-
 }

@@ -1,4 +1,13 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
 /**
  * 该文件中存放的是框架必须函数和一些常用函数
  */
@@ -222,12 +231,12 @@ function parse_name($name, $type = 0)
  * $t,符合规则后，执行的代码
  * $f，不符合规则的，执行代码，默认为抛出字符串‘没有权限’
  */
-function authcheck($rule, $uid, $relation = 'or', $t, $f = '没有权限')
+function authcheck($rule, $uid, $relation = 'or', $t = null, $f = '没有权限')
 {
     if ($relation == '') {
         $relation = 'or';
     }
-    $auth = new Helper_Authority();
+    $auth = new Norma\Helper\Authority();
 
     return $auth->getAuth($rule, $uid, $relation) ? $t : $f;
 }
