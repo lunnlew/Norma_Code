@@ -6,8 +6,10 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Koala\Server\Db;
+
 class Base implements Face
 {
+    
     // 数据库类型
     protected $db_type = null;
     // 是否自动释放查询结果
@@ -125,7 +127,8 @@ class Base implements Face
      */
     protected function parseLock($lock = false)
     {
-        if (!$lock) {return '';
+        if (!$lock) {
+            return '';
         }
 
         if ('ORACLE' == $this->db_type) {
@@ -561,7 +564,8 @@ class Base implements Face
      */
     protected function parseUnion($union)
     {
-        if (empty($union)) {return '';
+        if (empty($union)) {
+            return '';
         }
 
         if (isset($union['_all'])) {
@@ -622,7 +626,8 @@ class Base implements Face
     public function selectInsert($fields, $table, $options = array())
     {
         $this->model = $options['model'];
-        if (is_string($fields)) {$fields = explode(',', $fields);
+        if (is_string($fields)) {
+            $fields = explode(',', $fields);
         }
 
         array_walk($fields, array($this, 'parseKey'));
@@ -743,9 +748,11 @@ class Base implements Face
                 $this->parseLimit(!empty($options['limit']) ? $options['limit'] : ''),
                 $this->parseUnion(!empty($options['union']) ? $options['union'] : ''),
                 $this->parseComment(!empty($options['comment']) ? $options['comment'] : '')
-            ), $sql);
+            ),
+            $sql
+        );
 
-        return $sql;
+            return $sql;
     }
 
     /**
@@ -816,5 +823,7 @@ class Base implements Face
     }
 
     // 关闭数据库 由驱动类定义
-    public function close() {}
+    public function close()
+    {
+    }
 }
