@@ -228,3 +228,5 @@ pip-log.txt
 _gsdata_
 sync.ffs_db
 vendor/
+deploy/
+*.sh

@@ -18,9 +18,9 @@ defined('DEBUGLEVEL') or define('DEBUGLEVEL', 1);
 require('php_error.php');
 \php_error\reportErrors();
 //环境完备性检测
-require ENTRANCE_RELATIVE_PATH . 'Initialise/Integrity.php';
+require ENTRANCE_RELATIVE_PATH . '.Initialise/Integrity.php';
 //框架基本参数设置
-require ENTRANCE_RELATIVE_PATH . 'Initialise/FrameParams.php';
+require ENTRANCE_RELATIVE_PATH . '.Initialise/FrameParams.php';
 
 //加载框架核心
 if(RUN_MODE==='WEB') require FRAME_PATH . 'Core/KoalaCore.php';//WEB核心
