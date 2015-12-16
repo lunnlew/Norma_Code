@@ -16,7 +16,6 @@ define('ENTRANCE_RELATIVE_PATH', basename(ENTRANCE_PATH). DIRECTORY_SEPARATOR);
 //框架绝对路径
 define('FRAME_PATH', ENTRANCE_PATH . 'Koala/');
 
-
 /**
  * 应用绝对路径
  * 默认在 ENTRANCE_PATH.'MyApp/'处建立目录
