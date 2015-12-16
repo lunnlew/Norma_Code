@@ -1,8 +1,8 @@
 {
     "name": "lunnlew/Norma_Code",
-    "description": "The Koala Framework for PHP",
+    "description": "The Norma Framework for PHP",
     "version": "1.0.0",
-    "keywords": ["Koala", "framework", "psr-3"],
+    "keywords": ["Norma", "framework", "psr-3"],
     "homepage": "https://github.com/lunnlew/Norma_Code",
     "time": "2014-03-20",
     "type": "library",

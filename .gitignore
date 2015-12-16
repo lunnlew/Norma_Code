@@ -230,3 +230,4 @@ sync.ffs_db
 vendor/
 deploy/
 *.sh
+index.php

@@ -6,7 +6,7 @@
 namespace Library\OAPI\Weibo;
 /**
  */
-class Connect extends \Koala\OAPI\Weibo\Connect {
+class Connect extends \Norma\OAPI\Weibo\Connect {
 
 	/**
 	 * 获取已保存的code RedirectUri

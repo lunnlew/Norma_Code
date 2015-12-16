@@ -1,10 +1,10 @@
 <?php
 /**
- * Koala - A PHP Framework For Web
+ * Norma - A PHP Framework For Web
  * 
  * 框架基本参数设置
  * 
- * @package  Koala
+ * @package  Norma
  * @author   LunnLew <lunnlew@gmail.com>
  */
 

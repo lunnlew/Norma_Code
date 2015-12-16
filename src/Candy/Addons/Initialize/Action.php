@@ -1,15 +1,15 @@
 <?php
 /**
- * Koala - A PHP Framework For Web
+ * Norma - A PHP Framework For Web
  *
- * @package  Koala
+ * @package  Norma
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Addons\Initialize;
 /**
  * Initialize
  */
-class Action extends \Koala\Addons\Initialize\Action {
+class Action extends \Norma\Addons\Initialize\Action {
 	/**
 	 * 供插件管理器主动加载的入口
 	 * @param string $plugin 插件管理器

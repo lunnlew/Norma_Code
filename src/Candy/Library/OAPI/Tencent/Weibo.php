@@ -6,7 +6,7 @@
 namespace Library\OAPI\Tencent;
 /**
  */
-class Weibo extends \Koala\OAPI\Tencent\Weibo {
+class Weibo extends \Norma\OAPI\Tencent\Weibo {
 
 	/**
 	 * 获取已保存的code RedirectUri

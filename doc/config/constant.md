@@ -2,8 +2,8 @@
 
 ##框架常量
 ###FRAME_PATH--框架目录
-    为框架核心的所在路径，如/var/www/Koala/koala
-    koala目录结构:
+    为框架核心的所在路径，如/var/www/Norma/Norma
+    Norma目录结构:
         Core/*
         Helper/*
         Server/*

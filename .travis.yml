@@ -14,18 +14,18 @@ before_script:
 
 script:
   ## PHP_CodeSniffer
-  - scripts/bin/phpcs --standard=PSR2 --ignore="src/Koala/Vendor/*" src/Koala
+  - scripts/bin/phpcs --standard=PSR2 --ignore="src/Norma/Vendor/*" src/Norma
   ## PHP Copy/Paste Detector
-  - scripts/bin/phpcpd --verbose --exclude src/Koala/Vendor src/Koala
+  - scripts/bin/phpcpd --verbose --exclude src/Norma/Vendor src/Norma
   ## PHP Mess Detector
-  - scripts/bin/phpmd src/Koala text cleancode --exclude src/Koala/Vendor
-  - scripts/bin/phpmd src/Koala text codesize --exclude src/Koala/Vendor
-  - scripts/bin/phpmd src/Koala text controversial --exclude src/Koala/Vendor
-  - scripts/bin/phpmd src/Koala text design --exclude src/Koala/Vendor
-  - scripts/bin/phpmd src/Koala text naming --exclude src/Koala/Vendor
-  - scripts/bin/phpmd src/Koala text unusedcode --exclude src/Koala/Vendor
+  - scripts/bin/phpmd src/Norma text cleancode --exclude src/Norma/Vendor
+  - scripts/bin/phpmd src/Norma text codesize --exclude src/Norma/Vendor
+  - scripts/bin/phpmd src/Norma text controversial --exclude src/Norma/Vendor
+  - scripts/bin/phpmd src/Norma text design --exclude src/Norma/Vendor
+  - scripts/bin/phpmd src/Norma text naming --exclude src/Norma/Vendor
+  - scripts/bin/phpmd src/Norma text unusedcode --exclude src/Norma/Vendor
   ## PHPLOC
-  - scripts/bin/phploc --exclude src/Koala/Vendor src/Koala
+  - scripts/bin/phploc --exclude src/Norma/Vendor src/Norma
   ## PHPUNIT
   - scripts/bin/phpunit --coverage-clover=coverage.xml
   ## LINT

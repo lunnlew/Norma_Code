@@ -14,4 +14,4 @@ hookTrigger('appLazyInitialize', '', '', true);
 /**
  * 应用执行实现
  */
-class Koala extends KoalaCore {}
+class Norma extends NormaCore {}

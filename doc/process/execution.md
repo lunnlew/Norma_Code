@@ -9,15 +9,15 @@
     
     3、加载和执行框架引导程序 FRAME_PATH.'Initialise/bootstrap.php'
     
-    4、加载框架核心类文件 KoalaCore.php,并进行框架核心初始化
+    4、加载框架核心类文件 NormaCore.php,并进行框架核心初始化
     
-    5、判断是否存在应用自定义初始化文件APP_PATH.'Custom/Koala.php'
-        a、存在则加载该文件APP_PATH.'Custom/Koala.php'进行应用初始化
-        b、不存在则加载默认的空初始化文件FRAME_PATH.'Koala.php'
+    5、判断是否存在应用自定义初始化文件APP_PATH.'Custom/Norma.php'
+        a、存在则加载该文件APP_PATH.'Custom/Norma.php'进行应用初始化
+        b、不存在则加载默认的空初始化文件FRAME_PATH.'Norma.php'
         
     6、应用初始化完成后开始进行请求处理，路由分发和执行相应控制器
     
-###框架核心初始化流程(文件:FRAME_PATH.'Core/KoalaCore.php')
+###框架核心初始化流程(文件:FRAME_PATH.'Core/NormaCore.php')
     
     1、定义写数据目录与日志目录,版本信息
     
@@ -35,7 +35,7 @@
     
     8、框架初始化结束
 
-###应用初始化流程(文件:APP_PATH.'Custom/Koala.php')
+###应用初始化流程(文件:APP_PATH.'Custom/Norma.php')
     
     1、使用类加载器注册应用自己的类库,函数库
     

@@ -6,7 +6,7 @@
 namespace Library\OAPI\Tencent;
 /**
  */
-class QQConnect extends \Koala\OAPI\Tencent\QQConnect {
+class QQConnect extends \Norma\OAPI\Tencent\QQConnect {
 
 	/**
 	 * 获取已保存的code RedirectUri

@@ -1,22 +1,22 @@
 <?php
 /**
- * KoalaCMS - A PHP CMS System In Koala FrameWork
+ * NormaCMS - A PHP CMS System In Norma FrameWork
  *
- * @package  KoalaCMS
+ * @package  NormaCMS
  * @author   LunnLew <lunnlew@gmail.com>
  */
 
 namespace Controller;
-use Koala\Server\Controller\Base as ControllerBase;
+use Norma\Server\Controller\Base as ControllerBase;
 
 class Oapi extends ControllerBase {
 	public function qqLogin() {
-		$o = \Koala\OAPI::factory('Tencent\QQConnect', array(), 'Library');
+		$o = \Norma\OAPI::factory('Tencent\QQConnect', array(), 'Library');
 		$o->apply('get_auth_code', array('state' => time()));
 		exit;
 	}
 	public function qqCode() {
-		$o = \Koala\OAPI::factory('Tencent\QQConnect', array(), 'Library');
+		$o = \Norma\OAPI::factory('Tencent\QQConnect', array(), 'Library');
 		parse_str($o->apply('get_access_token', array()), $param);
 		$openid = json_decode(str_replace(array(' ', ');'), '', substr($o->apply('get_openid', $param), 9)), true);
 		$mysql = new \SaeMysql();
@@ -30,12 +30,12 @@ class Oapi extends ControllerBase {
 		exit('login success!');
 	}
 	public function weiboLogin() {
-		$o = \Koala\OAPI::factory('Weibo\Connect', array(), 'Library');
+		$o = \Norma\OAPI::factory('Weibo\Connect', array(), 'Library');
 		$o->apply('get_auth_code', array('state' => time()));
 		exit;
 	}
 	public function weiboCode() {
-		$o = \Koala\OAPI::factory('Weibo\Connect', array(), 'Library');
+		$o = \Norma\OAPI::factory('Weibo\Connect', array(), 'Library');
 		$param = json_decode($o->apply('get_access_token', array()), true);
 		$mysql = new \SaeMysql();
 		$sql = "SELECT * FROM `ouser` where openid = '" . $mysql->escape($param['uid']) . "' LIMIT 10";
@@ -48,12 +48,12 @@ class Oapi extends ControllerBase {
 		exit('login success!');
 	}
 	public function txweiboLogin() {
-		$o = \Koala\OAPI::factory('Tencent\Weibo', array(), 'Library');
+		$o = \Norma\OAPI::factory('Tencent\Weibo', array(), 'Library');
 		$o->apply('get_auth_code', array('state' => time()));
 		exit;
 	}
 	public function txweiboCode() {
-		$o = \Koala\OAPI::factory('Tencent\Weibo', array(), 'Library');
+		$o = \Norma\OAPI::factory('Tencent\Weibo', array(), 'Library');
 		parse_str($o->apply('get_access_token', array()), $param);
 		$mysql = new \SaeMysql();
 		$sql = "SELECT * FROM `ouser` where openid = '" . $mysql->escape($param['openid']) . "' LIMIT 10";
@@ -65,7 +65,7 @@ class Oapi extends ControllerBase {
 		exit('login success!');
 	}
 	public function test() {
-		$o = \Koala\OAPI::factory('Baidu\wxhot','','Library');
+		$o = \Norma\OAPI::factory('Baidu\wxhot','','Library');
 		echo $o->apply('wxhot');
 		exit;
 	}

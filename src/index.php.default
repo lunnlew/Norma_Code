@@ -14,7 +14,7 @@ define('ENTRANCE_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 define('ENTRANCE_RELATIVE_PATH', basename(ENTRANCE_PATH). DIRECTORY_SEPARATOR);
 
 //框架绝对路径
-define('FRAME_PATH', ENTRANCE_PATH . 'Koala/');
+define('FRAME_PATH', ENTRANCE_PATH . 'Norma/');
 
 
 /**
@@ -29,4 +29,4 @@ define('APP_PATH', ENTRANCE_PATH . 'Candy/');
 //引导应用程序
 require ENTRANCE_RELATIVE_PATH . '.Initialise/Bootstrap.php';
 //执行应用
-Koala::execute('web');
+Norma::execute('web');

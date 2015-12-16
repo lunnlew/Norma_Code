@@ -9,7 +9,7 @@
 define('DEBUGLEVEL', 1);
 //目录分隔符
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
-defined('IN_KOALA') or define('IN_KOALA', true);
+defined('IN_NORMA') or define('IN_NORMA', true);
 
 //入口绝对路径
 define('ENTRANCE_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
@@ -17,7 +17,7 @@ define('ENTRANCE_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 define('ENTRANCE_RELATIVE_PATH', basename(ENTRANCE_PATH). DIRECTORY_SEPARATOR);
 
 //框架绝对路径
-define('FRAME_PATH', dirname(ENTRANCE_PATH) . '/src/koala/');
+define('FRAME_PATH', dirname(ENTRANCE_PATH) . '/src/Norma/');
 
 
 
@@ -42,8 +42,8 @@ require FRAME_PATH . 'Initialise/FrameParams.php';
 
 
 //加载框架核心
-require FRAME_PATH . 'Core/KoalaCore.php';//WEB核心
+require FRAME_PATH . 'Core/NormaCore.php';//WEB核心
 
-require 'Custom/KoalaTest.php';
+require 'Custom/NormaTest.php';
 //执行应用
-KoalaTest::execute();
+NormaTest::execute();
