@@ -9,18 +9,32 @@ before_install:true
 install:true
 
 before_script:
-  - chmod ugo+x ./scripts/run-tests.sh
-  - wget http://get.sensiolabs.org/php-cs-fixer.phar -O php-cs-fixer
-  - sudo chmod a+x php-cs-fixer
-  - sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
+  - composer self-update
+  - composer install -n --dev --prefer-source
 
 script:
-## PHP_CodeSniffer
-## PHP Copy/Paste Detector
-## PHP Mess Detector
-## PHPLOC
-## PHPUNIT
-  - ./scripts/run-tests.sh
+  ## PHP_CodeSniffer
+  - scripts/bin/phpcs --standard=PSR2 --ignore="src/Koala/Vendor/*" src/Koala
+  ## PHP Copy/Paste Detector
+  - scripts/bin/phpcpd --verbose --exclude src/Koala/Vendor src/Koala
+  ## PHP Mess Detector
+  - scripts/bin/phpmd src/Koala text cleancode --exclude src/Koala/Vendor
+  - scripts/bin/phpmd src/Koala text codesize --exclude src/Koala/Vendor
+  - scripts/bin/phpmd src/Koala text controversial --exclude src/Koala/Vendor
+  - scripts/bin/phpmd src/Koala text design --exclude src/Koala/Vendor
+  - scripts/bin/phpmd src/Koala text naming --exclude src/Koala/Vendor
+  - scripts/bin/phpmd src/Koala text unusedcode --exclude src/Koala/Vendor
+  ## PHPLOC
+  - scripts/bin/phploc --exclude src/Koala/Vendor src/Koala
+  ## PHPUNIT
+  - scripts/bin/phpunit --coverage-clover=coverage.xml
+  ## LINT
+  - find ./ -type f -name \*.php -exec php -l {} \;
+
+  - scripts/bin/run-tests.sh
+
+   # - pear channel-discover pear.phpdoc.org
+   # - pear install phpdoc/phpDocumentor
 
 after_success:true
  # - bash <(curl -s https://codecov.io/bash)
