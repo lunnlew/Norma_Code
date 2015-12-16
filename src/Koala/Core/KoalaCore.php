@@ -11,12 +11,13 @@ define("FRAME_VERSION", '1.1');
 //框架发布时间
 define('FRAME_RELEASE', '20140323');
 //加载单例实现
-include (__DIR__ . '/Singleton.php');
+include(__DIR__ . '/Singleton.php');
 //加载类加载器
-include (__DIR__ . '/ClassLoader.php');
+include(__DIR__ . '/ClassLoader.php');
 /**
  * WEB方式核心初始化实现类
  */
+
 class KoalaCore extends Singleton
 {
     /**
@@ -25,17 +26,19 @@ class KoalaCore extends Singleton
      * @static
      * @access public
      */
-public static function execute($type='')
-{
-    $type = ucfirst($type);
-    if(!in_array($type, array('Web','Cmd')))$type = 'Web';
-    hookTrigger($type .'Execute', '', '', true);
-}
-
+    public static function execute($type = '')
+    {
+        $type = ucfirst($type);
+        if (!in_array($type, array('Web','Cmd'))) {
+            $type = 'Web';
+        }
+        hookTrigger($type .'Execute', '', '', true);
+    }
 }
 
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
+
 /**
  * 内核初始化进程
  */
@@ -71,15 +74,16 @@ KoalaCore::initialize(function () {
     //对多个相同应用情况下的缓存服务提供前缀防止缓存段共用问题;
     define('APP_UUID', strtolower(substr(md5(APP_PATH), 0, 6)));
     //composer第三方库加载支持
-    is_file(FRAME_PATH . 'Vendor/autoload.php') AND require FRAME_PATH . 'Vendor/autoload.php';
+    is_file(FRAME_PATH . 'Vendor/autoload.php') and require FRAME_PATH . 'Vendor/autoload.php';
     //调试及错误设置
     if (C('DEBUGLEVEL', defined('DEBUGLEVEL') ? DEBUGLEVEL : 1)) {
             global $_php_error_global_handler;
-            $_php_error_global_handler->turnOff();unset($_php_error_global_handler);
+            $_php_error_global_handler->turnOff();
+        unset($_php_error_global_handler);
             $run = new Run;
             $run->pushHandler(new PrettyPageHandler);
             $run->register();
-        } else {
+    } else {
         ini_set("display_errors", "Off");
         $log = Koala\Server\Log::factory('monolog');
         Koala\Server\ErrorHandler::register('monolog', array($log), function () use ($log) {
