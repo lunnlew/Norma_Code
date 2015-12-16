@@ -1,4 +1,15 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma;
+
 /**
  * Norma - A PHP Framework For Web
  *
@@ -16,14 +27,14 @@ class Config
     /**
      * 配置项
      */
-    static $config = array();
+    public static $config = array();
     /**
      * 加载配置
      * @param string $file_path 配置文件路路径
      */
     public static function loadFile($file_path)
     {
-        self::$config = array_merge(self::$config, require ($file_path));
+        self::$config = array_merge(self::$config, require($file_path));
     }
     /**
      * 获得配置项

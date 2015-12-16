@@ -1,11 +1,16 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 namespace Norma\Server;
+
 /**
  * 服务工厂类
  *
@@ -16,7 +21,7 @@ namespace Norma\Server;
  */
 class Factory
 {
-    static $tpl='\Server\%s\Drive\%s';
+    protected static $tpl='\Server\%s\Drive\%s';
     /**
      * 获得服务驱动实例
      *
@@ -46,8 +51,8 @@ class Factory
      * @static
      * @return string 完整服务驱动类名
      */
-    public static function getApiName($classify, $name ,$prex='Norma')
+    public static function getApiName($classify, $name, $prex = 'Norma')
     {
-        return vsprintf($prex.self::$tpl,array($classify,$name));
+        return vsprintf($prex.self::$tpl, array($classify,$name));
     }
 }

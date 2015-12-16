@@ -1,5 +1,16 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 namespace Norma\Server\KVDB;
+
 class Base implements Face
 {
     //云服务对象
@@ -31,11 +42,11 @@ class Base implements Face
     {
     }
     //获得kv信息
-    public function get_info()
+    public function getInfo()
     {
     }
     //获取选项值
-    public function get_options()
+    public function getOptions()
     {
     }
     //初始化Sae KV 服务
@@ -59,7 +70,7 @@ class Base implements Face
     {
     }
     //设置选项值
-    public function set_options($options)
+    public function setOptions($options)
     {
     }
 }

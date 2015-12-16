@@ -1,10 +1,13 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
 namespace Norma\OAPI\Org;
 
 use Norma\OAPI\BaseV1 as RequestBase;
@@ -13,7 +16,7 @@ use Norma\OAPI\BaseV1 as RequestBase;
  * 云通讯平台REST API
  * TODO
  */
-class Yuntongxun extends RequestBase
+abstract class Yuntongxun extends RequestBase
 {
     protected $time;
     /**

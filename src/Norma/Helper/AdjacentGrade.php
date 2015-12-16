@@ -1,10 +1,20 @@
 <?php
-defined('IN_NORMA') or exit();
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma\Helper;
+
 /**
  * 邻接分级类//TODO
  *
  */
-class Helper_AdjacentGrade
+class AdjacentGrade
 {
     //数据操作对象
     public $db;
@@ -43,7 +53,7 @@ class Helper_AdjacentGrade
 
         return $path;
     }
-    public function display_children($category_id, $level)
+    public function displayChildren($category_id, $level)
     {
         //TODO;
         exit;
@@ -63,7 +73,7 @@ class Helper_AdjacentGrade
         // 这里只是打印，你可以将以下代码改成其他，比如把节点信息存储起来
             echo str_repeat('--', $level) . $row['category_name'] . "<br/>";
         // 递归的打印所有的孩子节点
-            display_children($row['category_id'], $level+1);
+            displayChildren($row['category_id'], $level+1);
         }
     }
 }

@@ -1,9 +1,17 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
 /**
- * Norma - A PHP Framework For Web
- * 
+ *
  * 框架基本参数设置
- * 
+ *
  * @package  Norma
  * @author   LunnLew <lunnlew@gmail.com>
  */
@@ -24,4 +32,4 @@ define('APP_URL', SITE_URL);
 define('SOURCE_RELATIVE_URL', APP_RELATIVE_URL . 'Source/');
 
 defined('VENDOR_PATH') or define('VENDOR_PATH', dirname(dirname(FRAME_PATH)).'/vendor');
-is_file(VENDOR_PATH . 'autoload.php') AND require VENDOR_PATH . 'autoload.php';
+is_file(VENDOR_PATH . 'autoload.php') and require VENDOR_PATH . 'autoload.php';

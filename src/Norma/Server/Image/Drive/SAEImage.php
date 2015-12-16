@@ -1,4 +1,14 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 /**
  * NormaCMS - A PHP CMS System In Norma FrameWork
  *
@@ -155,7 +165,7 @@ final class SAEImage extends Base
      * @param integer $color_blue  blue部分
      * @return
      */
-    public function ttftext(string $text, int $x, int $y, $size = 8, string $fontfile, $color_red = 0, $color_green = 0, $color_blue = 0)
+    public function ttftext(string $text, int $x, int $y, $size = 8, string $fontfile = null, $color_red = 0, $color_green = 0, $color_blue = 0)
     {
         if ($this->canvas!==false) {
             imagettftext($this->canvas, $size, 0, $x, $y, imagecolorallocate($this->canvas, $color_red, $color_green, $color_blue), $fontfile, $text);

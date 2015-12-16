@@ -1,11 +1,16 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 namespace Norma\Server\Controller;
+
 /**
  * Controller基类
  *
@@ -43,8 +48,9 @@ abstract class Base
     public function __construct()
     {
         //控制器初始化
-        if(method_exists($this,'_initialize'))
+        if (method_exists($this, '_initialize')) {
             $this->_initialize();
+        }
     }
 
    /**
@@ -55,7 +61,7 @@ abstract class Base
     {
         if (empty($this->name)) {
             // 获取Action名称
-            $this->name     =   substr(get_class($this),0,-6);
+            $this->name     =   substr(get_class($this), 0, -6);
         }
 
         return $this->name;
@@ -68,9 +74,9 @@ abstract class Base
      * @param  mixed  $ajax    是否为Ajax方式 当数字时指定跳转时间
      * @return void
      */
-    protected function error($message='',$jumpUrl='',$ajax=false)
+    protected function error($message = '', $jumpUrl = '', $ajax = false)
     {
-        $this->dispatchJump($message,0,$jumpUrl,$ajax);
+        $this->dispatchJump($message, 0, $jumpUrl, $ajax);
     }
 
     /**
@@ -81,9 +87,9 @@ abstract class Base
      * @param  mixed  $ajax    是否为Ajax方式 当数字时指定跳转时间
      * @return void
      */
-    protected function success($message='',$jumpUrl='',$ajax=false)
+    protected function success($message = '', $jumpUrl = '', $ajax = false)
     {
-        $this->dispatchJump($message,1,$jumpUrl,$ajax);
+        $this->dispatchJump($message, 1, $jumpUrl, $ajax);
     }
 
     /**
@@ -97,7 +103,7 @@ abstract class Base
      * @access private
      * @return void
      */
-    private function dispatchJump($message,$status=1,$jumpUrl='',$ajax=false)
+    private function dispatchJump($message, $status = 1, $jumpUrl = '', $ajax = false)
     {
         if (true === $ajax || IS_AJAX) {// AJAX提交
             $data           =   is_array($ajax)?$ajax:array();
@@ -106,28 +112,42 @@ abstract class Base
             $data['url']    =   $jumpUrl;
             $this->ajaxReturn($data);
         }
-        if(is_int($ajax)) \FrontData::assign('waitSecond',$ajax);
-        if(!empty($jumpUrl)) \FrontData::assign('jumpUrl',$jumpUrl);
+        if (is_int($ajax)) {
+            \FrontData::assign('waitSecond', $ajax);
+        }
+        if (!empty($jumpUrl)) {
+            \FrontData::assign('jumpUrl', $jumpUrl);
+        }
         // 提示标题
-        \FrontData::assign('msgTitle',$status? L('_OPERATION_SUCCESS_') : L('_OPERATION_FAIL_'));
+        \FrontData::assign('msgTitle', $status? L('_OPERATION_SUCCESS_') : L('_OPERATION_FAIL_'));
         //如果设置了关闭窗口，则提示完毕后自动关闭窗口
-        if(\FrontData::get('closeWin'))    \FrontData::assign('jumpUrl','javascript:window.close();');
-        \FrontData::assign('status',$status);   // 状态
+        if (\FrontData::get('closeWin')) {
+            \FrontData::assign('jumpUrl', 'javascript:window.close();');
+        }
+        \FrontData::assign('status', $status);   // 状态
         //保证输出不受静态缓存影响
        // C('HTML_CACHE_ON',false);
         if ($status) { //发送成功信息
-            \FrontData::assign('message',$message);// 提示信息
+            \FrontData::assign('message', $message);// 提示信息
             // 成功操作后默认停留1秒
-            if(!\FrontData::get('waitSecond'))    \FrontData::assign('waitSecond','1');
+            if (!\FrontData::get('waitSecond')) {
+                \FrontData::assign('waitSecond', '1');
+            }
             // 默认操作成功自动返回操作前页面
-            if(!\FrontData::get('jumpUrl')) \FrontData::assign("jumpUrl",$_SERVER["HTTP_REFERER"]);
+            if (!\FrontData::get('jumpUrl')) {
+                \FrontData::assign("jumpUrl", $_SERVER["HTTP_REFERER"]);
+            }
             \FrontData::display(C('TMPL_ACTION_SUCCESS'));
         } else {
-            \FrontData::assign('error',$message);// 提示信息
+            \FrontData::assign('error', $message);// 提示信息
             //发生错误时候默认停留3秒
-            if(!\FrontData::get('waitSecond'))   \FrontData::assign('waitSecond','3');
+            if (!\FrontData::get('waitSecond')) {
+                \FrontData::assign('waitSecond', '3');
+            }
             // 默认发生错误的话自动返回上页
-            if(!\FrontData::get('jumpUrl')) \FrontData::assign('jumpUrl',"javascript:history.back(-1);");
+            if (!\FrontData::get('jumpUrl')) {
+                \FrontData::assign('jumpUrl', "javascript:history.back(-1);");
+            }
             \FrontData::display(C('TMPL_ACTION_ERROR'));
             // 中止执行  避免出错后继续执行
             exit ;
@@ -140,7 +160,7 @@ abstract class Base
      * @param  String $type AJAX返回数据格式
      * @return void
      */
-    protected function ajaxReturn($data,$type='')
+    protected function ajaxReturn($data, $type = '')
     {
         if (func_num_args()>2) {// 兼容3.0之前用法
             $args           =   func_get_args();
@@ -152,13 +172,15 @@ abstract class Base
             $data           =   $info;
             $type           =   $args?array_shift($args):'';
         }
-        if(empty($type)) $type  =   C('DEFAULT_AJAX_RETURN');
+        if (empty($type)) {
+            $type  =   C('DEFAULT_AJAX_RETURN');
+        }
         switch (strtoupper($type)) {
-            case 'JSON' :
+            case 'JSON':
                 // 返回JSON数据格式到客户端 包含状态信息
                 header('Content-Type:application/json; charset=utf-8');
                 exit(json_encode($data));
-            case 'XML'  :
+            case 'XML':
                 // 返回xml格式数据
                 header('Content-Type:text/xml; charset=utf-8');
                 exit(xml_encode($data));
@@ -167,19 +189,23 @@ abstract class Base
                 header('Content-Type:application/json; charset=utf-8');
                 $handler  =   isset($_GET[C('VAR_JSONP_HANDLER')]) ? $_GET[C('VAR_JSONP_HANDLER')] : C('DEFAULT_JSONP_HANDLER');
                 exit($handler.'('.json_encode($data).');');
-            case 'EVAL' :
+            case 'EVAL':
                 // 返回可执行的js脚本
                 header('Content-Type:text/html; charset=utf-8');
                 exit($data);
-            default     :
+            default:
                 // 用于扩展其他返回格式数据
-                tag('ajax_return',$data);
+                tag('ajax_return', $data);
         }
     }
-    public function __call($method,$args) {}
+    public function __call($method, $args)
+    {
+    }
    /**
      * 析构方法
      * @access public
      */
-    public function __destruct() {}
+    public function __destruct()
+    {
+    }
 }

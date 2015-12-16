@@ -26,8 +26,8 @@ class Action extends \Core\Plugin\Base
         //控制器分发
         $dispatcher = \Norma\Server\Dispatcher::factory('mvc');
         $dispatcher->execute(
-            hookTrigger('getControllerClass', array(\Request::$map_paths), '', true),
-            \Request::$map_paths[C('VAR_ACTION', 'a')]
+            hookTrigger('getControllerClass', array(\Norma\Request::$map_paths), '', true),
+            \Norma\Request::$map_paths[C('VAR_ACTION', 'a')]
         );
         $Front = new \Core\Front\Advice\FrontAdvice;
         $Front->output();

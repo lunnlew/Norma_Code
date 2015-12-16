@@ -1,11 +1,15 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
 namespace Norma\Helper;
+
 /**
  * 常用正则表达式串
  */
@@ -32,5 +36,5 @@ class Regular
      * 匹配一般词组
      * 中文、英文、数字及下划线
      */
-    const PHRASE = '/^[\x{4e00}-\x{9fa5}_a-zA-Z0-9
+    const PHRASE = '/^[\x{4e00}-\x{9fa5}_a-zA-Z0-9';
 }

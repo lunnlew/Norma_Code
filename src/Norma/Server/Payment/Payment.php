@@ -1,11 +1,15 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
 namespace Norma\Server;
+
 /**
  * 支付服务类
  *
@@ -30,21 +34,20 @@ class Payment
      * @static
      * @return object 驱动实例
      */
-    public static function factory($name='',$options=array())
+    public static function factory($name = '', $options = array())
     {
         if (empty($name)||!is_string($name)) {
-            $name = C('Payment:default','LAEPayment');
+            $name = C('Payment:default', 'LAEPayment');
         }
         if (!isset(self::$instances[$name])) {
             $c_options = C('Payment:'.$name);
             if (empty($c_options)) {
                 $c_options = array();
             }
-            $options = array_merge($c_options,$options);
-            self::$instances[$name] = Payment\Factory::getInstance($name,$options);
+            $options = array_merge($c_options, $options);
+            self::$instances[$name] = Payment\Factory::getInstance($name, $options);
         }
 
         return self::$instances[$name];
     }
-
 }

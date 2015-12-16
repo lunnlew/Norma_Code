@@ -1,12 +1,18 @@
 <?php
-/**
- * NormaCMS - A PHP CMS System In Norma FrameWork
- *
- * @package  NormaCMS
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 namespace Norma\Server\Image\Drive;
+
 use Norma\Server\Image\Base;
+
 /**
  * 基于GD库的Image服务驱动
  *
@@ -19,7 +25,7 @@ use Norma\Server\Image\Base;
  * listDir('./Norma/Addons/Fonts',$files);
  * $img = Norma\Server\Image::factory('GDImage');
  * foreach ($files['./Norma/Addons/Fonts'] as $key => $value) {
- * 	$img->setCanvas(160,160)->ttftext('测试'.$value,40,40,18,'./Norma/Addons/Fonts/'.$value,0,255,0)->save();
+ *  $img->setCanvas(160,160)->ttftext('测试'.$value,40,40,18,'./Norma/Addons/Fonts/'.$value,0,255,0)->save();
  * }
  * @final
  */
@@ -58,14 +64,14 @@ final class LAEGDImage extends Base
         //设置文件信息
         foreach ($files as $key => $file) {
             //对文件名中的空格做处理
-            $filename = str_replace(' ','%20',$file);
+            $filename = str_replace(' ', '%20', $file);
             //取得文件的大小信息
             if (false !== ($this->infos[$file] = getimagesize($filename))) {
                 //取得扩展名
                 //支持格式 see http://www.php.net/manual/zh/function.exif-imagetype.php
-                $this->infos[$file]['ext'] = image_type_to_extension(exif_imagetype($filename),0);
+                $this->infos[$file]['ext'] = image_type_to_extension(exif_imagetype($filename), 0);
                 //如果不在允许的图片类型范围内
-                if (!in_array($this->infos[$file]['ext'],$this->exts)) {
+                if (!in_array($this->infos[$file]['ext'], $this->exts)) {
                     unset($this->infos[$file]);
                 }
             } else {
@@ -80,20 +86,31 @@ final class LAEGDImage extends Base
      * @param int $height 缩略图高度
      * @return
      */
-    public function thumb($width=0,$height=0)
+    public function thumb($width = 0, $height = 0)
     {
         foreach ($this->infos as $name => $info) {
             //返回预处理的大小参数
-            extract($this->_getSizes($width,$height,$info[0],$info[1]),EXTR_OVERWRITE);
+            extract($this->_getSizes($width, $height, $info[0], $info[1]), EXTR_OVERWRITE);
             //设置画布资源
-            $this->setCanvas($dst_w,$dst_h);
+            $this->setCanvas($dst_w, $dst_h);
 
             if ($this->canvas!==false) {
                 //支持格式 gif,jpeg,png,wbmp,webp,xbm,xpm
-                imagecopyresampled($this->canvas,call_user_func('imagecreatefrom'.$info['ext'],$name),
-                    0,0,0,0,
-                    $dst_w,$dst_h,$info[0],$info[1]
-                    );
+                imagecopyresampled(
+                    $this->canvas,
+                    call_user_func(
+                        'imagecreatefrom'.$info['ext'],
+                        $name
+                    ),
+                    0,
+                    0,
+                    0,
+                    0,
+                    $dst_w,
+                    $dst_h,
+                    $info[0],
+                    $info[1]
+                );
                 //保存图片资源
                 $this->infos[$name]['dst'] = $this->canvas;
             }
@@ -103,13 +120,21 @@ final class LAEGDImage extends Base
         return $this;
     }
     //剪裁
-    public function crop() {}
+    public function crop()
+    {
+    }
     //旋转
-    public function rotate() {}
+    public function rotate()
+    {
+    }
     //透明
-    public function transparent() {}
+    public function transparent()
+    {
+    }
     //锐化
-    public function sharpen() {}
+    public function sharpen()
+    {
+    }
     /**
      * 设置画布资源
      * @param int     $width       画布宽度
@@ -118,12 +143,12 @@ final class LAEGDImage extends Base
      * @param integer $color_green green部分
      * @param integer $color_blue  blue部分
      */
-    public function setCanvas(int $width,int $height,$color_red=255,$color_green=255,$color_blue=255)
+    public function setCanvas(int $width, int $height, $color_red = 255, $color_green = 255, $color_blue = 255)
     {
         //新建一个真彩色图像
-        $this->canvas = imagecreatetruecolor($width,$height);
+        $this->canvas = imagecreatetruecolor($width, $height);
         //设置透明
-        ($this->canvas!==false)&&imagefill($this->canvas,0,0,imagecolortransparent($this->canvas,imagecolorallocate($this->canvas,$color_red,$color_green,$color_blue)));
+        ($this->canvas!==false)&&imagefill($this->canvas, 0, 0, imagecolortransparent($this->canvas, imagecolorallocate($this->canvas, $color_red, $color_green, $color_blue)));
 
         return $this;
     }
@@ -140,10 +165,10 @@ final class LAEGDImage extends Base
      * @param integer $color_blue  blue部分
      * @return
      */
-    public function ttftext(string $text,int $x,int $y,$size=8,string $fontfile,$color_red=0,$color_green=0,$color_blue=0)
+    public function ttftext(string $text, int $x, int $y, $size = 8, string $fontfile = null, $color_red = 0, $color_green = 0, $color_blue = 0)
     {
         if ($this->canvas!==false) {
-            imagettftext($this->canvas,$size,0, $x, $y, imagecolorallocate($this->canvas,$color_red,$color_green,$color_blue) ,$fontfile, $text);
+            imagettftext($this->canvas, $size, 0, $x, $y, imagecolorallocate($this->canvas, $color_red, $color_green, $color_blue), $fontfile, $text);
             $this->infos[$text] = array(
                 'dst'=>$this->canvas,
                 'ext'=>'png',
@@ -151,7 +176,7 @@ final class LAEGDImage extends Base
                 );
         } else {
             foreach ($this->infos as $name => $info) {
-                imagettftext($this->infos[$name]['dst'],$size,0, $x, $y, imagecolorallocate($this->infos[$name]['dst'],$color_red,$color_green,$color_blue) ,$fontfile, $text);
+                imagettftext($this->infos[$name]['dst'], $size, 0, $x, $y, imagecolorallocate($this->infos[$name]['dst'], $color_red, $color_green, $color_blue), $fontfile, $text);
             }
         }
 
@@ -170,11 +195,11 @@ final class LAEGDImage extends Base
         return $this;
     }
     //保存文件
-    public function save($file_path='./')
+    public function save($file_path = './')
     {
         foreach ($this->infos as $name => $info) {
             $func = 'image'.$info['ext'];
-            $func($info['dst'],rtrim($file_path,'/').'/'.call_user_func_array($this->namecall,array($name)).'.'.$info['ext']);
+            $func($info['dst'],rtrim($file_path, '/').'/'.call_user_func_array($this->namecall, array($name)).'.'.$info['ext']);
             //销毁资源
             imagedestroy($this->infos[$name]['dst']);
         }
@@ -210,7 +235,7 @@ final class LAEGDImage extends Base
      * @param  int   $s_h 原图高度
      * @return array 缩略图大小与坐标参数数组
      */
-    protected function _getSizes(int $d_w,int $d_h,int $s_w,int $s_h)
+    protected function _getSizes(int $d_w, int $d_h, int $s_w, int $s_h)
     {
         //$dst_x = $dst_y = 0;
         $dst_w = $d_w;

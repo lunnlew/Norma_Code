@@ -1,4 +1,14 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 namespace Norma\Server\Counter\Drive;
 
 use Norma\Server\Counter\Base;
@@ -16,7 +26,7 @@ final class BAECounter extends Base
     //建立一个计数器
     public static function create($name, $value, $expires = '')
     {
-        BaeCounter::EXPIRES = $expires;
+        constant(\BaeCounter::EXPIRES, $expires);
 
         return $this->object->register($name);
     }
@@ -40,9 +50,7 @@ final class BAECounter extends Base
     {
         $result = array();
         foreach ($list as $name) {
-            $result[] = array(
-                $name=>$this->object->get($name);
-                )
+            $result[] = array($name=>$this->object->get($name));
         }
 
         return $result;

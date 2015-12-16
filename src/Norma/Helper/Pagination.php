@@ -1,5 +1,15 @@
 <?php
-defined('IN_NORMA') or exit();
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma\Helper;
+
 /**
  * 分页类
  * ===> $this->styleDir/$this->styleName/style.css
@@ -21,7 +31,7 @@ defined('IN_NORMA') or exit();
  * View::assign('pageNum',$page->pageNums);
  *
  */
-class Helper_Pagination
+class Pagination
 {
     //------------核心参数
     //当前分页id

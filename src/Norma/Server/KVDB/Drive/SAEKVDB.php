@@ -1,4 +1,14 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 namespace Norma\Server\KVDB\Drive;
 
 use Norma\Server\KVDB\Base;
@@ -49,12 +59,12 @@ final class SAEKVDB extends Base
         return $this->object->get($key);
     }
     //获得kv信息
-    final public function get_info()
+    final public function getInfo()
     {
         return $this->object->get_info();
     }
     //获取选项值
-    final public function get_options()
+    final public function getOptions()
     {
         return $this->object->get_options();
     }
@@ -79,7 +89,7 @@ final class SAEKVDB extends Base
         return $this->object->set($key, $value);
     }
     //设置选项值
-    final public function set_options($options)
+    final public function setOptions($options)
     {
         return $this->object->set_options($options);
     }

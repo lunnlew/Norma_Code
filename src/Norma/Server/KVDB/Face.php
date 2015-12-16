@@ -1,5 +1,16 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 namespace Norma\Server\KVDB;
+
 interface Face
 {
     //初始化
@@ -15,9 +26,9 @@ interface Face
     //获得key对应的value
     public function get($key);
     //获得kv信息
-    public function get_info();
+    public function getInfo();
     //获取选项值
-    public function get_options();
+    public function getIptions();
     //批量获得key-values
     public function mget($ary);
     //前缀范围查找key-values
@@ -27,5 +38,5 @@ interface Face
     //更新key对应的value
     public function set($key, $value);
     //设置选项值
-    public function set_options($options);
+    public function setIptions($options);
 }

@@ -1,10 +1,15 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma;
+
 /**
  * 单例管理基类
  */
@@ -20,7 +25,7 @@ class Singleton
      * @param Closure $initializer Closure
      * @param array   $options     选项
      */
-    public static function initialize(Closure $initializer, $options = array())
+    public static function initialize(\Closure $initializer, $options = array())
     {
         $initializer(self::getInstance(get_called_class()), $options);
     }

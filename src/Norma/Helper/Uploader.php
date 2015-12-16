@@ -1,8 +1,19 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma\Helper;
+
 /**
  * 根据UEditor编辑器通用上传类改写以支持云引擎环境
  */
-class Helper_Uploader
+class Uploader
 {
     private $fileField;            //文件域名
     private $file;                 //文件上传对象
@@ -36,12 +47,12 @@ class Helper_Uploader
      * @param array  $config    配置项
      * @param bool   $base64    是否解析base64编码，可省略。若开启，则$fileField代表的是base64编码的字符串表单名
      */
-    public function __construct($fileField , $config , $base64 = false)
+    public function __construct($fileField, $config, $base64 = false)
     {
         $this->fileField = $fileField;
         $this->config = $config;
         $this->stateInfo = $this->stateMap[ 0 ];
-        $this->upFile( $base64 );
+        $this->upFile($base64);
     }
 
     /**
@@ -54,7 +65,7 @@ class Helper_Uploader
         //处理base64上传
         if ($base64) {
             $content = $_POST[ $this->fileField ];
-            $this->base64ToImage( $content );
+            $this->base64ToImage($content);
 
             return;
         }
@@ -62,17 +73,17 @@ class Helper_Uploader
         //处理普通上传
         $file = $this->file = $_FILES[ $this->fileField ];
         if (!$file) {
-            $this->stateInfo = $this->getStateInfo( 'POST' );
+            $this->stateInfo = $this->getStateInfo('POST');
 
             return;
         }
         if ($this->file[ 'error' ]) {
-            $this->stateInfo = $this->getStateInfo( $file[ 'error' ] );
+            $this->stateInfo = $this->getStateInfo($file[ 'error' ]);
 
             return;
         }
-        if ( !is_uploaded_file( $file[ 'tmp_name' ] ) ) {
-            $this->stateInfo = $this->getStateInfo( "UNKNOWN" );
+        if (!is_uploaded_file($file[ 'tmp_name' ])) {
+            $this->stateInfo = $this->getStateInfo("UNKNOWN");
 
             return;
         }
@@ -81,20 +92,20 @@ class Helper_Uploader
         $this->fileSize = $file[ 'size' ];
         $this->fileType = $this->getFileExt();
 
-        if ( !$this->checkSize() ) {
-            $this->stateInfo = $this->getStateInfo( "SIZE" );
+        if (!$this->checkSize()) {
+            $this->stateInfo = $this->getStateInfo("SIZE");
 
             return;
         }
-        if ( !$this->checkType() ) {
-            $this->stateInfo = $this->getStateInfo( "TYPE" );
+        if (!$this->checkType()) {
+            $this->stateInfo = $this->getStateInfo("TYPE");
 
             return;
         }
         $this->fullName = $this->getFolder() . '/' . $this->getName();
         if ($this->stateInfo == $this->stateMap[ 0 ]) {
-            if ( !Storage::upload($file[ "tmp_name" ] , $this->fullName ) ) {
-                $this->stateInfo = $this->getStateInfo( "MOVE" );
+            if (!Storage::upload($file[ "tmp_name" ], $this->fullName)) {
+                $this->stateInfo = $this->getStateInfo("MOVE");
             } else {
                 $this->url = Storage::getUrl($this->fullName);
             }
@@ -108,18 +119,18 @@ class Helper_Uploader
      */
     private function base64ToImage($base64Data)
     {
-        $img = base64_decode( $base64Data );
-        $this->fileName = time() . rand( 1 , 10000 ) . ".png";
+        $img = base64_decode($base64Data);
+        $this->fileName = time() . rand(1, 10000) . ".png";
         $this->fullName = $this->getFolder() . '/' . $this->fileName;
-        if ( !Storage::write($this->fullName , $img ) ) {
-           $this->stateInfo = $this->getStateInfo( "IO" );
+        if (!Storage::write($this->fullName, $img)) {
+            $this->stateInfo = $this->getStateInfo("IO");
 
             return;
         } else {
             $this->url = Storage::getUrl($this->fullName);
         }
         $this->oriName = "";
-        $this->fileSize = strlen( $img );
+        $this->fileSize = strlen($img);
         $this->fileType = ".png";
     }
 
@@ -155,7 +166,7 @@ class Helper_Uploader
      */
     private function getName()
     {
-        return $this->fileName = time() . rand( 1 , 10000 ) . $this->getFileExt();
+        return $this->fileName = time() . rand(1, 10000) . $this->getFileExt();
     }
 
     /**
@@ -164,7 +175,7 @@ class Helper_Uploader
      */
     private function checkType()
     {
-        return in_array( $this->getFileExt() , $this->config[ "allowFiles" ] );
+        return in_array($this->getFileExt(), $this->config[ "allowFiles" ]);
     }
 
     /**
@@ -182,7 +193,7 @@ class Helper_Uploader
      */
     private function getFileExt()
     {
-        return strtolower( strrchr( $this->file[ "name" ] , '.' ) );
+        return strtolower(strrchr($this->file[ "name" ], '.'));
     }
 
     /**
@@ -193,12 +204,12 @@ class Helper_Uploader
     {
 
         $pathStr = $this->config[ "savePath" ];
-        if ( strrchr( $pathStr , "/" ) != "/" ) {
+        if (strrchr($pathStr, "/") != "/") {
             $pathStr .= "/";
         }
-        $pathStr .= date( "Ymd" );
-        if ( !Storage::fileExists($pathStr) ) {
-            if ( !Storage::mkdir($pathStr) ) {
+        $pathStr .= date("Ymd");
+        if (!Storage::fileExists($pathStr)) {
+            if (!Storage::mkdir($pathStr)) {
                 return false;
             }
         }

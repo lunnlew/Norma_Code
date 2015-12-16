@@ -1,11 +1,16 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 namespace Norma\Server;
+
 /**
  * ErrorHandler服务类
  *
@@ -37,19 +42,19 @@ class ErrorHandler
      * @static
      * @return object 驱动实例
      */
-    public static function factory($name='',$options=array())
+    public static function factory($name = '', $options = array())
     {
         if (empty($name)||!is_string($name)) {
-            $name = C('ErrorHandler:default','ErrorHandler');
+            $name = C('ErrorHandler:default', 'ErrorHandler');
         }
         if (!isset(self::$instances[$name])) {
             $c_options = C('ErrorHandler:'.$name);
             if (empty($c_options)) {
                 $c_options = array();
             }
-            $options = array_merge($c_options,$options);
+            $options = array_merge($c_options, $options);
             $class = ErrorHandler\Factory::getServerName($name);
-            self::$instances[$name] = call_user_func_array("$class::register",$options);
+            self::$instances[$name] = call_user_func_array("$class::register", $options);
         }
 
         return self::$instances[$name];
@@ -62,9 +67,9 @@ class ErrorHandler
      * @param Closure $closure 闭包函数
      * @static
      */
-    public static function register($name='',$options=array(),\Closure $closure)
+    public static function register($name = '', $options = array(), \Closure $closure = null)
     {
-        $errorhandler = self::factory($name,$options);
+        $errorhandler = self::factory($name, $options);
         $closure($errorhandler);
     }
 }

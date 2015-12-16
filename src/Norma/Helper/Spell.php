@@ -1,11 +1,22 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma\Helper;
+
 /**
  * 中文拼音
  * 目前仅支持可以以GBK编码的20902个汉字提取拼音首字母
  * $py = new Spell();
  * $r = $py->getInitial($str,'utf-8','utf-8');
  */
-class Helper_Spell
+class Spell
 {
     //当前字符
     protected $word='';
@@ -20,14 +31,14 @@ class Helper_Spell
     protected $charset = array('in'=>'gbk','out'=>'utf-8');
     //例外处理//当没有拼音首字母other===false的情况下，返回原字串否则设置为该值
     protected $other = '!';//other=false;
-    public function __construct($flag=true)
+    public function __construct($flag = true)
     {
         $this->flag = $flag;
         //加载资源
         $this->source['gk221']=file_get_contents(DATA_PATH.'word/gk2-2-1.txt');
         $this->source['gk31']=file_get_contents(DATA_PATH.'word/gk3-1.txt');
         $this->source['gk41']=file_get_contents(DATA_PATH.'word/gk4-1.txt');
-        $this->pos=json_decode(file_get_contents(DATA_PATH.'word/pos.txt'),true);
+        $this->pos=json_decode(file_get_contents(DATA_PATH.'word/pos.txt'), true);
     }
     /**
      * 获得拼音首字母
@@ -36,12 +47,12 @@ class Helper_Spell
      * @param  string     $out  输出的编码
      * @return arr        返回数组
      */
-    public function getInitial($data,$in='gbk',$out='utf-8')
+    public function getInitial($data, $in = 'gbk', $out = 'utf-8')
     {
         if (is_string($data)) {
-            return self::getInitialByStr($data,$in,$out);
+            return self::getInitialByStr($data, $in, $out);
         } elseif (is_array($data)) {
-            return self::getInitialByArr($data,$in,$out);
+            return self::getInitialByArr($data, $in, $out);
         }
     }
     /**
@@ -51,7 +62,7 @@ class Helper_Spell
      * @param  string $out  输出的编码
      * @return arr    返回数组
      */
-    public function getInitialByStr($str,$in='gbk',$out='utf-8')
+    public function getInitialByStr($str, $in = 'gbk', $out = 'utf-8')
     {
         $this->charset['in'] = strtolower($in);
         $this->charset['out'] = strtolower($out);
@@ -81,7 +92,7 @@ class Helper_Spell
      * @param  string $out  输出的编码
      * @return arr    返回数组
      */
-    public function getInitialByArr($arr,$in='gbk',$out='utf-8')
+    public function getInitialByArr($arr, $in = 'gbk', $out = 'utf-8')
     {
         $this->charset['in'] = strtolower($in);
         $this->charset['out'] = strtolower($out);
@@ -125,7 +136,7 @@ class Helper_Spell
                 $nstr = substr($str, $i, 1);
                 $i = $i + 1;
             }
-            $this->word = iconv('gbk','utf-8',$nstr);
+            $this->word = iconv('gbk', 'utf-8', $nstr);
             if (isset($this->temp['fws'][$nstr])) {
                 $w[] = $this->temp['fws'][$nstr];
             } else {
@@ -145,7 +156,7 @@ class Helper_Spell
         //存放字符串拼音
         $w = array();
         foreach ($arr as $key => $word) {
-            $this->word = iconv('gbk','utf-8',$word);
+            $this->word = iconv('gbk', 'utf-8', $word);
             if (isset($this->temp['fws'][$word])) {
                 $w[] = $this->temp['fws'][$word];
             } else {
@@ -190,7 +201,7 @@ class Helper_Spell
             }
             $this->word = $nstr;
             //编码转换至GBK
-            $nstr = iconv('utf-8','gbk',$nstr);
+            $nstr = iconv('utf-8', 'gbk', $nstr);
             if (isset($this->temp['fws'][$nstr])) {
                 $w[] = $this->temp['fws'][$nstr];
             } else {
@@ -211,7 +222,7 @@ class Helper_Spell
         $w = array();
         foreach ($arr as $key => $word) {
             $this->word = $word;
-            $nword = iconv('utf-8','GBK',$word);
+            $nword = iconv('utf-8', 'GBK', $word);
             if (isset($this->temp['fws'][$nword])) {
                 $w[] = $this->temp['fws'][$nword];
             } else {
@@ -230,9 +241,9 @@ class Helper_Spell
     {
         $fw = self::_getInitial($word);//返回的utf-8编码数据首字母
         if ($fw!==false) {
-            $nstr=$this->temp['fws'][$word]=iconv('utf-8',$this->charset['out'],$fw);
+            $nstr=$this->temp['fws'][$word]=iconv('utf-8', $this->charset['out'], $fw);
         } else {
-            $nstr=$this->temp['fws'][$word]=iconv('gbk',$this->charset['out'],$word);
+            $nstr=$this->temp['fws'][$word]=iconv('gbk', $this->charset['out'], $word);
         }
 
         return $nstr;
@@ -294,13 +305,13 @@ class Helper_Spell
             0xc4c3,0xc5b6,0xc5be,0xc6da,0xc8bb,0xc8f6,
             0xcbfa,0xcdda,0xcef4,0xd1b9,0xd4d1
             );
-        if ($key=array_search($hexc,$hcs)) {
+        if ($key=array_search($hexc, $hcs)) {
             return $char[$key];
         } else {
             $hcs[] = $hexc;
             sort($hcs);
 
-            return $char[array_search($hexc,$hcs)];
+            return $char[array_search($hexc, $hcs)];
         }
     }
     /**
@@ -317,17 +328,17 @@ class Helper_Spell
             "N","O","P","Q","R","S",
             "T","W","X","Y","Z"
             );
-        $str = str_replace("\r\n",'',$this->source[$type]);
-        $p = stripos($str,$this->word)+3;//居右//stripos($str,$word),居左
+        $str = str_replace("\r\n", '', $this->source[$type]);
+        $p = stripos($str, $this->word)+3;//居右//stripos($str,$word),居左
         $str = '';
-        if ($key=array_search($p,$this->pos[$type])) {
+        if ($key=array_search($p, $this->pos[$type])) {
             return $char[$key];
         } else {
             $pos = $this->pos[$type];
             $pos[] = $p;
             sort($pos);
 
-            return $char[array_search($p,$pos)];
+            return $char[array_search($p, $pos)];
         }
     }
 }

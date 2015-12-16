@@ -135,7 +135,7 @@ function U($url = '', $vars = '', $suffix = true, $redirect = false, $domain = f
 function L($item)
 {
     $item = strtoupper($item);
-    $LANG = include (LANG_PATH . '/main.php');
+    $LANG = include(LANG_PATH . '/main.php');
 
     return isset($LANG[$item]) ? $LANG[$item] : $item;
 }
@@ -156,7 +156,8 @@ function M($table = '')
  */
 function addslashes_array(&$arr_r)
 {
-    foreach ($arr_r as &$val) {is_array($val) ? addslashes_array($val) : $val = addslashes($val);
+    foreach ($arr_r as &$val) {
+        is_array($val) ? addslashes_array($val) : $val = addslashes($val);
     }
 
     unset($val);
@@ -205,7 +206,10 @@ function redirect($url, $time = 0, $msg = '')
 function parse_name($name, $type = 0)
 {
     if ($type) {
-        return ucfirst(preg_replace_callback('/_([a-zA-Z])/', function ($match) {return strtoupper($match[1]);}, $name));
+        return ucfirst(preg_replace_callback('/_([a-zA-Z])/', function ($match) {
+            return strtoupper($match[1]);
+
+        }, $name));
     } else {
         return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
     }
@@ -295,9 +299,9 @@ function is_mobile()
     }
 
     //如果via信息含有wap则一定是移动设备,部分服务商会屏蔽该信息
-    if (isset($_SERVER['HTTP_VIA']))
+    if (isset($_SERVER['HTTP_VIA'])) {
     //找不到为flase,否则为true
-    {return stristr($_SERVER['HTTP_VIA'], 'wap') ? true : false;
+        return stristr($_SERVER['HTTP_VIA'], 'wap') ? true : false;
     }
 
     //判断手机发送的客户端标志,兼容性有待提高
@@ -359,11 +363,11 @@ function C($key, $defv = '', $runtime = false)
     if (strpos($key, 'Plugin') === 0) {
         list($pre, $name) = explode('\\', $key);
         if (file_exists(APP_ADDONS_PATH . 'Plugin\\' . $name . '\config.php')) {
-            return require (APP_ADDONS_PATH . 'Plugin\\' . $name . '\config.php');
+            return require(APP_ADDONS_PATH . 'Plugin\\' . $name . '\config.php');
         }
     }
 
-    return Config::getItem($key, $defv, $runtime);
+    return Norma\Config::getItem($key, $defv, $runtime);
 }
 
 //============文件系统函数
@@ -403,14 +407,14 @@ function listDir($dir = '.', &$list = array(), $search = '', $replace = '')
  * @param   array   $paths      list of paths to search
  * @return  array
  */
-function listFiles($directory = NULL, array $paths = NULL)
+function listFiles($directory = null, array $paths = null)
 {
-    if ($directory !== NULL) {
+    if ($directory !== null) {
         // Add the directory separator
         $directory .= DIRECTORY_SEPARATOR;
     }
 
-    if ($paths === NULL) {
+    if ($paths === null) {
         // Use the default paths
         $paths = array(APP_PATH, FRAME_PATH);
         ;
@@ -428,7 +432,7 @@ function listFiles($directory = NULL, array $paths = NULL)
                 // Get the file name
                 $filename = $file->getFilename();
 
-                if ($filename[0] === '.' OR $filename[strlen($filename) - 1] === '~') {
+                if ($filename[0] === '.' or $filename[strlen($filename) - 1] === '~') {
                     // Skip all hidden files and UNIX backup files
                     continue;
                 }
@@ -490,7 +494,8 @@ function parse_varstr($var_str, $del = '/')
 {
     $one = $two = array();
     $args = explode($del, $var_str);
-    if (count($args) % 2 != 0) {array_pop($args);
+    if (count($args) % 2 != 0) {
+        array_pop($args);
     }
 
     foreach ($args as $key => $value) {
@@ -517,7 +522,7 @@ function import($class_path, $class)
         $base_path = APP_PATH;
     }
     if (file_exists($base_path . $class_path . $class . '.php')) {
-        include ($base_path . $class_path . $class . '.php');
+        include($base_path . $class_path . $class . '.php');
 
         return new $class();
     } else {
@@ -528,7 +533,9 @@ function import($class_path, $class)
 function getValueRec($keys = array(), $arr = array(), &$depth = 0)
 {
     foreach ($keys as $index => $key) {
-        if ($depth == 1) {$key = strtolower($key);}
+        if ($depth == 1) {
+            $key = strtolower($key);
+        }
         $arr = isset($arr[$key]) ? $arr[$key] : null;
         if ($arr === null) {
             $depth = 0;

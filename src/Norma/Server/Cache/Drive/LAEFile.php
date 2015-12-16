@@ -1,10 +1,14 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 namespace Norma\Server\Cache\Drive;
 
 use Norma\Server\Cache\Base;
@@ -92,7 +96,7 @@ class LAEFile extends Base
         $object = $this->decode($content);
         if ($this->isExpired($object)) {
             @unlink($file_path);
-            $this->auto_clean_expired();
+            $this->autoCleanExpired();
 
             return null;
         }
@@ -245,7 +249,7 @@ class LAEFile extends Base
         return $res;
     }
     //自动清理过期
-    public function auto_clean_expired()
+    public function autoCleanExpired()
     {
         $autoclean = $this->get("key_clean_up_driver_files");
         if ($autoclean == null) {

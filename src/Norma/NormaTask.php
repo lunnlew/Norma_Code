@@ -1,4 +1,15 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma;
+
 //目录分隔符
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 
@@ -21,7 +32,7 @@ class NormaCore extends Singleton
     /**
      * 需延迟执行的closure;
      */
-    static $closure = null;
+    protected static $closure;
     /**
      * 执行应用
      * 若应用没有实现子类execute,则使用该默认方法
@@ -90,10 +101,10 @@ NormaCore::initialize(function () {
             FRAME_PATH . 'Addons/Compatible',
         ));
         //框架内置函数库
-        $instance->LoadFunc('Func', 'Common,Special');
+        $instance->loadFunc('Func', 'Common,Special');
     });
     //默认文件
-    \Config::loadFile(FRAME_PATH . 'Config/Global.default.php');
+     \Norma\Config::loadFile(FRAME_PATH . 'Global-default.conf.php');
     //核心AOP切面路径
     define('ADVICE_PATH', FRAME_PATH . 'Core/AOP/Advice/');
     //检查环境

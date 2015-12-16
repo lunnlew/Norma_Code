@@ -1,4 +1,15 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma;
+
 //类加载器
 //参考 PSR0规范 https://github.com/hfcorriez/fig-standards/blob/zh_CN/%E6%8E%A5%E5%8F%97/PSR-0.md
 class ClassLoader extends Singleton
@@ -29,7 +40,8 @@ class ClassLoader extends Singleton
     public function registerNamespace($namespace, $path)
     {
         if (is_array($path)) {
-            if (!isset($this->namespaces[$namespace])) {$this->namespaces[$namespace] = array();
+            if (!isset($this->namespaces[$namespace])) {
+                $this->namespaces[$namespace] = array();
             }
             $this->namespaces[$namespace] = array_merge((array) $this->namespaces[$namespace], $path);
         } else {
@@ -91,16 +103,16 @@ class ClassLoader extends Singleton
                     include $file;
                     break;
                 } else {
-                        if (is_file($file)) {
-                            include $dir . '/' . $path . "/$cname.php";//dir/class/class.php
-                            break;
-                        }
+                    if (is_file($file)) {
+                        include $dir . '/' . $path . "/$cname.php";//dir/class/class.php
+                        break;
+                    }
                 }
             }
         }
     }
     //函数库加载
-    public function LoadFunc($namespace, $list)
+    public function loadFunc($namespace, $list)
     {
         $funcs = explode(',', $list);
         foreach ($funcs as $file) {

@@ -1,10 +1,14 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma;
 
 //框架核心版本
 define("FRAME_VERSION", '1.1');
@@ -66,10 +70,10 @@ NormaCore::initialize(function () {
             FRAME_PATH . 'Server',
         ));
         //框架内置函数库
-        $instance->LoadFunc('Func', 'Common,Special');
+        $instance->loadFunc('Func', 'Common,Special');
     });
     //默认文件
-    \Config::loadFile(FRAME_PATH . 'Config/Global.default.php');
+    Config::loadFile(FRAME_PATH . 'Global-default.conf.php');
     //定义应用标识码
     //对多个相同应用情况下的缓存服务提供前缀防止缓存段共用问题;
     define('APP_UUID', strtolower(substr(md5(APP_PATH), 0, 6)));
@@ -92,8 +96,10 @@ NormaCore::initialize(function () {
             $log->pushHandler(new AEStreamHandler('Log/' . date('Y-m-d') . "/WARN.log", Norma\Server\Log::WARNING));
         });
     }
+        
     //插件支持
     \Core\Plugin\Manager::loadPlugin(FRAME_PATH . 'Addons');
+
     \Core\Plugin\Manager::loadPlugin(APP_PATH . 'Addons', '');
 });
 ////核心初始化结束

@@ -1,4 +1,14 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
 namespace Norma\Server\Counter\Drive;
 
 use Norma\Server\Counter\Base;
@@ -14,7 +24,7 @@ final class SaeChannel extends Base
     {
         $this->object = new \SaeChannel();
     }
-    public function createChannel(channel,$duration = 3600)
+    public function createChannel($channel, $duration = 3600)
     {
     }
     public function sendMessage($channel, $content)
