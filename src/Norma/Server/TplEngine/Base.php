@@ -9,20 +9,30 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace Norma\Server\Engine;
+namespace Norma\Server\TplEngine;
 
 /**
- * 模板引擎接口
+ * 模板引擎基类
  *
  * @package  Norma
- * @subpackage  Server\Engine
+ * @subpackage  Server\TplEngine
  * @author    LunnLew <lunnlew@gmail.com>
  */
-interface Face
+class Base implements Face
 {
-    public function assign($key, $value);
-    public function set($key, $value);
-    public function get($key);
-    public function render($tpl);
-    public function display($tpl = '');
+    public function assign($key, $value)
+    {
+    }
+    public function set($key, $value)
+    {
+    }
+    public function get($key)
+    {
+    }
+    public function render($tpl)
+    {
+    }
+    public function display($tpl = '')
+    {
+    }
 }

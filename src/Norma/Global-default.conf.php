@@ -7,7 +7,7 @@ $cfg['charset'] = 'utf-8';
 $cfg['time_zone'] = 'Asia/Hong_Kong';
 $cfg['enable_class_alias'] = true;
 //模板引擎
-$cfg['Engine'] = array(
+$cfg['TplEngine'] = array(
     'default' => 'Smarty',
     'tengine' => array(),
     'smarty' => array(

@@ -9,13 +9,13 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace Norma\Server\Engine;
+namespace Norma\Server\TplEngine;
 
 /**
  * 模板引擎工厂类
  *
  * @package  Norma
- * @subpackage  Server\Engine
+ * @subpackage  Server\TplEngine
  * @author    LunnLew <lunnlew@gmail.com>
  */
 class Factory extends \Norma\Server\Factory
@@ -35,6 +35,6 @@ class Factory extends \Norma\Server\Factory
                 $server_name = 'Smarty';
         }
 
-        return self::getApiName('Engine', $server_name);
+        return self::getApiName('TplEngine', $server_name);
     }
 }

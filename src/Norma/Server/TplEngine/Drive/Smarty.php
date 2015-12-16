@@ -9,15 +9,15 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace Norma\Server\Engine\Drive;
+namespace Norma\Server\TplEngine\Drive;
 
-use Norma\Server\Engine\Base;
+use Norma\Server\TplEngine\Base;
 
 /**
  * Smarty引擎驱动
  *
  * @package  Norma
- * @subpackage  Server\Engine\Drive
+ * @subpackage  Server\TplEngine\Drive
  * @author    LunnLew <lunnlew@gmail.com>
  */
 final class Smarty extends Base
