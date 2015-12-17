@@ -1,7 +1,9 @@
 <?php
 namespace Norma\Server\StreamHandler\Drive;
+
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+
 /**
  * ACE的Storage驱动
  * 所有文件名使用相对于数据存储区域的路径
@@ -16,7 +18,7 @@ final class SAEStreamHandler extends StreamHandler
      */
     public function __construct(array $params)
     {
-        parent::__construct($params[0], $params[1],$params[2]);
+        parent::__construct($params[0], $params[1], $params[2]);
     }
     protected function write(array $record)
     {

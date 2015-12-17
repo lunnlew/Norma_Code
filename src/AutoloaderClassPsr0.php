@@ -44,7 +44,9 @@ class AutoloaderClassPsr0 extends Singleton
                 $this->namespaces[$namespace] = array();
             }
             $this->namespaces[$namespace] = array_merge((array) $this->namespaces[$namespace], $path);
-        } else  $this->namespaces[$namespace] = rtrim($path, '\\/');
+        } else {
+            $this->namespaces[$namespace] = rtrim($path, '\\/');
+        }
     }
     //注册目录列表
     public function registerDirs(array $dirs)
@@ -85,9 +87,11 @@ class AutoloaderClassPsr0 extends Singleton
                             break;
                         }
                     }
-                } else if (file_exists($this->namespaces[$fnamespace] . '/' . $path . '.php')) {
+                } elseif (file_exists($this->namespaces[$fnamespace] . '/' . $path . '.php')) {
                         include $this->namespaces[$fnamespace] . '/' . $path . '.php';
-                    } else include $this->namespaces[$fnamespace] . '/' . $path . '/' . $cname . '.php';
+                } else {
+                    include $this->namespaces[$fnamespace] . '/' . $path . '/' . $cname . '.php';
+                }
                
             }
         } else {
@@ -100,7 +104,7 @@ class AutoloaderClassPsr0 extends Singleton
                 } elseif (is_file($file)) {
                         include $dir . '/' . $path . "/$cname.php";//dir/class/class.php
                         break;
-                    }
+                }
             }
         }
     }

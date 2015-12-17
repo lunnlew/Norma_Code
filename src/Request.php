@@ -9,12 +9,13 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 namespace Norma;
+
 class Request
 {
     //请求映射路径
-    static $map_paths = array();
+    public static $map_paths = array();
     //请求参数
-    static $params = array();
+    public static $params = array();
     //请求参数分析
     public static function parse()
     {
@@ -38,14 +39,14 @@ class Request
                 parse_str($_SERVER['QUERY_STRING'], $params);
                 $info_paths = array_filter(explode(C('URL_PATHINFO_DEPR', '/'), trim($pathinfo, C('URL_PATHINFO_DEPR', '/'))));
                 break;
-            case 3://兼容模式
+            case 3:
                 if (false !== ($pos = stripos($_SERVER['QUERY_STRING'], C('URL_HTML_SUFFIX', '.html')))) {
                     $_SERVER['QUERY_STRING'] = substr($_SERVER['QUERY_STRING'], 0, $pos);
                 }
                 parse_str($_SERVER['QUERY_STRING'], $params);
                 !isset($params[C('URL_VAR', 's')]) and ($params[C('URL_VAR', 's')] = '');
                 $info_paths = array_filter(explode(C('URL_PATHINFO_DEPR', '/'), trim($params[C('URL_VAR', 's')], C('URL_PATHINFO_DEPR', '/'))));
-            default:
+            default:  ////
                 break;
         }
         //插入子域名部署模式下的path

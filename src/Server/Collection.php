@@ -6,6 +6,7 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Norma\Server;
+
 /**
  * 数据收集器服务类
  *

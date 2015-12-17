@@ -87,12 +87,12 @@ NormaCore::initialize(function () {
         $log = Server\Log::factory('monolog');
         Server\ErrorHandler::register('monolog', array($log), function () use ($log) {
             $log->pushHandler(new \Monolog\Handler\ChromePHPHandler(Server\Log::INFO));
-             $StreamHandler = Server\StreamHandler::factory(RUN_ENGINE.'StreamHandler',array(
+             $StreamHandler = Server\StreamHandler::factory(RUN_ENGINE.'StreamHandler', array(
                 'Log/' . date('Y-m-d') . "/ERROR.log",
                 Server\Log::ERROR,
                 true
                 ));
-            $log->pushHandler($StreamHandler);
+             $log->pushHandler($StreamHandler);
         });
     }
         

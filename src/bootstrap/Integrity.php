@@ -60,4 +60,4 @@ if (defined('SAE_ACCESSKEY')) {
     define('RUN_ENGINE', 'LAE');
 }
 
-//echo 'RUN_MODE:'.RUN_MODE.';	SYS_MODE:'.SYS_MODE.';	RUN_ENGINE:'.RUN_ENGINE;exit;
+//echo 'RUN_MODE:'.RUN_MODE.';  SYS_MODE:'.SYS_MODE.';  RUN_ENGINE:'.RUN_ENGINE;exit;

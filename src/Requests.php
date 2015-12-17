@@ -91,7 +91,9 @@ class Requests
      *
      * @codeCoverageIgnore
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Autoloader for Requests
@@ -169,8 +171,9 @@ class Requests
 
         // Find us a working transport
         foreach (self::$transports as $class) {
-            if (!class_exists($class))
+            if (!class_exists($class)) {
                 continue;
+            }
 
             $result = call_user_func(array($class, 'test'));
             if ($result) {
@@ -467,7 +470,7 @@ class Requests
             'idn' => true,
             'hooks' => null,
             'transport' => null,
-            'verify' => dirname( __FILE__ ) . '/Requests/Transport/cacert.pem',
+            'verify' => dirname(__FILE__) . '/Requests/Transport/cacert.pem',
             'verifyname' => true,
         );
         if ($multirequest !== false) {
@@ -604,7 +607,7 @@ class Requests
                 }
                 $options['redirected']++;
                 $location = $return->headers['location'];
-                if (strpos ($location, '/') === 0) {
+                if (strpos($location, '/') === 0) {
                     // relative redirect, for compatibility make it absolute
                     $location = Requests_IRI::absolutize($url, $location);
                     $location = $location->uri;
@@ -661,7 +664,7 @@ class Requests
         $encoded = $data;
 
         while (true) {
-            $is_chunked = (bool) preg_match( '/^([0-9a-f]+)[^\r\n]*\r\n/i', $encoded, $matches );
+            $is_chunked = (bool) preg_match('/^([0-9a-f]+)[^\r\n]*\r\n/i', $encoded, $matches);
             if (!$is_chunked) {
                 // Looks like it's not chunked after all
                 return $data;
@@ -769,22 +772,25 @@ class Requests
     {
         // Compressed data might contain a full zlib header, if so strip it for
         // gzinflate()
-        if ( substr($gzData, 0, 3) == "\x1f\x8b\x08" ) {
+        if (substr($gzData, 0, 3) == "\x1f\x8b\x08") {
             $i = 10;
-            $flg = ord( substr($gzData, 3, 1) );
+            $flg = ord(substr($gzData, 3, 1));
             if ($flg > 0) {
                 if ($flg & 4) {
-                    list($xlen) = unpack('v', substr($gzData, $i, 2) );
+                    list($xlen) = unpack('v', substr($gzData, $i, 2));
                     $i = $i + 2 + $xlen;
                 }
-                if ( $flg & 8 )
+                if ($flg & 8) {
                     $i = strpos($gzData, "\0", $i) + 1;
-                if ( $flg & 16 )
+                }
+                if ($flg & 16) {
                     $i = strpos($gzData, "\0", $i) + 1;
-                if ( $flg & 2 )
+                }
+                if ($flg & 2) {
                     $i = $i + 2;
+                }
             }
-            $decompressed = self::compatible_gzinflate( substr( $gzData, $i ) );
+            $decompressed = self::compatible_gzinflate(substr($gzData, $i));
             if (false !== $decompressed) {
                 return $decompressed;
             }
@@ -801,27 +807,29 @@ class Requests
         $huffman_encoded = false;
 
         // low nibble of first byte should be 0x08
-        list( , $first_nibble )    = unpack( 'h', $gzData );
+        list( , $first_nibble )    = unpack('h', $gzData);
 
         // First 2 bytes should be divisible by 0x1F
-        list( , $first_two_bytes ) = unpack( 'n', $gzData );
+        list( , $first_two_bytes ) = unpack('n', $gzData);
 
-        if ( 0x08 == $first_nibble && 0 == ( $first_two_bytes % 0x1F ) )
+        if (0x08 == $first_nibble && 0 == ( $first_two_bytes % 0x1F )) {
             $huffman_encoded = true;
-
-        if ($huffman_encoded) {
-            if ( false !== ( $decompressed = @gzinflate( substr( $gzData, 2 ) ) ) )
-                return $decompressed;
         }
 
-        if ( "\x50\x4b\x03\x04" == substr( $gzData, 0, 4 ) ) {
+        if ($huffman_encoded) {
+            if (false !== ( $decompressed = @gzinflate(substr($gzData, 2)) )) {
+                return $decompressed;
+            }
+        }
+
+        if ("\x50\x4b\x03\x04" == substr($gzData, 0, 4)) {
             // ZIP file format header
             // Offset 6: 2 bytes, General-purpose field
             // Offset 26: 2 bytes, filename length
             // Offset 28: 2 bytes, optional field length
             // Offset 30: Filename field, followed by optional field, followed
             // immediately by data
-            list( , $general_purpose_flag ) = unpack( 'v', substr( $gzData, 6, 2 ) );
+            list( , $general_purpose_flag ) = unpack('v', substr($gzData, 6, 2));
 
             // If the file has been compressed on the fly, 0x08 bit is set of
             // the general purpose field. We can use this to differentiate
@@ -835,8 +843,8 @@ class Requests
 
             // Determine the first byte of data, based on the above ZIP header
             // offsets:
-            $first_file_start = array_sum( unpack( 'v2', substr( $gzData, 26, 4 ) ) );
-            if ( false !== ( $decompressed = @gzinflate( substr( $gzData, 30 + $first_file_start ) ) ) ) {
+            $first_file_start = array_sum(unpack('v2', substr($gzData, 26, 4)));
+            if (false !== ( $decompressed = @gzinflate(substr($gzData, 30 + $first_file_start)) )) {
                 return $decompressed;
             }
 
@@ -844,13 +852,13 @@ class Requests
         }
 
         // Finally fall back to straight gzinflate
-        if ( false !== ( $decompressed = @gzinflate( $gzData ) ) ) {
+        if (false !== ( $decompressed = @gzinflate($gzData) )) {
             return $decompressed;
         }
 
         // Fallback for all above failing, not expected, but included for
         // debugging and preventing regressions and to track stats
-        if ( false !== ( $decompressed = @gzinflate( substr( $gzData, 2 ) ) ) ) {
+        if (false !== ( $decompressed = @gzinflate(substr($gzData, 2)) )) {
             return $decompressed;
         }
 
