@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - 5.6
+  - 7
 
 # before_install: true
 
@@ -17,7 +17,7 @@ before_script:
 
 script:
   ## PHP_CodeSniffer
-  - travis/phpcs --standard=PSR2 src --ignore=*/Requests,*/Helper,*/Router,*/demo/*,*/Adapter/*,php_error.php
+#  - travis/phpcs --standard=PSR2 src --ignore=*/Requests,*/Helper,*/Router,*/demo/*,*/Adapter/*,php_error.php
   ## PHP Copy/Paste Detector
 #  - travis/phpcpd --verbose  src
   ## PHP Mess Detector
