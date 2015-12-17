@@ -6,6 +6,7 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Core\Secure;
+
 /**
  * 参数签名类
  */
@@ -18,18 +19,19 @@ class Sign
      * @param  string $sign_type 签名方式
      * @return array  签名成功返回含sign参数数组,签名失败返回false
      */
-    public function getSignParams($params=array(),$secret='',$sign_type='md5')
+    public function getSignParams($params = array(), $secret = '', $sign_type = 'md5')
     {
         //签名方法
         $sign_method = 'getFrom'.ucwords($sign_type);
         //不存在方法时，返回false
-        if(!is_callable(array($this,$sign_method)))
+        if (!is_callable(array($this,$sign_method))) {
 
             return false;
+        }
         //签名结果
         $sign = $this->{$sign_method}($params,$secret);
 
-        return array_merge($params,array('sign'=>$sign));
+        return array_merge($params, array('sign'=>$sign));
     }
     /**
      * 获取签名验证结果
@@ -38,14 +40,15 @@ class Sign
      * @param  string $sign_type 签名方式
      * @return bool   相等返回true,不相等返回false
      */
-    public function getVerify($params=array(),$secret='',$sign_type='md5')
+    public function getVerify($params = array(), $secret = '', $sign_type = 'md5')
     {
         //签名验证方法
         $verify_method = 'verifyFrom'.ucwords($sign_type);
         //不存在方法时，返回false
-        if(!is_callable(array($this,$verify_method)))
+        if (!is_callable(array($this,$verify_method))) {
 
             return false;
+        }
         return $this->{$verify_method}($params,$secret);
     }
     /**
@@ -55,7 +58,7 @@ class Sign
       * @access protected
       * @return string 返回参数签名值
       */
-    protected function getFromMd5($params=array(),$secret='')
+    protected function getFromMd5($params = array(), $secret = '')
     {
         $str = '';  //待签名字符串
         //先将参数以其参数名的字典序升序进行排序
@@ -77,13 +80,14 @@ class Sign
      * @access protected
      * @return bool   相等返回true,不相等返回false
      */
-    protected function verifyFromMd5($params=array(),$secret='')
+    protected function verifyFromMd5($params = array(), $secret = '')
     {
         $str = '';  //待签名字符串
-        $old_sign = $params['sign'];unset($params['sign']);//保存原始签名并移除参数sign
+        $old_sign = $params['sign'];
+        unset($params['sign']);//保存原始签名并移除参数sign
         //生成签名
-        $sign = $this->getFromMd5($params,$secret);
+        $sign = $this->getFromMd5($params, $secret);
         //比较结果
-        return 0===strcmp($sign,$old_sign);
+        return 0===strcmp($sign, $old_sign);
     }
 }
