@@ -57,4 +57,4 @@ $pay = $payment->setAdapter("99bill_Direct",array(
                         $rtnUrl="http://219.233.173.50:8802/futao/rmb_demo/show.php?msg=error";
 
     }
-}
+});

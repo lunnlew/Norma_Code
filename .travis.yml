@@ -24,11 +24,11 @@ script:
   - scripts/bin/phpmd src text naming
   - scripts/bin/phpmd src text unusedcode
   ## PHPLOC
-  - scripts/bin/phploc src/Norma
+  - scripts/bin/phploc src
   ## PHPUNIT
   - scripts/bin/phpunit --coverage-clover=coverage.xml
   ## LINT
-  - find ./ -type f -name \*.php -exec php -l {} \;
+  - find ./src/ -type f -name \*.php -exec php -l {} \;
 
  #  - scripts/bin/run-tests.sh
 

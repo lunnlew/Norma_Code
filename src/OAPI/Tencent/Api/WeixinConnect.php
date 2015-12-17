@@ -35,7 +35,7 @@ $cfg['refresh_access_token'] = array(
     'method'=>'get',
     'commonParam'=> array(),
     'requestParam'=>array('grant_type|@refresh_token','appid|getAppKey','refresh_token|getRefreshToken')
-    )
+    );
 //检查access_token有效性
 $cfg['refresh_access_token'] = array(
     'url'=>'https://api.weixin.qq.com/sns/auth',
@@ -43,7 +43,7 @@ $cfg['refresh_access_token'] = array(
     'method'=>'get',
     'commonParam'=> array(),
     'requestParam'=>array('access_token|getAccessToken','openid|getOpenid')
-    )
+    );
 //获取用户个人信息（UnionID机制）
 $cfg['refresh_access_token'] = array(
     'url'=>'https://api.weixin.qq.com/sns/userinfo',
@@ -51,5 +51,5 @@ $cfg['refresh_access_token'] = array(
     'method'=>'get',
     'commonParam'=> array(),
     'requestParam'=>array('access_token|getAccessToken','openid|getOpenid')
-    )
+    );
 return $cfg;

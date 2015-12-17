@@ -50,4 +50,4 @@ $pay = $payment->setAdapter("Alipay_Refund",array(
 
         //调试用，写文本函数记录程序运行情况是否正常
         //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-    }
+    });
