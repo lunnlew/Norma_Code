@@ -10,31 +10,31 @@ php:
 before_script:
   - composer self-update
   - composer install -n --dev --prefer-source
-  - chmod u+x scripts/bin/phpcs
-  - chmod u+x scripts/bin/phpmd
-  - chmod u+x scripts/bin/phpcpd
-  - chmod u+x scripts/bin/phploc
+  - chmod u+x travis/phpcs
+  - chmod u+x travis/phpmd
+  - chmod u+x travis/phpcpd
+  - chmod u+x travis/phploc
 
 script:
   ## PHP_CodeSniffer
-  - scripts/bin/phpcs --standard=PSR4 src
+  - travis/phpcs --standard=PSR4 src
   ## PHP Copy/Paste Detector
-  - scripts/bin/phpcpd --verbose  src
+  - travis/phpcpd --verbose  src
   ## PHP Mess Detector
-  - scripts/bin/phpmd src text cleancode
-  - scripts/bin/phpmd src text codesize
-  - scripts/bin/phpmd src text controversial
-  - scripts/bin/phpmd src text design
-  - scripts/bin/phpmd src text naming
-  - scripts/bin/phpmd src text unusedcode
+  - travis/phpmd src text cleancode
+  - travis/phpmd src text codesize
+  - travis/phpmd src text controversial
+  - travis/phpmd src text design
+  - travis/phpmd src text naming
+  - travis/phpmd src text unusedcode
   ## PHPLOC
-  - scripts/bin/phploc src
+  - travis/phploc src
   ## PHPUNIT
-  - scripts/bin/phpunit --coverage-clover=coverage.xml
+  - travis/phpunit --coverage-clover=coverage.xml
   ## LINT
   - find ./src/ -type f -name \*.php -exec php -l {} \;
 
- #  - scripts/bin/run-tests.sh
+ #  - travis/run-tests.sh
 
    # - pear channel-discover pear.phpdoc.org
    # - pear install phpdoc/phpDocumentor
