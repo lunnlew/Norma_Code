@@ -27,7 +27,7 @@ abstract class Task
      * @param string  Task名
      * @return string 类名
      */
-    public static function convert_task_to_class_name($task)
+    public static function convertRaskRoCassName($task)
     {
         $task = trim($task);
         if (empty($task)) {
@@ -43,7 +43,7 @@ abstract class Task
      * @param  string|Task  类名或者实例
      * @return string Task名
      */
-    public static function convert_class_to_task($class)
+    public static function convertCassToTask($class)
     {
         if (is_object($class)) {
             $class = get_class($class);
@@ -70,7 +70,7 @@ abstract class Task
             //没有提供Task是则设置默认Task
             $task = 'help';
         }
-        $class = Task::convert_task_to_class_name($task);
+        $class = Task::convertRaskRoCassName($task);
 
         //判断是否存在Task
         if (! class_exists($class)) {
@@ -88,7 +88,7 @@ abstract class Task
                 array(':task' => $class)
             );
         }
-        $class->set_options($options);
+        $class->setOptions($options);
 
         //如果请求了help则显示帮助信息
         if (array_key_exists('help', $options)) {
@@ -145,7 +145,7 @@ abstract class Task
         static $task_name = null;
 
         if ($task_name === null) {
-            $task_name = Task::convert_class_to_task($this);
+            $task_name = Task::convertCassToTask($this);
         }
 
         return $task_name;
@@ -157,7 +157,7 @@ abstract class Task
      * $param  array  用来设置的参数
      * @return this
      */
-    public function set_options(array $options)
+    public function setOptions(array $options)
     {
         foreach ($options as $key => $value) {
             $this->_options[$key] = $value;
@@ -171,7 +171,7 @@ abstract class Task
      *
      * @return array
      */
-    public function get_options()
+    public function getOptions()
     {
         return (array) $this->_options;
     }
@@ -181,7 +181,7 @@ abstract class Task
      *
      * @return array
      */
-    public function get_accepted_options()
+    public function getAcceptedOptions()
     {
         return (array) $this->_accepted_options;
     }
@@ -193,15 +193,15 @@ abstract class Task
      */
     public function execute()
     {
-        $options = $this->get_options();
+        $options = $this->getOptions();
         // 行为验证//TODO
         //$validation = Validation::factory($options);
-        //$validation = $this->build_validation($validation);
+        //$validation = $this->buildValidation($validation);
 
         if ($this->_method != '_help' and 0/* AND ! $validation->check()*/) {
             echo \FrontData::factory('minion/error/validation')
-                ->set('task', Task::convert_class_to_task($this))
-                ->set('errors', $validation->errors($this->get_errors_file()));
+                ->set('task', Task::convertCassToTask($this))
+                ->set('errors', $validation->errors($this->getErrorsFile()));
         } else {
             //运行任务
             $method = $this->_method;
@@ -220,16 +220,16 @@ abstract class Task
      */
     protected function _help(array $params)
     {
-        $tasks = $this->_compile_task_list(listFiles('Plugin/Minion/Task'));
+        $tasks = $this->_compileTaskList(listFiles('Plugin/Minion/Task'));
 
         $inspector = new \ReflectionClass($this);
 
-        list($description, $tags) = $this->_parse_doccomment($inspector->getDocComment());
+        list($description, $tags) = $this->_parseDoccomment($inspector->getDocComment());
 
         \FrontData::assign('tpl', 'minion/help/task');
         \FrontData::assign('description', $description);
         \FrontData::assign('tags', (array) $tags);
-        \FrontData::assign('task', Task::convert_class_to_task($this));
+        \FrontData::assign('task', Task::convertCassToTask($this));
         exit('View Render!!!');
         //echo $view;
     }
@@ -239,7 +239,7 @@ abstract class Task
      * @param string 需要被分析的注释
      * @return array 第一项是注释本身，其余是phpdoc标签值
      */
-    protected function _parse_doccomment($comment)
+    protected function _parseDoccomment($comment)
     {
         // Normalize all new lines to \n
         $comment = str_replace(array("\r\n", "\n"), "\n", $comment);
@@ -280,7 +280,7 @@ abstract class Task
      * @param  string prefix
      * @return array Compiled tasks
      */
-    protected function _compile_task_list(array $files, $prefix = '')
+    protected function _compileTaskList(array $files, $prefix = '')
     {
         $output = array();
 
@@ -288,7 +288,7 @@ abstract class Task
             $file = substr($file, strrpos($file, DIRECTORY_SEPARATOR) + 1);
 
             if (is_array($path) and count($path)) {
-                $task = $this->_compile_task_list($path, $prefix.$file.Task::$task_separator);
+                $task = $this->_compileTaskList($path, $prefix.$file.Task::$task_separator);
 
                 if ($task) {
                     $output = array_merge($output, $task);
@@ -303,9 +303,9 @@ abstract class Task
     /**
      * Adds any validation rules/labels for validating _options
      *
-     *     public function build_validation(Validation $validation)
+     *     public function buildValidation(Validation $validation)
      *     {
-     *         return parent::build_validation($validation)
+     *         return parent::buildValidation($validation)
      *             ->rule('paramname', 'not_empty'); // Require this param
      *     }
      *
@@ -313,11 +313,11 @@ abstract class Task
      *
      * @return Validation
      */
-    public function build_validation(Validation $validation)
+    public function buildValidation(Validation $validation)
     {
         // Add a rule to each key making sure it's in the task
         foreach ($validation->as_array() as $key => $value) {
-            $validation->rule($key, array($this, 'valid_option'), array(':validation', ':field'));
+            $validation->rule($key, array($this, 'validOption'), array(':validation', ':field'));
         }
 
         return $validation;
@@ -328,12 +328,12 @@ abstract class Task
      *
      * @return string
      */
-    public function get_errors_file()
+    public function getErrorsFile()
     {
         return $this->_errors_file;
     }
 
-    public function valid_option(Validation $validation, $option)
+    public function validOption(Validation $validation, $option)
     {
         if (! in_array($option, $this->_accepted_options)) {
             $validation->error($option, 'minion_option');

@@ -1,5 +1,6 @@
 <?php
 namespace Norma\Core\Router;
+
 use ReflectionObject;
 
 class Controller
@@ -116,5 +117,4 @@ class Controller
     {
         return json_encode($data);
     }
-
 }

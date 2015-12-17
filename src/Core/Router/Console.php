@@ -1,5 +1,6 @@
 <?php
 namespace Norma\Core\Router;
+
 use CLIFramework\Application;
 
 class Console extends Application

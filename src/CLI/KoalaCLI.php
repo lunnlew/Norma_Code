@@ -6,6 +6,7 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Norma\CLI;
+
 /**
  * 命令行参数解析支持
  */
@@ -54,7 +55,7 @@ class NormaCLI
      * @param  string $options,... 选项名
      * @return array
      */
-    public static function options($options = NULL)
+    public static function options($options = null)
     {
         // 获取所有的请求参数
         $options = func_get_args();
@@ -64,7 +65,7 @@ class NormaCLI
 
         //跳过第一个参数,它总是文件本身
         for ($i = 1; $i < $_SERVER['argc']; $i++) {
-            if ( ! isset($_SERVER['argv'][$i])) {
+            if (! isset($_SERVER['argv'][$i])) {
                 //没有更多参数
                 break;
             }
@@ -84,7 +85,7 @@ class NormaCLI
                 //分离选项和值
                 list ($opt, $value) = explode('=', $opt, 2);
             } else {
-                $value = NULL;
+                $value = null;
             }
 
             $values[$opt] = $value;
@@ -92,7 +93,7 @@ class NormaCLI
         //如果有选项列表
         if ($options) {
             foreach ($values as $opt => $value) {
-                if ( ! in_array($opt, $options)) {
+                if (! in_array($opt, $options)) {
                     //移除不在的值
                     unset($values[$opt]);
                 }
@@ -120,11 +121,11 @@ class NormaCLI
      * @param  array  $options array of options the user is shown
      * @return string the user input
      */
-    public static function read($text = '', array $options = NULL)
+    public static function read($text = '', array $options = null)
     {
         // If a question has been asked with the read
         $options_output = '';
-        if ( ! empty($options)) {
+        if (! empty($options)) {
             $options_output = ' [ '.implode(', ', $options).' ]';
         }
 
@@ -134,7 +135,7 @@ class NormaCLI
         $input = trim(fgets(STDIN));
 
         // If options are provided and the choice is not in the array, tell them to try again
-        if ( ! empty($options) && ! in_array($input, $options)) {
+        if (! empty($options) && ! in_array($input, $options)) {
             NormaCLI::write('This is not a valid option. Please try again.');
 
             $input = NormaCLI::read($text, $options);
@@ -202,17 +203,17 @@ class NormaCLI
      * you are done modifying the line.
      *
      *     // Sample progress indicator
-     *     NormaCLI::write_replace('0%');
-     *     NormaCLI::write_replace('25%');
-     *     NormaCLI::write_replace('50%');
-     *     NormaCLI::write_replace('75%');
+     *     NormaCLI::writeReplace('0%');
+     *     NormaCLI::writeReplace('25%');
+     *     NormaCLI::writeReplace('50%');
+     *     NormaCLI::writeReplace('75%');
      *     // Done writing this line
-     *     NormaCLI::write_replace('100%', TRUE);
+     *     NormaCLI::writeReplace('100%', TRUE);
      *
      * @param string  $text     the text to output
      * @param boolean $end_line whether the line is done being replaced
      */
-    public static function write_replace($text = '', $end_line = FALSE)
+    public static function writeReplace($text = '', $end_line = false)
     {
         // Append a newline if $end_line is TRUE
         $text = $end_line ? $text.PHP_EOL : $text;
@@ -290,5 +291,4 @@ class NormaCLI
 
         return $string;
     }
-
 }
