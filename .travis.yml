@@ -28,7 +28,7 @@ script:
 #  - travis/phpmd src text naming
 #  - travis/phpmd src text unusedcode
   ## PHPLOC
-#  - travis/phploc src
+  - travis/phploc src
   ## PHPUNIT
 #  - travis/phpunit --coverage-clover=coverage.xml
   ## LINT
