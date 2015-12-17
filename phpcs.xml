@@ -4,7 +4,7 @@
 
  <file>src</file>
 
- <exclude-pattern>*/Requests/*,*/Helper/*,*/Router/*,*/demo/*,*/Adapter/*,*/bootstrap/*</exclude-pattern>
+ <exclude-pattern>*/Requests/*,*/Helper/*,*/Router/*,*/demo/*,*/Adapter/*,php_error.php</exclude-pattern>
 
  <arg name="report" value="summary"/>
  <arg value="np"/>
