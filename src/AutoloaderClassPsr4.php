@@ -9,7 +9,6 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 namespace Norma;
-//加载单例实现
 include(__DIR__ . '/Singleton.php');
 /**
  * An example of a general-purpose implementation that includes the optional
