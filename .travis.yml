@@ -10,6 +10,10 @@ php:
 before_script:
   - composer self-update
   - composer install -n --dev --prefer-source
+  - chmod u+x scripts/bin/phpcs
+  - chmod u+x scripts/bin/phpmd
+  - chmod u+x scripts/bin/phpcpd
+  - chmod u+x scripts/bin/phploc
 
 script:
   ## PHP_CodeSniffer
