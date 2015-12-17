@@ -101,9 +101,7 @@ class AutoloaderClassPsr4 extends Singleton
         // retain the base directory for the namespace prefix
         if ($prepend) {
             array_unshift($this->prefixes[$prefix], $base_dir);
-        } else {
-            array_push($this->prefixes[$prefix], $base_dir);
-        }
+        } else array_push($this->prefixes[$prefix], $base_dir);
     }
 
     /**
