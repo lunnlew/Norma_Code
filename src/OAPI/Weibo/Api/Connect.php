@@ -1261,7 +1261,7 @@ $cfg["account_get_uid"] = array(
 //写入接口
 
 //account/verify_credentials
-$cfg["account_verify_credentials"] = NULL;
+$cfg["account_verify_credentials"] = null;
 //读取接口
 
 //account/end_session
@@ -2019,7 +2019,7 @@ $cfg["common_get_timezone"] = array(
     ),
 );
 //开发指南
-$cfg["开发指南"] = NULL;
+$cfg["开发指南"] = null;
 //place/public_timeline
 $cfg["place_public_timeline"] = array(
     'summary' => '获取最新20条公共的位置动态',

@@ -6,6 +6,7 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Norma\Plugin\Demo;
+
 /**
  * 插件实现类 Demo
  *  Plugin::trigger('hello');

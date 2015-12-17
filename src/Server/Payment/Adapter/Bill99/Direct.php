@@ -8,20 +8,17 @@
 // +----------------------------------------------------------------------
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
-namespace Norma\Server\Payment\Adapter\Alipay;
 
-require_once 'lib/alipay_submit.class.php';
-require_once 'lib/alipay_notify.class.php';
+namespace Norma\Server\Adapter\Bill99;
+
+require_once 'lib/submit.class.php';
 /**
- * 支付宝即时到账批量退款有密接口适配器
+ * 快钱人民币网关支付交易接口适配器
  */
-class Refund extends \Norma\Server\Payment\Adapter\Alipay
+class Direct extends \Norma\Server\Adapter\Bill99
 {
     //接口配置
     public $config = array();
     //请求参数
-    public $param = array(
-        //固定参数
-        "service" => "refund_fastpay_by_platform_pwd",
-        );
+    public $param = array();
 }

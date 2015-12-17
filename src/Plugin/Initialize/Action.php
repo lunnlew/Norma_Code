@@ -51,8 +51,8 @@ class Action extends \Norma\Plugin\Base
         /**
          * 应用配置文件
          */
-         \Norma\Config::loadFile(APP_PATH . 'Config/LAEGlobal.user.php');
-         \Norma\Request::parse();
+            \Norma\Config::loadFile(APP_PATH . 'Config/LAEGlobal.user.php');
+            \Norma\Request::parse();
     }
     public function defaultCoreLazyInitialize()
     {

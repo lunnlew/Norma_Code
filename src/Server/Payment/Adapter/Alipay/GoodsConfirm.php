@@ -1,10 +1,21 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma\Server\Payment\Adapter\Alipay;
+
 require_once 'lib/alipay_submit.class.php';
 require_once 'lib/alipay_notify.class.php';
 /**
  * 支付宝确认发货交易接口适配器
  */
-class Server_Payment_Adapter_Alipay_GoodsConfirm extends Server_Payment_Adapter_Alipay
+class GoodsConfirm extends \Norma\Server\Payment\Adapter\Alipay
 {
     //接口配置
     public $config = array();

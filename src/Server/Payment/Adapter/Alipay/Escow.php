@@ -1,10 +1,21 @@
 <?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma\Server\Payment\Adapter\Alipay;
+
 require_once 'lib/alipay_submit.class.php';
 require_once 'lib/alipay_notify.class.php';
 /**
  * 支付宝网银支付纯网关交易接口适配器
  */
-class Server_Payment_Adapter_Alipay_Escow extends Server_Payment_Adapter_Alipay
+class Escow extends \Norma\Server\Payment\Adapter\Alipay
 {
     //接口配置
     public $config = array();
@@ -12,6 +23,6 @@ class Server_Payment_Adapter_Alipay_Escow extends Server_Payment_Adapter_Alipay
     public $param = array(
         //固定参数
         "service" => "create_partner_trade_by_buyer",
-        "payment_type"	=> "1",//支付类型
+        "payment_type"  => "1",//支付类型
         );
 }

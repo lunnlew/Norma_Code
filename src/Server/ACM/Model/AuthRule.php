@@ -9,5 +9,5 @@ use Base_Model;
 class AuthRule extends Base_Model
 {
      //主表
-    static $table_name = 'auth_rule';
+    public static $table_name = 'auth_rule';
 }

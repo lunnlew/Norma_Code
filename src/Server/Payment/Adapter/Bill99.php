@@ -12,9 +12,9 @@
 namespace Norma\Server\Adapter;
 
 /**
- * 支付宝交易接口
+ * 快钱交易接口
  */
-class Alipay extends \Norma\Server\Base\PaymentAdapter
+class Bill99 extends \Norma\Server\Base\PaymentAdapter
 {
     //接口配置
     public $config = array();

@@ -17,7 +17,7 @@ before_script:
 
 script:
   ## PHP_CodeSniffer
-  - travis/phpcs --standard=PSR2 src --ignore=*/Requests,*/Helper,*/Router,*/demo/*
+  - travis/phpcs --standard=PSR2 src --ignore=*/Requests,*/Helper,*/Router,*/demo/*,*/Adapter/*
   ## PHP Copy/Paste Detector
 #  - travis/phpcpd --verbose  src
   ## PHP Mess Detector

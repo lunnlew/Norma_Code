@@ -9,5 +9,5 @@ use Base_Model;
 class AuthUser extends Base_Model
 {
      //主表
-    static $table_name = 'auth_User';
+    public static $table_name = 'auth_User';
 }

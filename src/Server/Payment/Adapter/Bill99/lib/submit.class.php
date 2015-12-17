@@ -33,7 +33,7 @@ class Submit
         fclose($fp);
         $pkeyid = openssl_get_privatekey($priv_key);
         // compute signature
-        openssl_sign($prestr, $signMsg, $pkeyid,OPENSSL_ALGO_SHA1);
+        openssl_sign($prestr, $signMsg, $pkeyid, OPENSSL_ALGO_SHA1);
         // free the key from memory
         openssl_free_key($pkeyid);
 
@@ -72,7 +72,7 @@ class Submit
         $para = $this->buildRequestPara($para_temp);
 
         $sHtml = "<form name='kqPay' id='kqPay' action='".$this->gateway_new."' method='".$method."'>";
-        while (list ($key, $val) = each ($para)) {
+        while (list ($key, $val) = each($para)) {
             $sHtml.= "<input type='hidden' name='".$key."' value='".$val."'/>";
         }
 
