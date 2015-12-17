@@ -2,11 +2,10 @@ language: php
 
 php:
   - 5.3
-  - 5.4
 
-before_install: true
+# before_install: true
 
-install: true
+# install: true
 
 before_script:
   - composer self-update
@@ -31,17 +30,17 @@ script:
   ## LINT
   - find ./ -type f -name \*.php -exec php -l {} \;
 
-  - scripts/bin/run-tests.sh
+ #  - scripts/bin/run-tests.sh
 
    # - pear channel-discover pear.phpdoc.org
    # - pear install phpdoc/phpDocumentor
 
-after_success: true
+# after_success: true
  # - bash <(curl -s https://codecov.io/bash)
-before_deploy: true
+# before_deploy: true
 
-deploy: true
+# deploy: true
 
-after_deploy: true
+# after_deploy: true
 
-after_script: true
+# after_script: true
