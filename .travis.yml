@@ -17,7 +17,7 @@ before_script:
 
 script:
   ## PHP_CodeSniffer
-  - travis/phpcs --standard=PSR4 src
+  - travis/phpcs --standard=PSR2 src
   ## PHP Copy/Paste Detector
 #  - travis/phpcpd --verbose  src
   ## PHP Mess Detector
