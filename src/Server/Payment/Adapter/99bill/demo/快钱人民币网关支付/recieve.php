@@ -1,6 +1,6 @@
 <?php
 $payment = new Server_Payment_Payment();
-$pay = $payment->setAdapter("99bill_Direct",array(
+$pay = $payment->setAdapter("99bill_Direct", array(
     //人民币网关账号，该账号为11位人民币网关商户编号+01,该参数必填。
     'merchantAcctId' => "1001213884201",
     //网关版本，固定值：v2.0,该参数必填。
@@ -37,17 +37,17 @@ $pay = $payment->setAdapter("99bill_Direct",array(
     $verify_result = $Notify->verifyNotify();
     if ($verify_result == 1) {
         switch ($_REQUEST[payResult]) {
-                case '10':
-                        //此处做商户逻辑处理
-                        $rtnOK=1;
-                        //以下是我们快钱设置的show页面，商户需要自己定义该页面。
-                        $rtnUrl="http://219.233.173.50:8802/futao/rmb_demo/show.php?msg=success";
-                        break;
-                default:
-                        $rtnOK=1;
-                        //以下是我们快钱设置的show页面，商户需要自己定义该页面。
-                        $rtnUrl="http://219.233.173.50:8802/futao/rmb_demo/show.php?msg=false";
-                        break;
+            case '10':
+                    //此处做商户逻辑处理
+                    $rtnOK=1;
+                    //以下是我们快钱设置的show页面，商户需要自己定义该页面。
+                    $rtnUrl="http://219.233.173.50:8802/futao/rmb_demo/show.php?msg=success";
+                break;
+            default:
+                    $rtnOK=1;
+                    //以下是我们快钱设置的show页面，商户需要自己定义该页面。
+                    $rtnUrl="http://219.233.173.50:8802/futao/rmb_demo/show.php?msg=false";
+                break;
 
         }
 
