@@ -1,10 +1,15 @@
 <?php
-/**
- * Norma - A PHP Framework For Web
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+namespace Norma;
+
 /**
  * 视图类
  *
@@ -13,8 +18,8 @@
  */
 class View extends Singleton
 {
-    static $engine = null;
-    static $options = array();
+    public static $engine = null;
+    public static $options = array();
     /**
      * 注册变量
      * @param string $key

@@ -70,4 +70,4 @@ $public_params = array(
     //公共参数
     'public_params'=>$public_params
     );
-return $cfg;
+ return $cfg;
