@@ -10,10 +10,10 @@
 // +----------------------------------------------------------------------
 
 //目录分隔符
-defined('DS') or define('DS', DIRECTORY_SEPARATOR);
-defined('IN_NORMA') or define('IN_NORMA', true);
+defined('DS') || define('DS', DIRECTORY_SEPARATOR);
+defined('IN_NORMA') || define('IN_NORMA', true);
 //默认调试级别设置
-defined('DEBUGLEVEL') or define('DEBUGLEVEL', 1);
+defined('DEBUGLEVEL') || define('DEBUGLEVEL', 1);
 
 /*
 |--------------------------------------------------------------------------

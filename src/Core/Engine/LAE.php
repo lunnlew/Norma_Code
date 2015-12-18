@@ -9,32 +9,31 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 
-
 /**
  * LAE云引擎参数统一化
  *
  */
 
 //运行数据路径
-defined('RUNTIME_PATH') or define('RUNTIME_PATH', APP_PATH . 'Runtime' . DS);
+defined('RUNTIME_PATH') || define('RUNTIME_PATH', APP_PATH . 'Runtime' . DS);
 //--编译目录
-defined('COMPILE_PATH') or define('COMPILE_PATH', RUNTIME_PATH . 'Compile' . DS);
+defined('COMPILE_PATH') || define('COMPILE_PATH', RUNTIME_PATH . 'Compile' . DS);
 //--缓存目录
-defined('CACHE_PATH') or define('CACHE_PATH', RUNTIME_PATH . 'Cache' . DS);
+defined('CACHE_PATH') || define('CACHE_PATH', RUNTIME_PATH . 'Cache' . DS);
 //--日志路径
-defined('LOG_PATH') or define('LOG_PATH', RUNTIME_PATH . 'Log' . DS);
+defined('LOG_PATH') || define('LOG_PATH', RUNTIME_PATH . 'Log' . DS);
 
 //临时数据路径
-if (SYS_MODE==='WIN') {
+if (SYS_MODE === 'WIN') {
     //windows
-    defined('TMP_PATH') or define('TMP_PATH', 'c:/temp/');
+    defined('TMP_PATH') || define('TMP_PATH', 'c:/temp/');
 } else {
     //linux
-    defined('TMP_PATH') or define('TMP_PATH', '/tmp/');
+    defined('TMP_PATH') || define('TMP_PATH', '/tmp/');
 }
 
 //存储数据路径
-defined('STOR_PATH') or define('STOR_PATH', RUNTIME_PATH . 'Storage' . DS);
+defined('STOR_PATH') || define('STOR_PATH', RUNTIME_PATH . 'Storage' . DS);
 
 //框架类及云平台自有类统一化命名
 if (C("enable_class_alias", false)) {

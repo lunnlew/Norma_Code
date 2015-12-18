@@ -11,7 +11,7 @@
 namespace Norma;
 
 //目录分隔符
-defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+defined('DS') || define('DS', DIRECTORY_SEPARATOR);
 
 //框架核心版本
 define("FRAME_VERSION", '1.0');
@@ -22,7 +22,7 @@ define('FRAME_RELEASE', '20140323');
 //核心初始化需求
 
 //加载单例实现
-include(__DIR__ . '/Singleton.php');
+include __DIR__ . '/Singleton.php';
 
 /**
  * CLI方式核心初始化实现类
@@ -53,7 +53,7 @@ class NormaCore extends Singleton
     {
         self::$closure[] = array(
             'closure' => $initializer,
-            'params' => array(self::getInstance(get_called_class()), $options)
+            'params' => array(self::getInstance(get_called_class()), $options),
         );
     }
     /**
@@ -72,7 +72,7 @@ class NormaCore extends Singleton
 }
 
 //加载类加载器
-include(__DIR__ . '/ClassLoader.php');
+include __DIR__ . '/ClassLoader.php';
 
 ////核心初始化开始
 /**
@@ -104,7 +104,7 @@ NormaCore::initialize(function () {
         $instance->loadFunc('Func', 'Common,Special');
     });
     //默认文件
-     \Norma\Config::loadFile(FRAME_PATH . 'Global-default.conf.php');
+    \Norma\Config::loadFile(FRAME_PATH . 'Global-default.conf.php');
     //核心AOP切面路径
     define('ADVICE_PATH', FRAME_PATH . 'Core/AOP/Advice/');
     //检查环境
@@ -115,18 +115,18 @@ NormaCore::initialize(function () {
     $log = Log::factory('monolog');
     ErrorHandler::register('monolog', array($log), function () use ($log) {
         switch (C('DEBUGLEVEL', defined('DEBUGLEVEL') ? DEBUGLEVEL : 1)) {
-            case 4://development//线下开发环境
+            case 4: //development//线下开发环境
                 ini_set("display_errors", "On");
                 $log->pushHandler(new Monolog\Handler\ChromePHPHandler(Log::ERROR));
                 break;
-            case 3://test//线上测试环境
+            case 3: //test//线上测试环境
                 ini_set("display_errors", "Off");
                 $log->pushHandler(new Monolog\Handler\ChromePHPHandler(Log::ERROR));
                 $log->pushHandler(new Monolog\Handler\ChromePHPHandler(Log::INFO));
                 $log->pushHandler(new Monolog\Handler\ChromePHPHandler(Log::WARNING));
                 break;
-            case 2://production//线上生产环境
-            case 1://默认模式
+            case 2: //production//线上生产环境
+            case 1: //默认模式
             default:
                 //关掉错误提示
                 error_reporting(0);
@@ -153,35 +153,35 @@ NormaCore::lazyInitialize(function () {
     include(ENTRANCE_PATH . '.Initialise/Constant' . RUN_ENGINE . '.php');
 
     //控制器路径
-    defined('CONTRLLER_PATH') or define('CONTRLLER_PATH', APP_PATH . 'Controller/');
+    defined('CONTRLLER_PATH') || define('CONTRLLER_PATH', APP_PATH . 'Controller/');
     //模型路径
-    defined('MODEL_PATH') or define('MODEL_PATH', APP_PATH . 'Model/');
+    defined('MODEL_PATH') || define('MODEL_PATH', APP_PATH . 'Model/');
     //语言包路径
-    defined('LANG_PATH') or define('LANG_PATH', APP_PATH . 'Language/');
+    defined('LANG_PATH') || define('LANG_PATH', APP_PATH . 'Language/');
     //模板路径
-    defined('VIEW_PATH') or define('VIEW_PATH', APP_PATH . 'View/');
+    defined('VIEW_PATH') || define('VIEW_PATH', APP_PATH . 'View/');
     //读数据路径
-    defined('DATA_PATH') or define('DATA_PATH', FRAME_PATH . 'Data/');
+    defined('DATA_PATH') || define('DATA_PATH', FRAME_PATH . 'Data/');
     //编译路径
-    defined('COMPILE_PATH') or define('COMPILE_PATH', RUNTIME_PATH . 'Compile/');
+    defined('COMPILE_PATH') || define('COMPILE_PATH', RUNTIME_PATH . 'Compile/');
     //缓存路径
-    defined('CACHE_PATH') or define('CACHE_PATH', RUNTIME_PATH . 'Cache/');
+    defined('CACHE_PATH') || define('CACHE_PATH', RUNTIME_PATH . 'Cache/');
     //静态资源路径
-    defined('ASSETS_URL') or define('ASSETS_URL', APP_URL . 'Source/');
+    defined('ASSETS_URL') || define('ASSETS_URL', APP_URL . 'Source/');
     //存储路径
-    defined('STOR_PATH') or define('STOR_PATH', RUNTIME_PATH . 'Storage/');
+    defined('STOR_PATH') || define('STOR_PATH', RUNTIME_PATH . 'Storage/');
     //存储访问路径
-    defined('STOR_URL') or define('STOR_URL', APP_RELATIVE_URL . 'Runtime/Storage/');
+    defined('STOR_URL') || define('STOR_URL', APP_RELATIVE_URL . 'Runtime/Storage/');
     //widget路径
-    defined('WIDGET_PATH') or define('WIDGET_PATH', APP_PATH . 'Plugin/Source/Widget/');
+    defined('WIDGET_PATH') || define('WIDGET_PATH', APP_PATH . 'Plugin/Source/Widget/');
     //widget访问路径
-    defined('WIDGET_URL') or define('WIDGET_URL', APP_RELATIVE_URL . 'Plugin/Source/Widget/');
+    defined('WIDGET_URL') || define('WIDGET_URL', APP_RELATIVE_URL . 'Plugin/Source/Widget/');
 
     //默认应用路径
-    defined('APP_PATH') or define('APP_PATH', ENTRANCE_PATH . 'App/');
+    defined('APP_PATH') || define('APP_PATH', ENTRANCE_PATH . 'App/');
     //默认应用插件路径
-    defined('APP_ADDONS_PATH') or define('APP_ADDONS_PATH', APP_PATH . 'Plugin/');
-    defined('APP_PLUGIN_PATH') or define("APP_PLUGIN_PATH", APP_ADDONS_PATH . 'Plugin/');
+    defined('APP_ADDONS_PATH') || define('APP_ADDONS_PATH', APP_PATH . 'Plugin/');
+    defined('APP_PLUGIN_PATH') || define("APP_PLUGIN_PATH", APP_ADDONS_PATH . 'Plugin/');
 
     //设置应用默认加载方案
     ClassLoader::initialize(function ($instance) {

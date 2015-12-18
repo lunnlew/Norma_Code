@@ -11,11 +11,11 @@
 namespace Norma;
 
 //应用版本
-defined('APP_VERSION') or define('APP_VERSION', '1');
+defined('APP_VERSION') || define('APP_VERSION', '1');
 
-defined('CONTRLLER_PATH') or define('CONTRLLER_PATH', APP_PATH . 'Application/Controller/');
-defined('MODEL_PATH') or define('MODEL_PATH', APP_PATH . 'Application/Model/');
-defined('VIEW_PATH') or define('VIEW_PATH', APP_PATH . 'Application/View/');
+defined('CONTRLLER_PATH') || define('CONTRLLER_PATH', APP_PATH . 'Application/Controller/');
+defined('MODEL_PATH') || define('MODEL_PATH', APP_PATH . 'Application/Model/');
+defined('VIEW_PATH') || define('VIEW_PATH', APP_PATH . 'Application/View/');
 /**
  * 应用的初始化过程
  */
