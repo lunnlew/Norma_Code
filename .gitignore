@@ -229,3 +229,5 @@ vendor/
 index.php
 node_modules
 app/
+web/asserts/
+web/*.html
