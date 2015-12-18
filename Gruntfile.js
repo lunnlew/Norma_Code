@@ -83,4 +83,5 @@ grunt.initConfig({
    // 被执行的任务列表。
   grunt.registerTask('default', ['concat','jshint','uglify']);
   grunt.registerTask('qunit', ['connect','qunit']);
+  
 };
