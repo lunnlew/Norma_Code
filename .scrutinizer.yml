@@ -1,0 +1,37 @@
+filter:
+    excluded_paths:
+        - 'app/*'
+        - 'travis/PHP/*'
+        - 'web/*'
+        - 'doc/*'
+    dependency_paths:
+        - 'travis/PHP/*'
+checks:
+    php: 
+        code_rating: true
+        duplication: true
+coding_style:
+    php:
+        spaces:
+            around_operators:
+                bitwise: false
+build:
+    environment:
+        php: '7.0.0'
+tools:
+    external_code_coverage:
+        timeout: 1200
+        runs: 3
+    php_analyzer: true
+    php_code_coverage: false
+    php_code_sniffer:
+        config:
+            standard: PSR2
+        filter:
+            paths: ['src']
+    php_loc:
+        enabled: true
+        excluded_dirs: ['web', 'doc','app']
+    php_cpd:
+        enabled: true
+        excluded_dirs: ['web', 'doc','app']

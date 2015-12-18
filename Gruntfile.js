@@ -51,6 +51,12 @@ module.exports = function(grunt) {
                     reload: true
                 }
             },
+            livereload: {
+                files: [webpath + '/dev/*'],
+                options: {
+                    livereload: '<%= connect.options.livereload %>',
+                }
+            },
             script: {
                 files: ['Gruntfile.js', webpath + '/dev/*'],
                 tasks: ['default', 'test'],
@@ -58,15 +64,9 @@ module.exports = function(grunt) {
                     spawn: false,
                 }
             },
-            livereload: {
-                files: [webpath + '/dev/*'],
-                options: {
-                    livereload: '<%= connect.options.livereload %>',
-                }
-            },
         },
         clean: {
-            dest: [webpath + '/dest'],
+            dest: [webpath + '/asserts'],
         },
         copy: {
             main: {
