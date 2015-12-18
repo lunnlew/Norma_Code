@@ -105,7 +105,7 @@ module.exports = function(grunt) {
             },
             build: {
                 src: [webpath + '/asserts/js/*.js'],
-                dest: webpath + '/<%= pkg.name %>.js'
+                dest: webpath + '/asserts/js/<%= pkg.name %>.js'
             }
         },
         //Javascript代码验证
@@ -119,8 +119,8 @@ module.exports = function(grunt) {
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */',
             },
             build: {
-                src: webpath + '/<%= pkg.name %>.js',
-                dest: webpath + '/<%= pkg.name %>.min.js'
+                src: webpath + '/asserts/js/<%= pkg.name %>.js',
+                dest: webpath + '/asserts/js/<%= pkg.name %>.min.js'
             },
             //   dynamic_mappings: {
             // Grunt will search for "**/*.js" under "lib/" when the "uglify" task
