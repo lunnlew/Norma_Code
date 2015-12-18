@@ -227,3 +227,4 @@ sync.ffs_db
 vendor/
 *.sh
 index.php
+node_modules

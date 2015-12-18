@@ -27,12 +27,7 @@ defined('DEBUGLEVEL') or define('DEBUGLEVEL', 1);
 |
  */
 require __DIR__ . '/../../vendor/autoload.php';
-/*
-|--------------------------------------------------------------------------
-| Register The Composer Auto Loader
-|--------------------------------------------------------------------
-|
- */
+
 require FRAME_PATH . 'AutoloaderClassPsr4.php';
 
 // instantiate the loader
