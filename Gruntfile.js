@@ -4,6 +4,7 @@ module.exports = function(grunt) {
     var serveIndex = require('serve-index');
     // LiveReload的默认端口号，你也可以改成你想要的端口号
     var lrPort = 35729;
+    var webpath = 'web';
     // 使用connect-livereload模块，生成一个与LiveReload脚本
     // <script src="http://127.0.0.1:35729/livereload.js?snipver=1" type="text/javascript"></script>
     var lrSnippet = require('connect-livereload')({
@@ -38,7 +39,7 @@ module.exports = function(grunt) {
                     //keepalive: true,
                     open: true,
                     // 物理路径(默认为. 即根目录) 注：使用'.'或'..'为路径的时，可能会返回403 Forbidden. 此时将该值改为相对路径 如：/grunt/reloard。
-                    base: './app/test/',
+                    base: webpath,
                 }
             }
         },
@@ -51,44 +52,50 @@ module.exports = function(grunt) {
                 }
             },
             script: {
-                files: ['Gruntfile.js', 'app/js/*.js', 'app/test/*.html'],
+                files: ['Gruntfile.js', webpath + '/dev/*'],
                 tasks: ['default', 'test'],
                 options: {
                     spawn: false,
                 }
             },
             livereload: {
-                files: ['app/js/*.js', 'app/test/*.html'],
+                files: [webpath + '/dev/*'],
                 options: {
                     livereload: '<%= connect.options.livereload %>',
                 }
             },
         },
         clean: {
-            dest: ['app/dest'],
+            dest: [webpath + '/dest'],
         },
         copy: {
             main: {
                 files: [{
                     expand: true,
-                    cwd: 'app/test/',
+                    cwd: webpath + '/dev/',
                     src: ['**/*.html'],
-                    dest: 'app/view/'
+                    dest: webpath,
+                    flatten: true,
+                    filter: 'isFile'
                 }, {
                     expand: true,
-                    cwd: 'app/test/',
+                    cwd: webpath + '/dev/',
                     src: ['**/*.js'],
-                    dest: 'app/dest/js/'
+                    dest: webpath + '/asserts/js/',
+                    flatten: true,
+                    filter: 'isFile'
                 }, {
                     expand: true,
-                    cwd: 'app/test/',
+                    cwd: webpath + '/dev/',
                     src: ['**/*.css'],
-                    dest: 'app/dest/css/'
+                    dest: webpath + '/asserts/css/',
+                    flatten: true,
+                    filter: 'isFile'
                 }, ],
             },
         },
         qunit: {
-            all: ['app/test/*.html'], //TODO
+            all: [webpath + '/*.html'], //TODO
         },
         //合并js文件
         concat: {
@@ -97,13 +104,13 @@ module.exports = function(grunt) {
                 stripBanners: true,
             },
             build: {
-                src: ['app/js/*.js'],
-                dest: 'app/build/<%= pkg.name %>.js'
+                src: [webpath + '/asserts/js/*.js'],
+                dest: webpath + '/<%= pkg.name %>.js'
             }
         },
         //Javascript代码验证
         jshint: {
-            all: ['Gruntfile.js', 'app/js/*.js']
+            all: ['Gruntfile.js', webpath + '/dev/js/*.js']
         },
         //minify source code
         uglify: {
@@ -112,8 +119,8 @@ module.exports = function(grunt) {
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */',
             },
             build: {
-                src: 'app/build/<%= pkg.name %>.js',
-                dest: 'app/dest/js/<%= pkg.name %>.min.js'
+                src: webpath + '/<%= pkg.name %>.js',
+                dest: webpath + '/<%= pkg.name %>.min.js'
             },
             //   dynamic_mappings: {
             // Grunt will search for "**/*.js" under "lib/" when the "uglify" task
@@ -146,6 +153,6 @@ module.exports = function(grunt) {
 
     // 被执行的任务列表。
     grunt.registerTask('serve', ['connect:server', 'watch']);
-    grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify', 'copy']);
+    grunt.registerTask('default', ['jshint', 'clean', 'uglify', 'copy', 'concat', 'qunit']);
     grunt.registerTask('test', ['qunit']);
 };
