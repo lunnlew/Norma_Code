@@ -1,5 +1,5 @@
 (function() {
-    //output hello grunttssfdsf
-    var helloGrunt = "Hello Grunt!(From aa.js)";
-    console.log(helloGrunt);
+    //output hello grunt
+    var helloGrunt = "Hello Grunt!(From a.js)";
+    console.log(helloGrunt);  
 })();

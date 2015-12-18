@@ -228,3 +228,4 @@ vendor/
 *.sh
 index.php
 node_modules
+app/
