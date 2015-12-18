@@ -153,6 +153,6 @@ module.exports = function(grunt) {
 
     // 被执行的任务列表。
     grunt.registerTask('serve', ['connect:server', 'watch']);
-    grunt.registerTask('default', ['jshint', 'clean', 'copy', 'uglify', 'concat', 'qunit']);
+    grunt.registerTask('default', ['jshint', 'clean', 'copy', 'concat', 'uglify', 'qunit']);
     grunt.registerTask('test', ['qunit']);
 };
