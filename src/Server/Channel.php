@@ -18,7 +18,7 @@ namespace Norma\Server;
  * @subpackage  Server
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Channel
+class Channel extends Factory
 {
 /**
  * 服务实例化函数
