@@ -69,60 +69,6 @@ function createRandomstr($lenth = 6)
     return random($lenth, '123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ');
 }
 /**
- * 建立较低碰撞率ID(短串)
- * @param  string $namespace 名称前缀
- * @return string            id串
- */
-function createShortGuid($namespace = '')
-{
-    static $guid = '';
-    $uid = uniqid("", true);
-    $data = $namespace;
-    $data .= $_SERVER['REQUEST_TIME'];
-    $data .= $_SERVER['HTTP_USER_AGENT'];
-    $data .= $_SERVER['LOCAL_ADDR'];
-    $data .= $_SERVER['LOCAL_PORT'];
-    $data .= $_SERVER['REMOTE_ADDR'];
-    $data .= $_SERVER['REMOTE_PORT'];
-    $hash = strtoupper(hash('ripemd128', $uid . $guid . md5($data)));
-    $guid = substr($hash, 0, 8) .
-    '-' .
-    substr($hash, 8, 4) .
-    '-' .
-    substr($hash, 12, 4);
-
-    return $guid;
-}
-/**
- * 建立较低碰撞率ID(长串)
- * @param  string $namespace 名称前缀
- * @return string            id串
- */
-function createGuid($namespace = '')
-{
-    static $guid = '';
-    $uid = uniqid("", true);
-    $data = $namespace;
-    $data .= $_SERVER['REQUEST_TIME'];
-    $data .= $_SERVER['HTTP_USER_AGENT'];
-    $data .= $_SERVER['LOCAL_ADDR'];
-    $data .= $_SERVER['LOCAL_PORT'];
-    $data .= $_SERVER['REMOTE_ADDR'];
-    $data .= $_SERVER['REMOTE_PORT'];
-    $hash = strtoupper(hash('ripemd128', $uid . $guid . md5($data)));
-    $guid = substr($hash, 0, 8) .
-    '-' .
-    substr($hash, 8, 4) .
-    '-' .
-    substr($hash, 12, 4) .
-    '-' .
-    substr($hash, 16, 4) .
-    '-' .
-    substr($hash, 20, 12);
-
-    return $guid;
-}
-/**
  * URL组装 支持不同URL模式 // U('BlogAdmin/Index/Index#top@localhost?id=1');
  * @param string $url URL表达式，格式：'[分组/模块/操作#锚点@域名]?参数1=值1&参数2=值2...'
  * @param string|array $vars 传入的参数，支持数组和字符串

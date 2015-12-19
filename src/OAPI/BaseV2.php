@@ -138,7 +138,6 @@ class BaseV2
         foreach ($header as $key => $value) {
             $params['header'][] = $key . ': ' . $value;
         }
-
         return $params;
     }
     /*
@@ -149,16 +148,15 @@ class BaseV2
     protected function _makeBody($params)
     {
         switch (strtoupper($this->api_params[$this->api_name]['body_type'])) {
-            case 'JSON':
-                $params['body'] = json_encode($params['body']);
-                $params['header'][] = 'Content-Type: application/json';
-                break;
+
             case 'XML':
                 exit('MAKE XML BODY!');
             $params['body'] = xml_encode($params['body']);
             break;
+            case 'JSON':
             default:
-                # code...
+                $params['body'] = json_encode($params['body']);
+                $params['header'][] = 'Content-Type: application/json';
                 break;
         }
 

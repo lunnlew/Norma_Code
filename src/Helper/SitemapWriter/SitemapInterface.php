@@ -13,7 +13,7 @@ interface SitemapInterface
     /**
      * Add item
      * @param  \Norma\Helper\SitemapWriter\ItemInterface $item
-     * @return $thisJ
+     * @return $this
      */
     public function addItem(ItemInterface $item);
 

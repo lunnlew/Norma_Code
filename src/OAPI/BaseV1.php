@@ -134,11 +134,12 @@ class BaseV1
     }
     /**
      * 从字符中解析出参数名与参数值
-     * @param  string $name api名
+     * @param  string $str
      * @return array  结果
      */
     protected function _parseStr($str = '')
     {
+        $result = array();
         $parts = explode('|', $str);
         $result[$name] = $name = array_shift($parts);
         $pos = false;

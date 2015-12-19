@@ -82,7 +82,7 @@ class Image implements \Norma\Helper\RSSWriter\ImageInterface
 
     /**
      * Set height
-     * @param  string $height
+     * @param  int $height
      * @return $this
      */
     public function height($height)
@@ -110,7 +110,7 @@ class Image implements \Norma\Helper\RSSWriter\ImageInterface
      */
     public function asXML()
     {
-        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><image></image>', LIBXML_NOERROR|LIBXML_ERR_NONE|LIBXML_ERR_FATAL);
+        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8" ?><image></image>', LIBXML_NOERROR | LIBXML_ERR_NONE | LIBXML_ERR_FATAL);
         $xml->addChild('title', $this->title);
         $xml->addChild('link', $this->link);
         $xml->addChild('description', $this->description);

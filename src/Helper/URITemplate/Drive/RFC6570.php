@@ -24,13 +24,13 @@ class RFC6570
     /** @var array Hash for quick operator lookups */
     private static $operatorHash = array(
         '' => array('prefix' => '', 'joiner' => ',', 'query' => false),
-        '+'                  => array('prefix' => '', 'joiner' => ',', 'query' => false),
-        '#'                                    => array('prefix' => '#', 'joiner' => ',', 'query' => false),
-        '.'                                                      => array('prefix' => '.', 'joiner' => '.', 'query' => false),
-        '/'                                                                        => array('prefix' => '/', 'joiner' => '/', 'query' => false),
-        ';'                                                                                          => array('prefix' => ';', 'joiner' => ';', 'query' => true),
-        '?'                                                                                                            => array('prefix' => '?', 'joiner' => '&', 'query' => true),
-        '&'                                                                                                                              => array('prefix' => '&', 'joiner' => '&', 'query' => true)
+        '+' => array('prefix' => '', 'joiner' => ',', 'query' => false),
+        '#' => array('prefix' => '#', 'joiner' => ',', 'query' => false),
+        '.' => array('prefix' => '.', 'joiner' => '.', 'query' => false),
+        '/' => array('prefix' => '/', 'joiner' => '/', 'query' => false),
+        ';' => array('prefix' => ';', 'joiner' => ';', 'query' => true),
+        '?' => array('prefix' => '?', 'joiner' => '&', 'query' => true),
+        '&' => array('prefix' => '&', 'joiner' => '&', 'query' => true),
     );
 
     /** @var array Delimiters */
@@ -41,7 +41,7 @@ class RFC6570
 
     public function __construct()
     {
-        $args           = func_get_args();
+        $args = func_get_args();
         $this->template = $args[0][0];
     }
     public function expand()
@@ -71,23 +71,23 @@ class RFC6570
 
         if (isset(self::$operatorHash[$expression[0]])) {
             $result['operator'] = $expression[0];
-            $expression         = substr($expression, 1);
+            $expression = substr($expression, 1);
         } else {
             $result['operator'] = '';
         }
 
         foreach (explode(',', $expression) as $value) {
-            $value   = trim($value);
+            $value = trim($value);
             $varspec = array();
             if ($colonPos = strpos($value, ':')) {
-                $varspec['value']    = substr($value, 0, $colonPos);
+                $varspec['value'] = substr($value, 0, $colonPos);
                 $varspec['modifier'] = ':';
                 $varspec['position'] = (int) substr($value, $colonPos + 1);
             } elseif (substr($value, -1) == '*') {
                 $varspec['modifier'] = '*';
-                $varspec['value']    = substr($value, 0, -1);
+                $varspec['value'] = substr($value, 0, -1);
             } else {
-                $varspec['value']    = (string) $value;
+                $varspec['value'] = (string) $value;
                 $varspec['modifier'] = '';
             }
             $result['values'][] = $varspec;
@@ -106,29 +106,29 @@ class RFC6570
     private function expandMatch(array $matches)
     {
         static $rfc1738to3986 = array('+' => '%20', '%7e' => '~');
-        $replacements         = array();
-        $parsed               = self::parseExpression($matches[1]);
-        $prefix               = self::$operatorHash[$parsed['operator']]['prefix'];
-        $joiner               = self::$operatorHash[$parsed['operator']]['joiner'];
-        $useQuery             = self::$operatorHash[$parsed['operator']]['query'];
+        $replacements = array();
+        $parsed = self::parseExpression($matches[1]);
+        $prefix = self::$operatorHash[$parsed['operator']]['prefix'];
+        $joiner = self::$operatorHash[$parsed['operator']]['joiner'];
+        $useQuery = self::$operatorHash[$parsed['operator']]['query'];
         foreach ($parsed['values'] as $value) {
 
             if (!isset($this->variables[$value['value']])) {
                 continue;
             }
 
-            $variable         = $this->variables[$value['value']];
+            $variable = $this->variables[$value['value']];
             $actuallyUseQuery = $useQuery;
-            $expanded         = '';
+            $expanded = '';
 
             if (is_array($variable)) {
 
                 $isAssoc = $this->isAssoc($variable);
-                $kvp     = array();
+                $kvp = array();
                 foreach ($variable as $key => $var) {
 
                     if ($isAssoc) {
-                        $key           = rawurlencode($key);
+                        $key = rawurlencode($key);
                         $isNestedArray = is_array($var);
                     } else {
                         $isNestedArray = false;
@@ -227,7 +227,7 @@ class RFC6570
      */
     private function isAssoc(array $array)
     {
-        return $array && array_keys($array)[0] !== 0;
+        return !empty($array) && array_keys($array)[0] !== 0;
     }
 
     /**
