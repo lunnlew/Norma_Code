@@ -24,7 +24,7 @@ class Action extends \Norma\Plugin\Base
     public function run($options = array())
     {
         //控制器分发
-        $dispatcher = \Norma\Server\Dispatcher::factory('mvc');
+        $dispatcher = \Norma\Server\Dispatcher::factory();
         $dispatcher->execute(
             hookTrigger('getControllerClass', array(\Norma\Request::$map_paths), '', true),
             \Norma\Request::$map_paths[C('VAR_ACTION', 'a')]

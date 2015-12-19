@@ -72,6 +72,7 @@ NormaCore::initialize(function () {
         global $_php_error_global_handler;
         $_php_error_global_handler->turnOff();
         unset($_php_error_global_handler);
+
         $run = new Run;
         $run->pushHandler(new PrettyPageHandler);
         $run->register();
@@ -79,7 +80,7 @@ NormaCore::initialize(function () {
         $log = Server\Log::factory('monolog');
         Server\ErrorHandler::register('MonologErrorHandler', array($log), function () use ($log) {
             $log->pushHandler(new \Monolog\Handler\ChromePHPHandler(Server\Log::INFO));
-            $StreamHandler = Server\StreamHandler::factory(RUN_ENGINE . 'StreamHandler', array(
+            $StreamHandler = Server\StreamHandler::factory('StreamHandler', array(
                 'Log/' . date('Y-m-d') . "/ERROR.log",
                 Server\Log::ERROR,
                 true,

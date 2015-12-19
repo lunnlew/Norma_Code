@@ -18,7 +18,7 @@
  */
 namespace Norma\Server\Dispatcher\Drive;
 
-class Dispatcher
+class MVCDispatcher
 {
     protected $options = array();
     /**
@@ -35,7 +35,7 @@ class Dispatcher
                 // 非法操作
                 throw new \ReflectionException();
             }
-            $controller->{ $method}();
+            $controller->{$method}();
         } catch (\ReflectionException $e) {
             exit('方法异常');
         }

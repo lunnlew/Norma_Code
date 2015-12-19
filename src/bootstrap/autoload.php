@@ -50,6 +50,8 @@ require FRAME_PATH . 'bootstrap/Integrity.php';
 require FRAME_PATH . 'bootstrap/FrameParams.php';
 
 require_once FRAME_PATH . 'Core/Engine/PreDefine.php';
+//加载引擎资源
+require_once FRAME_PATH . 'Core/Engine/' . RUN_ENGINE . '.php';
 //加载框架核心
 if (RUN_MODE === 'CLI') {
     require FRAME_PATH . 'NormaTask.php'; //CLI核心
@@ -63,5 +65,3 @@ if (RUN_MODE === 'CLI') {
         require FRAME_PATH . 'NormaEmpty.php'; //加载空核心
     }
 }
-//加载引擎资源
-require_once FRAME_PATH . 'Core/Engine/' . RUN_ENGINE . '.php';

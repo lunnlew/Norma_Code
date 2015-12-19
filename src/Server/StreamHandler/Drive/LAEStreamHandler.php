@@ -36,7 +36,7 @@ final class LAEStreamHandler extends StreamHandler
             restore_error_handler();
         }
     }
-    private function customErrorHandler($code, $msg)
+    public function customErrorHandler($code, $msg)
     {
         $this->errorMessage = preg_replace('{^fopen\(.*?\): }', '', $msg);
     }

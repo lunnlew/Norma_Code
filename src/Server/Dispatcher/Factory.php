@@ -16,7 +16,7 @@ class Factory extends \Norma\Server\Factory
     public static function getRealServerName($name, $prex = 'Norma')
     {
         if (in_array($name, array(
-            'Dispatcher',
+            'MVCDispatcher',
             'RESTDispatcher',
         ))) {
             return self::getApiName('Dispatcher', $name, $prex);

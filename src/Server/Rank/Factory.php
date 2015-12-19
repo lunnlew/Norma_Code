@@ -23,7 +23,7 @@ class Factory extends \Norma\Server\Factory
         if (in_array($name, array(
             'LAERank',
             'SAERank',
-            'BaeRank',
+            'BAERank',
         ))) {
             return self::getApiName('Rank', $name, $prex);
         } else {

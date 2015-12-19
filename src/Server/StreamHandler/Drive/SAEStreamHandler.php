@@ -2,7 +2,6 @@
 namespace Norma\Server\StreamHandler\Drive;
 
 use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 
 /**
  * ACE的Storage驱动
@@ -28,13 +27,13 @@ final class SAEStreamHandler extends StreamHandler
             }
             $this->errorMessage = null;
             set_error_handler(array($this, 'customErrorHandler'));
-             sae_set_display_errors(false);//关闭信息输出
-                    sae_debug((string) $record['formatted']);//记录日志
-                    sae_set_display_errors(true);
+            sae_set_display_errors(false); //关闭信息输出
+            sae_debug((string) $record['formatted']); //记录日志
+            sae_set_display_errors(true);
             restore_error_handler();
         }
     }
-    private function customErrorHandler($code, $msg)
+    public function customErrorHandler($code, $msg)
     {
         $this->errorMessage = preg_replace('{^fopen\(.*?\): }', '', $msg);
     }

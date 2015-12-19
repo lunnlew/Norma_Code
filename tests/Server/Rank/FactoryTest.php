@@ -9,58 +9,52 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace Norma\Server\Cache;
+namespace Norma\Server\Rank;
 
 /**
- * 缓存工厂实现
- *
- * @package  Norma\Server\Cache
+ * @package  Norma\Server\Rank
  * @author    LunnLew <lunnlew@gmail.com>
  * @final
  */
 final class FactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Norma\Server\Cache\Factory::getServerName
-     * @covers Norma\Server\Cache\Factory::getRealServerName
+     * @covers Norma\Server\Rank\Factory::getServerName
+     * @covers Norma\Server\Rank\Factory::getRealServerName
      */
     public function testGetServerName()
     {
         $this->assertEquals(
-            'LAEFile',
-            Factory::getServerName('File')
+            'LAERank',
+            Factory::getServerName('rank')
         );
         $this->assertEquals(
-            'LAEFile',
-            Factory::getServerName('file')
+            'LAERank',
+            Factory::getServerName('Rank')
         );
         $arr_name = array(
-            'LAEFile',
-            'LAEMemcache',
-            'LAEMemfile',
-            'LAEapc',
-            'LAEeaccelerator',
-            'LAExcache',
-            'SAEMemcache',
+            'LAERank',
+            'SAERank',
+            'BAERank',
         );
         foreach ($arr_name as $value) {
             $this->assertNotFalse(Factory::getRealServerName($value));
         }
         $this->assertEquals(
-            'Norma\Server\Cache\Drive\LAEFile',
-            Factory::getRealServerName(Factory::getServerName('file'))
+            'Norma\Server\Rank\Drive\LAERank',
+            Factory::getRealServerName(Factory::getServerName('rank'))
         );
         $this->assertEquals(
-            'Norma\Server\Cache\Drive\LAEFile',
-            Factory::getRealServerName(Factory::getServerName('file'), '')
+            'Norma\Server\Rank\Drive\LAERank',
+            Factory::getRealServerName(Factory::getServerName('rank'), '')
         );
         $this->assertNotFalse(
-            'Norma\Server\Cache\Drive\LAEFile',
-            Factory::getRealServerName(Factory::getServerName('other'), '')
+            'Norma\Server\Rank\Drive\LAERank',
+            Factory::getRealServerName(Factory::getServerName('file'), '')
         );
         $this->assertEquals(
-            'Library\Server\Cache\Drive\LAEMemcache',
-            Factory::getRealServerName(Factory::getServerName('Memcache'), 'Library')
+            'Library\Server\Rank\Drive\LAERank',
+            Factory::getRealServerName(Factory::getServerName('rank'), 'Library')
         );
     }
 }

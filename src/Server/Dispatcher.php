@@ -29,8 +29,8 @@ class Dispatcher extends Factory
      * @static
      * @return object 驱动实例
      */
-    public static function factory($name = '', $options = array(), $default = 'MVC', $prex = 'Norma')
+    public static function factory($name = '', $options = array(), $default = 'MVCDispatcher', $prex = 'Norma')
     {
-        return parent::getFactory($name, $options, $default, $prex);
+        return parent::getFactoryByOriginal($name, $options, $default, $prex);
     }
 }

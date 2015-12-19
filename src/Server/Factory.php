@@ -37,18 +37,42 @@ class Factory
      * @static
      * @return object 驱动实例
      */
-    public static function getFactory($name = '', $options = array(), $default = 'Memcache', $prex = 'Norma')
+    public static function getFactory($name = '', $options = array(), $default = 'Server', $prex = 'Norma')
     {
+        $new_name = self::getServerName($name);
 
         $called_class = get_called_class();
         $class_parts = explode('\\', $called_class);
         $server_name = array_pop($class_parts);
-        $new_name = self::getServerName($name);
         if (isset(self::$instances[$new_name])) {
             return self::$instances[$new_name];
         }
         $fac = $called_class . '\Factory';
         return (self::$instances[$new_name] = $fac::getInstance($new_name, array_merge((Array) C($server_name . ':' . $name), (Array) $options), $prex));
+    }
+    /**
+     * 服务实例化函数
+     *
+     * @param  string $name    驱动名
+     * @param  array  $options 驱动构造参数
+     * @static
+     * @return object 驱动实例
+     */
+    public static function getFactoryByOriginal($name = '', $options = array(), $default = 'Server', $prex = 'Norma')
+    {
+
+        if (empty($name)) {
+            $name = C($server_name . ':default', $default);
+        }
+
+        $called_class = get_called_class();
+        $class_parts = explode('\\', $called_class);
+        $server_name = array_pop($class_parts);
+        if (isset(self::$instances[$name])) {
+            return self::$instances[$name];
+        }
+        $fac = $called_class . '\Factory';
+        return (self::$instances[$name] = $fac::getInstance($name, array_merge((Array) C($server_name . ':' . $name), (Array) $options), $prex));
     }
     public static function getServerName($name)
     {
