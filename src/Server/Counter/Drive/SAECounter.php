@@ -21,7 +21,6 @@ final class SAECounter extends Base
 {
     //云服务对象
     public $object;
-    ;
     public function __construct()
     {
         $this->object = new \SaeCounter();
