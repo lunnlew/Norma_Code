@@ -25,7 +25,7 @@ final class LAEMysql extends Base
         switch (extension_loaded('mysql')) {
             case false:
                 exit('no mysql extension!');
-                break;
+            break;
             case true:
             default:
                 if (!empty($config)) {
@@ -122,7 +122,8 @@ final class LAEMysql extends Base
      */
     public function query($str)
     {
-        if (0 === stripos($str, 'call')) {// 存储过程查询支持
+        if (0 === stripos($str, 'call')) {
+// 存储过程查询支持
             $this->close();
             $this->connected = false;
         }
@@ -285,7 +286,8 @@ final class LAEMysql extends Base
     {
         foreach ($data as $key => $val) {
             $value = $this->parseValue($val);
-            if (is_scalar($value)) {// 过滤非标量数据
+            if (is_scalar($value)) {
+// 过滤非标量数据
                 $values[] = $value;
                 $fields[] = $this->parseKey($key);
             }
@@ -316,7 +318,8 @@ final class LAEMysql extends Base
             $value = array();
             foreach ($data as $key => $val) {
                 $val = $this->parseValue($val);
-                if (is_scalar($val)) {// 过滤非标量数据
+                if (is_scalar($val)) {
+// 过滤非标量数据
                     $value[] = $val;
                 }
             }
@@ -365,11 +368,7 @@ final class LAEMysql extends Base
      */
     public function escapeString($str)
     {
-        if ($this->current_link) {
-            return mysql_real_escape_string($str, $this->current_link);
-        } else {
-            return mysql_escape_string($str);
-        }
+        return mysql_real_escape_string($str, $this->current_link);
     }
 
     /**

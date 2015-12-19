@@ -32,6 +32,7 @@ script:
   ## PHPLOC
   - travis/phploc src
   ## PHPUNIT
+  - travis/phpunit
 #  - travis/phpunit --coverage-clover=coverage.xml
   ## LINT
   - find ./src/ -type f -name \*.php -exec php -l {} \;
