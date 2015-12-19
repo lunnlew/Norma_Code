@@ -31,6 +31,6 @@ class Db extends Factory
      */
     public static function factory($name = '', $options = array(), $default = 'Mysql', $prex = 'Norma')
     {
-        return parent::getFactory($name, $options, $default, $prex);
+        return self::getFactory($name, $options, $default, $prex);
     }
 }

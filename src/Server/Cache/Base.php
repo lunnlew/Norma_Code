@@ -55,7 +55,7 @@ abstract class Base implements Face
     public function setOption($options = array())
     {
         if (!empty($options)) {
-            $this->options = $options + $this->options;//合并配置
+            $this->options = $options + $this->options; //合并配置
         }
         preg_match_all('/[\w]+/', $this->options['group'], $res);
         $this->options['group'] = '';

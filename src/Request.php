@@ -19,7 +19,7 @@ class Request
     //请求参数分析
     public static function parse()
     {
-        $info_paths = $paths = array();
+        $params = $info_paths = $paths = array();
         if (C("SUBDOMAIN", false)) {
             if (preg_match('/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/', $_SERVER['HTTP_HOST']) == false || $_SERVER['HTTP_HOST'] != 'localhost') {
                 $paths = array_reverse(array_slice(explode('.', $_SERVER['HTTP_HOST']), 0, -2));
@@ -27,10 +27,10 @@ class Request
         }
         //$paths = array_reverse(array_slice(explode('.', 'sub1.www.baidu.com'), 0, -2));
         switch (C('URLMODE', 3)) {
-            case 1://普通模式
+            case 1: //普通模式
                 parse_str($_SERVER['QUERY_STRING'], $params);
                 break;
-            case 2://PATHINFO模式
+            case 2: //PATHINFO模式
                 if (false !== ($pos = stripos($_SERVER['PATH_INFO'], C('URL_HTML_SUFFIX', '.html')))) {
                     $pathinfo = substr($_SERVER['PATH_INFO'], 0, $pos);
                 } else {
@@ -46,7 +46,7 @@ class Request
                 parse_str($_SERVER['QUERY_STRING'], $params);
                 !isset($params[C('URL_VAR', 's')]) and ($params[C('URL_VAR', 's')] = '');
                 $info_paths = array_filter(explode(C('URL_PATHINFO_DEPR', '/'), trim($params[C('URL_VAR', 's')], C('URL_PATHINFO_DEPR', '/'))));
-            default:  ////
+            default: ////
                 break;
         }
         //插入子域名部署模式下的path
@@ -83,6 +83,7 @@ class Request
     }
     private static function parsePaths(&$paths = array(), $params = array(), $overwite = true)
     {
+        $options = array();
         //处理计数
         $num = 0;
         //是否启用了多应用模式//默认单应用

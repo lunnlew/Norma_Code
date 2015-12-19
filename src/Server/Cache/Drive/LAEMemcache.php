@@ -11,8 +11,8 @@
 
 namespace Norma\Server\Cache\Drive;
 
-use Norma\Server\Cache\Base;
 use Memcache;
+use Norma\Server\Cache\Base;
 
 /**
  * 本地Memcache缓存实现
@@ -36,8 +36,9 @@ final class LAEMemcache extends Base
         'servers' => array(
             'host' => '127.0.0.1',
             'port' => 11211,
-        )
+        ),
     );
+    protected $mmc;
     /**
      * 检查驱动状态
      * @return bool
@@ -70,7 +71,7 @@ final class LAEMemcache extends Base
                 $this->mmc->addServer($v['host'], $v['port']);
             }
         }
-        $version = $this->mmc->get('version_' . $this->group());//无数据第一次运行时的警告怎样抑制?
+        $version = $this->mmc->get('version_' . $this->group()); //无数据第一次运行时的警告怎样抑制?
         if (!empty($version)) {
             $this->version = $version;
         } else {

@@ -23,6 +23,7 @@ use Norma\Server\Cache\Base;
 
 final class SAEMemcache extends Base
 {
+    protected $mmc;
     /**
      * 检查驱动状态
      * @return bool
@@ -45,7 +46,7 @@ final class SAEMemcache extends Base
         if (!$this->mmc) {
             throw new \Norma\Exception\NotSupportedException('初始化SAE Memcahce失败!');
         }
-        $version = $this->mmc->get('version_' . $group());//无数据第一次运行时的警告怎样抑制?
+        $version = $this->mmc->get('version_' . $this->group()); //无数据第一次运行时的警告怎样抑制?
         if (!empty($version)) {
             $this->version = $version;
         } else {

@@ -31,6 +31,6 @@ class Dispatcher extends Factory
      */
     public static function factory($name = '', $options = array(), $default = 'MVCDispatcher', $prex = 'Norma')
     {
-        return parent::getFactoryByOriginal($name, $options, $default, $prex);
+        return self::getFactoryByOriginal($name, $options, $default, $prex);
     }
 }

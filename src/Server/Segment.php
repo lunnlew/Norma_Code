@@ -30,6 +30,6 @@ class Segment extends Factory
      */
     public static function factory($name = '', $options = array(), $default = 'Segment', $prex = 'Norma')
     {
-        return parent::getFactory($name, $options, $default, $prex);
+        return self::getFactory($name, $options, $default, $prex);
     }
 }

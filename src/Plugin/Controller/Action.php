@@ -15,7 +15,6 @@ class Action
 {
     /**
      * 供插件管理器主动加载的入口
-     * @param string $plugin 插件管理器
      */
     public function __construct()
     {

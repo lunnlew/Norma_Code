@@ -30,6 +30,6 @@ class Channel
  */
     public static function factory($name = '', $options = array(), $default = 'Channel', $prex = 'Norma')
     {
-        return parent::getFactory($name, $options, $default, $prex);
+        return self::getFactory($name, $options, $default, $prex);
     }
 }
