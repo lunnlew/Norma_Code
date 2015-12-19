@@ -14,7 +14,7 @@ defined('DS') || define('DS', DIRECTORY_SEPARATOR);
 defined('IN_NORMA') || define('IN_NORMA', true);
 //默认调试级别设置
 defined('DEBUGLEVEL') || define('DEBUGLEVEL', 1);
-
+define('APP_PATH', dirname(dirname(__DIR__)) . '/tests/');
 defined('FRAME_PATH') || define('FRAME_PATH', dirname(__DIR__) . '/');
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +51,6 @@ require_once FRAME_PATH . 'Core/Engine/' . RUN_ENGINE . '.php';
 //加载框架核心
 if (RUN_MODE === 'CLI') {
     require FRAME_PATH . 'NormaTask.php'; //CLI核心
-    defined('RUNTIME_PATH') || define('RUNTIME_PATH', dirname(dirname(__DIR__)) . '/tests/.runtime/');
 } else {
     require FRAME_PATH . 'NormaCore.php'; //WEB核心
     //加载应用核心
