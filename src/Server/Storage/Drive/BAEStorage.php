@@ -8,7 +8,7 @@ final class BAEStorage extends Base
 {
     public $bucket = 'imagefile';
     //云服务对象
-    public $object = '';
+    public $object;
     //构造函数
     public function __construct()
     {
@@ -130,6 +130,6 @@ final class BAEStorage extends Base
         }
         file_put_contents(TMP_PATH . $file, $content);
 
-        return include(TMP_PATH . '/' . $file);
+        return include TMP_PATH . '/' . $file;
     }
 }

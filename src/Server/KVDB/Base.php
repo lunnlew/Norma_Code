@@ -14,7 +14,7 @@ namespace Norma\Server\KVDB;
 class Base implements Face
 {
     //云服务对象
-    public $object = '';
+    public $object;
     public function __construct()
     {
         $this->object = new SaeKV();

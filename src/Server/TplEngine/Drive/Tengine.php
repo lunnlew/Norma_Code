@@ -22,7 +22,7 @@ use Norma\Server\TplEngine\Base;
  */
 final class Tengine extends Base
 {
-    public $object = '';
+    public $object;
     public function __construct($option = array())
     {
     }

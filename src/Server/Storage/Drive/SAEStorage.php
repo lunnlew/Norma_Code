@@ -13,7 +13,7 @@ final class SAEStorage extends Base
     //数据存储区
     public $bucket = 'image';
     //云服务对象
-    public $object = '';
+    public $object;
     public function __construct($_accessKey = '', $_secretKey = '')
     {
         $this->object = new \SaeStorage($_accessKey, $_secretKey);
@@ -118,6 +118,6 @@ final class SAEStorage extends Base
         }
         file_put_contents(TMP_PATH . $file, $content);
 
-        return include(TMP_PATH . '/' . $file);
+        return include TMP_PATH . '/' . $file;
     }
 }

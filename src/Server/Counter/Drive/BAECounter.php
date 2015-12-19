@@ -19,6 +19,7 @@ use Norma\Server\Counter\Base;
 final class BAECounter extends Base
 {
     public $object;
+    ;
     public function __construct()
     {
         $this->object = new \BaeCounter();

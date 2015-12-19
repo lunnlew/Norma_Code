@@ -19,7 +19,7 @@ use Norma\Server\Counter\Base;
 final class SaeChannel extends Base
 {
     //云服务对象
-    public $object = '';
+    public $object;
     public function __construct()
     {
         $this->object = new \SaeChannel();

@@ -22,7 +22,7 @@ use Norma\Server\TplEngine\Base;
  */
 final class Smarty extends Base
 {
-    public $object = '';
+    public $object;
     public function __construct($option = array())
     {
         foreach ($option as $key => $value) {
@@ -35,7 +35,7 @@ final class Smarty extends Base
                 }
             }
         }
-        $smarty =new \Smarty();
+        $smarty = new \Smarty();
         if (isset($option['TemplateDir'])) {
             $smarty->addTemplateDir($option['TemplateDir'], 0);
         }
@@ -72,7 +72,7 @@ final class Smarty extends Base
         if (isset($option['plugins'])) {
             if (isset($option['plugins']['function'])) {
                 foreach ($option['plugins']['function'] as $key => $value) {
-                     $smarty->registerPlugin('function', $key, $value);
+                    $smarty->registerPlugin('function', $key, $value);
                 }
             }
         }
@@ -111,6 +111,6 @@ final class Smarty extends Base
      */
     public function __call($method, $args)
     {
-        return call_user_func_array(array($this->object,$method), $args);
+        return call_user_func_array(array($this->object, $method), $args);
     }
 }

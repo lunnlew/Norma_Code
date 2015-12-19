@@ -22,8 +22,8 @@ use Norma\Server\TplEngine\Base;
  */
 final class Twig extends Base
 {
-    public $object = '';
-    public $vars=array();
+    public $object;
+    public $vars = array();
     public function __construct($option = array())
     {
         foreach ($option as $key => $value) {
@@ -49,7 +49,7 @@ final class Twig extends Base
         if (isset($plugins)) {
             if (isset($plugins['function'])) {
                 foreach ($plugins['function'] as $name => $callable) {
-                     $this->registerPlugin($name, $callable);
+                    $this->registerPlugin($name, $callable);
                 }
             }
         }
@@ -58,16 +58,16 @@ final class Twig extends Base
     }
     public function assign($key, $value)
     {
-        $this->vars[$key]=$value;
+        $this->vars[$key] = $value;
     }
     public function display($tpl = '')
     {
-        $template=$this->object->loadTemplate($tpl);
+        $template = $this->object->loadTemplate($tpl);
         echo $template->render($this->vars);
     }
     public function render($tpl, $vars = array())
     {
-        $template=$this->object->loadTemplate($tpl);
+        $template = $this->object->loadTemplate($tpl);
 
         return $template->render($this->vars);
     }

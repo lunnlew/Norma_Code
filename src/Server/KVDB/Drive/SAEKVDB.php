@@ -20,7 +20,7 @@ use Norma\Server\KVDB\Base;
 final class SAEKVDB extends Base
 {
     //云服务对象
-    public $object = '';
+    public $object;
     public function __construct()
     {
         $this->object = new \SaeKV();

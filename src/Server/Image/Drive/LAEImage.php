@@ -20,7 +20,7 @@ use Norma\Server\Image\Base;
  */
 final class LAEImage extends Base
 {
-    public $object = '';
+    public $object;
     public $files = array();
     public $width = '';
     public $height = '';

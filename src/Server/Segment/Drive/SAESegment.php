@@ -19,7 +19,7 @@ use Norma\Server\Segment\Base;
  */
 class SAESegment extends Base
 {
-    public $object = '';
+    public $object;
     public function __construct()
     {
         $this->object = new \SaeSegment();

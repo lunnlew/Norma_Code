@@ -13,11 +13,11 @@ final class ACEStorage extends Base
     //数据存储区
     public $bucket = 'image';
     //云服务对象
-    public $object = '';
+    public $object;
     public function __construct($_accessKey = '', $_secretKey = '')
     {
         $this->object = \OSSClient::factory(array(
-            'AccessKeyId'     => $_accessKey,
+            'AccessKeyId' => $_accessKey,
             'AccessKeySecret' => $_secretKey,
         ));
     }
@@ -25,8 +25,8 @@ final class ACEStorage extends Base
     final public function write($file, $content = '', $size = '')
     {
         $param = array(
-            'Bucket'  => $this->bucket,
-            'Key'     => $file,
+            'Bucket' => $this->bucket,
+            'Key' => $file,
             'Content' => $content,
         );
         if ($content instanceof resource) {
@@ -40,7 +40,7 @@ final class ACEStorage extends Base
     {
         $object = $this->object->getObject(array(
             'Bucket' => $this->bucket,
-            'Key'    => $file,
+            'Key' => $file,
         ));
 
         return (string) $object;
@@ -54,7 +54,7 @@ final class ACEStorage extends Base
     {
         return $this->object->deleteObject(array(
             'Bucket' => $this->bucket,
-            'Key'    => $file,
+            'Key' => $file,
         ));
     }
     //创建目录(目前通过写入空白文件来达成)
