@@ -137,7 +137,7 @@ abstract class Base implements Face
      * @access protected
      * @return string $key 完整缓存key
      */
-    protected function key($key)
+    protected function makeKey($key)
     {
         return $this->options['group'] . '_' . $this->version . '_' . $key;
     }

@@ -96,7 +96,7 @@ final class LAEMemcache extends Base
             $this->options['compress'] = $compress;
         }
 
-        return $this->mmc->set($this->key($key), $var, $this->options['compress'] ? MEMCACHE_COMPRESSED : 0, $expire);
+        return $this->mmc->set($this->makeKey($key), $var, $this->options['compress'] ? MEMCACHE_COMPRESSED : 0, $expire);
     }
     /**
      * 获取缓存值
@@ -109,7 +109,7 @@ final class LAEMemcache extends Base
             return;
         }
 
-        return $this->mmc->get($this->key($key));
+        return $this->mmc->get($this->makeKey($key));
     }
     /**
      * 增值操作
@@ -123,7 +123,7 @@ final class LAEMemcache extends Base
             return;
         }
 
-        return $this->mmc->increment($this->key($key), $value);
+        return $this->mmc->increment($this->makeKey($key), $value);
     }
     /**
      * 减值操作
@@ -137,7 +137,7 @@ final class LAEMemcache extends Base
             return;
         }
 
-        return $this->mmc->decrement($this->key($key), $value);
+        return $this->mmc->decrement($this->makeKey($key), $value);
     }
     /**
      * 删除缓存项
@@ -150,7 +150,7 @@ final class LAEMemcache extends Base
             return;
         }
 
-        return $this->mmc->delete($this->key($key));
+        return $this->mmc->delete($this->makeKey($key));
     }
     /**
      * 压缩缓存项
