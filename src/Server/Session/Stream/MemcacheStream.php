@@ -30,22 +30,22 @@ final class MemcacheStream extends Base
 
         self::$maxtime = ini_get('session.gc_maxlifetime');
 
-        session_module_name('user');//session文件保存方式，这个是必须的！除非在Php.ini文件中设置了
+        session_module_name('user'); //session文件保存方式，这个是必须的！除非在Php.ini文件中设置了
 
         session_set_save_handler(
-            array(__CLASS__,'open'), //在运行session_start()时执行
-            array(__CLASS__,'close'), //在脚本执行完成或调用session_write_close() 或 session_destroy()时被执行,即在所有session操作完后被执行
-            array(__CLASS__,'read'), //在运行session_start()时执行,因为在session_start时,会去read当前session数据
-            array(__CLASS__,'write'), //此方法在脚本结束和使用session_write_close()强制提交SESSION数据时执行
-            array(__CLASS__,'destroy'), //在运行session_destroy()时执行
-            array(__CLASS__,'gc')//执行概率由session.gc_probability 和 session.gc_divisor的值决定,时机是在open,read之后,session_start会相继执行open,read和gc
+            array(__CLASS__, 'open'), //在运行session_start()时执行
+            array(__CLASS__, 'close'), //在脚本执行完成或调用session_write_close() 或 session_destroy()时被执行,即在所有session操作完后被执行
+            array(__CLASS__, 'read'), //在运行session_start()时执行,因为在session_start时,会去read当前session数据
+            array(__CLASS__, 'write'), //此方法在脚本结束和使用session_write_close()强制提交SESSION数据时执行
+            array(__CLASS__, 'destroy'), //在运行session_destroy()时执行
+            array(__CLASS__, 'gc') //执行概率由session.gc_probability 和 session.gc_divisor的值决定,时机是在open,read之后,session_start会相继执行open,read和gc
         );
         //sae-error
         session_start();
     }
     /**
      * session_read
-     * @param mixed $id session id
+     * @param mixed $sid session id
      */
     public static function read($sid)
     {
@@ -53,7 +53,7 @@ final class MemcacheStream extends Base
     }
     /**
      * session_write
-     * @param mixed $id   session id
+     * @param mixed $sid   session id
      * @param mixed $data session data
      */
     public static function write($sid, $data)
@@ -62,11 +62,11 @@ final class MemcacheStream extends Base
     }
     /**
      * session_destroy
-     * @param mixed $id session id
+     * @param mixed $sid session id
      */
-    public static function destroy($id)
+    public static function destroy($sid)
     {
-        return self::$mem->delete($id);
+        return self::$mem->delete($sid);
     }
     /**
      * session_gc
