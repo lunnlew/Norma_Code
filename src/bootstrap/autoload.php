@@ -51,7 +51,7 @@ require_once FRAME_PATH . 'Core/Engine/' . RUN_ENGINE . '.php';
 //加载框架核心
 if (RUN_MODE === 'CLI') {
     require FRAME_PATH . 'NormaTask.php'; //CLI核心
-    define('RUNTIME_PATH', dirname(dirname(__DIR__)) . '/tests/.runtime/');
+    defined('RUNTIME_PATH') || define('RUNTIME_PATH', dirname(dirname(__DIR__)) . '/tests/.runtime/');
 } else {
     require FRAME_PATH . 'NormaCore.php'; //WEB核心
     //加载应用核心
