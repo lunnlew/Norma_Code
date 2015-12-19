@@ -13,31 +13,22 @@ namespace Norma\Server\Log;
 
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'Monolog';
-        switch ($name) {
-            case 'log':
-                if (RUN_ENGINE == 'SAE') {
-                    if (function_exists('SAELog')) {
-                        $server_name = 'SAELog';
-                    }
-                } elseif (RUN_ENGINE == 'BAE') {
-                    if (class_exists('BaeLog')) {
-                        $server_name = 'BaeLog';
-                    }
-                } else {
-                    if (class_exists('Log')) {
-                        $server_name = 'LAELog';
-                    }
-                }
-                break;
-            case 'monolog':
-            default:
-                $server_name = 'Monolog';
-                break;
+        if (in_array($name, array(
+            'LAEMonolog',
+            'SAELog',
+            'BaeLog',
+        ))) {
+            return self::getApiName('Log', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('Log', $server_name);
     }
 }

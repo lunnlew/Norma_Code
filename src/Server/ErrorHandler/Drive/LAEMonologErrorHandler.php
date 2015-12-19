@@ -13,6 +13,6 @@ namespace Norma\Server\ErrorHandler\Drive;
 
 use Monolog\ErrorHandler;
 
-class MonologErrorHandler extends ErrorHandler
+class LAEMonologErrorHandler extends ErrorHandler
 {
 }

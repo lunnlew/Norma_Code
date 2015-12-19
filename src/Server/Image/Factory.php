@@ -16,22 +16,22 @@ namespace Norma\Server\Image;
  */
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'LAEImage';
-        switch ($name) {
-            case 'saeimage':
-                $server_name = 'SAEImage';
-                break;
-            case 'gdimage':
-                $server_name = 'LAEGDImage';
-                break;
-            case 'image':
-            case 'laeimage':
-                $server_name = 'LAEImage';
-                break;
+        if (in_array($name, array(
+            'SAEImage',
+            'LAEImage',
+            'LAEGDImage',
+        ))) {
+            return self::getApiName('Image', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('Image', $server_name);
     }
 }

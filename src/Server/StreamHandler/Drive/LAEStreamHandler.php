@@ -2,7 +2,6 @@
 namespace Norma\Server\StreamHandler\Drive;
 
 use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 
 /**
  * ACE的Storage驱动
@@ -28,12 +27,12 @@ final class LAEStreamHandler extends StreamHandler
             }
             $this->errorMessage = null;
             set_error_handler(array($this, 'customErrorHandler'));
-             //使用Storage只是测试,日志不合适使用Storage
-                    Server\Storage::factory()->setArea(LOG_PATH);
-            if (!Server\Storage::factory()->write($this->url, (string) $record['formatted'], FILE_APPEND)) {
-                exit('日志写入失败![msg=' . (string) $record['formatted'] . ']');
+            //使用Storage只是测试,日志不合适使用Storage
+            \Norma\Server\Storage::factory()->setArea(LOG_PATH);
+            if (!\Norma\Server\Storage::factory()->write($this->url, (string) $record['formatted'], FILE_APPEND)) {
+                return 0;
             }
-           
+
             restore_error_handler();
         }
     }

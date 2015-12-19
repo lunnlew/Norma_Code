@@ -21,35 +21,19 @@ namespace Norma\Server\Db;
 class Factory extends \Norma\Server\Factory
 {
     /**
-     * 获得服务驱动实例
-     *
-     * @param  string $name   服务驱动名
-     * @param  array  $option 配置数组
-     * @final
+     * 获取正式服务名
+     * @param  string $name 服务名
      * @static
-     * @return object 实例
+     * @return string 正式服务名
      */
-    final public static function getInstance($name, $option = array(), $prex = 'Norma')
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $class = static::getServerName($name, $prex);
-        if (class_exists($class)) {
-            return new $class($option);
+        if (in_array(strtolower($name), array(
+            'laemysql',
+        ))) {
+            return self::getApiName('Db', $name, $prex);
         } else {
-            return null;
+            return false;
         }
-    }
-    /**
-     * 组装完整服务类名
-     *
-     * @param  string $name 服务驱动名
-     * @param  string $prex 类名前缀
-     * @static
-     * @return string 完整服务驱动类名
-     */
-    public static function getServerName($name, $prex = '')
-    {
-        $name = RUN_ENGINE . ucfirst($name);
-
-        return self::getApiName('Db', $name);
     }
 }

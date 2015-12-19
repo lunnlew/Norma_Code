@@ -64,8 +64,8 @@ class LAEFile extends Base
         $data = $this->encode($var, $expire);
         $toWrite = true;
         /*
-         * Skip if Existing Caching in Options
-         */
+			         * Skip if Existing Caching in Options
+		*/
         if (isset($this->options['skipExisting']) && $this->options['skipExisting'] == true && file_exists($file_path)) {
             $content = $this->readfile($file_path);
             $old = $this->decode($content);
@@ -172,9 +172,9 @@ class LAEFile extends Base
                         $file_path = $path . "/" . $file . "/" . $f;
                         unlink($file_path);
                     }
-                }// end read subdir
-            }// end if
-        }// end while
+                } // end read subdir
+            } // end if
+        } // end while
     }
     /**
      * 缓存清空
@@ -201,8 +201,8 @@ class LAEFile extends Base
         }
     }
     /*
-     * Return total cache size + auto removed expired files
-     */
+		     * Return total cache size + auto removed expired files
+	*/
     public function stats()
     {
         $res = array(
@@ -235,9 +235,9 @@ class LAEFile extends Base
                         }
                         $total = $total + $size;
                     }
-                }// end read subdir
-            }// end if
-        }// end while
+                } // end read subdir
+            } // end if
+        } // end while
 
         $res['size'] = $total - $removed;
         $res['info'] = array(
@@ -267,8 +267,8 @@ class LAEFile extends Base
         }
     }
     /*
-     * Object for Files & SQLite encode
-     */
+		     * Object for Files & SQLite encode
+	*/
     public function encode($data, $expire = 3600)
     {
         return serialize(array(
@@ -277,8 +277,8 @@ class LAEFile extends Base
         ));
     }
     /*
-     * Object for Files & SQLite decode
-     */
+		     * Object for Files & SQLite decode
+	*/
     public function decode($value)
     {
         $x = @unserialize($value);
@@ -289,9 +289,9 @@ class LAEFile extends Base
         }
     }
     /*
-     * Read File
-     * Use file_get_contents OR ALT read
-     */
+		     * Read File
+		     * Use file_get_contents OR ALT read
+	*/
     public function readfile($file)
     {
         if (function_exists("file_get_contents")) {
@@ -319,8 +319,8 @@ class LAEFile extends Base
         return RUNTIME_PATH . 'FileCache/' . $this->group() . '/';
     }
     /*
-     * Return $FILE FULL PATH
-     */
+		     * Return $FILE FULL PATH
+	*/
     private function getFilePath($key, $skip = false)
     {
         $path = $this->getPath();
@@ -328,8 +328,8 @@ class LAEFile extends Base
         $folder = substr($code, 0, 2);
         $path = $path . "/" . $folder;
         /*
-         * Skip Create Sub Folders;
-         */
+			         * Skip Create Sub Folders;
+		*/
         if ($skip == false) {
             if (!file_exists($path)) {
                 if (!@mkdir($path, 0777, true)) {

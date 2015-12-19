@@ -13,15 +13,20 @@ namespace Norma\Server\ACM;
 
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'Authority';
-        switch ($type) {
-            case 'authority':
-                $server_name = 'Authority';
-                break;
+        if (in_array(strtolower($name), array(
+            'authority',
+        ))) {
+            return self::getApiName('ACM', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('ACM', $server_name);
     }
 }

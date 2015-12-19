@@ -13,18 +13,21 @@ namespace Norma\Server\ErrorHandler;
 
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'ErrorHandler';
-        switch ($name) {
-            case 'monolog':
-                $server_name = 'MonologErrorHandler';
-                break;
-            default:
-                $server_name = 'ErrorHandler';
-                break;
+        if (in_array($name, array(
+            'LAEMonologErrorHandler',
+            'LAEErrorHandler',
+        ))) {
+            return self::getApiName('ErrorHandler', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('ErrorHandler', $server_name);
     }
 }

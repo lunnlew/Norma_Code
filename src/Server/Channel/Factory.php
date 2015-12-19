@@ -20,28 +20,22 @@ namespace Norma\Server\Channel;
  */
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'LAEChannel';
-        switch ($name) {
-            case 'channel':
-                if (RUN_ENGINE == 'SAE') {
-                    if (function_exists('SAEChannel')) {
-                        $server_name = 'SAEChannel';
-                    }
-                } elseif (RUN_ENGINE == 'BAE') {
-                    if (class_exists('BaeChannel')) {
-                        $server_name = 'BaeChannel';
-                    }
-                } else {
-                    if (class_exists('Channel')) {
-                        $server_name = 'LAEChannel';
-                    }
-                }
-
-                break;
+        if (in_array(strtolower($name), array(
+            'saechannel',
+            'laechannel',
+            'baechannel',
+        ))) {
+            return self::getApiName('Channel', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('Channel', $server_name);
     }
 }

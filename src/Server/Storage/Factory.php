@@ -19,8 +19,22 @@ namespace Norma\Server\Storage;
  */
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        return self::getApiName('Storage', $name);
+        if (in_array($name, array(
+            'LAEStorage',
+            'SAEStorage',
+            'BAEStorage',
+        ))) {
+            return self::getApiName('Storage', $name, $prex);
+        } else {
+            return false;
+        }
     }
 }

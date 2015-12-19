@@ -19,8 +19,21 @@ namespace Norma\Server\StreamHandler;
  */
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        return self::getApiName('StreamHandler', $name);
+        if (in_array($name, array(
+            'LAEStreamHandler',
+            'SAEStreamHandler',
+        ))) {
+            return self::getApiName('StreamHandler', $name, $prex);
+        } else {
+            return false;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Norma\Server;
  * @subpackage  Server
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Log
+class Log extends Factory
 {
     /**
      * 服务驱动实例数组
@@ -82,20 +82,8 @@ class Log
      * @static
      * @return object 驱动实例
      */
-    public static function factory($name = '', $options = array())
+    public static function factory($name = '', $options = array(), $default = 'Monolog', $prex = 'Norma')
     {
-        if (empty($name) || !is_string($name)) {
-            $name = C('Log:default', 'Monolog');
-        }
-        if (!isset(self::$instances[$name])) {
-            $c_options = C('Log:' . $name);
-            if (empty($c_options)) {
-                $c_options = array();
-            }
-            $options = array_merge($c_options, $options);
-            self::$instances[$name] = Log\Factory::getInstance($name, $options);
-        }
-
-        return self::$instances[$name];
+        return parent::getFactory($name, $options, $default, $prex);
     }
 }

@@ -20,21 +20,22 @@ namespace Norma\Server\TplEngine;
  */
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'Smarty';
-        switch ($name) {
-            case 'twig':
-                $server_name = 'Twig';
-                break;
-            case 'tengine':
-                $server_name = 'Tengine';
-                break;
-            case 'smarty':
-            default:
-                $server_name = 'Smarty';
+        if (in_array($name, array(
+            'Smarty',
+            'Twig',
+            'Tengine',
+        ))) {
+            return self::getApiName('TplEngine', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('TplEngine', $server_name);
     }
 }

@@ -12,28 +12,23 @@ namespace Norma\Server\Segment;
 
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'LAESegment';
-        switch ($name) {
-            case 'segment':
-                if (RUN_ENGINE == 'SAE') {
-                    if (function_exists('SAESegment')) {
-                        $server_name = 'SAESegment';
-                    }
-                } elseif (RUN_ENGINE == 'BAE') {
-                    if (class_exists('BaeSegment')) {
-                        $server_name = 'BaeSegment';
-                    }
-                } else {
-                    if (class_exists('Segment')) {
-                        $server_name = 'LAESegment';
-                    }
-                }
-
-                break;
+        if (in_array($name, array(
+            'LAESegment',
+            'SAESegment',
+            'BaeSegment',
+        ))) {
+            return self::getApiName('Segment', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('Segment', $server_name);
     }
 }

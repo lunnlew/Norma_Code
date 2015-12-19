@@ -20,28 +20,22 @@ namespace Norma\Server\Counter;
  */
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'LAECounter';
-        switch ($name) {
-            case 'counter':
-                if (RUN_ENGINE == 'SAE') {
-                    if (function_exists('SAECounter')) {
-                        $server_name = 'SAECounter';
-                    }
-                } elseif (RUN_ENGINE == 'BAE') {
-                    if (class_exists('BaeCounter')) {
-                        $server_name = 'BaeCounter';
-                    }
-                } else {
-                    if (class_exists('Counter')) {
-                        $server_name = 'LAECounter';
-                    }
-                }
-
-                break;
+        if (in_array(strtolower($name), array(
+            'laecounter',
+            'saecounter',
+            'baecounter',
+        ))) {
+            return self::getApiName('Counter', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('Counter', $server_name);
     }
 }

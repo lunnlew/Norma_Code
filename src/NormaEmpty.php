@@ -19,9 +19,9 @@ defined('VIEW_PATH') || define('VIEW_PATH', APP_PATH . 'Application/View/');
 /**
  * 应用的初始化过程
  */
-hookTrigger('appInitialize', '', '', true);
-hookTrigger('coreLazyInitialize', '', '', true);
-hookTrigger('appLazyInitialize', '', '', true);
+RUN_MODE === 'WEB' && \hookTrigger('appInitialize', '', '', true);
+\hookTrigger('coreLazyInitialize', '', '', true);
+RUN_MODE === 'WEB' && \hookTrigger('appLazyInitialize', '', '', true);
 /**
  * Norma - A PHP Framework For Web
  *
@@ -31,6 +31,6 @@ hookTrigger('appLazyInitialize', '', '', true);
 /**
  * 应用执行实现
  */
-class Norma extends NormaCore
+class NormaEmpty extends NormaCore
 {
 }

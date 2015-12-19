@@ -13,19 +13,15 @@ namespace Norma\Server\Dispatcher;
 
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'Dispatcher';
-        switch ($name) {
-            case 'rest':
-                $server_name = 'RESTDispatcher';
-                break;
-            case 'mvc':
-            default:
-                $server_name = 'Dispatcher';
-                break;
+        if (in_array($name, array(
+            'Dispatcher',
+            'RESTDispatcher',
+        ))) {
+            return self::getApiName('Dispatcher', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('Dispatcher', $server_name);
     }
 }

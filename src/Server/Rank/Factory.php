@@ -12,28 +12,22 @@ namespace Norma\Server\Rank;
 
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'LAERank';
-        switch ($name) {
-            case 'rank':
-                if (RUN_ENGINE == 'SAE') {
-                    if (function_exists('SAERank')) {
-                        self::$cache_type = 'SAERank';
-                    }
-                } elseif (RUN_ENGINE == 'BAE') {
-                    if (class_exists('BaeRank')) {
-                        self::$cache_type = 'BaeRank';
-                    }
-                } else {
-                    if (class_exists('Rank')) {
-                        self::$cache_type = 'LAERank';
-                    }
-                }
-
-                break;
+        if (in_array($name, array(
+            'LAERank',
+            'SAERank',
+            'BaeRank',
+        ))) {
+            return self::getApiName('Rank', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('Rank', $server_name);
     }
 }

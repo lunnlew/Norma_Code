@@ -16,30 +16,25 @@ namespace Norma\Server\Collection;
  */
 class Factory extends \Norma\Server\Factory
 {
-    public static function getServerName($name, $prex = '')
+    /**
+     * 获取正式服务名
+     * @param  string $name 服务名
+     * @static
+     * @return string 正式服务名
+     */
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'DataCollection';
-        switch ($name) {
-            case 'route':
-                $server_name = 'RouteCollection';
-                break;
-            case 'header':
-                $server_name = 'HeaderDataCollection';
-                break;
-            case 'server':
-                $server_name = 'ServerDataCollection';
-                break;
-            case 'response':
-                $server_name = 'ResponseCookieDataCollection';
-                break;
-            case 'front':
-                $server_name = 'FrontDataCollection';
-                break;
-            default:
-                $server_name = 'DataCollection';
-                break;
+        if (in_array(strtolower($name), array(
+            'routecollection',
+            'headerdatacollection',
+            'aerverdatacollection',
+            'responsecookiedatacollection',
+            'frontdatacollection',
+            'datacollection',
+        ))) {
+            return self::getApiName('Collection', $name, $prex);
+        } else {
+            return false;
         }
-
-        return self::getApiName('Collection', $server_name);
     }
 }

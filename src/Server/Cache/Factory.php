@@ -26,18 +26,21 @@ final class Factory extends \Norma\Server\Factory
      * @static
      * @return string 正式服务名
      */
-    public static function getServerName($name, $prex = '')
+    public static function getRealServerName($name, $prex = 'Norma')
     {
-        $server_name = 'LAEMemcache';
-        switch (strtolower($name)) {
-            case 'file':
-                $server_name = 'LAEFile';
-                break;
-            case 'memfile':
-                $server_name = 'LAEMemfile';
-                break;
+        if (in_array($name, array(
+            'LAEFile',
+            'LAEMemcache',
+            'LAEMemfile',
+            'LAEapc',
+            'LAEeaccelerator',
+            'LAExcache',
+            'SAEMemcache',
+        ))) {
+            return self::getApiName('Cache', $name, $prex);
+        } else {
+            return false;
         }
 
-        return self::getApiName('Cache', $server_name);
     }
 }
