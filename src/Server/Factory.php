@@ -39,11 +39,14 @@ class Factory
      */
     public static function getFactory($name = '', $options = array(), $default = 'Server', $prex = 'Norma')
     {
-        $new_name = self::getServerName($name);
 
         $called_class = get_called_class();
         $class_parts = explode('\\', $called_class);
         $server_name = array_pop($class_parts);
+        if (empty($name)) {
+            $name = C($server_name . ':default', RUN_ENGINE . $default);
+        }
+        $new_name = self::getServerName($name);
         if (isset(self::$instances[$new_name])) {
             return self::$instances[$new_name];
         }
@@ -63,7 +66,6 @@ class Factory
         $called_class = get_called_class();
         $class_parts = explode('\\', $called_class);
         $server_name = array_pop($class_parts);
-
         if (empty($name)) {
             $name = C($server_name . ':default', $default);
         }
@@ -76,9 +78,6 @@ class Factory
     }
     public static function getServerName($name)
     {
-        if (empty($name)) {
-            $name = C($server_name . ':default', RUN_ENGINE . $default);
-        }
         $name = ucfirst($name);
         if (!in_array(strtoupper(substr($name, 0, 3)), array(
             'LAE', 'BAE', 'SAE',
@@ -89,8 +88,6 @@ class Factory
     /**
      * 获得服务驱动实例
      *
-     * @param  string $name   服务驱动名
-     * @param  array  $options 配置数组
      * @final
      * @static
      * @return object 实例
@@ -108,8 +105,6 @@ class Factory
     /**
      * 组装完整服务类名
      *
-     * @param  string $server_name 服务驱动名
-     * @param  string $prex        类名前缀
      * @access protected
      * @static
      * @return string 完整服务驱动类名

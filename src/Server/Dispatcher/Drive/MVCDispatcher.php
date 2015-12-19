@@ -23,8 +23,8 @@ class MVCDispatcher
     protected $options = array();
     /**
      * 执行分发
-     * @param Closure $classClosure  获取控制器类
-     * @param Closure $methodClosure 获取控制器方法
+     * @param Closure $class  获取控制器类
+     * @param Closure $method 获取控制器方法
      */
     public function execute($class, $method)
     {

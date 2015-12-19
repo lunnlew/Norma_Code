@@ -35,7 +35,7 @@ abstract class Base implements Face
      * @var integer
      * @access protected
      */
-    protected $version = 1;
+    protected $version = '1';
     /**
      * 构造函数
      * @param array $options 配置选项
