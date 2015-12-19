@@ -5,6 +5,8 @@ filter:
         - 'web/*'
         - 'doc/*'
         - '*/Requests/*'
+        - '*/Helper/*'
+        - '*/Router/*'
     dependency_paths:
         - 'travis/PHP/*'
 checks:

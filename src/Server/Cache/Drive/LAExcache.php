@@ -60,7 +60,7 @@ final class LAExcache extends Base
             $expire = $this->options['expire'];
         }
 
-        return xcache_set($this->key($key), serialize($var), $expire);
+        return xcache_set($this->makeKey($key), serialize($var), $expire);
     }
     /**
      * 获取缓存值
@@ -69,7 +69,7 @@ final class LAExcache extends Base
      */
     public function get($key)
     {
-        return @unserialize(xcache_set($this->key($key)));
+        return @unserialize(xcache_set($this->makeKey($key)));
     }
     /**
      * 增值操作
@@ -98,7 +98,7 @@ final class LAExcache extends Base
      */
     public function delete($key)
     {
-        return xcache_unset($this->key($key));
+        return xcache_unset($this->makeKey($key));
     }
     /**
      * 压缩缓存项

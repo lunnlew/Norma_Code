@@ -60,7 +60,7 @@ final class LAEeaccelerator extends Base
             $expire = $this->options['expire'];
         }
 
-        return eaccelerator_put($this->key($key), serialize($var), $expire);
+        return eaccelerator_put($this->makeKey($key), serialize($var), $expire);
     }
     /**
      * 获取缓存值
@@ -69,7 +69,7 @@ final class LAEeaccelerator extends Base
      */
     public function get($key)
     {
-        return @unserialize(eaccelerator_get($this->key($key)));
+        return @unserialize(eaccelerator_get($this->makeKey($key)));
     }
     /**
      * 增值操作
@@ -98,7 +98,7 @@ final class LAEeaccelerator extends Base
      */
     public function delete($key)
     {
-        return eaccelerator_rm($this->key($key));
+        return eaccelerator_rm($this->makeKey($key));
     }
     /**
      * 压缩缓存项
