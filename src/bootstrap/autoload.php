@@ -40,10 +40,6 @@ $loader->register();
 $loader->addNamespace('Norma', FRAME_PATH);
 $loader->addNamespace('Norma', __DIR__ . '/../../tests');
 
-//日志处理
-require 'php_error.php';
-\php_error\reportErrors();
-
 //环境完备性检测
 require FRAME_PATH . 'bootstrap/Integrity.php';
 //框架基本参数设置
