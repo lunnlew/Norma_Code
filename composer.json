@@ -27,14 +27,5 @@
     },
     "suggest": {
         "monolog/monolog": "Allows more advanced logging of the application flow"
-    },
-    "repositories": [
-        {   
-            "packagist": false
-        },  
-        {   
-            "type": "composer", 
-            "url": "http://packagist.cn"
-        }   
-    ]
+    }
 }

@@ -60,14 +60,14 @@ class Factory
      */
     public static function getFactoryByOriginal($name = '', $options = array(), $default = 'Server', $prex = 'Norma')
     {
+        $called_class = get_called_class();
+        $class_parts = explode('\\', $called_class);
+        $server_name = array_pop($class_parts);
 
         if (empty($name)) {
             $name = C($server_name . ':default', $default);
         }
 
-        $called_class = get_called_class();
-        $class_parts = explode('\\', $called_class);
-        $server_name = array_pop($class_parts);
         if (isset(self::$instances[$name])) {
             return self::$instances[$name];
         }
