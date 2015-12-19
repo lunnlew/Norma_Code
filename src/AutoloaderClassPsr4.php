@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 namespace Norma;
 
-include(__DIR__ . '/Singleton.php');
+include __DIR__ . '/Singleton.php';
 /**
  * An example of a general-purpose implementation that includes the optional
  * functionality of allowing multiple base directories for a single namespace
@@ -131,7 +131,7 @@ class AutoloaderClassPsr4 extends Singleton
 
             // try to load a mapped file for the prefix and relative class
             $mapped_file = $this->loadMappedFile($prefix, $relative_class);
-            if ($mapped_file) {
+            if ($mapped_file !== false) {
                 return $mapped_file;
             }
 
@@ -166,8 +166,8 @@ class AutoloaderClassPsr4 extends Singleton
             // replace namespace separators with directory separators
             // in the relative class name, append with .php
             $file = $base_dir
-                  . str_replace('\\', '/', $relative_class)
-                  . '.php';
+            . str_replace('\\', '/', $relative_class)
+                . '.php';
 
             // if the mapped file exists, require it
             if ($this->requireFile($file)) {

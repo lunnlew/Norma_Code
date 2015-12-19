@@ -13,22 +13,22 @@ function ptuiCB($status, $l, $href, $window = 1, $msg = '', $nick = '')
 }
 /**
  * uin转换为十六进制字符
- * @param  [type] $str [description]
- * @return [type]      [description]
+ * @param  string $str [description]
+ * @return string      [description]
  */
 function uin2hex($str = '')
 {
     $maxLength = 16;
-    $hex=dechex((int) $str);
+    $hex = dechex((int) $str);
     $len = strlen($hex);
     for ($i = $len; $i < $maxLength; $i++) {
-        $hex = "0".$hex;
+        $hex = "0" . $hex;
     }
     $arr = [];
     for ($j = 0; $j < $maxLength; $j += 2) {
-        array_push($arr, "\\x".substr($hex, $j, 2));
+        array_push($arr, "\\x" . substr($hex, $j, 2));
     }
-    eval("\$result = \"" . implode("", $arr)."\";");
+    eval("\$result = \"" . implode("", $arr) . "\";");
 
     return $result;
 }
@@ -44,15 +44,15 @@ function hexchar2bin($str = '')
     $arr = [];
     $len = strlen($str);
     for ($i = 0; $i < $len; $i = $i + 2) {
-        array_push($arr, "\\x". substr($str, $i, 2));
+        array_push($arr, "\\x" . substr($str, $i, 2));
     }
-    eval("\$temp = \"" . implode("", $arr)."\";");
+    eval("\$temp = \"" . implode("", $arr) . "\";");
 
     return $temp;
 }
 function qqhash($uin, $ptwebqq)
 {
-    for ($N = $ptwebqq."password error", $T = "", $V = [];;) {
+    for ($N = $ptwebqq . "password error", $T = "", $V = [];;) {
         if (strlen($T) <= strlen($N)) {
             $T .= $uin;
             if (strlen($T) == strlen($N)) {

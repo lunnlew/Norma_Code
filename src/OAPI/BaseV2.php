@@ -15,9 +15,9 @@ class BaseV2
     //api名称
     public $api_name;
     //api参数设置
-    public $api_params=array();
+    public $api_params = array();
     //访问参数
-    public $access_params=array();
+    public $access_params = array();
 
     public function __construct($params = array())
     {
@@ -27,7 +27,7 @@ class BaseV2
         //分为文件名及组织分类名
         list($filename, $org) = array_reverse(explode('\\', $class));
         //加载参数设置
-        $this->api_params = include(FRAME_PATH.'OAPI' . '/' . $org . '/Api/' . $filename . '.php');
+        $this->api_params = include FRAME_PATH . 'OAPI' . '/' . $org . '/Api/' . $filename . '.php';
 
     }
     /**
@@ -45,7 +45,7 @@ class BaseV2
                 //获取请求方法
                 $methods = explode('/', strtoupper($this->api_params[$this->api_name]['method']));
                 //判断是否使用跳转方式//只对GET方式
-                if (in_array('GET', $methods, true)&&isset($this->api_params[$this->api_name]['jump'])) {
+                if (in_array('GET', $methods, true) && isset($this->api_params[$this->api_name]['jump'])) {
                     $this->_jumpUrl($this->api_name, $this->_parseParams(), array_shift($methods));
                 } else {
                     //获取数据
@@ -64,24 +64,24 @@ class BaseV2
      */
     protected function _parseParams()
     {
-        $access_params = array('uri'=>array(),'header'=>array(),'body'=>array());
+        $access_params = array('uri' => array(), 'header' => array(), 'body' => array());
         foreach ($this->access_params as $postype => $arr) {
             if (is_array($arr)) {
                 foreach ($this->access_params[$postype] as $name => $value) {
                     if (is_string($value)) {
-                        $access_params[$postype][] = $name.'|@'.$value;
+                        $access_params[$postype][] = $name . '|@' . $value;
                     } else {
-                        $access_params[$postype][] = $name.'|@'.array_pop($value);//对41行的处理,具有多个相同key时
+                        $access_params[$postype][] = $name . '|@' . array_pop($value); //对41行的处理,具有多个相同key时
                     }
                 }
             }
         }
         $this->access_params = array_merge_recursive($this->api_params[$this->api_name]['request_params'], $this->api_params[$this->api_name]['public_params'], $access_params);
 
-        $access_params = array('uri'=>array(),'header'=>array(),'body'=>array());
+        $access_params = array('uri' => array(), 'header' => array(), 'body' => array());
         foreach ($this->access_params as $postype => $arr) {
             if (is_array($arr)) {
-                $this->access_params[$postype]=array_unique($arr);
+                $this->access_params[$postype] = array_unique($arr);
                 foreach ($this->access_params[$postype] as $str) {
                     $access_params[$postype] = array_merge($access_params[$postype], $this->_parseStr($str));
                 }
@@ -93,13 +93,14 @@ class BaseV2
         //print_r($this->access_params);exit;
     }
     /*
-     * 从字符中解析出参数名与参数值
-     * @param  string $name api名
-     * @return array  结果
-     */
+		     * 从字符中解析出参数名与参数值
+		     * @param  string $name api名
+		     * @return array  结果
+	*/
     protected function _parseStr($str = '')
     {
         $parts = explode('|', $str);
+        $result = array();
         $result[$name] = $name = array_shift($parts);
         $pos = false;
         if (count($parts) > 0) {
@@ -126,36 +127,36 @@ class BaseV2
         return $result;
     }
     /*
-     * 组装
-     * @param  arr
-     * @return array 结果
-     */
+		     * 组装
+		     * @param  arr
+		     * @return array 结果
+	*/
     protected function _makeHeader($params)
     {
         $header = $params['header'];
         unset($params['header']);
         foreach ($header as $key => $value) {
-            $params['header'][]= $key.': '.$value;
+            $params['header'][] = $key . ': ' . $value;
         }
 
         return $params;
     }
     /*
-     * 组装
-     * @param  arr
-     * @return array 结果
-     */
+		     * 组装
+		     * @param  arr
+		     * @return array 结果
+	*/
     protected function _makeBody($params)
     {
         switch (strtoupper($this->api_params[$this->api_name]['body_type'])) {
             case 'JSON':
-                $params['body'] =  json_encode($params['body']);
+                $params['body'] = json_encode($params['body']);
                 $params['header'][] = 'Content-Type: application/json';
                 break;
             case 'XML':
                 exit('MAKE XML BODY!');
-                $params['body'] = xml_encode($params['body']);
-                break;
+            $params['body'] = xml_encode($params['body']);
+            break;
             default:
                 # code...
                 break;
@@ -198,10 +199,10 @@ class BaseV2
         //0,1,2
         if (isset($this->api_params[$name]['cacert_type'])) {
             //SSL证书认证
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, (bool) $this->api_params[$name]['cacert_type']);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, $this->api_params[$name]['cacert_type']);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, (bool) $this->api_params[$name]['cacert_type']);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, $this->api_params[$name]['cacert_type']);
             if ((bool) $this->api_params[$name]['cacert_type']) {
-                curl_setopt($curl, CURLOPT_CAINFO, $this->api_params[$name]['cacert_path']);//证书地址
+                curl_setopt($ch, CURLOPT_CAINFO, $this->api_params[$name]['cacert_path']); //证书地址
             }
         }
         //
@@ -238,9 +239,9 @@ class BaseV2
         $output = curl_exec($ch);
 
         /*//获取执行请求后相关信息
-        $info = curl_getinfo($ch,CURLINFO_HEADER_OUT);
-        print_r($info);//打印信息数组
-        exit;*/
+			        $info = curl_getinfo($ch,CURLINFO_HEADER_OUT);
+			        print_r($info);//打印信息数组
+		*/
 
         //释放curl句柄
         curl_close($ch);

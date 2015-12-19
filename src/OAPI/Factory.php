@@ -42,14 +42,15 @@ class Factory
     /**
      * 组装完整服务类名
      *
-     *  @param  string $server_name 服务驱动名
-     * @param  string $prex 类名前缀
+     *  @param  string $classify
+     * @param  string $name
+     * @param  string $prex
      * @access protected
      * @static
      * @return string 完整服务驱动类名
      */
     public static function getApiName($classify, $name, $prex = 'Norma')
     {
-        return vsprintf($prex.self::$tpl, array($classify,$name));
+        return vsprintf($prex . self::$tpl, array($classify, $name));
     }
 }

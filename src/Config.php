@@ -48,7 +48,7 @@ class Config
         if ($runtime && $defv != '') {
             return (self::$config[$key] = $defv);
         }
-        if (null === ($val = getValueRec(explode(':', $key), self::$config))) {
+        if (null === ($val = \getValueRec(explode(':', $key), self::$config))) {
             $result = $defv;
         } else {
             $result = $val;
@@ -58,7 +58,7 @@ class Config
             $result = explode(',', $result);
         }
 
-        return $result;
+        return (string) $result;
     }
     /**
      * 获得配置项

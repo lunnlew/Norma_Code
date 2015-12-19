@@ -37,7 +37,7 @@ class OAPI
     public static function factory($name, $options = array(), $prex = 'Norma')
     {
         if (empty($name) || !is_string($name)) {
-            exit('OAPI ERROR!');
+            return;
         }
         if (!isset(self::$instances[$name])) {
             $fac = __CLASS__ . '\Factory';

@@ -20,7 +20,7 @@ abstract class Img extends RequestBase
 {
     /**
      * [setPutPolicy description]
-     * @param [type] $name      [description]
+     * @param string $name      [description]
      * @param array  $putPolicy [description]
      */
     public function setPutPolicy($name, $putPolicy = array())
@@ -43,20 +43,20 @@ abstract class Img extends RequestBase
     }
     /**
      * [_getAccessKey description]
-     * @param  [type] $str [description]
-     * @return [type] [description]
+     * @param  string $str [description]
+     * @return string [description]
      */
     abstract protected function _getAccessKey($str);
     /**
      * [_getSecertKey description]
-     * @param  [type] $str [description]
-     * @return [type] [description]
+     * @param  string $str [description]
+     * @return string [description]
      */
     abstract protected function _getSecertKey($str);
     /**
      *
      * @param  array  $putPolicy [description]
-     * @return [type] [description]
+     * @return string [description]
      */
     protected function _getAccessToken($str)
     {
@@ -64,6 +64,6 @@ abstract class Img extends RequestBase
 
         return $this->_getAccessKey('AccessKey')
         . ':' . \urlsafe_base64_encode(hash_hmac("sha1", $encodedPutPolicy, $this->_getSecertKey('SecertKey'), true))
-        . ':' . $encodedPutPolicy;
+            . ':' . $encodedPutPolicy;
     }
 }

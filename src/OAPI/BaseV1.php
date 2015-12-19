@@ -53,13 +53,13 @@ class BaseV1
         $class = get_called_class();
         $this->sid = $class;
         list($class, $org) = array_reverse(explode('\\', $class));
-        $this->cfg = include(__DIR__ . '/' . $org . '/Api/' . $class . '.php');
+        $this->cfg = include __DIR__ . '/' . $org . '/Api/' . $class . '.php';
     }
     /**
      * get params
-     * @param  [type] $name   [description]
+     * @param  string $name   [description]
      * @param  array  $params [description]
-     * @return [type] [description]
+     * @return string [description]
      */
     public function getParams($name, $params = array())
     {
@@ -82,7 +82,7 @@ class BaseV1
         $this->params = $params;
         if (isset($this->cfg[$name])) {
             if (isset($this->cfg[$name]['url'])) {
-                    $methods = explode('/', $this->cfg[$name]['method']);
+                $methods = explode('/', $this->cfg[$name]['method']);
                 if (isset($this->cfg[$name]['redirect'])) {
                     $this->_redirectUrl($name, $this->_parseParams($name), array_shift($methods));
                 } else {
@@ -98,7 +98,7 @@ class BaseV1
     /**
      * 从配置中解析出header,cookie参数
      * @param  string $name api名
-     * @return [type] [description]
+     * @return string [description]
      */
     protected function _parseHC($name)
     {
@@ -186,10 +186,10 @@ class BaseV1
         //0,1,2
         if (isset($this->cfg[$name]['cacert_type'])) {
             //SSL证书认证
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, (bool) $this->cfg[$name]['cacert_type']);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, $this->cfg[$name]['cacert_type']);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, (bool) $this->cfg[$name]['cacert_type']);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, $this->cfg[$name]['cacert_type']);
             if ((bool) $this->cfg[$name]['cacert_type']) {
-                curl_setopt($curl, CURLOPT_CAINFO, $params['cacert']);//证书地址
+                curl_setopt($ch, CURLOPT_CAINFO, $params['cacert']); //证书地址
             }
             unset($params['cacert']);
         }

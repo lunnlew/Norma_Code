@@ -144,7 +144,7 @@ function U($url = '', $vars = '', $suffix = true, $redirect = false, $domain = f
 function L($item)
 {
     $item = strtoupper($item);
-    $LANG = include(LANG_PATH . '/main.php');
+    $LANG = include LANG_PATH . '/main.php';
 
     return isset($LANG[$item]) ? $LANG[$item] : $item;
 }
@@ -309,7 +309,7 @@ function is_mobile()
 
     //如果via信息含有wap则一定是移动设备,部分服务商会屏蔽该信息
     if (isset($_SERVER['HTTP_VIA'])) {
-    //找不到为flase,否则为true
+        //找不到为flase,否则为true
         return stristr($_SERVER['HTTP_VIA'], 'wap') ? true : false;
     }
 
@@ -372,7 +372,7 @@ function C($key, $defv = '', $runtime = false)
     if (strpos($key, 'Plugin') === 0) {
         list($pre, $name) = explode('\\', $key);
         if (file_exists(APP_ADDONS_PATH . 'Plugin\\' . $name . '\config.php')) {
-            return require(APP_ADDONS_PATH . 'Plugin\\' . $name . '\config.php');
+            return require APP_ADDONS_PATH . 'Plugin\\' . $name . '\config.php';
         }
     }
 
@@ -426,7 +426,7 @@ function listFiles($directory = null, array $paths = null)
     if ($paths === null) {
         // Use the default paths
         $paths = array(APP_PATH, FRAME_PATH);
-        ;
+
     }
 
     // Create an array for the files
@@ -525,13 +525,15 @@ function parse_varstr($var_str, $del = '/')
  */
 function import($class_path, $class)
 {
+    $base_path = APP_PATH;
     if (strpos('#', $class_path) === 0) {
         $base_path = FRAME_PATH;
-    }if (strpos('@', $class_path) === 0) {
+    }
+    if (strpos('@', $class_path) === 0) {
         $base_path = APP_PATH;
     }
     if (file_exists($base_path . $class_path . $class . '.php')) {
-        include($base_path . $class_path . $class . '.php');
+        include $base_path . $class_path . $class . '.php';
 
         return new $class();
     } else {

@@ -54,6 +54,7 @@ if (RUN_MODE === 'WEB') {
     require FRAME_PATH . 'NormaTask.php'; //CLI核心
 }
 //加载引擎资源
+require_once FRAME_PATH . 'Core/Engine/PreDefine.php';
 require_once FRAME_PATH . 'Core/Engine/' . RUN_ENGINE . '.php';
 
 //加载应用核心
