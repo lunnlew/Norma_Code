@@ -57,7 +57,7 @@ NormaCore::initialize(function () {
             'Requests' => FRAME_PATH . 'Core',
             'Core' => FRAME_PATH,
             'Render' => FRAME_PATH,
-            'Server' => FRAME_PATH,
+            'Service' => FRAME_PATH,
             'Controller' => APP_PATH,
             'Addons' => APP_PATH,
         ));
@@ -77,12 +77,12 @@ NormaCore::initialize(function () {
         $run->pushHandler(new PrettyPageHandler);
         $run->register();
     } else {
-        $log = Server\Log::factory('monolog');
-        Server\ErrorHandler::register('MonologErrorHandler', array($log), function () use ($log) {
-            $log->pushHandler(new \Monolog\Handler\ChromePHPHandler(Server\Log::INFO));
-            $StreamHandler = Server\StreamHandler::factory('StreamHandler', array(
+        $log = Service\Log::factory('monolog');
+        Service\ErrorHandler::register('MonologErrorHandler', array($log), function () use ($log) {
+            $log->pushHandler(new \Monolog\Handler\ChromePHPHandler(Service\Log::INFO));
+            $StreamHandler = Service\StreamHandler::factory('StreamHandler', array(
                 'Log/' . date('Y-m-d') . "/ERROR.log",
-                Server\Log::ERROR,
+                Service\Log::ERROR,
                 true,
             ));
             $log->pushHandler($StreamHandler);

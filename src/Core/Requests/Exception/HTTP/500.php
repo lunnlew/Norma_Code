@@ -1,12 +1,12 @@
 <?php
 /**
- * Exception for 500 Internal Server Error responses
+ * Exception for 500 Internal Service Error responses
  *
  * @package Requests
  */
 
 /**
- * Exception for 500 Internal Server Error responses
+ * Exception for 500 Internal Service Error responses
  *
  * @package Requests
  */
@@ -24,5 +24,5 @@ class Requests_Exception_HTTP_500 extends Requests_Exception_HTTP
      *
      * @var string
      */
-    protected $reason = 'Internal Server Error';
+    protected $reason = 'Internal Service Error';
 }

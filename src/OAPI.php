@@ -14,7 +14,7 @@ namespace Norma;
  * OAPI
  *
  * @package  Norma
- * @subpackage  Server
+ * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
 class OAPI

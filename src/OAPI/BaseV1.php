@@ -141,7 +141,8 @@ class BaseV1
     {
         $result = array();
         $parts = explode('|', $str);
-        $result[$name] = $name = array_shift($parts);
+        $result[$name] = '';
+        $name = array_shift($parts);
         $pos = false;
         if (count($parts) > 0) {
             //循环处理

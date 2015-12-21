@@ -14,7 +14,7 @@ namespace Norma\OAPI;
  * 工厂类
  *
  * @package  Norma
- * @subpackage  Server\OAPI
+ * @subpackage  Service\OAPI
  * @author    LunnLew <lunnlew@gmail.com>
  */
 class Factory

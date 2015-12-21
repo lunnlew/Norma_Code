@@ -57,7 +57,7 @@ NormaTask::initialize(function () {
             'Requests' => FRAME_PATH . 'Core',
             'Core' => FRAME_PATH,
             'Render' => FRAME_PATH,
-            'Server' => FRAME_PATH,
+            'Service' => FRAME_PATH,
         ));
         $instance->registerDirs(array(
             FRAME_PATH,

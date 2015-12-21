@@ -39,8 +39,8 @@ class Singleton
     public static function getInstance($class, $new = false)
     {
         if ($new
-             || !isset(self::$instances[$class])
-             || !is_object(self::$instances[$class])
+            || !isset(self::$instances[$class])
+            || !is_object(self::$instances[$class])
         ) {
             self::$instances[$class] = new $class();
         }
