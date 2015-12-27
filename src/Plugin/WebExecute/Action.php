@@ -28,7 +28,6 @@ class Action extends \Norma\Plugin\Base
             hookTrigger('getControllerClass', array(\Norma\Request::$map_paths), '', true),
             \Norma\Request::$map_paths[C('VAR_ACTION', 'a')]
         );
-        $Front = new \Core\Front\Advice\FrontAdvice;
-        $Front->output();
+
     }
 }

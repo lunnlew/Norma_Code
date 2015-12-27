@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
-namespace Norma\Service\ServiceStatus;
+namespace Norma\Service\ServerStatus;
 
 class Base
 {

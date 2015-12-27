@@ -34,19 +34,19 @@ $cfg['TplEngine'] = array(
         'charset' => 'UTF-8',
         'autoescape' => 'html',
         'optimizations' => -1,
-    )
+    ),
 );
 $cfg['TMPL_ACTION_SUCCESS'] = 'Public/page/dispatch_jump';
 $cfg['TMPL_ACTION_ERROR'] = 'Public/page/dispatch_jump';
 
-$cfg['URLMODE'] = 3;//1普通,2pathinfo,3兼容
+$cfg['URLMODE'] = 3; //1普通,2pathinfo,3兼容
 $cfg['URL_PATHINFO_DEPR'] = '/';
 $cfg["URL_HTML_SUFFIX"] = '.html';
 $cfg["URL_VAR"] = 's';
 
-$cfg['DEFAULT_M_LAYER'] = 'Model';// 默认的模型层名称
-$cfg['DEFAULT_C_LAYER'] = 'Controller';// 默认的控制器层名称
-$cfg['DEFAULT_V_LAYER'] = 'View';// 默认的视图层名称
+$cfg['DEFAULT_M_LAYER'] = 'Model'; // 默认的模型层名称
+$cfg['DEFAULT_C_LAYER'] = 'Controller'; // 默认的控制器层名称
+$cfg['DEFAULT_V_LAYER'] = 'View'; // 默认的视图层名称
 
 //多应用相关配置
 $cfg['MULTIPLE_APP'] = 0;
@@ -92,10 +92,10 @@ $cfg['Db'] = array(
         'db_port' => 3306,
         'db_prefix' => 'norma_',
         'db_charset' => 'utf8',
-        'params' => array('persist' => false)
-    )
+        'params' => array('persist' => false),
+    ),
 );
-$cfg["DB_PREFIX"] = 'norma_';// 数据库表前缀
+$cfg["DB_PREFIX"] = 'norma_'; // 数据库表前缀
 
 //服务配置
 //CACHE,Channel,Counter,KVDB,Log,Rank,Segment,Storage
@@ -133,7 +133,7 @@ $cfg['Cache'] = array(
         'servers' => array(
             'host' => '127.0.0.1',
             'port' => 11211,
-        )
+        ),
     ),
     //apc
     'laeapc' => array(
@@ -146,7 +146,7 @@ $cfg['Cache'] = array(
 
 //模板标签
 $cfg['TAG'] = array(
-    'get' => array('field', 'where', 'order', 'num', 'data', 'call')
+    'get' => array('field', 'where', 'order', 'num', 'data', 'call'),
 );
 
 //编辑器

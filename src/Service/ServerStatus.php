@@ -18,7 +18,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class ServiceStatus extends Factory
+class ServerStatus extends Factory
 {
 
     /**

@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
-namespace Norma\Service\ServiceStatus;
+namespace Norma\Service\ServerStatus;
 
 /**
  * 工厂类
@@ -31,7 +31,7 @@ class Factory extends \Norma\Service\Factory
             'Linux',
             'Windows',
         ))) {
-            return self::getApiName('ServiceStatus', $name, $prex);
+            return self::getApiName('ServerStatus', $name, $prex);
         } else {
             return false;
         }
