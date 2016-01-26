@@ -8,9 +8,7 @@
 
 namespace Controller;
 
-use Norma\Service\Controller\Base as ControllerBase;
-
-class Oapi extends ControllerBase
+class Oapi
 {
     public function qqLogin()
     {

@@ -12,10 +12,10 @@
         "email": "lunnlew@qq.com"
     }],
     "config": {
-        "vendor-dir": "vendor"
+        "vendor-dir": "src/Norma/Vendor"
     },
     "require": {
-        "php": ">=7",
+        "php": ">=5",
         "monolog/monolog": "^1.17",
         "psr/log": "1.0.*@dev",
         "filp/whoops": "^1.1",
@@ -27,5 +27,11 @@
     },
     "suggest": {
         "monolog/monolog": "Allows more advanced logging of the application flow"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "http://packagist.phpcomposer.com"
+        }
     }
 }

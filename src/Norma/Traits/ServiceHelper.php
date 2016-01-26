@@ -1,0 +1,78 @@
+<?php
+// +----------------------------------------------------------------------
+// | Norma
+// +----------------------------------------------------------------------
+// | Copyright (c) 2015  All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author:  LunnLew <lunnlew@gmail.com>
+// +----------------------------------------------------------------------
+
+namespace Norma\Traits;
+
+Trait  ServiceHelper
+{
+    /**
+     * 服务驱动实例数组
+     * @var array
+     * @static
+     * @access protected
+     */
+    protected static $instances = array();
+	protected static $fac = null;
+	public static function getInstance($name = '', $options = array(), $default = 'Service', $prex = 'Norma'){
+		$called_class = get_called_class();
+        $class_parts = explode('\\', $called_class);
+        $server_name = array_pop($class_parts);
+        if (empty($name)) {
+            $name = \Norma\C($server_name . ':default', RUN_ENGINE . $default);
+        }
+		if (isset(self::$instances[$name])) {
+            return self::$instances[$name];
+        }
+        self::$fac = $called_class . '\Factory';
+		 return (self::$instances[$name] = self::getDriveInstance($name, array_merge((Array) \Norma\C($server_name . ':' . $name), (Array) $options), $prex));
+    }
+	public static function getInstanceN($name = '', $options = array(), $default = 'Service', $prex = 'Norma'){
+		$called_class = get_called_class();
+        $class_parts = explode('\\', $called_class);
+        $server_name = array_pop($class_parts);
+        if (empty($name)) {
+            $name = \Norma\C($server_name . ':default', RUN_ENGINE . $default);
+        }
+		$name = self::getServiceName($name);
+        if (isset(self::$instances[$name])) {
+            return self::$instances[$name];
+        }
+        self::$fac = $called_class . '\Factory';
+		 return (self::$instances[$name] = self::getDriveInstance($name, array_merge((Array) \Norma\C($server_name . ':' . $name), (Array) $options), $prex));
+    }
+	 /**
+     * 获得服务驱动实例
+     *
+     * @final
+     * @static
+     * @return object 实例
+     */
+    protected static function getDriveInstance($class, $options = array(), $prex = 'Norma')
+    {
+        $class = self::$fac::getRealServiceName($class, $prex);
+        if (class_exists($class)) {
+            return new $class(array_values(array_filter($options)));
+        } else {
+            throw new \Norma\Exception\RuntimeException('服务[' . $class . ']类未找到!');
+        }
+    }
+	protected static function getServiceName($name)
+    {
+        $name = ucfirst($name);
+        if (!in_array(strtoupper(substr($name, 0, 3)), array(
+            'LAE', 'BAE', 'SAE',
+        ))) {
+            return RUN_ENGINE . $name;
+        } else {
+            return $name;
+        }
+    }
+}
