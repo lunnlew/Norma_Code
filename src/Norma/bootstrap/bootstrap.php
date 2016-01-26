@@ -13,7 +13,7 @@ namespace Norma;
  * Norma 引导文件
  */
 // 加载基础文件
-require __DIR__ . '/base.php';
+require dirname(__DIR__) . '/base.php';
 require FRAME_PATH . 'Loader.php';
 
 // 实例化类加载器
