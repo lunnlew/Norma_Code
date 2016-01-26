@@ -11,7 +11,7 @@ namespace Norma\Plugin;
  * Filter
  */
 
-class Filter extends \Norma\PluginBase
+class Filter
 {
     /**
      * 供插件管理器主动加载的入口

@@ -11,7 +11,7 @@ namespace Norma\Plugin;
  * WebExecute
  */
 
-class WebExecute extends \Norma\PluginBase
+class WebExecute
 {
     /**
      * 供插件管理器主动加载的入口
