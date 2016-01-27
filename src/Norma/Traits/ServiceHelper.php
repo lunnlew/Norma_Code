@@ -86,7 +86,7 @@ Trait  ServiceHelper
         if (class_exists($class)) {
             return new $class(array_values(array_filter($options)));
         } else {
-            throw new \Norma\Exception\ServiceException('服务[' . $class . ']类未找到!');
+            throw new \Norma\Exception\ServiceException(L('Service Drive Class %s Not Exists!',$class));
         }
     }
 	/**
