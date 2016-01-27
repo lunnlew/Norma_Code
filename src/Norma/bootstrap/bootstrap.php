@@ -23,7 +23,7 @@ $loader = new Loader;
 $loader -> register();
 // 设置Norma命名空间基准路径
 $loader -> addNamespace('Norma', FRAME_PATH);
-$composer_loader = FRAME_PATH . 'Vendor/autoload.php';
+$composer_loader = VENDOR_PATH . 'autoload.php';
 if(is_file($composer_loader))include($composer_loader);
 // 注册错误和异常处理机制
 // 环境完备性检测
