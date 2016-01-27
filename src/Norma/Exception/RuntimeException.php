@@ -6,7 +6,6 @@
  * @author   LunnLew <lunnlew@gmail.com>
  */
 namespace Norma\Exception;
-
-class RuntimeException extends Exception
+class RuntimeException extends \Norma\Core\Exception
 {
 }
