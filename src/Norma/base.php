@@ -72,3 +72,11 @@ function getValueRec($keys = array(), $arr = array(), &$depth = 0) {
 
 	return $arr;
 }
+/**
+ * 文字替换函数
+ * // TODO 未来需要实现用于国际化支持
+ */
+function L(){
+	$args = func_get_args();
+	return vsprintf(array_shift($args),$args);
+}
