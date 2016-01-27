@@ -12,7 +12,7 @@
         "email": "lunnlew@qq.com"
     }],
     "config": {
-        "vendor-dir": "src/Norma/Vendor"
+        "vendor-dir": "vendor"
     },
     "require": {
         "php": ">=5",
