@@ -42,11 +42,6 @@ if (APP_AUTO_BUILD && is_file(APP_PATH . 'build.php')) {
 	Build::run(
 	include APP_PATH . 'build.php');
 }
-// 处于单元测试环境
-if (IN_UNIT_TEST) {
-	$loader -> addNamespace('tests', TEST_PATH);
-}
-
 $loader -> addNamespace('Controller', APP_PATH.'Application/Controller');
 hookTrigger('appInitialize', '', '', true);
 
