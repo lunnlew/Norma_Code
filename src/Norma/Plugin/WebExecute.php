@@ -18,7 +18,7 @@ class WebExecute
      */
     public function __construct()
     {
-        \Norma\PluginManager::only('WebExecute', array(&$this, 'run'));
+        \Norma\PluginManager::set('WebExecute', array(&$this, 'run'));
     }
     public function run($options = array())
     {

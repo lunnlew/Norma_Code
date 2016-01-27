@@ -52,7 +52,7 @@ class PluginManager
      * @param string $hook     挂载点
      * @param mixd   $callable 可调用的参数
      */
-    public static function only($hook, $callable, $param = null)
+    public static function set($hook, $callable, $param = null)
     {
         self::$_onlys[$hook] = $callable;
         self::$_params[$hook][self::callableToStr($callable)] = $param;

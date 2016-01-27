@@ -15,7 +15,7 @@ class Front
     public function __construct()
     {
         //你想自动挂接的钩子列表
-        \Norma\PluginManager::only('setRequestType', array(&$this, 'setRequestType'));
+        \Norma\PluginManager::set('setRequestType', array(&$this, 'setRequestType'));
     }
     public function setRequestType()
     {

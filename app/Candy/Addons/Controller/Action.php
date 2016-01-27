@@ -20,7 +20,7 @@ class Action
     function __construct()
     {
         //你想自动挂接的钩子列表
-        \Norma\PluginManager::only('getControllerClass', array(&$this, 'register'));
+        \Norma\PluginManager::set('getControllerClass', array(&$this, 'register'));
     }
     /**
      * 注册控制器加载方法并返回控制器类

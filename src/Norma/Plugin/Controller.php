@@ -20,7 +20,7 @@ class Controller {
 	 */
 	public function __construct() {
 		//你想自动挂接的钩子列表
-		\Norma\PluginManager::only('getControllerClass', array(&$this, 'register'));
+		\Norma\PluginManager::set('getControllerClass', array(&$this, 'register'));
 	}
 
 	/**
