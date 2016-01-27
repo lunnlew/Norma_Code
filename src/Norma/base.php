@@ -28,7 +28,7 @@ defined('IN_UNIT_TEST') or define('IN_UNIT_TEST', false);
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 // 框架路径
 defined('FRAME_PATH') or define('FRAME_PATH', dirname(__FILE__) . DS);
-
+defined('VENDOR_PATH') or define('VENDOR_PATH', dirname(__FILE__) . DS.'vendor'.DS);
 // ===全局函数
 
 /**
