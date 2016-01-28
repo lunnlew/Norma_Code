@@ -30,7 +30,6 @@ defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 defined('FRAME_PATH') or define('FRAME_PATH', dirname(__FILE__) . DS);
 defined('VENDOR_PATH') or define('VENDOR_PATH', dirname(__FILE__) . DS.'vendor'.DS);
 // ===全局函数
-
 /**
  * 触发钩子
  */
