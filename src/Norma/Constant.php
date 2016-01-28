@@ -11,6 +11,9 @@
 namespace Norma;
 
 class Constant {
+	/**
+	 * 加载常量定义文件
+	 */
 	public static function LoadDefineWith($type, $path) {
 		is_file($file = rtrim($path, '/\\') . '/' . strtolower($type) . '.php') &&
 		require $file;
