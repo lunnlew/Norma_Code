@@ -10,7 +10,10 @@
 // +----------------------------------------------------------------------
 
 namespace Norma\Exception;
+
 /**
+ * NormaExceptionInterface
+ * 
  * 框架自身顶层异常接口定义
  */
 interface NormaExceptionInterface {

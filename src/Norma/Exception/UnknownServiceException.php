@@ -15,9 +15,6 @@ namespace Norma\Exception;
  * UnknownServiceException
  *
  * 当一个不存在的服务被调用时抛出的异常
- *
- * @uses       Exception
- * @package    Klein\Exceptions
  */
 class UnknownServiceException extends RuntimeException implements NormaExceptionInterface
 {
