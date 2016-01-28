@@ -14,7 +14,7 @@ class Evn {
 	/**
 	 * 获取当前的应用引擎环境
 	 */
-	public static function Engine() {
+	public function Engine() {
 		if (!defined('RUN_ENGINE')) {
 			if (defined('SAE_ACCESSKEY')) {
 				define('RUN_ENGINE', 'SAE');
@@ -29,7 +29,7 @@ class Evn {
 	/**
 	 * 获取当前的运行模式
 	 */
-	public static function Mode() {
+	public function Mode() {
 		if (!defined('RUN_MODE')) {
 			if (PHP_SAPI == 'cli') {
 				define('RUN_MODE', 'CLI');
@@ -44,7 +44,7 @@ class Evn {
 	/**
 	 * 获取操作系统
 	 */
-	public static function OS() {
+	public function OS() {
 		if (!defined('OS')) {
 			if (strstr(PHP_OS, 'WIN')) {
 				define('OS', 'WIN');
@@ -56,11 +56,14 @@ class Evn {
 		}
 		return OS;
 	}
-	/**
-	 * 获取兼容支持目录
-	 */
-	public static function getCompatibilityPath() {
-		return FRAME_PATH . 'Compatibility/';
+	
+	var $parent_path;
+	public function setParentPath($path='') {
+		$this->parent_path = trim($path,'/\\').'/';
+		return $this;
+	}
+	public function getPath($path) {
+		return $this->parent_path . trim($path,'/\\').'/';
 	}
 
 }
