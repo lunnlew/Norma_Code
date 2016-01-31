@@ -10,6 +10,5 @@
 // +----------------------------------------------------------------------
 
 return [
-'Service Drive Class %s Not Exists!'=>'服务驱动类%s不存在!',
-
-]
+'Service Drive Class %s Not Exists!'=>'服务驱动类%s不存在!'
+];
