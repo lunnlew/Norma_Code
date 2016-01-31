@@ -11,7 +11,7 @@
 
 namespace Norma;
 // 框架路径
-defined('FRAME_PATH') or define('FRAME_PATH', dirname(__DIR__) . DS);
+defined('FRAME_PATH') or define('FRAME_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
 // 加载基础文件
 require FRAME_PATH . 'base.php';
 /**
