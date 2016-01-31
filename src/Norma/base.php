@@ -26,8 +26,7 @@ defined('APP_AUTO_BUILD') or define('APP_AUTO_BUILD', false);
 defined('IN_UNIT_TEST') or define('IN_UNIT_TEST', false);
 // 目录分隔符
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
-// 框架路径
-defined('FRAME_PATH') or define('FRAME_PATH', dirname(__FILE__) . DS);
+
 defined('VENDOR_PATH') or define('VENDOR_PATH', dirname(__FILE__) . DS.'vendor'.DS);
 // ===全局函数
 /**
