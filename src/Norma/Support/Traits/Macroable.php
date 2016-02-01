@@ -47,6 +47,8 @@ trait Macroable
     }
 	
 	/**
+	 * Checks if callable is bindable. 
+	 */
 	 * @param \Closure $callable
 	 * @return bool
 	 */
