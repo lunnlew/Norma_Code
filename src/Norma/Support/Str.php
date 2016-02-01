@@ -317,7 +317,7 @@ class Str
     }
 
     /**
-     * Convert the given string to title case.
+     * 转换为title case风格.
      *
      * @param  string  $value
      * @return string
