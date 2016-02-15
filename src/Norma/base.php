@@ -18,16 +18,20 @@ define('START_TIME', microtime(true));
 define('START_MEM', memory_get_usage());
 // 版本信息
 define('NORMA_VERSION', '1.0');
+// 目录分隔符
+defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+
+// 应用目录
+defined('APP_PATH') or define('APP_PATH', dirname(__FILE__) . DS);
 
 // ===系统常量
 // 是否自动生成应用模块
 defined('APP_AUTO_BUILD') or define('APP_AUTO_BUILD', false);
 // 是否为单元测试
 defined('IN_UNIT_TEST') or define('IN_UNIT_TEST', false);
-// 目录分隔符
-defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 
-defined('VENDOR_PATH') or define('VENDOR_PATH', dirname(__FILE__) . DS.'vendor'.DS);
+
+defined('VENDOR_PATH') or define('VENDOR_PATH', dirname(__FILE__) . DS . 'vendor' . DS);
 // ===全局函数
 /**
  * 触发钩子
