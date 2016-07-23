@@ -27,6 +27,8 @@ defined('APP_PATH') or define('APP_PATH', dirname(__DIR__).'/application/');
 
 // 应用目录
 defined('APP_PREFIX') or define('APP_PREFIX', substr(md5(APP_PATH),5,6));
+// 应用目录
+defined('APP_UUID') or define('APP_UUID', substr(md5(APP_PATH),5,6));
 
 // 注册框架类加载器
 require FRAME_PATH . 'Loader.php';
