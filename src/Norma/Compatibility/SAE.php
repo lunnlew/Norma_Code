@@ -15,11 +15,11 @@
  */
 
 //运行数据路径
-defined('RUNTIME_PATH') || define('RUNTIME_PATH', 'saemc://Runntime' . DS);
+defined('RUNTIME_PATH') || define('RUNTIME_PATH', 'saemc://Runntime' . DIRECTORY_SEPARATOR);
 //--编译目录
-defined('COMPILE_PATH') || define('COMPILE_PATH', 'saemc://Compile' . DS);
+defined('COMPILE_PATH') || define('COMPILE_PATH', 'saemc://Compile' . DIRECTORY_SEPARATOR);
 //--缓存目录
-defined('CACHE_PATH') || define('CACHE_PATH', 'saemc://Cache' . DS);
+defined('CACHE_PATH') || define('CACHE_PATH', 'saemc://Cache' . DIRECTORY_SEPARATOR);
 //--日志路径
 defined('LOG_PATH') || define('LOG_PATH', null);
 

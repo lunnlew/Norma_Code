@@ -56,14 +56,4 @@ class Evn {
 		}
 		return OS;
 	}
-	
-	var $parent_path;
-	public function setParentPath($path='') {
-		$this->parent_path = trim($path,'/\\').'/';
-		return $this;
-	}
-	public function getPath($path) {
-		return $this->parent_path . trim($path,'/\\').'/';
-	}
-
 }

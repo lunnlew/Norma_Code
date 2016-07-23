@@ -509,7 +509,3 @@ function urlsafe_base64_encode($str)
 {
     return str_replace(array('+', '/'), array('-', '_'), base64_encode($str));
 }
-function hookTrigger($hook, $param = null, $callable = null, $return = false)
-{
-    return \Norma\PluginManager::trigger($hook, $param, $callable, $return);
-}

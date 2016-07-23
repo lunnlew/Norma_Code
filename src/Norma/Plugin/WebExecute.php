@@ -25,7 +25,7 @@ class WebExecute
         //控制器分发
         $dispatcher = \Norma\Service\Dispatcher::getInstance('MVCDispatcher');
         $dispatcher->execute(
-            \Norma\hookTrigger('getControllerClass', array(\Norma\Request::$map_paths), '', true),
+            \Norma\PluginManager::trigger('getControllerClass', array(\Norma\Request::$map_paths), '', true),
             \Norma\Request::$map_paths[\Norma\C('VAR_ACTION', 'a')]
         );
 

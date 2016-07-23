@@ -28,6 +28,7 @@ class MVCDispatcher
      */
     public function execute($class, $method)
     {
+        $class = '\App\\'.$class;
     	$method = 'index';
         //获得控制器Aop对象
         $controller = new $class;

@@ -25,7 +25,7 @@ class App {
 		if (!in_array($type, array('Web', 'Cmd'))) {
 			$type = 'Web';
 		}
-		hookTrigger($type . 'Execute', '', '', true);
+		\Norma\PluginManager::trigger($type . 'Execute', '', '', true);
 	}
 
 }
