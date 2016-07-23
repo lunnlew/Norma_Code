@@ -8,14 +8,15 @@
 // +----------------------------------------------------------------------
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
-/**
- *
- * 环境完备性检测
- *
- * @package  Norma
- * @author   LunnLew <lunnlew@gmail.com>
- */
-RUN_MODE === 'WEB' && (file_exists(APP_PATH) or exit('目录[' . APP_PATH . ']不存在!'));
-//必须支持的项目
-//--目录是否准备完善
-file_exists(FRAME_PATH) || exit('目录[' . FRAME_PATH . ']不存在!');
+
+namespace Norma\Traits;
+
+Trait DemoHelper{
+    var $demo;
+	
+    public function initDemo()
+    {
+        return ($this->demo='demo');
+    }
+}
+

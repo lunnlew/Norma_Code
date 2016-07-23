@@ -25,7 +25,7 @@ Trait  ServiceFactoryHelper
         if (in_array($name,self::$list)) {
             return self::getApiName(self::$service, $name, $prex);
         } else {
-            return false;
+            throw new \Norma\Exception\UnknownServiceException(\Norma\L('Service Drive Type [%s] Unsupport!',$name));
         }
     }
 	/**

@@ -29,7 +29,8 @@ class MVCDispatcher
     public function execute($class, $method)
     {
         $class = '\App\\'.$class;
-    	$method = 'index';
+        if(empty($method))
+    	   $method = 'index';
         //获得控制器Aop对象
         $controller = new $class;
         try {
@@ -37,9 +38,11 @@ class MVCDispatcher
                 // 非法操作
                 throw new \ReflectionException();
             }
-            $controller->{$method}();
+            $res = $controller->{$method}();
         } catch (\ReflectionException $e) {
-            exit('方法异常');
+            $res = '不合法的方法名';
         }
+
+        return $res;
     }
 }

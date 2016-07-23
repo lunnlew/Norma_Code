@@ -76,3 +76,7 @@ function dump($var, $echo = true, $label = null) {
 		return $output;
 	}
 }
+function L() {
+	$args = func_get_args();
+	return vsprintf(array_shift($args), $args);
+}

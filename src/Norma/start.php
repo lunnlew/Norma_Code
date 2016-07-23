@@ -25,6 +25,9 @@ defined('FRAME_PATH') or define('FRAME_PATH', dirname(__DIR__) . DIRECTORY_SEPAR
 // 应用目录
 defined('APP_PATH') or define('APP_PATH', dirname(__DIR__).'/application/');
 
+// 应用目录
+defined('APP_PREFIX') or define('APP_PREFIX', substr(md5(APP_PATH),5,6));
+
 // 注册框架类加载器
 require FRAME_PATH . 'Loader.php';
 
@@ -45,8 +48,6 @@ if (file_exists($compiledPath = APP_PATH . 'cache/compiled.php')) {
 	require $compiledPath;
 }else{
 	\Norma\Constant::LoadDefineWith([($evn=new \Norma\Evn)->OS(),$evn->Engine(),$evn->MODE()], FRAME_PATH.'Compatibility');
-	// 环境完备性检测
-	require FRAME_PATH . 'bootstrap/Integrity.php';
 	// 加载插件
 	\Norma\PluginManager::loadPlugin(FRAME_PATH . 'Plugin');
 }

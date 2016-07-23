@@ -12,10 +12,11 @@
 namespace Norma\Traits;
 
 Trait ViewHelper{
+    var $view;
 	
-    public static function ViewHelper()
+    public function initView($view_drive_class='View')
     {
-        return \Norma\Service\View::getInstance('View');
+        return ($this->view=\Norma\Service\View::getInstance($view_drive_class));
     }
 	 /**
      * 加载模板和页面输出 可以返回输出内容
@@ -27,7 +28,7 @@ Trait ViewHelper{
      */
     public function fetch($template = '', $vars = [], $cache_id = '')
     {
-        return self::ViewHelper()->fetch($template, $vars, $cache_id);
+        return $this->view->fetch($template, $vars, $cache_id);
     }
 
     /**
@@ -39,7 +40,7 @@ Trait ViewHelper{
      */
     public function show($content, $vars = [])
     {
-        return self::ViewHelper()->show($content, $vars);
+        return $this->view->show($content, $vars);
     }
 
     /**
@@ -51,7 +52,7 @@ Trait ViewHelper{
      */
     public function assign($name, $value = '')
     {
-        self::ViewHelper()->assign($name, $value);
+        $this->view->assign($name, $value);
     }
 }
 
