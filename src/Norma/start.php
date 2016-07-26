@@ -20,7 +20,7 @@ define('START_MEM', memory_get_usage());
 (version_compare(PHP_VERSION, $min_version = "7.0") === -1) and exit('当前PHP运行版本[' . PHP_VERSION . "]低于[" . $min_version . "]!");
 
 // 框架路径
-defined('FRAME_PATH') or define('FRAME_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR);
+defined('FRAME_PATH') or define('FRAME_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 
 // 应用目录
 defined('APP_PATH') or define('APP_PATH', dirname(__DIR__).'/application/');
@@ -28,28 +28,38 @@ defined('APP_PATH') or define('APP_PATH', dirname(__DIR__).'/application/');
 // 应用目录
 defined('APP_PREFIX') or define('APP_PREFIX', substr(md5(APP_PATH),5,6));
 // 应用目录
-defined('APP_UUID') or define('APP_UUID', substr(md5(APP_PATH),5,6));
-
-// 注册框架类加载器
-require FRAME_PATH . 'Loader.php';
-
-// 注册基础文件
-require FRAME_PATH . 'base.php';
-
-// 注册类加载器
-($loader = new \Norma\Loader()) -> register();
-// 注册命名空间路径
-$loader -> addNamespace('Norma', FRAME_PATH);
-$loader -> addNamespace('App', APP_PATH);
-
-// 加载Composer库
-defined('COMPOSER_VENDOR_PATH') and require_once (COMPOSER_VENDOR_PATH. 'autoload.php');
+defined('APP_UUID') or define('APP_UUID', APP_PREFIX);
 
 // 编译文件库
 if (file_exists($compiledPath = APP_PATH . 'cache/compiled.php')) {
 	require $compiledPath;
 }else{
+	// 注册框架类加载器
+	require FRAME_PATH . 'Loader.php';
+
+	// 注册基础文件
+	require FRAME_PATH . 'base.php';
+
+	// 注册类加载器
+	($loader = new \Norma\Loader()) -> register();
+	// 注册命名空间路径
+	$loader -> addNamespace('Norma', FRAME_PATH);
+	$loader -> addNamespace('App', APP_PATH);
+
+	// 加载Composer库
+	defined('COMPOSER_VENDOR_PATH') and require_once (COMPOSER_VENDOR_PATH. 'autoload.php');
+	// 平台兼容支持
 	\Norma\Constant::LoadDefineWith([($evn=new \Norma\Evn)->OS(),$evn->Engine(),$evn->MODE()], FRAME_PATH.'Compatibility');
 	// 加载插件
 	\Norma\PluginManager::loadPlugin(FRAME_PATH . 'Plugin');
+}
+
+switch (strtoupper($evn->MODE())) {
+	case 'CLI':
+		\Norma\Task::Using($argc, $argv)->Running();
+		break;
+	case 'WEB':
+	default:
+		Norma\App::execute('web');
+		break;
 }
