@@ -119,37 +119,37 @@ class Console {
 
 	// produces usge page, based on $args
 	function ShowHelpPage() {
-		$fmt = $this->sprintf(" %%-%ds %%-%ds ", ($this->help_short_len + 1), ($this->help_long_len + 1));
+		$fmt = sprintf(" %%-%ds %%-%ds ", ($this->help_short_len + 1), ($this->help_long_len + 1));
 
-		$msg = $this->sprintf("\nUsage: %s -opt=val -switch ...\n" . "\nKnown options and switches are detailed below.\n" . " [R] means the option is required,\n" . " [S] stands for valueless switch, otherwise\n" . " option requires an value,\n" . " [M] means you can use this option as many times,\n" . " as you need,\n" . "\n", $this->help_command_name);
+		$msg = sprintf("\nUsage: %s -opt=val -switch ...\n" . "\nKnown options and switches are detailed below.\n" . " [R] means the option is required,\n" . " [S] stands for valueless switch, otherwise\n" . " option requires an value,\n" . " [M] means you can use this option as many times,\n" . " as you need,\n" . "\n", $this->help_command_name);
 
 		foreach ($this->args AS $entry) {
 			$flags = ($entry['required']) ? "R" : "";
 			$flags .= ($entry['switch']) ? "S" : "";
 			$flags .= ($entry['multi']) ? "M" : "";
 			if ($flags != "") {
-				$flags = $this->sprintf("[%s] ", $flags);
+				$flags = sprintf("[%s] ", $flags);
 			}
 
-			$short = ($entry['short'] !== FALSE) ? ($this->sprintf("-%s", $entry['short'])) : "";
-			$long = ($entry['long'] !== FALSE) ? ($this->sprintf("-%s", $entry['long'])) : "";
+			$short = ($entry['short'] !== FALSE) ? (sprintf("-%s", $entry['short'])) : "";
+			$long = ($entry['long'] !== FALSE) ? (sprintf("-%s", $entry['long'])) : "";
 
-			$tmp = $this->sprintf($fmt, $short, $long);
+			$tmp = sprintf($fmt, $short, $long);
 			$indent = strlen($tmp);
 			$offset = $this->page_width - $indent;
 
 			$desc = $this->sprintf("%s%s", $flags, $entry['info']);
 
-			$msg .= $this->sprintf("%s%s\n", $tmp, mb_substr($desc, 0, $offset));
+			$msg .= sprintf("%s%s\n", $tmp, substr($desc, 0, $offset));
 
 			// does it fit?
 			if (strlen($entry['info']) > $offset) {
-				$_fmt = $this->sprintf("%%-%ds%%s\n", $indent);
-				$_text = mb_substr($desc, $offset);
+				$_fmt = sprintf("%%-%ds%%s\n", $indent);
+				$_text = substr($desc, $offset);
 				$_lines = explode("\n", wordwrap($_text, $offset));
 
 				foreach ($_lines AS $_line) {
-					$msg .= $this->sprintf($_fmt, "", trim($_line));
+					$msg .= sprintf($_fmt, "", trim($_line));
 				}
 
 			}
@@ -228,13 +228,13 @@ class Console {
 			}
 
 			if (($entry["multi"] != TRUE) && (count($entry['param']) > 0)) {
-				$this->errors[] = $this->sprintf("Argument '-%s' was already specified.", $entry['long']);
+				$this->errors[] = sprintf("Argument '-%s' was already specified.", $entry['long']);
 				$result = FALSE;
 			}
 			// haven't found anything like this yet
 			if ($found == 0) {
 				if ($entry["required"] == TRUE) {
-					$this->errors[] = $this->sprintf("Missing required option '-%s'.", $entry['long']);
+					$this->errors[] = sprintf("Missing required option '-%s'.", $entry['long']);
 					$result = FALSE;
 				}
 			} else {
@@ -242,20 +242,20 @@ class Console {
 				if ($entry["multi"] != TRUE) {
 					if ($found == 2) {
 						printf("s: %d\n", $entry["multi"]);
-						$this->errors[] = $this->sprintf("Argument '-%s' was already specified.", $entry['long']);
+						$this->errors[] = sprintf("Argument '-%s' was already specified.", $entry['long']);
 						$result = FALSE;
 					}
 				}
 
 				if ($entry["switch"] === FALSE) {
 					if ($this->found_args[$found_as_key]["val"] === FALSE) {
-						$this->errors[] = $this->sprintf("Argument '-%s' requires value (i.e. -%s=something).", $found_as_key, $found_as_key);
+						$this->errors[] = sprintf("Argument '-%s' requires value (i.e. -%s=something).", $found_as_key, $found_as_key);
 						$result = FALSE;
 					}
 				} else {
 					if (count($this->found_args[$found_as_key]["val"]) == 0) {
 						printf("'%s' '%s'", $this->found_args[$found_as_key]["val"], $entry["long"]);
-						$this->errors[] = $this->sprintf("'-%s' is just a switch, and does not require any value.", $found_as_key);
+						$this->errors[] = sprintf("'-%s' is just a switch, and does not require any value.", $found_as_key);
 						$result = FALSE;
 					}
 				}
@@ -276,7 +276,7 @@ class Console {
 			$msg = "Unknown options found: ";
 			$comma = "";
 			foreach ($this->found_args AS $key => $val) {
-				$msg .= $this->sprintf("%s-%s", $comma, $key);
+				$msg .= sprintf("%s-%s", $comma, $key);
 				$comma = ", ";
 			}
 
@@ -299,20 +299,20 @@ class Console {
 				$tmp = explode("=", $argv[$i]);
 
 				if ($tmp[0][0] != '-') {
-					$this->errors[] = $this->sprintf("Syntax error. Arguments start with dash (i.e. -%s).", $tmp[0]);
+					$this->errors[] = sprintf("Syntax error. Arguments start with dash (i.e. -%s).", $tmp[0]);
 					$result = FALSE;
 				}
 
-				$arg_key = mb_substr(str_replace(array(" "), "", $tmp[0]), 1);
+				$arg_key = substr(str_replace(array(" "), "", $tmp[0]), 1);
 
 				if (strlen($tmp[0]) <= 0) {
-					$this->errors[] = $this->sprintf("Bad argument '%s'.", $tmp[0]);
+					$this->errors[] = sprintf("Bad argument '%s'.", $tmp[0]);
 					$valid = $result = FALSE;
 				}
 
 				// if( array_key_exists( $arg_key, $this->found_args ) )
 				// {
-				// $this->errors[] = $this->sprintf("Argument '%s' was already specified.", $tmp[0]);
+				// $this->errors[] = sprintf("Argument '%s' was already specified.", $tmp[0]);
 				// $valid = $result = FALSE;
 				// }
 
@@ -363,11 +363,12 @@ class Console {
 		$args = func_get_args();
 		switch (strtoupper(($evn = new \Norma\Evn)->OS())) {
 		case 'WIN':
+			return iconv('UTF-8', 'gbk', call_user_func_array('sprintf', $args));
 		default:
-			$args[0] = iconv('UTF-8', 'gbk', $args[0]);
+			return call_user_func_array('sprintf', $args);
 			break;
 		}
-		return call_user_func_array('sprintf', $args);
+
 	}
 
 	// ond of class

@@ -48,14 +48,14 @@ class Help {
 		if ($result) {
 			// green light...
 			if ($Console->IsOptionSet("list")) {
-				$Console->printf("%d list(s) specifed:\n", $Console->GetOptionArgCount('list'));
-				// since 'list' is 'multi' argument, GetOptionArg() returns an array
-				// to trawerse. So we go so...
-				$list = $Console->GetOptionArg("list");
-				foreach ($list AS $key) {
-					$Console->printf(" list: '%s'\n", $key);
+				$searchingInPath = FRAME_PATH . 'Task/';
+				$Console->printf("Searching in path: `%s`\n", $searchingInPath);
+				$list = array_diff(scandir($searchingInPath), array('.', '..'));
+				$Console->printf("Tool list found:\n");
+				foreach ($list as $key => $file) {
+					$Console->printf(str_pad('', 1, '	') . substr($file, 0, -4) . "\n");
 				}
-
+				$Console->printf("Please run command: `php start.php [name]`,example: `php start.php Demo`\n");
 			}
 		} else {
 			// oh, we failed. Spit out help page, and list of encountered
@@ -65,5 +65,4 @@ class Help {
 			exit();
 		}
 	}
-
 }
