@@ -52,15 +52,15 @@ class Loader {
 		$base_dir = rtrim($base_dir, DIRECTORY_SEPARATOR) . '/';
 
 		// 初始化命名空间前缀数组
-		if (isset($this -> prefixes[$prefix]) === false) {
-			$this -> prefixes[$prefix] = array();
+		if (isset($this->prefixes[$prefix]) === false) {
+			$this->prefixes[$prefix] = array();
 		}
 
 		// 绑定命名空间前缀对应的基准目录
 		if ($prepend) {
-			array_unshift($this -> prefixes[$prefix], $base_dir);
+			array_unshift($this->prefixes[$prefix], $base_dir);
 		} else {
-			array_push($this -> prefixes[$prefix], $base_dir);
+			array_push($this->prefixes[$prefix], $base_dir);
 		}
 	}
 
@@ -84,7 +84,7 @@ class Loader {
 			$relative_class = substr($class, $pos + 1);
 
 			// 试着利用命名空间前缀和相对类名来加载映射文件
-			$mapped_file = $this -> loadMappedFile($prefix, $relative_class);
+			$mapped_file = $this->loadMappedFile($prefix, $relative_class);
 			if ($mapped_file !== false) {
 				return $mapped_file;
 			}
@@ -106,7 +106,7 @@ class Loader {
 	 */
 	protected function loadMappedFile($prefix, $relative_class) {
 		// 为这个命名空间前缀设置了基准目录数组没?
-		if (isset($this -> prefixes[$prefix]) === false) {
+		if (isset($this->prefixes[$prefix]) === false) {
 			return false;
 		}
 
@@ -119,7 +119,7 @@ class Loader {
 			$file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
 
 			// 如果存在文件则require
-			if ($this -> requireFile($file)) {
+			if ($this->requireFile($file)) {
 				return $file;
 			}
 		}

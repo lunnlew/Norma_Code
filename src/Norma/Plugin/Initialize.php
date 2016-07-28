@@ -14,8 +14,7 @@ namespace Norma\Plugin;
  * Initialize
  */
 
-class Initialize
-{
+class Initialize {
 	/**
 	 * 供插件管理器主动加载的入口
 	 */

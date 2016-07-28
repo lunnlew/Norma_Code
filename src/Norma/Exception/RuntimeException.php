@@ -13,8 +13,8 @@ namespace Norma\Exception;
 
 /**
  * RuntimeException
- * 
+ *
  * 框架抛出的异常顶层类定义并继承PHP异常处理
  */
-class RuntimeException extends \Exception {
+class RuntimeException extends \Norma\Exception {
 }
