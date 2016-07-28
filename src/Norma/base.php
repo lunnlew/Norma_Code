@@ -10,24 +10,6 @@
 // +----------------------------------------------------------------------
 namespace Norma;
 
-
-
-/**
- * 获得配置值
- * @param string $key  配置项
- * @param string $defv 默认值
- */
-function C($key, $defv = '', $runtime = false) {
-	if (strpos($key, 'Plugin') === 0) {
-		list($pre, $name) = explode('\\', $key);
-		if (file_exists(APP_ADDONS_PATH . 'Plugin\\' . $name . '\config.php')) {
-			return
-			require APP_ADDONS_PATH . 'Plugin\\' . $name . '\config.php';
-		}
-	}
-	return \Norma\Config::getItem($key, $defv, $runtime);
-}
-
 /**
  * 递归获取数组值
  */
@@ -70,7 +52,7 @@ function dump($var, $echo = true, $label = null) {
 		$output = '<pre>' . $label . $output . '</pre>';
 	}
 	if ($echo) {
-		echo($output);
+		echo ($output);
 		return null;
 	} else {
 		return $output;

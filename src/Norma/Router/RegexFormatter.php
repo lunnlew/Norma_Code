@@ -8,25 +8,26 @@
 // +----------------------------------------------------------------------
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
-namespace Norma;
-
-/**
- * App执行实现类
- */
-class App {
-	/**
-	 * 执行应用
-	 * 若应用没有实现子类execute,则使用该默认方法
-	 * @static
-	 * @access public
-	 */
-	public static function execute($type = '') {
-		\Norma\PluginManager::trigger('reject_request_check');
-
-		$type = ucfirst($type);
-		if (!in_array($type, array('Web', 'Cmd'))) {
-			$type = 'Web';
+namespace Norma\Router;
+class RegexFormatter implements IRouteFormatter {
+	private $Regex;
+	function TryParse(string $value, \mixed &$result) {
+		$s = '';
+		$res = $this->Try($value, $s);
+		$result = $s;
+		return (bool) $res;
+	}
+	function TryToString(\mixed $value, string &$result) {
+		return $this->Try($value, $result);
+	}
+	function Try ($value, &$result) {
+		$s = $value;
+		if ($s != null && $this->Regex->IsMatch($s)) {
+			$result = $s;
+			return true;
+		} else {
+			$result = null;
+			return false;
 		}
-		\Norma\PluginManager::trigger($type . 'Execute', '', '', true);
 	}
 }

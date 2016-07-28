@@ -14,17 +14,16 @@ namespace Norma\Service\Collection;
  * @subpackage  Service\Collection
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Factory
-{
+class Factory {
 	use \Norma\Traits\ServiceFactoryHelper;
 	static $service = 'Collection';
 	static $list = array(
-            'routecollection',
-            'headerdatacollection',
-            'aerverdatacollection',
-            'responsecookiedatacollection',
-            'frontdatacollection',
-            'datacollection',
-        );
-    
+		'HeaderDataCollection',
+		'ServerDataCollection',
+		'ResponseCookieDataCollection',
+		'FrontDataCollection',
+		'DataCollection',
+		'RouteCollection',
+	);
+
 }

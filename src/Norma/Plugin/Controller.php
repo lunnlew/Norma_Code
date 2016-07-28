@@ -15,20 +15,20 @@ namespace Norma\Plugin;
  */
 
 class Controller {
-	var $default_group='Index';
-	var $default_module='Index';
-	var $default_action='index';
+	var $default_group = 'Index';
+	var $default_module = 'Index';
+	var $default_action = 'index';
 	/**
 	 * 供插件管理器主动加载的入口
 	 */
 	public function __construct() {
 		//你想自动挂接的钩子列表
-		if(\Norma\C('MULTIPLE_GROUP')){
+		if (\Norma\Config::get('MULTIPLE_GROUP')) {
 			\Norma\PluginManager::set('getControllerClass', array(&$this, 'registerByMG'));
-		}else{
+		} else {
 			\Norma\PluginManager::set('getControllerClass', array(&$this, 'register'));
 		}
-		
+
 	}
 
 	/**
@@ -38,12 +38,15 @@ class Controller {
 	 */
 	public function register($options = array()) {
 		$len = count($options);
-		$options = array_fill($len,2-$len,'');
+		$options = array_fill($len, 2 - $len, '');
 		list($module, $action) = array_values($options);
-		if (empty($module))
+		if (empty($module)) {
 			$module = $this->default_module;
-		if (empty($action))
+		}
+
+		if (empty($action)) {
 			$action = $this->default_action;
+		}
 
 		$class = 'Controller\\' . $module;
 
@@ -58,14 +61,19 @@ class Controller {
 	 */
 	public function registerByMG($options = array()) {
 		$len = count($options);
-		$options = array_fill($len,3-$len,'');
+		$options = array_fill($len, 3 - $len, '');
 		list($group, $module, $action) = array_values($options);
-		if (empty($group))
+		if (empty($group)) {
 			$group = $this->default_group;
-		if (empty($module))
+		}
+
+		if (empty($module)) {
 			$module = $this->default_module;
-		if (empty($action))
+		}
+
+		if (empty($action)) {
 			$action = $this->default_action;
+		}
 
 		$class = $group . '\Controller\\' . $module;
 

@@ -16,7 +16,7 @@ $cfg['check_before_login'] = array('url' => 'https://ssl.ptlogin2.qq.com/check',
 
 //获取登陆验证码
 $cfg['get_login_verifycode'] = array('url' => 'https://ssl.captcha.qq.com/getimage', 'method' => 'get', 'requestParam' => array('uin|getUin', 'aid|@501004106', 'r|getRandnum'),
-    /*
+	/*
 			'cookie'=>array(
 				'pgv_info|@ssid=s306391428',
 	*/
@@ -24,7 +24,7 @@ $cfg['get_login_verifycode'] = array('url' => 'https://ssl.captcha.qq.com/getima
 
 //一次登陆
 $cfg['login_first'] = array('url' => 'https://ssl.ptlogin2.qq.com/login', 'method' => 'get', 'requestParam' => array('u|getUin', 'verifycode|getVerifycode', 'p|getEncodePass', 'webqq_type|@10', 'remember_uin|@1', 'login2qq|@1', 'aid|@501004106', 'u1|@http://w.qq.com/proxy.html?login2qq=1&webqq_type=10', 'h|@1', 'ptredirect|@0', 'ptlang|@2052', 'daid|@164', 'from_ui|@1', 'pttype|@1', 'dumy', 'fp|@loginerroralert', 'action|@0-24-875627', 'mibao_css|@m_webqq', 't|@1', 'g|@1', 'js_type|@0', 'js_ver|@10088', 'login_sig'),
-    /*
+	/*
 			'cookie'=>array(
 				'chkuin|getUin',
 				'confirmuin|getUin',
@@ -78,8 +78,8 @@ $cfg['change_status2'] = array('url' => 'http://d.web2.qq.com/channel/change_sta
  * 获取在线状态
  */
 $cfg['get_online_buddies2'] = array('url' => 'http://d.web2.qq.com/channel/get_online_buddies2', 'method' => 'get', 'header' => array('Host|@d.web2.qq.com', 'Referer|@http://d.web2.qq.com/proxy.html?v=20130916001&callback=1&id=2', 'User-Agent|@Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/36.0.1985.125 Chrome/36.0.1985.125'), 'requestParam' => array('newstatus|getNewStatus',
-    //该值在改变状态后，查询状态需要.
-    'clientid|getRandnum', 'psessionid|getData', 'vfwebqq|getData', 't|getRandnum'));
+	//该值在改变状态后，查询状态需要.
+	'clientid|getRandnum', 'psessionid|getData', 'vfwebqq|getData', 't|getRandnum'));
 
 /**
  * 获取会话列表

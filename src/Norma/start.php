@@ -23,17 +23,17 @@ define('START_MEM', memory_get_usage());
 defined('FRAME_PATH') or define('FRAME_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 
 // 应用目录
-defined('APP_PATH') or define('APP_PATH', dirname(__DIR__).'/application/');
+defined('APP_PATH') or define('APP_PATH', dirname(__DIR__) . '/application/');
 
 // 应用目录
-defined('APP_PREFIX') or define('APP_PREFIX', substr(md5(APP_PATH),5,6));
+defined('APP_PREFIX') or define('APP_PREFIX', substr(md5(APP_PATH), 5, 6));
 // 应用目录
 defined('APP_UUID') or define('APP_UUID', APP_PREFIX);
 
 // 编译文件库
 if (file_exists($compiledPath = APP_PATH . 'cache/compiled.php')) {
 	require $compiledPath;
-}else{
+} else {
 	// 注册框架类加载器
 	require FRAME_PATH . 'Loader.php';
 
@@ -41,25 +41,35 @@ if (file_exists($compiledPath = APP_PATH . 'cache/compiled.php')) {
 	require FRAME_PATH . 'base.php';
 
 	// 注册类加载器
-	($loader = new \Norma\Loader()) -> register();
+	($loader = new \Norma\Loader())->register();
 	// 注册命名空间路径
-	$loader -> addNamespace('Norma', FRAME_PATH);
-	$loader -> addNamespace('App', APP_PATH);
-
+	$loader->addNamespace('Norma', FRAME_PATH);
+	$loader->addNamespace('App', APP_PATH);
 	// 加载Composer库
-	defined('COMPOSER_VENDOR_PATH') and require_once (COMPOSER_VENDOR_PATH. 'autoload.php');
+	defined('COMPOSER_VENDOR_PATH') and require_once COMPOSER_VENDOR_PATH . 'autoload.php';
+	//加载默认全局配置文件
+	\Norma\Config::load(APP_PATH . 'Config/Global-default.php');
+	//加载应用配置文件
+	$cfg = \Norma\Config::load(APP_PATH . 'Config/Global.php');
+	//加载应用独立文件
+	if (\Norma\Config::has('cfg_list')) {
+		$cfg_list = explode(',', \Norma\Config::get('cfg_list'));
+		foreach ($cfg_list as $key => $file) {
+			\Norma\Config::load(APP_PATH . 'Config/' . $file . '.php');
+		}
+	}
 	// 平台兼容支持
-	\Norma\Constant::LoadDefineWith([($evn=new \Norma\Evn)->OS(),$evn->Engine(),$evn->MODE()], FRAME_PATH.'Compatibility');
+	\Norma\Constant::LoadDefineWith([($evn = new \Norma\Evn)->OS(), $evn->Engine(), $evn->MODE()], FRAME_PATH . 'Compatibility');
 	// 加载插件
 	\Norma\PluginManager::loadPlugin(FRAME_PATH . 'Plugin');
 }
 
 switch (strtoupper($evn->MODE())) {
-	case 'CLI':
-		\Norma\Task::Using($argc, $argv)->Running();
-		break;
-	case 'WEB':
-	default:
-		Norma\App::execute('web');
-		break;
+case 'CLI':
+	\Norma\Task::Using($argc, $argv)->Running();
+	break;
+case 'WEB':
+default:
+	Norma\App::execute('web');
+	break;
 }

@@ -12,14 +12,16 @@
         "email": "lunnlew@qq.com"
     }],
     "config": {
-        "vendor-dir": "vendor"
+        "vendor-dir": "src/vendor"
     },
     "require": {
         "php": ">=5",
         "monolog/monolog": "^1.17",
         "psr/log": "1.0.*@dev",
         "filp/whoops": "^1.1",
-         "corneltek/pux": "~1.5"
+        "corneltek/pux": "~1.5",
+        "ql/uri-template": "1.*",
+        "fzaninotto/faker": "^1.6"
     },
     "require-dev": {
         "phpunit/phpunit": "5.0.*",
@@ -31,7 +33,7 @@
     "repositories": {
         "packagist": {
             "type": "composer",
-            "url": "http://packagist.phpcomposer.com"
+            "url": "https://packagist.phpcomposer.com"
         }
     }
 }
