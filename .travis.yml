@@ -10,6 +10,11 @@ php:
 before_script:
   - composer self-update
   - composer install -n --dev --prefer-source
+  - apt-get install php-pear
+  - pear channel-update pear.php.net
+  - pear upgrade-all
+  - pear channel-discover pear.phpunit.de
+  - pear install -a phpunit/PHPUnit
   - npm install
   - grunt default
   - chmod u+x travis/phpcs
@@ -33,7 +38,7 @@ script:
   ## PHPLOC
   - travis/phploc src
   ## PHPUNIT
-  - travis/phpunit
+  - phpunit -v
 #  - travis/phpunit --coverage-clover=coverage.xml
   ## LINT
   - find ./src/ -type f -name \*.php -exec php -l {} \;
