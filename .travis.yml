@@ -21,7 +21,6 @@ before_script:
   - chmod u+x travis/phpmd
   - chmod u+x travis/phpcpd
   - chmod u+x travis/phploc
-  - chmod u+x travis/phpunit
 
 script:
   ## PHP_CodeSniffer
