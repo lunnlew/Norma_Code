@@ -36,7 +36,8 @@ class Error {
 		}
 		self::getExceptionHandler()->report($e);
 		if (RUN_MODE == "CLI") {
-			self::getExceptionHandler()->renderForConsole(new ConsoleOutput, $e);
+			exit('NO');
+			//self::getExceptionHandler()->renderForConsole(new ConsoleOutput, $e);
 		} else {
 			self::getExceptionHandler()->render($e)->output();
 		}
