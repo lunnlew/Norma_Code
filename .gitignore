@@ -224,7 +224,6 @@ pip-log.txt
 *.log
 _gsdata_
 sync.ffs_db
-vendor/
 *.sh
 index.php
 node_modules
@@ -233,3 +232,4 @@ web/asserts/
 web/*.html
 demo/
 application
+*/vendor/

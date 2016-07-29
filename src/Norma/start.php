@@ -34,9 +34,6 @@ defined('APP_UUID') or define('APP_UUID', APP_PREFIX);
 // 应用调试开关
 defined('DEBUG') or define('DEBUG', false);
 
-//异常模板文件
-defined('EXCEPTIONTMPL') or define('EXCEPTIONTMPL', FRAME_PATH . 'tpl/norma_exception.tpl');
-
 // 编译文件库
 if (file_exists($compiledPath = APP_PATH . 'cache/compiled.php')) {
 	require $compiledPath;

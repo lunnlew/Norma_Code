@@ -145,7 +145,7 @@ class Handle {
 
 		ob_start();
 		extract($data);
-		include Config::get('exception_tmpl') ?: EXCEPTIONTMPL;
+		include Config::get('exception_tmpl') ?: App::$EXCEPTION_TMPL;
 		// 获取并清空缓存
 		$content = ob_get_clean();
 		$response = (new \Norma\Service\Response)->create($content, 'html');
