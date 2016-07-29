@@ -9,10 +9,10 @@ php:
 
 before_script:
   - composer self-update
-  #- composer install -n --dev --prefer-source
+  - composer install -n --dev --prefer-source
   - npm install
   - grunt default
-  - chmod u+x travis/phpcs
+  - chmod u+x src/vendor/bin/phpunit
   - chmod u+x travis/phpmd
   - chmod u+x travis/phpcpd
 
@@ -31,7 +31,7 @@ script:
   ## PHPLOC
   #- travis/phploc src
   ## PHPUNIT
-  #- phpunit -v
+  - src/vendor/bin/phpunit -v
 #  - travis/phpunit --coverage-clover=coverage.xml
   ## LINT
   - find ./src/ -type f -name \*.php -exec php -l {} \;
