@@ -10,8 +10,8 @@ php:
 before_script:
   - composer self-update
   - composer install -n --dev --prefer-source
-  - npm install
-  - grunt default
+  #- npm install
+  #- grunt default
   - chmod u+x src/vendor/bin/phpunit
   - chmod u+x travis/phpmd
   - chmod u+x travis/phpcpd

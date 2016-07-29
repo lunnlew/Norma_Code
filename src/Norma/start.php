@@ -73,12 +73,15 @@ if (file_exists($compiledPath = APP_PATH . 'cache/compiled.php')) {
 	\Norma\PluginManager::loadPlugin(FRAME_PATH . 'Plugin');
 }
 
-switch (strtoupper($evn->MODE())) {
-case 'CLI':
-	\Norma\Task::Using($argc, $argv)->Running();
-	break;
-case 'WEB':
-default:
-	Norma\App::execute('web');
-	break;
+//如果不处于单元测试
+if (strpos($_SERVER['PHP_SELF'], 'phpunit') === false) {
+	switch (strtoupper($evn->MODE())) {
+	case 'CLI':
+		\Norma\Task::Using($argc, $argv)->Running();
+		break;
+	case 'WEB':
+	default:
+		Norma\App::execute('web');
+		break;
+	}
 }
