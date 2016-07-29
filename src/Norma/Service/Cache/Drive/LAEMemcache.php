@@ -55,7 +55,7 @@ final class LAEMemcache extends Base {
 		try {
 			$this->mmc = new Memcache;
 		} catch (\Exception $e) {
-			throw new \Norma\Exception\UnknownServiceException('初始化Memcahce失败!');
+			throw new \Norma\Exception\RuntimeException('初始化Memcahce失败!');
 		};
 		//支持多个memcache服务器
 		if (isset($this->options['servers']['host'])) {

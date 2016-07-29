@@ -28,11 +28,9 @@ final class SAEMemcache extends Base {
 	 * @return bool
 	 */
 	public function checkDriver() {
-		if (function_exists("memcache_init")) {
-			return true;
+		if (!function_exists("memcache_init")) {
+			throw new \Norma\Exception\RuntimeException("请检查是否启用了memcache服务");
 		}
-
-		return false;
 	}
 	/**
 	 *  初始化服务
