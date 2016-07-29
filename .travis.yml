@@ -20,7 +20,6 @@ before_script:
   - chmod u+x travis/phpcs
   - chmod u+x travis/phpmd
   - chmod u+x travis/phpcpd
-  - chmod u+x travis/phploc
 
 script:
   ## PHP_CodeSniffer
@@ -35,7 +34,7 @@ script:
 #  - travis/phpmd src text naming
 #  - travis/phpmd src text unusedcode
   ## PHPLOC
-  - travis/phploc src
+  #- travis/phploc src
   ## PHPUNIT
   - phpunit -v
 #  - travis/phpunit --coverage-clover=coverage.xml
