@@ -10,6 +10,6 @@
 // +----------------------------------------------------------------------
 namespace Norma\Router;
 interface IRouteFormatter {
-	abstract function TryParse(string $value, \mixed &$result);
-	abstract function TryToString(\mixed $value, string &$result);
+	public function TryParse(string $value, \mixed &$result);
+	public function TryToString(\mixed $value, string &$result);
 }
