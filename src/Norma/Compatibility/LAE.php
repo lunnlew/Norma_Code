@@ -36,7 +36,3 @@ if (OS === 'WIN') {
 defined('STOR_PATH') || define('STOR_PATH', RUNTIME_PATH . '/Storage' . DIRECTORY_SEPARATOR);
 
 //其他引用
-
-function Url() {
-	return '#';
-}

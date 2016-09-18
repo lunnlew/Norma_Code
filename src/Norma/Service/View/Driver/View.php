@@ -98,16 +98,13 @@ final class View {
 		}
 
 		// 分析模板文件规则
-		// TODO
-		//$request = Request::instance();
-		//$controller = $request->controller();
-		$controller = 'Index';
+		$request = \Norma\Request::instance();
+		$controller = $request->controller();
 		if ($controller && 0 !== strpos($template, '/')) {
 			$depr = $this->config['view_depr'];
 			$template = str_replace(['/', ':'], $depr, $template);
 			if ('' == $template) {
 				// 如果模板文件名为空 按照默认规则定位
-				// TODO
 				$template = str_replace('.', DIRECTORY_SEPARATOR, $controller) . $depr . $request->action();
 			} elseif (false === strpos($template, $depr)) {
 				$template = str_replace('.', DIRECTORY_SEPARATOR, $controller) . $depr . $template;

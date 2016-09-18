@@ -1,7 +1,5 @@
 <?php
-$cfg['db_provider'] = 'Mysql';
-$cfg['db_options'] = array(
-	'',
-);
-
-return $cfg;
+return [
+	'db_provider' => 'Mysql',
+	'db_options' => [],
+];

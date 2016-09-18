@@ -23,7 +23,7 @@ class Base {
 	protected $response_code = 200;
 
 	// header参数
-	protected $headers = [];
+	protected $header = [];
 
 	function __construct($params) {
 		$this->origin_data = $params[0];
@@ -173,11 +173,11 @@ class Base {
 
 	public function output() {
 
-		if (!headers_sent() && !empty($this->headers)) {
+		if (!headers_sent() && !empty($this->header)) {
 			// 发送状态码
 			http_response_code($this->response_code);
 			// 发送头部信息
-			foreach ($this->headers as $name => $val) {
+			foreach ($this->header as $name => $val) {
 				header($name . ':' . $val);
 			}
 		}

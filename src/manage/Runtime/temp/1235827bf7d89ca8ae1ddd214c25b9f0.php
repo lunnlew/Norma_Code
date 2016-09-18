@@ -1,4 +1,4 @@
-<?php if (!defined('IS_SECURITY')) exit(); /*a:3:{s:34:"./src/manage/view/Index\index.html";i:1474176851;s:36:"./src/manage/view/Public\header.html";i:1474176820;s:37:"./src/manage/view/Public\sidebar.html";i:1474176897;}*/ ?>
+<?php if (!defined('IS_SECURITY')) exit(); /*a:3:{s:34:"./src/manage/view/Index\index.html";i:1474180740;s:36:"./src/manage/view/Public\header.html";i:1474181261;s:37:"./src/manage/view/Public\sidebar.html";i:1474181274;}*/ ?>
 <!doctype html>
 <html class="no-js fixed-layout">
 
@@ -11,8 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="icon" type="image/icon" href="/favicon.icon">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="icon" type="image/icon" href="/assets/favicon.icon">
     <link rel="apple-touch-icon-precomposed" href="/assets/amazeui/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="/assets/amazeui/css/amazeui.min.css" />
@@ -37,11 +37,11 @@
                         <span class="am-icon-users"></span> 管理员设置 <span class="am-icon-caret-down"></span>
                     </a>
                     <ul class="am-dropdown-content">
-                        <li><a href="<?php echo Url('Admin/index'); ?>"><span class="am-icon-user"></span> 管理员列表</a></li>
-                        <li><a href="<?php echo Url('Admin/update'); ?>"><span class="am-icon-user"></span> 新增管理员</a></li>
+                        <li><a href="#"><span class="am-icon-user"></span> 管理员列表</a></li>
+                        <li><a href="#"><span class="am-icon-user"></span> 新增管理员</a></li>
                     </ul>
                 </li>
-                <li><a href="<?php echo Url('Common/doLoginout'); ?>"><span class="am-icon-power-off"></span> 退出登陆</a></li>
+                <li><a href="#"><span class="am-icon-power-off"></span> 退出登陆</a></li>
                <!--  <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li> -->
             </ul>
         </div>
@@ -51,7 +51,7 @@
         <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
     <div class="am-offcanvas-bar admin-offcanvas-bar">
         <ul class="am-list admin-sidebar-list">
-            <li><a href="<?php echo Url('Admin/Index/index'); ?>"><span class="am-icon-home"></span> 首页</a></li>
+            <li><a href="#"><span class="am-icon-home"></span> 首页</a></li>
             <li class="admin-parent">
                 <a class="am-cf" data-am-collapse="{target: '#model-collapse-nav'}"><span class="am-icon-user-md"></span> 模块管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                 <ul class="am-list am-collapse admin-sidebar-sub" id="model-collapse-nav">
@@ -67,10 +67,11 @@
         <div class="admin-content">
             <div class="admin-content-body">
                 <div class="am-cf am-padding">
-                    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> / 
-                    <small>快捷操作</small></div>
+                    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> /
+                        <small>应用列表</small></div>
                 </div>
                 <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+                <li><a href="<?php echo Url('app/detail',array('appid'=>10000)); ?>" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>Manage应用</a></li>
                 </ul>
             </div>
             <footer class="admin-content-footer">

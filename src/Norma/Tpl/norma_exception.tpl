@@ -284,7 +284,7 @@
     <div class="echo">
         <?php echo $echo;?>
     </div>
-    <?php if(DEBUG) { ?>
+    <?php if(\Norma\App::$debug) { ?>
     <div class="exception">
     <div class="message">
         
@@ -412,7 +412,7 @@
         <span>V<?php echo NORMA_VERSION; ?></span> 
         <span>{ 十年磨一剑-为API开发设计的高性能框架 }</span>
     </div>
-    <?php if(DEBUG) { ?>
+    <?php if(\Norma\App::$debug) { ?>
     <script>
         var LINE = <?php echo $line; ?>;
 

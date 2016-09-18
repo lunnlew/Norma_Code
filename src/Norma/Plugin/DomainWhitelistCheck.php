@@ -9,23 +9,19 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 namespace Norma\Plugin;
+use Norma\Request;
 
 /**
- * Reject
+ * 域名白名单检查机制
+ * http://stackoverflow.com/questions/1459739/php-serverhttp-host-vs-serverserver-name-am-i-understanding-the-ma/28889208#28889208
  */
 
-class Reject {
-	/**
-	 * 供插件管理器主动加载的入口
-	 */
+class DomainWhitelistCheck {
+
 	public function __construct() {
-		\Norma\PluginManager::set('reject_request_check', array(&$this, 'rejectRequestCheck'));
+		\Norma\PluginManager::set('request_action', array(&$this, 'run'));
 	}
-	/**
-	 * 白名单机制的请求域检测
-	 * http://stackoverflow.com/questions/1459739/php-serverhttp-host-vs-serverserver-name-am-i-understanding-the-ma/28889208#28889208
-	 */
-	public function rejectRequestCheck() {
+	public function run(Request $request) {
 		$reject_request = true;
 		if (array_key_exists('HTTP_HOST', $_SERVER)) {
 			$host_name = \Norma\Evn::getHost();
@@ -35,11 +31,18 @@ class Reject {
 				$host_name = substr($host_name, $strpos);
 			}
 			// ]
-			$domain_whitelist = \Norma\Config::get('domain_whitelist');
-			if (!empty($domain_whitelist)) {
-				// [ for dynamic verification, replace this chunk with db/file/curl queries
-				$reject_request = (false === array_search($host_name, explode(',', $domain_whitelist), true));
-				// ]
+			$enable_domain_whitelist = \Norma\Config::get('enable_domain_whitelist');
+			//如果启用白名单机制
+			if ($enable_domain_whitelist) {
+				$domain_whitelist = \Norma\Config::get('domain_whitelist');
+				//允许的域名
+				if (!empty($domain_whitelist)) {
+					// [ for dynamic verification, replace this chunk with db/file/curl queries
+					$reject_request = (false === array_search($host_name, explode(',', $domain_whitelist), true));
+					// ]
+				} else {
+					$reject_request = false;
+				}
 			} else {
 				$reject_request = false;
 			}

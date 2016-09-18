@@ -29,7 +29,7 @@ class Handle {
 	public function report(Exception $exception) {
 		if (!$this->isIgnoreReport($exception)) {
 			// 收集异常数据
-			if (DEBUG) {
+			if (\Norma\App::$debug) {
 				$data = [
 					'file' => $exception->getFile(),
 					'line' => $exception->getLine(),
@@ -75,7 +75,7 @@ class Handle {
 	 * @param Exception $e
 	 */
 	public function renderForConsole(Output $output, Exception $e) {
-		if (DEBUG) {
+		if (\Norma\App::$debug) {
 			$output->setVerbosity(Output::VERBOSITY_DEBUG);
 		}
 		(new Console)->renderException($e, $output);
@@ -88,7 +88,7 @@ class Handle {
 	protected function renderHttpException(HttpException $e) {
 		$status = $e->getStatusCode();
 		$template = Config::get('http_exception_template');
-		if (!DEBUG && !empty($template[$status])) {
+		if (!\Norma\App::$debug && !empty($template[$status])) {
 			return Response::create($template[$status], 'view', $status)->assign(['e' => $e]);
 		} else {
 			return $this->convertExceptionToResponse($e);
@@ -101,7 +101,7 @@ class Handle {
 	 */
 	protected function convertExceptionToResponse(Exception $exception) {
 		// 收集异常数据
-		if (DEBUG) {
+		if (\Norma\App::$debug) {
 			// 调试模式，获取详细的错误信息
 			$data = [
 				'name' => get_class($exception),
