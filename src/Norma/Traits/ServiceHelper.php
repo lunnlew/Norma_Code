@@ -83,7 +83,7 @@ Trait ServiceHelper {
 	protected static function getDriveInstance($class, $options = array(), $prex = 'Norma') {
 		$class = self::$fac::getRealServiceName($class, $prex);
 		if (class_exists($class)) {
-			return new $class(array_values(array_filter($options)));
+			return new $class(array_filter($options));
 		} else {
 			throw new \Norma\Exception\UnknownServiceException(\Norma\L('Service Drive Class %s Not Exists!', $class));
 		}

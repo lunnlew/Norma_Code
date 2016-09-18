@@ -15,7 +15,7 @@
  */
 
 //运行数据路径
-defined('RUNTIME_PATH') || define('RUNTIME_PATH', APP_PATH . 'Runtime' . DIRECTORY_SEPARATOR);
+defined('RUNTIME_PATH') || define('RUNTIME_PATH', APP_PATH . '/Runtime' . DIRECTORY_SEPARATOR);
 //--编译目录
 defined('COMPILE_PATH') || define('COMPILE_PATH', RUNTIME_PATH . 'Compile' . DIRECTORY_SEPARATOR);
 //--缓存目录
@@ -25,14 +25,18 @@ defined('LOG_PATH') || define('LOG_PATH', RUNTIME_PATH . 'Log' . DIRECTORY_SEPAR
 
 //临时数据路径
 if (OS === 'WIN') {
-    //windows
-    defined('TMP_PATH') || define('TMP_PATH', 'c:/temp/');
+	//windows
+	defined('TMP_PATH') || define('TMP_PATH', 'c:/temp/');
 } else {
-    //linux
-    defined('TMP_PATH') || define('TMP_PATH', '/tmp/');
+	//linux
+	defined('TMP_PATH') || define('TMP_PATH', '/tmp/');
 }
 
 //存储数据路径
-defined('STOR_PATH') || define('STOR_PATH', RUNTIME_PATH . 'Storage' . DIRECTORY_SEPARATOR);
+defined('STOR_PATH') || define('STOR_PATH', RUNTIME_PATH . '/Storage' . DIRECTORY_SEPARATOR);
 
 //其他引用
+
+function Url() {
+	return '#';
+}

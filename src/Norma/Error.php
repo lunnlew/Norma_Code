@@ -35,7 +35,6 @@ class Error {
 			$e = new ThrowableError($e);
 		}
 		self::getExceptionHandler()->report($e);
-		print_r($e);
 		if (RUN_MODE == "CLI") {
 			//self::getExceptionHandler()->renderForConsole(new ConsoleOutput, $e);
 		} else {

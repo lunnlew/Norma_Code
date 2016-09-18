@@ -35,9 +35,14 @@ class Reject {
 				$host_name = substr($host_name, $strpos);
 			}
 			// ]
-			// [ for dynamic verification, replace this chunk with db/file/curl queries
-			$reject_request = !array_search($host_name, explode(',', \Norma\Config::get('domain_whitelist')), true);
-			// ]
+			$domain_whitelist = \Norma\Config::get('domain_whitelist');
+			if (!empty($domain_whitelist)) {
+				// [ for dynamic verification, replace this chunk with db/file/curl queries
+				$reject_request = (false === array_search($host_name, explode(',', $domain_whitelist), true));
+				// ]
+			} else {
+				$reject_request = false;
+			}
 		}
 		if ($reject_request) {
 			header($_SERVER['SERVER_PROTOCOL'] . ' 400 Bad Request');

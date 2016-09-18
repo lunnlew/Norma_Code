@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 // 版本信息
 define('NORMA_VERSION', '1.0');
-
+define('IS_SECURITY', true);
 // 开始运行时间
 define('START_TIME', microtime(true));
 // 内存使用
@@ -38,6 +38,8 @@ defined('DEBUG') or define('DEBUG', false);
 if (file_exists($compiledPath = APP_PATH . 'cache/compiled.php')) {
 	require $compiledPath;
 } else {
+	//加载函数库
+	require FRAME_PATH . 'functions.php';
 	// 注册框架类加载器
 	require FRAME_PATH . 'Loader.php';
 

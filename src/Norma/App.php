@@ -14,6 +14,8 @@ namespace Norma;
  * App执行实现类
  */
 class App {
+	//相对于应用路径
+	static $modulePath = '';
 	//异常模板文件
 	static $EXCEPTION_TMPL = FRAME_PATH . 'tpl/norma_exception.tpl';
 	/**
