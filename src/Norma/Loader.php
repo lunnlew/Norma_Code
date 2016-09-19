@@ -192,7 +192,6 @@ class Loader {
 			$module = \Norma\Request::instance()->module();
 		}
 		$class = self::parseClass($module, $layer, $name, $appendSuffix);
-		$class = 'App\Controller\Index';
 		if (class_exists($class)) {
 			return new $class(\Norma\Request::instance());
 		} elseif ($empty && class_exists($emptyClass = self::parseClass($module, $layer, $empty, $appendSuffix))) {

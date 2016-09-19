@@ -9,8 +9,6 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 namespace Norma;
-use Norma\Request;
-
 /**
  * App执行实现类
  */
@@ -94,9 +92,9 @@ class App {
 			// 获取当前语言
 			$request->langset(Lang::detect());
 			// 加载系统语言包
-			Lang::load(THINK_PATH . 'lang' . DS . $request->langset() . EXT);
+			Lang::load(FRAME_PATH . 'Ability/Lang' . DIRECTORY_SEPARATOR . $request->langset() . '.php');
 			if (!\Norma\Config::get('app_multi_module')) {
-				Lang::load(APP_PATH . 'lang' . DS . $request->langset() . EXT);
+				Lang::load(APP_PATH . 'Lang' . DIRECTORY_SEPARATOR . $request->langset() . '.php');
 			}
 		}
 
@@ -235,7 +233,7 @@ class App {
 			$request->module($module);
 		}
 		// 当前模块路径
-		App::$modulePath = APP_PATH . ($module ? $module . DS : '');
+		App::$modulePath = APP_PATH . ($module ? $module . DIRECTORY_SEPARATOR : '');
 
 		// 是否自动转换控制器和操作名
 		$convert = is_bool($convert) ? $convert : $config['url_convert'];
@@ -355,5 +353,59 @@ class App {
 			array_walk_recursive($args, [\Norma\Request::instance(), 'filterExp']);
 		}
 		return $args;
+	}
+
+	/**
+	 * 初始化应用或模块
+	 * @access public
+	 * @param string $module 模块名
+	 * @return array
+	 */
+	private static function init($module = '') {
+		// 定位模块目录
+		$module = $module ? $module . DIRECTORY_SEPARATOR : '';
+
+		// 加载初始化文件
+		if (is_file(APP_PATH . $module . 'init' . '.php')) {
+			include APP_PATH . $module . 'init' . '.php';
+		} else {
+			$path = APP_PATH . $module;
+			// 加载模块配置
+			$config = Config::load(APP_PATH . 'Config/' . $module . 'config' . '.php');
+
+			// 加载应用状态配置
+			if ($config['app_status']) {
+				$config = Config::load(APP_PATH . 'Config/' . $module . $config['app_status'] . '.php');
+			}
+
+			// 读取扩展配置文件
+			if ($config['extra_config_list']) {
+				foreach ($config['extra_config_list'] as $name => $file) {
+					$filename = APP_PATH . 'Config/' . $module . $file . '.php';
+					Config::load($filename, is_string($name) ? $name : pathinfo($filename, PATHINFO_FILENAME));
+				}
+			}
+
+			// 加载别名文件
+			if (is_file(APP_PATH . 'Config/' . $module . 'alias' . '.php')) {
+				Loader::addClassMap(include APP_PATH . 'Config/' . $module . 'alias' . '.php');
+			}
+
+			// 加载行为扩展文件
+			if (is_file(APP_PATH . 'Config/' . $module . 'tags' . '.php')) {
+				Hook::import(include APP_PATH . 'Config/' . $module . 'tags' . '.php');
+			}
+
+			// 加载公共文件
+			if (is_file($path . 'common' . '.php')) {
+				include $path . 'common' . '.php';
+			}
+
+			// 加载当前模块语言包
+			if ($config['lang_switch_on'] && $module) {
+				Lang::load($path . 'lang' . DIRECTORY_SEPARATOR . Request::instance()->langset() . '.php');
+			}
+		}
+		return Config::get();
 	}
 }

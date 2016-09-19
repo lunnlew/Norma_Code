@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace app\Home\Controller;
 /**
  *
  */
-class app {
+class App {
 	use \Norma\Traits\ViewHelper;
 	function __construct() {
 		$this->initView();
 	}
-	function index() {
+	function detail($appid) {
 		$this->assign('list', array());
 		$this->assign('sys', array());
-		return $this->fetch('index');
+		return $this->fetch();
 	}
 }

@@ -1,0 +1,111 @@
+<!doctype html>
+<html class="no-js fixed-layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Norma框架构建管理系统</title>
+    <meta name="description" content="Norma框架构建管理系统">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="icon" type="image/icon" href="/assets/favicon.icon">
+    <link rel="apple-touch-icon-precomposed" href="/assets/amazeui/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="/assets/amazeui/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/assets/amazeui/css/admin.css">
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+<p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+  以获得更好的体验！</p>
+<![endif]-->
+    {include file="Public/header" /}
+    <div class="am-cf admin-main">
+        <!-- sidebar start -->
+        {include file="Public/sidebar" /}
+        <!-- sidebar end -->
+        <!-- content start -->
+        <div class="admin-content">
+            <div class="admin-content-body">
+                <div class="am-cf am-padding">
+                    <div class="am-fl am-cf"><strong class="am-text-primary">应用设置</strong> </div>
+                </div>
+                <div class="am-g">
+                    <div class="am-u-sm-12">
+                        <table  class="am-table am-table-bd am-table-striped admin-content-table am-table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>配置项</th>
+                                    <th>描述</th>
+                                    <th>当前设置</th>
+                                    <th>管理</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {volist name="list" id="vo"}
+                                <tr>
+                                    <td>{$key}</td>
+                                    <td>{$key} 的说明</td>
+                                    <td class="am-text-middle {if condition="!is_array($vo)"}config-item{/if}" data-type="text" data-pk="{$key}">
+                                    	{if condition="is_array($vo)"}
+                                    	array
+                                    	{else/}
+                                    	{$vo}
+                                    	{/if}
+                                    </td>
+                                    <td>
+                                        <div class="am-dropdown" data-am-dropdown="">
+                                            <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle=""><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
+                                            <ul class="am-dropdown-content">
+                                                <li><a href="#">1. 编辑</a></li>
+                                                <li><a href="#">2. 下载</a></li>
+                                                <li><a href="#">3. 删除</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                 {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <footer class="admin-content-footer">
+                    <hr>
+                    <p class="am-padding-left">© 2016 Lunnlew 提供技术支持。</p>
+                </footer>
+            </div>
+            <!-- content end -->
+        </div>
+        <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+        <!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="/assets/amazeui/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+        <!--[if (gte IE 9)|!(IE)]><!-->
+        <script src="/assets/amazeui/js/jquery.min.js"></script>
+        <!--<![endif]-->
+        <script src="/assets/amazeui/js/amazeui.min.js"></script>
+        <script src="/assets/amazeui/js/app.js"></script>
+        <!-- poshytip -->
+        <link href="/assets/poshytip-1.2/tip-yellowsimple/tip-yellowsimple.css" rel="stylesheet">
+        <script src="/assets/poshytip-1.2/jquery.poshytip.min.js"></script>
+        <link href="/assets/jquery-editable/css/jquery-editable.css" rel="stylesheet" />
+        <script src="/assets/jquery-editable/js/jquery-editable-poshytip.min.js"></script>
+</body>
+<script>
+var c = window.location.href.match(/c=inline/i) ? 'inline' : 'popup';
+$.fn.editable.defaults.mode = c === 'inline' ? 'inline' : 'popup';
+//editables 
+$('.config-item').editable({
+    url: "{:Url('config/update',array('appid'=>$appid,'item'=>$item_type))}",
+    type: 'text',
+    pk: 1
+});
+</script>
+
+</html>

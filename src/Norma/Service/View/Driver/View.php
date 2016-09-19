@@ -15,7 +15,7 @@ final class View {
 	// 模板引擎参数
 	protected $config = [
 		// 模板起始路径
-		'view_path' => APP_PATH . '/view/',
+		'view_path' => '',
 		// 模板文件后缀
 		'view_suffix' => 'html',
 		// 模板文件名分隔符
