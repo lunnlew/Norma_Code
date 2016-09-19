@@ -224,12 +224,8 @@ pip-log.txt
 *.log
 _gsdata_
 sync.ffs_db
-*.sh
-index.php
 node_modules
-app/
-web/asserts/
-web/*.html
 demo/
-application
 */vendor/
+*Runtime*
+*examples*
