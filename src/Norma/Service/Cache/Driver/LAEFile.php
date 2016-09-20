@@ -37,6 +37,9 @@ class LAEFile extends Base {
 	 * @return bool
 	 */
 	public function checkDriver() {
+		if (!file_exists(RUNTIME_PATH)) {
+			mkdir(RUNTIME_PATH, 0777, true);
+		}
 		if (!is_writable(RUNTIME_PATH)) {
 			throw new \Norma\Exception\RuntimeException("驱动服务目录不可写,请检查" . RUNTIME_PATH);
 		}
