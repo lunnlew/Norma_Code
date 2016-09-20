@@ -9,10 +9,10 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 //
-define('APP_PATH', dirname(dirname(__FILE__)) . '/');
+define('APP_PATH', dirname(dirname(__FILE__)));
 
-define('FRAME_PATH', dirname(dirname(__DIR__)) . '/Norma/');
+define('FRAME_PATH', dirname(dirname(__DIR__)) . '/Norma');
 
-define('COMPOSER_VENDOR_PATH', dirname(dirname(__DIR__)) . '/vendor/');
+define('COMPOSER_VENDOR_PATH', dirname(dirname(__DIR__)) . '/vendor');
 
 require_once FRAME_PATH . '/start.php';

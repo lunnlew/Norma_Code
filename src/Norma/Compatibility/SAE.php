@@ -29,6 +29,9 @@ defined('TMP_PATH') || define('TMP_PATH', rtrim(SAE_TMP_PATH) . '/');
 //存储数据路径
 defined('STOR_PATH') || define('STOR_PATH', null);
 
+//public路径
+defined('PUBLIC_URL') || define('PUBLIC_URL', '');
+
 //其他引用
 //--AE私有常量
 define('DB_TYPE', 'mysql');

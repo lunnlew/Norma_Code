@@ -46,17 +46,17 @@ final class LAEMemfile extends LAEFile {
 	 * @return bool
 	 */
 	public function initService() {
-		if (!file_exists(RUNTIME_PATH . 'MemFileCache/')) {
+		if (!file_exists(RUNTIME_PATH . '/MemFileCache/')) {
 			echo '<pre>';
 			echo '为使用<strong>内存文件缓存</strong>方式,请使用以下命令建立目录:' . "\r\n";
 			echo 'mkdir /dev/shm/MemFileCache' . "\r\n";
-			echo 'ln -s /dev/shm/MemFileCache ' . RUNTIME_PATH . 'MemFileCache' . "\r\n";
-			echo 'chmod -R 777 ' . RUNTIME_PATH . 'MemFileCache' . "\r\n";
+			echo 'ln -s /dev/shm/MemFileCache ' . RUNTIME_PATH . '/MemFileCache' . "\r\n";
+			echo 'chmod -R 777 ' . RUNTIME_PATH . '/MemFileCache' . "\r\n";
 			exit;
 		}
 	}
 	//获得缓存路径
 	public function getPath() {
-		return RUNTIME_PATH . 'MemFileCache/' . $this->group() . '/';
+		return RUNTIME_PATH . '/MemFileCache/' . $this->group() . '/';
 	}
 }

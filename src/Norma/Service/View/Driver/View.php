@@ -91,7 +91,7 @@ final class View {
 		if (strpos($template, '@')) {
 			// 跨模块调用
 			list($module, $template) = explode('@', $template);
-			$path = APP_PATH . $module . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR;
+			$path = APP_PATH . '/' . $module . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR;
 		} else {
 			// 当前视图目录
 			$path = $this->config['view_path'];

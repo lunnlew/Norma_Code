@@ -48,7 +48,7 @@ class Help {
 		if ($result) {
 			// green light...
 			if ($Console->IsOptionSet("list")) {
-				$searchingInPath = FRAME_PATH . 'Task/';
+				$searchingInPath = FRAME_PATH . '/Task/';
 				$Console->printf("Searching in path: `%s`\n", $searchingInPath);
 				$list = array_diff(scandir($searchingInPath), array('.', '..'));
 				$Console->printf("Tool list found:\n");

@@ -297,8 +297,8 @@ function get_ip() {
 function C($key, $defv = '', $runtime = false) {
 	if (strpos($key, 'Plugin') === 0) {
 		list($pre, $name) = explode('\\', $key);
-		if (file_exists(APP_ADDONS_PATH . 'Plugin\\' . $name . '\config.php')) {
-			return require APP_ADDONS_PATH . 'Plugin\\' . $name . '\config.php';
+		if (file_exists(APP_ADDONS_PATH . '/Plugin\\' . $name . '\config.php')) {
+			return require APP_ADDONS_PATH . '/Plugin\\' . $name . '\config.php';
 		}
 	}
 

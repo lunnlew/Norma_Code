@@ -97,6 +97,6 @@ final class SAEStorage extends Base {
 		}
 		file_put_contents(TMP_PATH . $file, $content);
 
-		return include TMP_PATH . '/' . $file;
+		return include TMP_PATH . '//' . $file;
 	}
 }

@@ -19,7 +19,7 @@ class PuxExecute {
 		\Norma\PluginManager::set('PuxExecute', array(&$this, 'run'));
 	}
 	public function run($options = array()) {
-		$mux = require APP_PATH . 'Data/mux.php';
+		$mux = require APP_PATH . '/Data/mux.php';
 		$route = $mux->dispatch($_SERVER['PATH_INFO']);
 		$res = \Pux\Executor::execute($route);
 

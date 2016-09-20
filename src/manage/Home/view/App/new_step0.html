@@ -32,13 +32,25 @@
         <div class="admin-content">
             <div class="admin-content-body">
                 <div class="am-cf am-padding">
-                    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> /
-                        <small>应用列表</small></div>
+                    <div class="am-fl am-cf"><strong class="am-text-primary">应用设置</strong> </div>
                 </div>
-                <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-                    <li><a href="{:Url('app/detail',array('appid'=>10000))}" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>ManageApp</a></li>
-                    <li><a href="{:Url('app/new')}" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新建应用</a></li>
-                </ul>
+                <div class="am-g">
+                    <div class="am-u-sm-5">
+                        <form action="{:Url('app/build')}" class="am-form" method="POST">
+                            <fieldset>
+                                <legend>生成设置</legend>
+                                <div class="am-form-group">
+                                    <label for="appname">应用名称</label>
+                                    <input type="text" id="appname"  name="appname" placeholder="应用名称" class="am-form-field" required/>
+                                </div>
+                            </fieldset>
+                            <button type="submit" class="am-btn am-btn-primary">创建</button>
+                        </form>
+                    </div>
+                    <div class="am-u-sm-5">
+                        
+                    </div>
+                </div>
             </div>
             <footer class="admin-content-footer">
                 <hr>
@@ -64,21 +76,5 @@
     <link href="{$Norma.const.PUBLIC_URL}/assets/jquery-editable/css/jquery-editable.css" rel="stylesheet" />
     <script src="{$Norma.const.PUBLIC_URL}/assets/jquery-editable/js/jquery-editable-poshytip.min.js"></script>
 </body>
-<script>
-var c = window.location.href.match(/c=inline/i) ? 'inline' : 'popup';
-$.fn.editable.defaults.mode = c === 'inline' ? 'inline' : 'popup';
-//editables 
-$('.ratio').editable({
-    url: "{:Url('/Api/Ratio/update')}",
-    type: 'number',
-    pk: 1
-});
-//editables 
-$('.sys').editable({
-    url: "{:Url('/Api/Sys/update')}",
-    type: 'text',
-    pk: 1
-});
-</script>
 
 </html>

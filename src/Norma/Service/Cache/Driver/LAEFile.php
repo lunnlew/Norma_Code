@@ -305,7 +305,7 @@ class LAEFile extends Base {
 	}
 	//获得缓存路径
 	public function getPath() {
-		return RUNTIME_PATH . 'FileCache/' . $this->group() . '/';
+		return RUNTIME_PATH . '/FileCache/' . $this->group() . '/';
 	}
 	/*
 		* Return $FILE FULL PATH

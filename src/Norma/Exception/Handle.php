@@ -189,7 +189,7 @@ class Handle {
 		}
 		// 导入语言包
 		if (Config::get('lang_switch')) {
-			Lang::load(THINK_PATH . 'lang' . DS . Lang::detect() . EXT);
+			Lang::load(THINK_PATH . '/lang' . DS . Lang::detect() . EXT);
 		}
 
 		if (strpos($message, ':')) {

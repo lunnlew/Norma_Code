@@ -10,15 +10,17 @@
 // +----------------------------------------------------------------------
 //
 //建议使用 SRC_PATH/manage/public 目录作为正式入口
-//该文件只是为了方便第一次安装使用框架
+//该文件只是为了方便框架第一次安装使用
 //
 
 define('SRC_PATH', './src');
 
 define('APP_PATH', SRC_PATH . '/manage');
 
-define('FRAME_PATH', SRC_PATH . '/Norma/');
+define('FRAME_PATH', SRC_PATH . '/Norma');
 
-define('COMPOSER_VENDOR_PATH', SRC_PATH . '/vendor/');
+define('COMPOSER_VENDOR_PATH', SRC_PATH . '/vendor');
+
+define('PUBLIC_URL', '/src/public');
 
 require_once FRAME_PATH . '/start.php';

@@ -107,10 +107,10 @@ final class BAEStorage extends Base {
 		$file = '/' . ltrim($file, '/');
 		$resp = $this->object->get_object($this->bucket, $file);
 		$content = $resp->body;
-		if (!is_dir(dirname(TMP_PATH . $file))) {
-			mkdir(dirname(TMP_PATH . $file));
+		if (!is_dir(dirname(TMP_PATH . '/' . $file))) {
+			mkdir(dirname(TMP_PATH . '/' . $file));
 		}
-		file_put_contents(TMP_PATH . $file, $content);
+		file_put_contents(TMP_PATH . '/' . $file, $content);
 
 		return include TMP_PATH . '/' . $file;
 	}

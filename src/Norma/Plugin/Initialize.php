@@ -25,7 +25,7 @@ class Initialize {
 	}
 
 	public function deafultAppInitialize() {
-		RUN_MODE === 'WEB' && \Norma\PluginManager::loadPlugin(APP_LIB_PATH . 'Plugin', '');
+		RUN_MODE === 'WEB' && \Norma\PluginManager::loadPlugin(APP_LIB_PATH . '/Plugin', '');
 	}
 
 	public function defaultCoreAfterInitialize() {

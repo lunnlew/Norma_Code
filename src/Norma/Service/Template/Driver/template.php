@@ -57,7 +57,7 @@ class Template {
 	 * @access public
 	 */
 	public function __construct(array $config = []) {
-		$this->config['cache_path'] = RUNTIME_PATH . 'temp' . DIRECTORY_SEPARATOR;
+		$this->config['cache_path'] = RUNTIME_PATH . '/temp' . DIRECTORY_SEPARATOR;
 		$this->config = array_merge($this->config, $config);
 		$this->config['taglib_begin'] = $this->stripPreg($this->config['taglib_begin']);
 		$this->config['taglib_end'] = $this->stripPreg($this->config['taglib_end']);
@@ -404,7 +404,7 @@ class Template {
 	 * @access private
 	 * @param string $content 要解析的模板内容
 	 * @return void
-	 * @throws \think\Exception
+	 * @throws \Norma\Exception
 	 */
 	private function parsePhp(&$content) {
 		// 短标签的情况要将<?标签用echo方式输出 否则无法正常输出xml标识
@@ -824,7 +824,7 @@ class Template {
 					if (strpos($match[0], '.')) {
 						$vars = explode('.', $match[0]);
 						$first = array_shift($vars);
-						if ('$Think' == $first) {
+						if ('$Norma' == $first) {
 							// 所有以Think.打头的以特殊变量对待 无需模板赋值就可以输出
 							$parseStr = $this->parseThinkVar($vars);
 						} elseif ('$Request' == $first) {
@@ -838,7 +838,7 @@ class Template {
 							} else {
 								$params = '';
 							}
-							$parseStr = '\think\Request::instance()->' . $method . '(' . $params . ')';
+							$parseStr = '\Norma\Request::instance()->' . $method . '(' . $params . ')';
 						} else {
 							switch ($this->config['tpl_var_identify']) {
 							case 'array': // 识别为数组
@@ -924,7 +924,7 @@ class Template {
 
 	/**
 	 * 特殊模板变量解析
-	 * 格式 以 $Think. 打头的变量属于特殊模板变量
+	 * 格式 以 $Norma. 打头的变量属于特殊模板变量
 	 * @access public
 	 * @param  array $vars 变量数组
 	 * @return string
@@ -948,14 +948,14 @@ class Template {
 				if (isset($vars[2])) {
 					$parseStr = '$_COOKIE[\'' . $vars[1] . '\'][\'' . $vars[2] . '\']';
 				} else {
-					$parseStr = '\\think\\Cookie::get(\'' . $vars[1] . '\')';
+					$parseStr = '\\Norma\\Cookie::get(\'' . $vars[1] . '\')';
 				}
 				break;
 			case 'SESSION':
 				if (isset($vars[2])) {
 					$parseStr = '$_SESSION[\'' . $vars[1] . '\'][\'' . $vars[2] . '\']';
 				} else {
-					$parseStr = '\\think\\Session::get(\'' . $vars[1] . '\')';
+					$parseStr = '\\Norma\\Session::get(\'' . $vars[1] . '\')';
 				}
 				break;
 			case 'ENV':
@@ -968,13 +968,13 @@ class Template {
 				$parseStr = strtoupper($vars[1]);
 				break;
 			case 'LANG':
-				$parseStr = '\\think\\Lang::get(\'' . $vars[1] . '\')';
+				$parseStr = '\\Norma\\Lang::get(\'' . $vars[1] . '\')';
 				break;
 			case 'CONFIG':
 				if (isset($vars[2])) {
 					$vars[1] .= '.' . $vars[2];
 				}
-				$parseStr = '\\think\\Config::get(\'' . $vars[1] . '\')';
+				$parseStr = '\\Norma\\Config::get(\'' . $vars[1] . '\')';
 				break;
 			default:
 				$parseStr = '\'\'';
@@ -1042,7 +1042,7 @@ class Template {
 			if (strpos($template, '@')) {
 				// 跨模块调用模板
 				$template = str_replace(['/', ':'], $this->config['view_depr'], $template);
-				$template = APP_PATH . str_replace('@', '/' . basename($this->config['view_path']) . '/', $template);
+				$template = APP_PATH . '/' . str_replace('@', '/' . basename($this->config['view_path']) . '/', $template);
 			} else {
 				$template = str_replace(['/', ':'], $this->config['view_depr'], $template);
 				$template = $this->config['view_path'] . $template;

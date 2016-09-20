@@ -41,7 +41,7 @@ class App {
 	public static $debug = false;
 
 	//异常模板文件
-	protected static $EXCEPTION_TMPL = FRAME_PATH . 'tpl/norma_exception.tpl';
+	protected static $EXCEPTION_TMPL = FRAME_PATH . '/tpl/norma_exception.tpl';
 
 	protected static $dispatch = '';
 	/**
@@ -60,7 +60,7 @@ class App {
 				$extra_config_list = explode(',', $extra_config_list);
 			}
 			foreach ($extra_config_list as $key => $file) {
-				\Norma\Config::load(APP_PATH . 'Config/' . $file . '.php');
+				\Norma\Config::load(APP_PATH . '/Config/' . $file . '.php');
 			}
 		}
 		// 设置系统时区
@@ -85,16 +85,16 @@ class App {
 		\Norma\App::$loader->addNamespace(\Norma\Config::get('app_namespace') ?: "App", APP_PATH);
 
 		// 加载插件
-		\Norma\PluginManager::loadPlugin(APP_PATH . 'Plugin');
+		\Norma\PluginManager::loadPlugin(APP_PATH . '/Plugin', \Norma\Config::get('app_namespace'));
 
 		// 开启多语言机制
 		if (\Norma\Config::get('lang_switch_on')) {
 			// 获取当前语言
 			$request->langset(Lang::detect());
 			// 加载系统语言包
-			Lang::load(FRAME_PATH . 'Ability/Lang' . DIRECTORY_SEPARATOR . $request->langset() . '.php');
+			Lang::load(FRAME_PATH . '/Ability/Lang' . DIRECTORY_SEPARATOR . $request->langset() . '.php');
 			if (!\Norma\Config::get('app_multi_module')) {
-				Lang::load(APP_PATH . 'Lang' . DIRECTORY_SEPARATOR . $request->langset() . '.php');
+				Lang::load(APP_PATH . '/Lang' . DIRECTORY_SEPARATOR . $request->langset() . '.php');
 			}
 		}
 
@@ -216,7 +216,7 @@ class App {
 				if ($module == $bindModule) {
 					$available = true;
 				}
-			} elseif (!in_array($module, $config['deny_module_list']) && is_dir(APP_PATH . $module)) {
+			} elseif (!in_array($module, $config['deny_module_list']) && is_dir(APP_PATH . '/' . $module)) {
 				$available = true;
 			}
 			// 模块初始化
@@ -233,7 +233,7 @@ class App {
 			$request->module($module);
 		}
 		// 当前模块路径
-		App::$modulePath = APP_PATH . ($module ? $module . DIRECTORY_SEPARATOR : '');
+		App::$modulePath = APP_PATH . '/' . ($module ? $module . DIRECTORY_SEPARATOR : '');
 
 		// 是否自动转换控制器和操作名
 		$convert = is_bool($convert) ? $convert : $config['url_convert'];
@@ -366,40 +366,43 @@ class App {
 		$module = $module ? $module . DIRECTORY_SEPARATOR : '';
 
 		// 加载初始化文件
-		if (is_file(APP_PATH . $module . 'init' . '.php')) {
-			include APP_PATH . $module . 'init' . '.php';
+		if (is_file(APP_PATH . '/' . $module . 'init' . '.php')) {
+			include APP_PATH . '/' . $module . 'init' . '.php';
 		} else {
-			$path = APP_PATH . $module;
+			$path = APP_PATH . '/' . $module;
 			// 加载模块配置
-			$config = Config::load(APP_PATH . 'Config/' . $module . 'config' . '.php');
+			$config = Config::load(APP_PATH . '/Config/' . $module . 'config' . '.php');
 
 			// 加载应用状态配置
 			if ($config['app_status']) {
-				$config = Config::load(APP_PATH . 'Config/' . $module . $config['app_status'] . '.php');
+				$config = Config::load(APP_PATH . '/Config/' . $module . $config['app_status'] . '.php');
 			}
 
 			// 读取扩展配置文件
 			if ($config['extra_config_list']) {
 				foreach ($config['extra_config_list'] as $name => $file) {
-					$filename = APP_PATH . 'Config/' . $module . $file . '.php';
+					$filename = APP_PATH . '/Config/' . $module . $file . '.php';
 					Config::load($filename, is_string($name) ? $name : pathinfo($filename, PATHINFO_FILENAME));
 				}
 			}
 
 			// 加载别名文件
-			if (is_file(APP_PATH . 'Config/' . $module . 'alias' . '.php')) {
-				Loader::addClassMap(include APP_PATH . 'Config/' . $module . 'alias' . '.php');
+			if (is_file(APP_PATH . '/Config/' . $module . 'alias' . '.php')) {
+				Loader::addClassMap(include APP_PATH . '/Config/' . $module . 'alias' . '.php');
 			}
 
 			// 加载行为扩展文件
-			if (is_file(APP_PATH . 'Config/' . $module . 'tags' . '.php')) {
-				Hook::import(include APP_PATH . 'Config/' . $module . 'tags' . '.php');
+			if (is_file(APP_PATH . '/Config/' . $module . 'tags' . '.php')) {
+				Hook::import(include APP_PATH . '/Config/' . $module . 'tags' . '.php');
 			}
 
 			// 加载公共文件
 			if (is_file($path . 'common' . '.php')) {
 				include $path . 'common' . '.php';
 			}
+
+			// 加载插件
+			\Norma\PluginManager::loadPlugin($path . '/Plugin', ($config['app_namespace'] ?: 'App') . '\\' . trim($module, DIRECTORY_SEPARATOR));
 
 			// 加载当前模块语言包
 			if ($config['lang_switch_on'] && $module) {
