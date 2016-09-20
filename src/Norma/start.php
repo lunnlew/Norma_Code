@@ -23,7 +23,7 @@ define('START_MEM', memory_get_usage());
 defined('FRAME_PATH') or define('FRAME_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 
 // 应用目录
-defined('APP_PATH') or define('APP_PATH', dirname(__DIR__) . '/application');
+defined('APP_PATH') or define('APP_PATH', dirname(__DIR__) . '/manage');
 
 // 应用前缀
 defined('APP_PREFIX') or define('APP_PREFIX', substr(md5(APP_PATH), 5, 6));

@@ -34,7 +34,7 @@ script:
   - src/vendor/bin/phpunit -v
 #  - travis/phpunit --coverage-clover=coverage.xml
   ## LINT
-  - find ./src/ -type f -name \*.php -exec php -l {} \;
+  - find ./src/ -path "./src/vendor" -prune -o -type f -name \*.php -exec php -l {} \;
 
  #  - travis/run-tests.sh
 
