@@ -27,7 +27,7 @@ class App {
 
 	function build($appname = 'app') {
 		$project_path = (\Norma\Config::get('build.project_path') ?: dirname(dirname(FRAME_PATH)) . '/project') . '/' . $appname;
-		\Norma\PluginManager::trigger('build_app', array(
+		\Norma\Hook::trigger('build_app', array(
 			'project_path' => $project_path,
 			'buildoption' => [
 				// 生成运行时目录

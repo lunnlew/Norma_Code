@@ -1,45 +1,70 @@
 <?php
-// +----------------------------------------------------------------------
-// | Norma
-// +----------------------------------------------------------------------
-// | Copyright (c) 2015  All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author:  LunnLew <lunnlew@gmail.com>
-// +----------------------------------------------------------------------
-// +----------------------------------------------------------------------
-namespace Norma;
-/**
- * 支持ajax和普通访问下的信息提示
- * @param    mixed        $message  消息内容
- * @param    int          $type   消息类型
- */
-function message($message, $type = \Core\Front\MessageState::INFO) {
-	if (is_ajax()) {
-		if (is_array($message)) {
-			exit(json_encode($message));
-		} else {
-
-			exit($message);
-		}
-	} else {
-		switch ($type) {
-		case \Core\Front\MessageState::COMMON:
-			\View::display(\FrontData::get('tpl'));
-			break;
-		case \Core\Front\MessageState::ERROR:
-			\View::error($message);
-			break;
-		case \Core\Front\MessageState::SUCCESS:
-		case \Core\Front\MessageState::INFO:
-		default:
-			\View::success($message);
-			break;
-		}
-		exit;
+if (!function_exists('url')) {
+	/**
+	 * Url生成
+	 * @param string        $url 路由地址
+	 * @param string|array  $value 变量
+	 * @param bool|string   $suffix 前缀
+	 * @param bool|string   $domain 域名
+	 * @return string
+	 */
+	function url($url = '', $vars = '', $suffix = true, $domain = false) {
+		return \Norma\Url::build($url, $vars, $suffix, $domain);
 	}
-}/**
+}
+if (!function_exists('parseName')) {
+	/**
+	 * 字符串命名风格转换
+	 * type 0 将Java风格转换为C的风格 1 将C风格转换为Java的风格
+	 * @param string  $name 字符串
+	 * @param integer $type 转换类型
+	 * @return string
+	 */
+	function parseName($name, $type = 0) {
+		if ($type) {
+			return ucfirst(preg_replace_callback('/_([a-zA-Z])/', function ($match) {
+				return strtoupper($match[1]);
+			}, $name));
+		} else {
+			return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
+		}
+	}
+}
+
+if (!function_exists('redirect')) {
+/**
+ * URL重定向
+ * @param string $url 重定向的URL地址
+ * @param integer $time 重定向的等待时间（秒）
+ * @param string $msg 重定向前的提示信息
+ * @return void
+ */
+	function redirect($url, $time = 0, $msg = '') {
+		//多行URL地址支持
+		$url = str_replace(array("\n", "\r"), '', $url);
+		if (empty($msg)) {
+			$msg = "系统将在{$time}秒之后自动跳转到{$url}！";
+			if (!headers_sent()) {
+				// redirect
+				if (0 === $time) {
+					header('Location: ' . $url);
+				} else {
+					header("refresh:{$time};url={$url}");
+					echo ($msg);
+				}
+				exit();
+			} else {
+				$str = "<meta http-equiv='Refresh' content='{$time};URL={$url}'>";
+				if ($time != 0) {
+					$str .= $msg;
+				}
+
+				exit($str);
+			}
+		}
+	}
+}
+/**
  * 该文件中存放的是框架必须函数和一些常用函数
  */
 /**
@@ -107,38 +132,6 @@ function addslashes_array(&$arr_r) {
 	}
 
 	unset($val);
-}
-
-/**
- * URL重定向
- * @param string $url 重定向的URL地址
- * @param integer $time 重定向的等待时间（秒）
- * @param string $msg 重定向前的提示信息
- * @return void
- */
-function redirect($url, $time = 0, $msg = '') {
-	//多行URL地址支持
-	$url = str_replace(array("\n", "\r"), '', $url);
-	if (empty($msg)) {
-		$msg = "系统将在{$time}秒之后自动跳转到{$url}！";
-		if (!headers_sent()) {
-			// redirect
-			if (0 === $time) {
-				header('Location: ' . $url);
-			} else {
-				header("refresh:{$time};url={$url}");
-				echo ($msg);
-			}
-			exit();
-		} else {
-			$str = "<meta http-equiv='Refresh' content='{$time};URL={$url}'>";
-			if ($time != 0) {
-				$str .= $msg;
-			}
-
-			exit($str);
-		}
-	}
 }
 
 /**

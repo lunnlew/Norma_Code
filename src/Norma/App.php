@@ -52,7 +52,7 @@ class App {
 	public static function listen(Request $request = null, $type = 'web') {
 		is_null($request) && $request = Request::instance();
 		//请求筛选
-		\Norma\PluginManager::trigger('request_action', [$request]);
+		\Norma\Hook::trigger('request_action', [$request]);
 		//加载应用独立文件
 		if (\Norma\Config::has('extra_config_list')) {
 			$extra_config_list = \Norma\Config::get('extra_config_list');
@@ -85,7 +85,7 @@ class App {
 		\Norma\App::$loader->addNamespace(\Norma\Config::get('app_namespace') ?: "App", APP_PATH);
 
 		// 加载插件
-		\Norma\PluginManager::loadPlugin(APP_PATH . '/Plugin', \Norma\Config::get('app_namespace'));
+		\Norma\Hook::loadPlugin(APP_PATH . '/Plugin', \Norma\Config::get('app_namespace'));
 
 		// 开启多语言机制
 		if (\Norma\Config::get('lang_switch_on')) {
@@ -146,9 +146,9 @@ class App {
 			// 默认自动识别响应输出类型
 			$isAjax = $request->isAjax();
 			$type = $isAjax ? Config::get('default_ajax_return') : Config::get('default_return_type');
-			\Norma\PluginManager::trigger('output', [$data, $type]);
+			\Norma\Hook::trigger('output', [$data, $type]);
 		} else {
-			\Norma\PluginManager::trigger('output');
+			\Norma\Hook::trigger('output');
 		}
 
 		//
@@ -402,7 +402,7 @@ class App {
 			}
 
 			// 加载插件
-			\Norma\PluginManager::loadPlugin($path . '/Plugin', ($config['app_namespace'] ?: 'App') . '\\' . trim($module, DIRECTORY_SEPARATOR));
+			\Norma\Hook::loadPlugin($path . '/Plugin', ($config['app_namespace'] ?: 'App') . '\\' . trim($module, DIRECTORY_SEPARATOR));
 
 			// 加载当前模块语言包
 			if ($config['lang_switch_on'] && $module) {

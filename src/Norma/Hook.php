@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 namespace Norma;
 
-class PluginManager {
+class Hook {
 	//已注册的插件监听表
 	private static $_queues = array();
 	private static $_onlys = array();

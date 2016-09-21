@@ -63,9 +63,9 @@ return array(
 	),
 	'view_replace_str' => array(
 	),
-	'dispatch_success_tmpl' => './src/Norma/Tpl/dispatch_jump.tpl',
-	'dispatch_error_tmpl' => './src/Norma/Tpl/dispatch_jump.tpl',
-	'exception_tmpl' => './src/Norma/Tpl/norma_exception.tpl',
+	'dispatch_success_tmpl' => FRAME_PATH . '/Tpl/dispatch_jump.tpl',
+	'dispatch_error_tmpl' => FRAME_PATH . '/Tpl/dispatch_jump.tpl',
+	'exception_tmpl' => FRAME_PATH . '/Tpl/norma_exception.tpl',
 	'error_message' => '页面错误！请稍后再试～',
 	'show_error_msg' => false,
 	'exception_handle' => '',

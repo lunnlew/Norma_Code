@@ -19,7 +19,7 @@ use Norma\Request;
 class DomainWhitelistCheck {
 
 	public function __construct() {
-		\Norma\PluginManager::set('request_action', array(&$this, 'run'));
+		\Norma\Hook::set('request_action', array(&$this, 'run'));
 	}
 	public function run(Request $request) {
 		$reject_request = true;

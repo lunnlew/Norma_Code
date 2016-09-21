@@ -13,8 +13,8 @@ namespace Norma;
 
 use Norma\App;
 use Norma\Config;
+use Norma\Hook;
 use Norma\Request;
-use think\Hook;
 use think\Log;
 use think\Response;
 

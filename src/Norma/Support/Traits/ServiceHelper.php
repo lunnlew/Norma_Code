@@ -86,7 +86,7 @@ Trait ServiceHelper {
 		if (class_exists($class)) {
 			return new $class(array_filter($options));
 		} else {
-			throw new \Norma\Exception\UnknownServiceException(\Norma\L('Service Drive Class %s Not Exists!', $class));
+			throw new \Norma\Exception\UnknownServiceException(L('Service Drive Class %s Not Exists!', $class));
 		}
 	}
 	/**

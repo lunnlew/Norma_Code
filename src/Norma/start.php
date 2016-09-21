@@ -36,8 +36,8 @@ if (file_exists($compiledPath = APP_PATH . '/cache/compiled.php')) {
 } else {
 	//加载函数库
 	require FRAME_PATH . '/functions.php';
-	require FRAME_PATH . '/helper.php';
 	// 注册框架类加载器
+	require FRAME_PATH . '/Support/Traits/LoaderHelper.php';
 	require FRAME_PATH . '/Loader.php';
 
 	// 注册类加载器
@@ -65,7 +65,7 @@ if (file_exists($compiledPath = APP_PATH . '/cache/compiled.php')) {
 	// 平台兼容支持
 	\Norma\Constant::LoadDefineWith([OS, RUN_ENGINE, RUN_MODE], FRAME_PATH . '/Compatibility');
 	// 加载插件
-	\Norma\PluginManager::loadPlugin(FRAME_PATH . '/Plugin');
+	\Norma\Hook::loadPlugin(FRAME_PATH . '/Plugin');
 }
 
 //如果不处于单元测试

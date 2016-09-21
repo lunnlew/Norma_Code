@@ -23,7 +23,7 @@ Trait ServiceFactoryHelper {
 		if (in_array($name, self::$list)) {
 			return self::getApiName(self::$service, $name, $prex);
 		} else {
-			throw new \Norma\Exception\UnknownServiceException(\Norma\L('Service Driver Type [%s] Unsupport!', $name));
+			throw new \Norma\Exception\UnknownServiceException(L('Service Driver Type [%s] Unsupport!', $name));
 		}
 	}
 	/**

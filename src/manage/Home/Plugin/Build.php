@@ -9,7 +9,7 @@ namespace App\Home\Plugin;
 
 class Build {
 	public function __construct() {
-		\Norma\PluginManager::register('build_app', array(&$this, 'build_app'));
+		\Norma\Hook::register('build_app', array(&$this, 'build_app'));
 	}
 
 	static $project_path = '';
