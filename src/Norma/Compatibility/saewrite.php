@@ -10,17 +10,17 @@
 // +----------------------------------------------------------------------
 
 /**
- * SAE标准空间 兼容支持
+ * SAE云空间 兼容支持
  */
 
 //运行数据路径
-defined('RUNTIME_PATH') || define('RUNTIME_PATH', 'saemc://Runntime' . DIRECTORY_SEPARATOR);
+defined('RUNTIME_PATH') || define('RUNTIME_PATH', APP_PATH . '/Runtime' . DIRECTORY_SEPARATOR);
 //--编译目录
-defined('COMPILE_PATH') || define('COMPILE_PATH', 'saemc://Compile' . DIRECTORY_SEPARATOR);
+defined('COMPILE_PATH') || define('COMPILE_PATH', RUNTIME_PATH . '/Compile' . DIRECTORY_SEPARATOR);
 //--缓存目录
-defined('CACHE_PATH') || define('CACHE_PATH', 'saemc://Cache' . DIRECTORY_SEPARATOR);
+defined('CACHE_PATH') || define('CACHE_PATH', RUNTIME_PATH . '/Cache' . DIRECTORY_SEPARATOR);
 //--日志路径
-defined('LOG_PATH') || define('LOG_PATH', null);
+defined('LOG_PATH') || define('LOG_PATH', RUNTIME_PATH . '/Log' . DIRECTORY_SEPARATOR);
 
 //临时数据路径
 defined('TMP_PATH') || define('TMP_PATH', rtrim(SAE_TMP_PATH) . '/');

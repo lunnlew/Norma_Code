@@ -1,6 +1,6 @@
 <?php
 return array(
-	'app_namespace' => 'app',
+	'app_namespace' => 'App',
 	'app_debug' => true,
 	'app_trace' => false,
 	'app_status' => '',
@@ -49,7 +49,7 @@ return array(
 	'url_domain_deploy' => false,
 	'url_domain_root' => '',
 	'url_convert' => true,
-	'url_controller_layer' => 'controller',
+	'url_controller_layer' => 'Controller',
 	'var_method' => '_method',
 	'template' => array(
 		'type' => 'Think',
@@ -63,9 +63,9 @@ return array(
 	),
 	'view_replace_str' => array(
 	),
-	'dispatch_success_tmpl' => 'E:\\Workspace\\Norma_Code\\src/Norma/tpl/dispatch_jump.tpl',
-	'dispatch_error_tmpl' => 'E:\\Workspace\\Norma_Code\\src/Norma/tpl/dispatch_jump.tpl',
-	'exception_tmpl' => 'E:\\Workspace\\Norma_Code\\src/Norma/tpl/norma_exception.tpl',
+	'dispatch_success_tmpl' => './src/Norma/Tpl/dispatch_jump.tpl',
+	'dispatch_error_tmpl' => './src/Norma/Tpl/dispatch_jump.tpl',
+	'exception_tmpl' => './src/Norma/Tpl/norma_exception.tpl',
 	'error_message' => '页面错误！请稍后再试～',
 	'show_error_msg' => false,
 	'exception_handle' => '',

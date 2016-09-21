@@ -229,3 +229,4 @@ demo/
 */vendor/
 *Runtime*
 *project*
+sftp-*

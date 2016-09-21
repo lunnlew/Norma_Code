@@ -36,7 +36,8 @@ class Config {
 		if (empty($type)) {
 			$type = pathinfo($config, PATHINFO_EXTENSION);
 		}
-		self::set((\Norma\Service\Config::getInstance(ucwords($type)))->parse($config), $name, $range);
+		$config_ins = \Norma\Service\Config::getInstance(ucwords($type));
+		self::set($config_ins->parse($config), $name, $range);
 	}
 
 	/**

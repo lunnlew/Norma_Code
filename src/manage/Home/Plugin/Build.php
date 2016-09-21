@@ -103,7 +103,7 @@ class Build {
 			// 创建默认的模块目录和文件
 			$list = [
 				'__file__' => ['config.php', 'common.php'],
-				'__dir__' => ['controller', 'model', 'view'],
+				'__dir__' => ['Controller', 'model', 'view'],
 			];
 		}
 		// 创建子目录和文件
@@ -132,7 +132,7 @@ class Build {
 					$space = $namespace . '\\' . ($module ? $module . '\\' : '') . $path;
 					$class = $val . ($suffix ? ucfirst($path) : '');
 					switch ($path) {
-					case 'controller': // 控制器
+					case 'Controller': // 控制器
 						$content = "<?php\nnamespace {$space};\n\nclass {$class}\n{\n\n}";
 						break;
 					case 'model': // 模型
@@ -168,10 +168,10 @@ class Build {
 	 * @return void
 	 */
 	protected static function buildHello($module, $namespace, $suffix = false) {
-		$filename = self::$project_path . ($module ? $module . DIRECTORY_SEPARATOR : '') . 'controller' . DIRECTORY_SEPARATOR . 'Index' . ($suffix ? 'Controller' : '') . '.php';
+		$filename = self::$project_path . ($module ? $module . DIRECTORY_SEPARATOR : '') . 'Controller' . DIRECTORY_SEPARATOR . 'Index' . ($suffix ? 'Controller' : '') . '.php';
 		if (!is_file($filename)) {
-			$content = file_get_contents(FRAME_PATH . '/tpl' . DIRECTORY_SEPARATOR . 'default_index.tpl');
-			$content = str_replace(['{$app}', '{$module}', '{layer}', '{$suffix}'], [$namespace, $module ? $module . '\\' : '', 'controller', $suffix ? 'Controller' : ''], $content);
+			$content = file_get_contents(FRAME_PATH . '/Tpl' . DIRECTORY_SEPARATOR . 'default_index.tpl');
+			$content = str_replace(['{$app}', '{$module}', '{layer}', '{$suffix}'], [$namespace, $module ? $module . '\\' : '', 'Controller', $suffix ? 'Controller' : ''], $content);
 			if (!is_dir(dirname($filename))) {
 				mkdir(dirname($filename), 0755, true);
 			}

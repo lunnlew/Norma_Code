@@ -14,7 +14,7 @@ class App {
 		$this->assign('sys', array());
 		return $this->fetch();
 	}
-	function new ($step = 0) {
+	function newApp($step = 0) {
 		$tpl = '';
 		switch ($step) {
 		case 0:

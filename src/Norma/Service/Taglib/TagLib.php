@@ -9,7 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace Norma\Service\Taglib;
+namespace Norma\Service\TagLib;
 
 use Norma\Exception;
 

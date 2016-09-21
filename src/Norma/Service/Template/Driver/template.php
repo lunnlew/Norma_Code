@@ -659,7 +659,7 @@ class Template {
 			$className = $tagLib;
 			$tagLib = substr($tagLib, strrpos($tagLib, '\\') + 1);
 		} else {
-			$className = \Norma\Service\Taglib::getInstance('Cx');
+			$className = \Norma\Service\TagLib::getInstance('Cx');
 		}
 		$tLib = new $className($this);
 		$tLib->parseTag($content, $hide ? '' : $tagLib);

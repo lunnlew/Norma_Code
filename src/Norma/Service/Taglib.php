@@ -12,13 +12,13 @@
 namespace Norma\Service;
 
 /**
- * Taglib类
+ * TagLib类
  *
  * @package  Norma
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Taglib {
+class TagLib {
 	use \Norma\Traits\ServiceHelper;
 
 }

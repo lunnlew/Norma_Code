@@ -46,7 +46,7 @@ Trait ServiceHelper {
 			return self::$instances[$name];
 		}
 		self::$fac = $called_class . '\Factory';
-		return (self::$instances[$name] = self::getDriveInstance($name, array_merge((Array) \Norma\Config::get($server_name . ':' . $name), (Array) $options), $prex));
+		return (self::$instances[$name] = static::getDriveInstance($name, array_merge((Array) \Norma\Config::get($server_name . ':' . $name), (Array) $options), $prex));
 	}
 	/**
 	 * 获取最终服务类实例
@@ -66,12 +66,12 @@ Trait ServiceHelper {
 		if (empty($name)) {
 			$name = \Norma\Config::get($server_name . ':default', RUN_ENGINE . $default);
 		}
-		$name = self::getServiceName($name);
+		$name = static::getServiceName($name);
 		if (isset(self::$instances[$name])) {
 			return self::$instances[$name];
 		}
 		self::$fac = $called_class . '\Factory';
-		return (self::$instances[$name] = self::getDriveInstance($name, array_merge((Array) \Norma\Config::get($server_name . ':' . $name), (Array) $options), $prex));
+		return (self::$instances[$name] = static::getDriveInstance($name, array_merge((Array) \Norma\Config::get($server_name . ':' . $name), (Array) $options), $prex));
 	}
 	/**
 	 * 获得服务驱动实例
@@ -81,7 +81,8 @@ Trait ServiceHelper {
 	 * @return object 实例
 	 */
 	protected static function getDriveInstance($class, $options = array(), $prex = 'Norma') {
-		$class = self::$fac::getRealServiceName($class, $prex);
+		$fac = self::$fac;
+		$class = $fac::getRealServiceName($class, $prex);
 		if (class_exists($class)) {
 			return new $class(array_filter($options));
 		} else {

@@ -152,7 +152,7 @@ class Loader {
 	 * @return Object
 	 * @throws ClassNotFoundException
 	 */
-	public static function model($name = '', $layer = 'model', $appendSuffix = false, $common = 'common') {
+	public static function model($name = '', $layer = 'Model', $appendSuffix = false, $common = 'common') {
 		if (isset(self::$instance[$name . $layer])) {
 			return self::$instance[$name . $layer];
 		}
@@ -185,7 +185,7 @@ class Loader {
 	 * @return Object|false
 	 * @throws ClassNotFoundException
 	 */
-	public static function controller($name, $layer = 'controller', $appendSuffix = false, $empty = '') {
+	public static function controller($name, $layer = 'Controller', $appendSuffix = false, $empty = '') {
 		if (strpos($name, '/')) {
 			list($module, $name) = explode('/', $name);
 		} else {
@@ -208,7 +208,7 @@ class Loader {
 	 * @return Object|false
 	 * @throws ClassNotFoundException
 	 */
-	public static function validate($name = '', $layer = 'validate', $appendSuffix = false, $common = 'common') {
+	public static function validate($name = '', $layer = 'Validate', $appendSuffix = false, $common = 'common') {
 		$name = $name ?: Config::get('default_validate');
 		if (empty($name)) {
 			return new Validate;
@@ -245,7 +245,7 @@ class Loader {
 	 * @param bool         $appendSuffix 是否添加类名后缀
 	 * @return mixed
 	 */
-	public static function action($url, $vars = [], $layer = 'controller', $appendSuffix = false) {
+	public static function action($url, $vars = [], $layer = 'Controller', $appendSuffix = false) {
 		$info = pathinfo($url);
 		$action = $info['basename'];
 		$module = '.' != $info['dirname'] ? $info['dirname'] : \Norma\Request::instance()->controller();

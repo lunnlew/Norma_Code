@@ -9,16 +9,16 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace Norma\Service\Taglib\Driver;
+namespace Norma\Service\TagLib\Driver;
 
 /**
  * CX标签库解析类
  * @category   Think
  * @package  Think
- * @subpackage  Driver.Taglib
+ * @subpackage  Driver.TagLib
  * @author    liu21st <liu21st@gmail.com>
  */
-class Cx extends \Norma\Service\Taglib\Taglib {
+class Cx extends \Norma\Service\TagLib\TagLib {
 
 	// 标签定义
 	protected $tags = [

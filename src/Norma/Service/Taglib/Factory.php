@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
-namespace Norma\Service\Taglib;
+namespace Norma\Service\TagLib;
 
 /**
  * 工厂类
@@ -19,7 +19,7 @@ namespace Norma\Service\Taglib;
  */
 class Factory {
 	use \Norma\Traits\ServiceFactoryHelper;
-	static $service = 'Taglib';
+	static $service = 'TagLib';
 	static $list = array(
 		'Cx',
 	);

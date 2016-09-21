@@ -15,9 +15,8 @@ define('IS_SECURITY', true);
 define('START_TIME', microtime(true));
 // 内存使用
 define('START_MEM', memory_get_usage());
-
 //--php版本最低需求
-(version_compare(PHP_VERSION, $min_version = "7.0") === -1) and exit('当前PHP运行版本[' . PHP_VERSION . "]低于[" . $min_version . "]!");
+//(version_compare(PHP_VERSION, $min_version = "7.0") === -1) and exit('当前PHP运行版本[' . PHP_VERSION . "]低于[" . $min_version . "]!");
 
 // 框架路径
 defined('FRAME_PATH') or define('FRAME_PATH', __DIR__ . DIRECTORY_SEPARATOR);
@@ -42,12 +41,14 @@ if (file_exists($compiledPath = APP_PATH . '/cache/compiled.php')) {
 	require FRAME_PATH . '/Loader.php';
 
 	// 注册类加载器
-	($loader = new \Norma\Loader())->register();
+	$loader = new \Norma\Loader;
+	$loader->register();
 	// 注册命名空间路径
 	$loader->addNamespace('Norma', FRAME_PATH);
 	\Norma\App::$loader = $loader;
 
-	($evn = new \Norma\Evn)->OS();
+	$evn = new \Norma\Evn;
+	$evn->OS();
 	$evn->Engine();
 	$evn->MODE();
 	\Norma\App::$evn = $evn;

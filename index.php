@@ -21,6 +21,6 @@ define('FRAME_PATH', SRC_PATH . '/Norma');
 
 define('COMPOSER_VENDOR_PATH', SRC_PATH . '/vendor');
 
-define('PUBLIC_URL', '/src/public');
+define('PUBLIC_URL', '/src/manage/public');
 
 require_once FRAME_PATH . '/start.php';

@@ -17,7 +17,12 @@ class Evn {
 	public function Engine() {
 		if (!defined('RUN_ENGINE')) {
 			if (defined('SAE_ACCESSKEY')) {
-				define('RUN_ENGINE', 'SAE');
+				if (is_writeable(APP_PATH)) {
+					define('RUN_ENGINE', 'SAEWrite');
+				} else {
+					define('RUN_ENGINE', 'SAE');
+				}
+
 			} elseif (isset($_SERVER['HTTP_BAE_ENV_APPID'])) {
 				define('RUN_ENGINE', 'BAE');
 			} else {

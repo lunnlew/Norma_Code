@@ -26,7 +26,7 @@ class App {
 	/**
 	 * @var string 应用类库命名空间
 	 */
-	public static $namespace = 'app';
+	public static $namespace = 'App';
 
 	/**
 	 * @var bool 应用类库后缀
@@ -41,7 +41,7 @@ class App {
 	public static $debug = false;
 
 	//异常模板文件
-	protected static $EXCEPTION_TMPL = FRAME_PATH . '/tpl/norma_exception.tpl';
+	protected static $EXCEPTION_TMPL = FRAME_PATH . '/Tpl/norma_exception.tpl';
 
 	protected static $dispatch = '';
 	/**
@@ -206,7 +206,7 @@ class App {
 		$request = Request::instance();
 		if ($config['app_multi_module']) {
 			// 多模块部署
-			$module = strip_tags(strtolower($result[0] ?: $config['default_module']));
+			$module = ucfirst(strip_tags(strtolower($result[0] ?: $config['default_module'])));
 			$bind = Route::getBind('module');
 
 			$available = false;
@@ -239,7 +239,7 @@ class App {
 		$convert = is_bool($convert) ? $convert : $config['url_convert'];
 		// 获取控制器名
 		$controller = strip_tags($result[1] ?: $config['default_controller']);
-		$controller = $convert ? strtolower($controller) : $controller;
+		$controller = ucfirst($convert ? strtolower($controller) : $controller);
 
 		// 获取操作名
 		$actionName = strip_tags($result[2] ?: $config['default_action']);
