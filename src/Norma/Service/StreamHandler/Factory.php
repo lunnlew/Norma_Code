@@ -17,13 +17,12 @@ namespace Norma\Service\StreamHandler;
  * @subpackage  Service\Storage
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'StreamHandler';
 	static $list = array(
-            'LAEStreamHandler',
-            'SAEStreamHandler',
-        );
-    
+		'LAEStreamHandler',
+		'SAEStreamHandler',
+	);
+
 }

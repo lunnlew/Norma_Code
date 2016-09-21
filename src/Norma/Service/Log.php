@@ -17,8 +17,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Log
-{
-	use \Norma\Traits\ServiceHelper;
+class Log {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

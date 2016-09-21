@@ -18,7 +18,7 @@ namespace Norma\Service\TagLib;
  * @author    LunnLew <lunnlew@gmail.com>
  */
 class Factory {
-	use \Norma\Traits\ServiceFactoryHelper;
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'TagLib';
 	static $list = array(
 		'Cx',

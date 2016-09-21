@@ -18,14 +18,13 @@ namespace Norma\Service\TplEngine;
  * @subpackage  Service\TplEngine
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'TplEngine';
 	static $list = array(
-            'Smarty',
-            'Twig',
-            'Tengine',
-        );
-    
+		'Smarty',
+		'Twig',
+		'Tengine',
+	);
+
 }

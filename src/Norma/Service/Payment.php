@@ -17,8 +17,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Payment
-{
-	use \Norma\Traits\ServiceHelper;
+class Payment {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

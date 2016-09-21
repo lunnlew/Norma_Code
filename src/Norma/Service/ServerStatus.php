@@ -18,8 +18,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class ServerStatus
-{
-	use \Norma\Traits\ServiceHelper;
+class ServerStatus {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

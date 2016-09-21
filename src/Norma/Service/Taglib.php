@@ -19,6 +19,6 @@ namespace Norma\Service;
  * @author    LunnLew <lunnlew@gmail.com>
  */
 class TagLib {
-	use \Norma\Traits\ServiceHelper;
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

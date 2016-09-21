@@ -18,8 +18,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Config
-{
-	use \Norma\Traits\ServiceHelper;
+class Config {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

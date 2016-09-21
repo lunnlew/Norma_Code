@@ -18,8 +18,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Dispatcher
-{
-	use \Norma\Traits\ServiceHelper;
+class Dispatcher {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

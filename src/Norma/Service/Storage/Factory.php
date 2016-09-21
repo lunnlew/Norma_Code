@@ -17,14 +17,13 @@ namespace Norma\Service\Storage;
  * @subpackage  Service\Storage
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Storage';
 	static $list = array(
-            'LAEStorage',
-            'SAEStorage',
-            'BAEStorage',
-        );
-    
+		'LAEStorage',
+		'SAEStorage',
+		'BAEStorage',
+	);
+
 }

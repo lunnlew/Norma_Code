@@ -10,14 +10,13 @@
 // +----------------------------------------------------------------------
 namespace Norma\Service\Rank;
 
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Rank';
 	static $list = array(
-            'LAERank',
-            'SAERank',
-            'BAERank',
-        );
-    
+		'LAERank',
+		'SAERank',
+		'BAERank',
+	);
+
 }

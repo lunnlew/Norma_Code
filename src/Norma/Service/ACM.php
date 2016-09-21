@@ -18,8 +18,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class ACM
-{
-	use \Norma\Traits\ServiceHelper;
+class ACM {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

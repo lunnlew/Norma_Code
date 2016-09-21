@@ -11,14 +11,13 @@
 
 namespace Norma\Service\Log;
 
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Log';
 	static $list = array(
-            'LAEMonolog',
-            'SAELog',
-            'BaeLog',
-        );
-    
+		'LAEMonolog',
+		'SAELog',
+		'BaeLog',
+	);
+
 }

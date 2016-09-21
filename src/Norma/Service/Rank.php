@@ -17,9 +17,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Rank
-{
-	use \Norma\Traits\ServiceHelper;
+class Rank {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }
-

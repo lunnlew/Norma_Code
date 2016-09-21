@@ -10,12 +10,11 @@
 // +----------------------------------------------------------------------
 namespace Norma\Service\Payment;
 
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Payment';
 	static $list = array(
-            'Alipay',
-        );
-    
+		'Alipay',
+	);
+
 }

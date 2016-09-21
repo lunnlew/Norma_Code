@@ -14,8 +14,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Collection
-{
-	use \Norma\Traits\ServiceHelper;
+class Collection {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

@@ -18,8 +18,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class View
-{
-	use \Norma\Traits\ServiceHelper;
+class View {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

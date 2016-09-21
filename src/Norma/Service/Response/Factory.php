@@ -17,14 +17,13 @@ namespace Norma\Service\Response;
  * @subpackage  Service\Storage
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Response';
 	static $list = array(
-            'Html',
-            'Xml',
-            'Json',
-            'Jsonp'
-        );
+		'Html',
+		'Xml',
+		'Json',
+		'Jsonp',
+	);
 }

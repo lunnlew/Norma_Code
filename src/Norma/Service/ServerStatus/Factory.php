@@ -17,13 +17,12 @@ namespace Norma\Service\ServerStatus;
  * @subpackage  Service\Storage
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'ServerStatus';
 	static $list = array(
-            'Linux',
-            'Windows',
-        );
-    
+		'Linux',
+		'Windows',
+	);
+
 }

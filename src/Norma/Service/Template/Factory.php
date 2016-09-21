@@ -18,7 +18,7 @@ namespace Norma\Service\Template;
  * @author    LunnLew <lunnlew@gmail.com>
  */
 class Factory {
-	use \Norma\Traits\ServiceFactoryHelper;
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Template';
 	static $list = array(
 		'Template',

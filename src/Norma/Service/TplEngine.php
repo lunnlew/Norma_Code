@@ -18,8 +18,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class TplEngine
-{
-	use \Norma\Traits\ServiceHelper;
+class TplEngine {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

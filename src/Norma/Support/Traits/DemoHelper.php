@@ -9,8 +9,12 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace Norma\Traits\Controller;
+namespace Norma\Support\Traits;
 
-trait Jump{
-    function test() { echo 'testd'; }
+Trait DemoHelper {
+	var $demo;
+
+	public function initDemo() {
+		return ($this->demo = 'demo');
+	}
 }

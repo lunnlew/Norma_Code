@@ -18,12 +18,11 @@ namespace Norma\Service\Db;
  * @subpackage  Service\Db
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Db';
 	static $list = array(
-            'laemysql',
-        );
-    
+		'laemysql',
+	);
+
 }

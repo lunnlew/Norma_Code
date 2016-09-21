@@ -18,14 +18,13 @@ namespace Norma\Service\Channel;
  * @subpackage  Service\Channel
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Channel';
 	static $list = array(
-            'saechannel',
-            'laechannel',
-            'baechannel',
-        );
-    
+		'saechannel',
+		'laechannel',
+		'baechannel',
+	);
+
 }

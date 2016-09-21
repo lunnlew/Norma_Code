@@ -18,14 +18,13 @@ namespace Norma\Service\Counter;
  * @subpackage  Service\Counter
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Counter';
 	static $list = array(
-            'laecounter',
-            'saecounter',
-            'baecounter',
-        );
-    
+		'laecounter',
+		'saecounter',
+		'baecounter',
+	);
+
 }

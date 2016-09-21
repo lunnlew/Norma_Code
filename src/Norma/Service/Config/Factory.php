@@ -17,13 +17,12 @@ namespace Norma\Service\Config;
  * @subpackage  Service\Storage
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Config';
 	static $list = array(
-            'ini',
-            'xml',
-            'json'
-        );
+		'ini',
+		'xml',
+		'json',
+	);
 }

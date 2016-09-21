@@ -11,13 +11,12 @@
 
 namespace Norma\Service\ErrorHandler;
 
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'ErrorHandler';
 	static $list = array(
-            'LAEMonologErrorHandler',
-            'LAEErrorHandler',
-        );
-    
+		'LAEMonologErrorHandler',
+		'LAEErrorHandler',
+	);
+
 }

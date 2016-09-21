@@ -17,8 +17,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Segment
-{
-	use \Norma\Traits\ServiceHelper;
+class Segment {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

@@ -10,14 +10,13 @@
 // +----------------------------------------------------------------------
 namespace Norma\Service\Segment;
 
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Segment';
 	static $list = array(
-            'LAESegment',
-            'SAESegment',
-            'BaeSegment',
-        );
-    
+		'LAESegment',
+		'SAESegment',
+		'BaeSegment',
+	);
+
 }

@@ -15,7 +15,7 @@ namespace Norma\Service\Collection;
  * @author    LunnLew <lunnlew@gmail.com>
  */
 class Factory {
-	use \Norma\Traits\ServiceFactoryHelper;
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Collection';
 	static $list = array(
 		'HeaderDataCollection',

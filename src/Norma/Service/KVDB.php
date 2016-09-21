@@ -18,9 +18,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class KVDB
-{
-	use \Norma\Traits\ServiceHelper;
+class KVDB {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }
-

@@ -5,7 +5,7 @@ namespace app\Home\Controller;
  *
  */
 class App {
-	use \Norma\Traits\ViewHelper;
+	use \Norma\Support\Traits\ViewHelper;
 	function __construct() {
 		$this->initView();
 	}

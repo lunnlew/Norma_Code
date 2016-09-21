@@ -9,7 +9,7 @@
 // | Author:  LunnLew <lunnlew@gmail.com>
 // +----------------------------------------------------------------------
 
-namespace Norma\Traits;
+namespace Norma\Support\Traits;
 
 Trait ServiceFactoryHelper {
 	protected static $tpl = '\Service\%s\Driver\%s';

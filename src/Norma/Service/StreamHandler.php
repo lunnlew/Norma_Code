@@ -18,8 +18,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class StreamHandler
-{
-	use \Norma\Traits\ServiceHelper;
+class StreamHandler {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }

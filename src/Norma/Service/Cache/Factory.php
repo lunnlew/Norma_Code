@@ -18,18 +18,17 @@ namespace Norma\Service\Cache;
  * @author    LunnLew <lunnlew@gmail.com>
  * @final
  */
-final class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+final class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Cache';
 	static $list = array(
-            'LAEFile',
-            'LAEMemcache',
-            'LAEMemfile',
-            'LAEapc',
-            'LAEeaccelerator',
-            'LAExcache',
-            'SAEMemcache',
-        );
-    
+		'LAEFile',
+		'LAEMemcache',
+		'LAEMemfile',
+		'LAEapc',
+		'LAEeaccelerator',
+		'LAExcache',
+		'SAEMemcache',
+	);
+
 }

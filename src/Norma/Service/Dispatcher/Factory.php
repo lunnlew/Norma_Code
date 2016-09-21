@@ -11,13 +11,12 @@
 
 namespace Norma\Service\Dispatcher;
 
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Dispatcher';
 	static $list = array(
-            'MVCDispatcher',
-            'RESTDispatcher',
-        );
-    
+		'MVCDispatcher',
+		'RESTDispatcher',
+	);
+
 }

@@ -14,14 +14,13 @@ namespace Norma\Service\Image;
 /**
  * Image Factory
  */
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'Image';
 	static $list = array(
-            'SAEImage',
-            'LAEImage',
-            'LAEGDImage',
-        );
-    
+		'SAEImage',
+		'LAEImage',
+		'LAEGDImage',
+	);
+
 }

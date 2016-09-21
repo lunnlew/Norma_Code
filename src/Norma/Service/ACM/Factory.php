@@ -11,12 +11,11 @@
 
 namespace Norma\Service\ACM;
 
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'ACM';
 	static $list = array(
-            'authority'
-        );
-    
+		'authority',
+	);
+
 }

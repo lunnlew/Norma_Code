@@ -11,14 +11,13 @@
 
 namespace Norma\Service\KVDB;
 
-class Factory
-{
-	use \Norma\Traits\ServiceFactoryHelper;
+class Factory {
+	use \Norma\Support\Traits\ServiceFactoryHelper;
 	static $service = 'KVDB';
 	static $list = array(
-            'SAEKVDB',
-            'BaeKVDB',
-            'LAEKVDB',
-        );
-    
+		'SAEKVDB',
+		'BaeKVDB',
+		'LAEKVDB',
+	);
+
 }

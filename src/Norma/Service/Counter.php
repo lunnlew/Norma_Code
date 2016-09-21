@@ -18,8 +18,7 @@ namespace Norma\Service;
  * @subpackage  Service
  * @author    LunnLew <lunnlew@gmail.com>
  */
-class Counter
-{
-	use \Norma\Traits\ServiceHelper;
+class Counter {
+	use \Norma\Support\Traits\ServiceHelper;
 
 }
