@@ -75,7 +75,7 @@ class Config {
 
 		if (!strpos($name, '.')) {
 			// 判断环境变量
-			$result = getenv(APP_PREFIX . strtoupper($name));
+			$result = getenv(APP_UUID . strtoupper($name));
 			if (false !== $result) {
 				return $result;
 			}
@@ -83,7 +83,7 @@ class Config {
 		} else {
 			// 二维数组设置和获取支持
 			$name = explode('.', $name);
-			$result = getenv(APP_PREFIX . strtoupper($name[0] . '_' . $name[1]));
+			$result = getenv(APP_UUID . strtoupper($name[0] . '_' . $name[1]));
 			// 判断环境变量
 			if (false !== $result) {
 				return $result;
@@ -106,7 +106,7 @@ class Config {
 		}
 
 		if (!strpos($name, '.')) {
-			$result = getenv(APP_PREFIX . strtoupper($name));
+			$result = getenv(APP_UUID . strtoupper($name));
 			if (false !== $result) {
 				return $result;
 			}
@@ -115,7 +115,7 @@ class Config {
 		} else {
 			// 二维数组设置和获取支持
 			$name = explode('.', $name);
-			$result = getenv(APP_PREFIX . strtoupper($name[0] . '_' . $name[1]));
+			$result = getenv(APP_UUID . strtoupper($name[0] . '_' . $name[1]));
 			// 判断环境变量
 			if (false !== $result) {
 				return $result;

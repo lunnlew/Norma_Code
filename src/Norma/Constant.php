@@ -19,8 +19,12 @@ class Constant {
 			$types = explode(',', $types);
 		}
 		foreach ($types as $type) {
+			if (!is_string($type)) {
+				$type = $type();
+			}
 			is_file($file = rtrim($path, '/\\') . '/' . strtolower($type) . '.php') &&
 			require $file;
+
 		}
 	}
 

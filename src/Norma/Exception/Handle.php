@@ -130,10 +130,6 @@ class Handle {
 				'message' => $this->getMessage($exception),
 			];
 
-			if (!Config::get('show_error_msg')) {
-				// 不显示详细错误信息
-				$data['message'] = Config::get('error_message');
-			}
 		}
 
 		//保留一层

@@ -27,7 +27,7 @@ class Evn {
 		if (defined('SAE_ACCESSKEY')) {
 			self::$runEngine = 'sae';
 			if (is_writeable(APP_PATH)) {
-				self::$runEngineEx = 'writeable';
+				self::$runEngineEx = 'saewrite';
 			}
 		} elseif (isset($_SERVER['HTTP_BAE_ENV_APPID'])) {
 			self::$runEngine = 'bae';

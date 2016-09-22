@@ -30,10 +30,7 @@ defined('FRAME_PATH') or define('FRAME_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 defined('APP_PATH') or define('APP_PATH', dirname(__DIR__) . '/manage');
 
 // 应用前缀
-defined('APP_PREFIX') or define('APP_PREFIX', substr(md5(APP_PATH), 5, 6));
-
-// 应用前缀
-defined('APP_UUID') or define('APP_UUID', APP_PREFIX);
+defined('APP_UUID') or define('APP_UUID', substr(md5(APP_PATH), 5, 6));
 
 require FRAME_PATH . '/bootstrap/autoload.php';
 
