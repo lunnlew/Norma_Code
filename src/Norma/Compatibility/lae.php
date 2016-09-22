@@ -24,7 +24,7 @@ defined('CACHE_PATH') || define('CACHE_PATH', RUNTIME_PATH . '/Cache' . DIRECTOR
 defined('LOG_PATH') || define('LOG_PATH', RUNTIME_PATH . '/Log' . DIRECTORY_SEPARATOR);
 
 //临时数据路径
-if (OS === 'WIN') {
+if (\Norma\Support\Evn::$os == 'WIN') {
 	//windows
 	defined('TMP_PATH') || define('TMP_PATH', 'c:/temp/');
 } else {

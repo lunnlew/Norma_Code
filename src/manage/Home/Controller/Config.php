@@ -10,7 +10,16 @@ class Config {
 		$this->initView();
 	}
 	function detail($appid, $item = 'base') {
-		$config = \Norma\Config::get();
+		$project_path = (\Norma\Config::get('build.project_path') ?: dirname(dirname(FRAME_PATH)) . '/project') . '/' . $appid;
+
+		$config = include $project_path . '/Config/Global.php';
+
+		if (!is_array($config) || empty($config)) {
+			$config = \Norma\Config::get();
+		} else {
+			$config = array_merge(\Norma\Config::get(), $config);
+		}
+
 		switch ($item) {
 		case 'error':
 			$data = array_intersect_key($config, array_flip(include (APP_PATH . '/Data/error-config-key.php')));
@@ -35,7 +44,10 @@ class Config {
 		return $this->fetch();
 	}
 	function update($pk, $value, $appid, $item = 'base') {
-		$config = \Norma\Config::get();
+		$project_path = (\Norma\Config::get('build.project_path') ?: dirname(dirname(FRAME_PATH)) . '/project') . '/' . $appid;
+
+		$config = include $project_path . '/Config/Global.php';
+
 		switch ($item) {
 		case 'error':
 			$data = include APP_PATH . '/Data/error-config-key.php';
@@ -57,7 +69,7 @@ class Config {
 		if (in_array($pk, $data)) {
 			$config[$pk] = $value;
 		}
-		file_put_contents(APP_PATH . '/Config/Global.php', "<?php\nreturn " . var_export($config, true) . ";");
+		file_put_contents($project_path . '/Config/Global.php', "<?php\nreturn " . var_export($config, true) . ";");
 		return $pk;
 	}
 }

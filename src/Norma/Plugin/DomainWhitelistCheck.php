@@ -24,7 +24,7 @@ class DomainWhitelistCheck {
 	public function run(Request $request) {
 		$reject_request = true;
 		if (array_key_exists('HTTP_HOST', $_SERVER)) {
-			$host_name = \Norma\Evn::getHost();
+			$host_name = \Norma\Support\Evn::getHost();
 			// [ need to cater for `host:port` since some "buggy" SAPI(s) have been known to return the port too, see http://goo.gl/bFrbCO
 			$strpos = strpos($host_name, ':');
 			if ($strpos !== false) {

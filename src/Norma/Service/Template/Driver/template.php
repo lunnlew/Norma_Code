@@ -333,7 +333,7 @@ class Template {
 		$replace = $this->config['tpl_replace_string'];
 		$content = str_replace(array_keys($replace), array_values($replace), $content);
 		// 添加安全代码及模板引用记录
-		$content = '<?php if (!defined(\'IS_SECURITY\')) exit(); /*' . serialize($this->includeFile) . '*/ ?>' . "\n" . $content;
+		$content = '<?php if (!defined(\'IS_NORMA\')) exit(); /*' . serialize($this->includeFile) . '*/ ?>' . "\n" . $content;
 		// 编译存储
 		$this->storage->write($cacheFile, $content);
 		$this->includeFile = [];

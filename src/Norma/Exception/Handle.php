@@ -184,7 +184,7 @@ class Handle {
 	 */
 	protected function getMessage(Exception $exception) {
 		$message = $exception->getMessage();
-		if (RUN_MODE == "CLI") {
+		if (\Norma\Support\Evn::isCli()) {
 			return $message;
 		}
 		// 导入语言包
@@ -231,7 +231,7 @@ class Handle {
 	 */
 	protected function getExtendData(Exception $exception) {
 		$data = [];
-		if ($exception instanceof \norma\Exception) {
+		if ($exception instanceof \Norma\Exception) {
 			$data = $exception->getData();
 		}
 		return $data;

@@ -36,7 +36,9 @@
                         <small>应用列表</small></div>
                 </div>
                 <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-                    <li><a href="{:Url('app/detail',array('appid'=>10000))}" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>ManageApp</a></li>
+                    {volist name="list" id="vo"}
+                        <li><a href="{:Url('app/detail',array('appid'=>$vo))}" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>{$vo}</a></li>
+                    {/volist}
                     <li><a href="{:Url('app/newApp')}" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新建应用</a></li>
                 </ul>
             </div>

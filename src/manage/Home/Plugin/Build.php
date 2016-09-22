@@ -40,6 +40,8 @@ class Build {
 				self::module($module, $list, $namespace, $suffix);
 			}
 		}
+		// 创建配置文件和公共文件
+		self::buildCommon('');
 		// 解除锁定
 		unlink($lockfile);
 	}
@@ -186,7 +188,7 @@ class Build {
 	 * @return void
 	 */
 	protected static function buildCommon($module) {
-		$filename = self::$project_path . 'Config/' . ($module ? $module . DIRECTORY_SEPARATOR : '') . 'config.php';
+		$filename = self::$project_path . 'Config/' . ($module ? $module . DIRECTORY_SEPARATOR : '') . 'Global.php';
 		if (!is_file($filename)) {
 			file_put_contents($filename, "<?php\n//配置文件\nreturn [\n\n];");
 		}

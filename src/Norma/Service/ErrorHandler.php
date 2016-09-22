@@ -48,7 +48,7 @@ class ErrorHandler {
 		$server_name = array_pop($class_parts);
 
 		if (empty($name)) {
-			$name = C($server_name . ':default', RUN_ENGINE . $default);
+			$name = C($server_name . ':default', strtoupper(\Norma\Support\Evn::$runEngine) . $default);
 		}
 		$name = ucfirst($name);
 		if (isset(self::$instances[$name])) {
@@ -60,7 +60,7 @@ class ErrorHandler {
 		))) {
 			$class = ErrorHandler\Factory::getRealServiceName($name, $prex);
 		} else {
-			$class = ErrorHandler\Factory::getRealServiceName(RUN_ENGINE . $name, $prex);
+			$class = ErrorHandler\Factory::getRealServiceName(strtoupper(\Norma\Support\Evn::$runEngine) . $name, $prex);
 		}
 		return (self::$instances[$name] = call_user_func_array("$class::register", $options));
 

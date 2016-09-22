@@ -40,7 +40,7 @@ Trait ServiceHelper {
 		$class_parts = explode('\\', $called_class);
 		$server_name = array_pop($class_parts);
 		if (empty($name)) {
-			$name = \Norma\Config::get($server_name . ':default', RUN_ENGINE . $default);
+			$name = \Norma\Config::get($server_name . ':default', strtoupper(\Norma\Support\Evn::$runEngine) . $default);
 		}
 		if (isset(self::$instances[$name])) {
 			return self::$instances[$name];
@@ -64,7 +64,7 @@ Trait ServiceHelper {
 		$class_parts = explode('\\', $called_class);
 		$server_name = array_pop($class_parts);
 		if (empty($name)) {
-			$name = \Norma\Config::get($server_name . ':default', RUN_ENGINE . $default);
+			$name = \Norma\Config::get($server_name . ':default', strtoupper(\Norma\Support\Evn::$runEngine) . $default);
 		}
 		$name = static::getServiceName($name);
 		if (isset(self::$instances[$name])) {
@@ -103,7 +103,7 @@ Trait ServiceHelper {
 		if (!in_array(strtoupper(substr($name, 0, 3)), array(
 			'LAE', 'BAE', 'SAE',
 		))) {
-			return RUN_ENGINE . $name;
+			return strtoupper(\Norma\Support\Evn::$runEngine) . $name;
 		} else {
 			return $name;
 		}

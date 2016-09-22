@@ -350,7 +350,7 @@ class Console {
 	//中文编码处理
 	public function printf() {
 		$args = func_get_args();
-		switch (strtoupper(($evn = new \Norma\Evn)->OS())) {
+		switch (strtoupper(\Norma\Support\Evn::$os)) {
 		case 'WIN':
 		default:
 			$args[0] = iconv('UTF-8', 'gbk', $args[0]);
@@ -361,7 +361,7 @@ class Console {
 	//中文编码处理
 	public function sprintf() {
 		$args = func_get_args();
-		switch (strtoupper(($evn = new \Norma\Evn)->OS())) {
+		switch (strtoupper(\Norma\Support\Evn::$os)) {
 		case 'WIN':
 			return iconv('UTF-8', 'gbk', call_user_func_array('sprintf', $args));
 		default:

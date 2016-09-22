@@ -10,8 +10,21 @@ class Index {
 		$this->initView();
 	}
 	function index() {
-		$this->assign('list', array());
-		$this->assign('sys', array());
+		$path = (\Norma\Config::get('build.project_path') ?: dirname(dirname(FRAME_PATH)) . '/project') . '/';
+		$app = [];
+		$handle = opendir($path);
+		if ($handle) {
+			while ($file = readdir($handle)) {
+				if ($file == '.' || $file == '..') {
+					continue;
+				}
+				$newpath = $path . $file;
+				if (is_dir($newpath)) {
+					$app[] = basename($newpath);
+				}
+			}
+		}
+		$this->assign('list', $app);
 		return $this->fetch('index');
 	}
 }

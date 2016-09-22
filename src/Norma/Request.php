@@ -266,7 +266,7 @@ class Request {
 			$this->url = $url;
 			return $this;
 		} elseif (!$this->url) {
-			if (RUN_MODE == "CLI") {
+			if (\Norma\Support\Evn::isCli()) {
 				$this->url = isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : '';
 			} elseif (isset($_SERVER['HTTP_X_REWRITE_URL'])) {
 				$this->url = $_SERVER['HTTP_X_REWRITE_URL'];
@@ -310,7 +310,7 @@ class Request {
 			return $this;
 		} elseif (!$this->baseFile) {
 			$url = '';
-			if (!(RUN_MODE == "CLI")) {
+			if (!(\Norma\Support\Evn::isCli())) {
 				$script_name = basename($_SERVER['SCRIPT_FILENAME']);
 				if (basename($_SERVER['SCRIPT_NAME']) === $script_name) {
 					$url = $_SERVER['SCRIPT_NAME'];
@@ -360,7 +360,7 @@ class Request {
 				// 判断URL里面是否有兼容模式参数
 				$_SERVER['PATH_INFO'] = $_GET[Config::get('var_pathinfo')];
 				unset($_GET[Config::get('var_pathinfo')]);
-			} elseif (RUN_MODE == "CLI") {
+			} elseif (\Norma\Support\Evn::isCli()) {
 				// CLI模式下 index.php module/controller/action/params/...
 				$_SERVER['PATH_INFO'] = isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : '';
 			}
@@ -468,14 +468,14 @@ class Request {
 	public function method($method = false) {
 		if (true === $method) {
 			// 获取原始请求类型
-			return (RUN_MODE == "CLI") ? 'GET' : (isset($this->server['REQUEST_METHOD']) ? $this->server['REQUEST_METHOD'] : $_SERVER['REQUEST_METHOD']);
+			return (\Norma\Support\Evn::isCli()) ? 'GET' : (isset($this->server['REQUEST_METHOD']) ? $this->server['REQUEST_METHOD'] : $_SERVER['REQUEST_METHOD']);
 		} elseif (!$this->method) {
 			if (isset($_POST[Config::get('var_method')])) {
 				$this->method = strtoupper($_POST[Config::get('var_method')]);
 			} elseif (isset($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'])) {
 				$this->method = strtoupper($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE']);
 			} else {
-				$this->method = (RUN_MODE == "CLI") ? 'GET' : (isset($this->server['REQUEST_METHOD']) ? $this->server['REQUEST_METHOD'] : $_SERVER['REQUEST_METHOD']);
+				$this->method = (\Norma\Support\Evn::isCli()) ? 'GET' : (isset($this->server['REQUEST_METHOD']) ? $this->server['REQUEST_METHOD'] : $_SERVER['REQUEST_METHOD']);
 			}
 		}
 		return $this->method;

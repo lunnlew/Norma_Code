@@ -25,7 +25,7 @@ class Initialize {
 	}
 
 	public function deafultAppInitialize() {
-		RUN_MODE === 'WEB' && \Norma\Hook::loadPlugin(APP_LIB_PATH . '/Plugin', '');
+		\Norma\Support\Evn::isWeb() && \Norma\Hook::loadPlugin(APP_LIB_PATH . '/Plugin', '');
 	}
 
 	public function defaultCoreAfterInitialize() {
